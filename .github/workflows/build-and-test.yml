@@ -1,0 +1,56 @@
+name: Build and Test
+on: [push]
+
+jobs:
+  build-n-test:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [macos-latest, windows-latest]
+    
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-dotnet@v2
+        with:
+          dotnet-version: '6.0.x'
+
+      - name: MacOS C++ SDK
+        if: ${{ matrix.os == 'macos-latest' }}
+        uses: robinraju/release-downloader@v1.4
+        with:
+          repository: "DolbyIO/comms-sdk-cpp"
+          tag: "2.0.0"
+          fileName: "cppsdk-2.0.0-macos64.zip"
+          out-file-path: "cppsdk"
+      
+      - name: Windows C++ SDK
+        if: ${{ matrix.os == 'windows-latest' }}
+        uses: robinraju/release-downloader@v1.4
+        with:
+          repository: "DolbyIO/comms-sdk-cpp"
+          tag: "2.0.0"
+          fileName: "cppsdk-2.0.0-win64.zip"
+          out-file-path: "${{github.workspace}}/cppsdk"
+
+      - uses: montudor/action-zip@v1
+        with:
+          args: unzip -qq ${{github.workspace}}/cppsdk.zip -d ${{github.workspace}}/cppsdk
+
+      - run: cmake -E make_directory ${{github.workspace}}/build
+
+      - name: Configure
+        shell: bash
+        working-directory: ${{github.workspace}}/build
+        run: cmake -DDOLBYIO_LIBRARY_PATH="${{github.workspace}}/cppsdk" -DCMAKE_BUILD_TYPE=RelWithDebugInfo ${{github.workspace}}
+
+      - name: Build
+        shell: bash
+        working-directory: ${{github.workspace}}/build
+        run: cmake --build .
+
+      - name: Tests
+        shell: bash
+        working-directory: ${{github.workspace}}/build
+        run: ctest -vv
+
+
