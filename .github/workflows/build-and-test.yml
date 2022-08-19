@@ -32,17 +32,14 @@ jobs:
       - run: cmake -E make_directory ${{github.workspace}}/build
 
       - name: Configure
-        shell: bash
         working-directory: ${{github.workspace}}/build
         run: cmake -DDOLBYIO_LIBRARY_PATH="${{github.workspace}}/cppsdk/sdk-release" -DCMAKE_BUILD_TYPE=RelWithDebugInfo ${{github.workspace}}
 
       - name: Build
-        shell: bash
         working-directory: ${{github.workspace}}/build
         run: cmake --build .
 
       - name: Tests
-        shell: bash
         working-directory: ${{github.workspace}}/build
         run: ctest -vv
 
