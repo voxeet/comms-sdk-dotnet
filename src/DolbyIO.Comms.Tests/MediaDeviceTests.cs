@@ -9,7 +9,11 @@ namespace DolbyIO.Comms.Tests
             AudioDevice dest;
             NativeTests.AudioDeviceTest(out dest);
 
-            var uid = new byte[] { Convert.ToByte('U'), Convert.ToByte('I'), Convert.ToByte('D') };
+            var uid = new byte[Constants.DeviceUidSize];
+            uid[0] = Convert.ToByte('U');
+            uid[1] = Convert.ToByte('I');
+            uid[2] = Convert.ToByte('D');
+
             Assert.Equal(uid, dest.Uid);
             Assert.Equal("dummy device", dest.Name);
             Assert.Equal(DeviceDirection.Output, dest.Direction);

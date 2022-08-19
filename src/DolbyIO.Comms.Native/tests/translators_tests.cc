@@ -54,9 +54,9 @@ extern "C" {
     (*result) = to_c<dolbyio::comms::native::participant>(participant);
   }
 
-  EXPORT_API void AudioDeviceTest(device** result) {
+  EXPORT_API void AudioDeviceTest(device* result) {
     dvc_device dev("UID", "dummy device", dvc_device::direction::output, dvc_device::platform::macos, "ID");
-    (*result) = to_c<dolbyio::comms::native::device>(dev);
+    no_alloc_to_c(result, dev);
   }
 
 }

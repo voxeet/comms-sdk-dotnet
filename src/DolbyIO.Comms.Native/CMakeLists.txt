@@ -13,7 +13,7 @@ add_library(DolbyIO.Comms.Native  SHARED
     conference.cc
     media_device.cc
     sdk.cc
-    $<$<CONFIG:Debug>:tests/translators_tests.cc>
+    $<$<BOOL:BUILD_TESTS>:tests/translators_tests.cc>
 )
 
 set_target_properties(DolbyIO.Comms.Native  PROPERTIES C_VISIBILITY_PRESET default)

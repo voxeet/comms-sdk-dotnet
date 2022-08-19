@@ -1,5 +1,8 @@
 cmake_minimum_required(VERSION 3.15)
 
+option(BUILD_TESTS "Build Tests" ON)
+option(BUILD_UNITY "Package Unity Plugin" ON)
+
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_CURRENT_SOURCE_DIR}/cmake/")
 
 include(version)
@@ -19,9 +22,14 @@ add_subdirectory(src/DolbyIO.Comms.SDK)
 add_subdirectory(samples/CmdLine)
 add_subdirectory(samples/SimpleApp)    
 
-include(unity)
+if (BUILD_UNITY)
+    include(unity)
+endif()
 
-include(CTest)
-add_subdirectory(src/DolbyIO.Comms.Tests)
+if (BUILD_TESTS)
+    include(CTest)
+    add_subdirectory(src/DolbyIO.Comms.Tests)
+endif()
 
-add_subdirectory(docs)
+unset(BUILD_TESTS CACHE)
+unset(BUILD_UNITY CACHE)
