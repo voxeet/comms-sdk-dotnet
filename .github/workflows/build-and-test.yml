@@ -27,7 +27,7 @@ jobs:
           fileName: "${{ matrix.sdk }}"
           out-file-path: "cppsdk"
 
-      - run: 7z e ${{github.workspace}}/cppsdk.zip -o ${{github.workspace}}/cppsdk
+      - run: 7z e ${{github.workspace}}/cppsdk.zip -o${{github.workspace}}/cppsdk
 
       - run: cmake -E make_directory ${{github.workspace}}/build
 
