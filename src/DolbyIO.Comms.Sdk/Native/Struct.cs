@@ -13,15 +13,15 @@ namespace DolbyIO.Comms
     }
 
     /// <summary>
-    /// The class that represents the participant who tries to open
+    /// The UserInfo class represents the participant who opens
     /// a session.
     /// </summary>
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
     public class UserInfo
     {
         /// <summary>
-        /// The unique ID for the participant opening the session, this field 
-        /// is provided by the backend when session is opened.
+        /// The unique identifier of the participant who opens the session. 
+        /// Backend provides the identifier after opening the session.
         /// </summary>
         [MarshalAs(UnmanagedType.LPStr)]
         public readonly string Id = "";
@@ -33,9 +33,9 @@ namespace DolbyIO.Comms
         public string Name = "";
         
         /// <summary>
-        /// The external unique identifier that the customer's application can add 
-        /// to the participant while opening a session. If a participant uses the 
-        /// same external ID in conferences, the participant's ID also remains the same
+        /// The external unique identifier that an application can add
+        /// to the participant while opening a session. If a participant uses the
+        /// same external ID in a few conferences, the participant ID also remains the same
         /// across all sessions.
         /// </summary>
         [MarshalAs(UnmanagedType.LPStr)]
@@ -49,22 +49,22 @@ namespace DolbyIO.Comms
     }
 
     /// <summary>
-    /// Informations about a conference participant.
+    /// The ParticipantInfo class gathers information about a conference participant.
     /// </summary>
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
     public class ParticipantInfo 
     {
         /// <summary>
-        /// The external unique identifier that the customer's application can add 
-        /// to the participant while opening a session. If a participant uses the 
-        /// same external ID in conferences, the participant's ID also remains the same
+        /// The external unique identifier that an application can add
+        /// to the participant while opening a session. If a participant uses the
+        /// same external ID in a few conferences, the participant ID also remains the same
         /// across all sessions.
         /// </summary>
         [MarshalAs(UnmanagedType.LPStr)]
         public readonly string ExternalId = "";
 
         /// <summary>
-        /// The participant's name.
+        /// The participant name.
         /// </summary>
         [MarshalAs(UnmanagedType.LPStr)]
         public readonly string Name = "";
@@ -77,7 +77,7 @@ namespace DolbyIO.Comms
     }
 
     /// <summary>
-    /// Contains the current status of a conference participant and
+    /// The Participant class contains the current status of a conference participant and
     /// information whether the participant's audio is enabled.
     /// </summary>
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
@@ -107,27 +107,27 @@ namespace DolbyIO.Comms
         public readonly ParticipantStatus Status;
 
         /// <summary>
-        /// A boolean that informs whether the participant is sending audio into conference.
+        /// A boolean that informs whether the participant is sending audio to conference.
         /// </summary>
         [MarshalAs(UnmanagedType.U1)]
         public readonly bool IsSendingAudio = false;
 
         /// <summary>
-        /// A boolean that indicates whether a remote participant is audible locally. This will always 
-        /// be false for the local participant.
+        /// A boolean that indicates whether a remote participant is audible locally. This property is always
+        /// false for the local participant.
         /// </summary>
         [MarshalAs(UnmanagedType.U1)]
         public readonly bool IsAudibleLocally = false;
     }
 
     /// <summary>
-    /// The conference parameters.
+    /// The ConferenceParams class gathers conference parameters.
     /// </summary>
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
     public class ConferenceParams
     {
         /// <summary>
-        /// A boolean that indicates whether the SDK should create a Dolby Voice 
+        /// A boolean that indicates whether the SDK should create a Dolby Voice
         /// conference where each participant receives one audio stream.
         /// </summary>
         [MarshalAs(UnmanagedType.U1)]
@@ -165,7 +165,7 @@ namespace DolbyIO.Comms
     }
 
     /// <summary>
-    /// Contains the conference information. This structure provides
+    /// The ConferenceInfos class contains information about a conference. This structure provides
     /// conference details that are required to join a specific conference. The SDK
     /// returns ConferenceInfos to describe the created or joined conference.
     /// </summary>
@@ -179,13 +179,17 @@ namespace DolbyIO.Comms
         public string Id;
 
         /// <summary>
-        /// The conference alias. The alias is optional in the case of using the conference ID.
+        /// The conference alias. The alias must be a logical and unique string that consists
+        /// of up to 250 characters, such as letters, digits, and symbols other than #.
+        /// The alias is case insensitive, which means that using "foobar" and "FOObar"
+        /// aliases refers to the same conference. The alias is optional in the case
+        /// of using the conference ID.
         /// </summary>
         [MarshalAs(UnmanagedType.LPStr)]
         public string Alias;
 
         /// <summary>
-        /// Indicates whether the conference represented by the object has been just created.
+        /// A boolean that indicates whether the conference represented by the object has been just created.
         /// </summary>
         [MarshalAs(UnmanagedType.U1)]
         public readonly bool IsNew;
@@ -208,7 +212,7 @@ namespace DolbyIO.Comms
         public readonly SpatialAudioStyle SpatialAudioStyle = 0;
 
         /// <summary>
-        /// Permissions that allow a conference participant to perform limited 
+        /// Permissions that allow a conference participant to perform limited
         /// actions during a protected conference.
         /// </summary>
         public List<ConferenceAccessPermissions> Permissions
@@ -230,7 +234,7 @@ namespace DolbyIO.Comms
     }
 
     /// <summary>
-    /// The options that define how the application expects to join a
+    /// The ConnectionOptions class contains options that define how the application expects to join a
     /// conference in terms of media preference.
     /// </summary>
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
@@ -239,15 +243,15 @@ namespace DolbyIO.Comms
         /// <summary>
         /// The conference access token that is required to join a protected conference if
         /// the conference is created using the [create](ref:conference#operation-create-conference)
-        /// REST API. The application needs to externally fetch and provide the token to
-        /// the SDK when it calls the join or listen method.
+        /// REST API. While calling the join or listen method, the application has to externally
+        /// fetch the token and provide it to the SDK.
         /// </summary>
         [MarshalAs(UnmanagedType.LPStr)]
         public string ConferenceAccessToken = "";
 
         /// <summary>
-        /// Enables spatial audio for the joining participant. This boolean should be set to
-        /// true if the spatial_style is not disabled. For more information, refer to our sample
+        /// A boolean that enables spatial audio for the joining participant. This boolean must be set to
+        /// true if spatial_style is enabled. For more information, refer to our sample
         /// application code.
         /// </summary>
         [MarshalAs(UnmanagedType.U1)]
@@ -255,27 +259,27 @@ namespace DolbyIO.Comms
     }
 
     /// <summary>
-    /// The local media constraints for application joining a conference.
+    /// The MediaConstraints class contains the local media constraints for an application joining a conference.
     /// </summary>
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
     public class MediaConstraints
     {
         /// <summary>
         /// A boolean that indicates whether the application should
-        /// capture local audio and send it to a conference.
+        /// capture the local audio and send it to the conference.
         /// </summary>
         [MarshalAs(UnmanagedType.U1)]
         public bool Audio = false;
 
         /// <summary>
-        /// Enables and disables audio processing on the server for the 
+        /// A boolean that enables and disables audio processing on the server for the 
         /// injected audio.
         /// </summary>
         [MarshalAs(UnmanagedType.U1)]
         public bool AudioProcessing = true;
 
         /// <summary>
-        /// Allows the user to join a conference as a sender only. This
+        /// A boolean that allows a participant to join a conference as a sender. This
         /// is strictly intended for Server Side SDK applications that
         /// want to inject media without recording. This flag is
         /// ignored by the Client SDK applications.
@@ -285,7 +289,8 @@ namespace DolbyIO.Comms
     }
 
     /// <summary>
-    /// The options for joining a conference as an active user.
+    /// The JoinOptions class gathers options for joining a conference as a user
+    /// who can send and receive media.
     /// </summary>
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
     public class JoinOptions
@@ -296,13 +301,14 @@ namespace DolbyIO.Comms
         public ConnectionOptions Connection = new ConnectionOptions();
         
         /// <summary>
-        /// The media constraints for the active user.
+        /// The media constraints for the user.
         /// </summary>
         public MediaConstraints Constraints = new MediaConstraints();
     }
     
     /// <summary>
-    /// The options for listening to a conference as listener.
+    /// The ListenOptions class gathers options for joining a conference as listener
+    /// who can only receive media.
     /// </summary>
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
     public class ListenOptions 
@@ -314,7 +320,7 @@ namespace DolbyIO.Comms
     }
 
     /// <summary>
-    /// The platform agnostic description of an audio device.
+    /// The AudioDevice class contains a platform-agnostic description of an audio device.
     /// </summary>
     /// @ingroup device_management
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]

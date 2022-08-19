@@ -7,15 +7,15 @@ using System.Runtime.InteropServices;
 namespace DolbyIO.Comms.Services 
 {
     /// <summary>
-    /// The Session Service is responsible for connecting SDK with the Dolby.io
+    /// The Session Service is responsible for connecting the SDK with the Dolby.io
     /// backend by opening and closing sessions. Opening a session is mandatory
     /// before joining conferences.
     ///
     /// To use the Session Service, follow these steps:
-    /// 1. Open a session using the <see cref="DolbyIO.Comms.Services.Session.Open(UserInfo)"/> method.
-    /// 2. Join a conference. See <see cref="DolbyIO.Comms.Services.Conference"/>
+    /// 1. Open a session using the <see cref="DolbyIO.Comms.Services.Session.Open(UserInfo)">Open</see> method.
+    /// 2. Join a conference using the <see cref="DolbyIO.Comms.Services.Conference">Conference Service</see>.
     /// 3. Leave the conference and close the session using the 
-    /// <see cref="DolbyIO.Comms.Services.Session.Close"/> method.
+    /// <see cref="DolbyIO.Comms.Services.Session.Close">Close</see> method.
     /// </summary>
     /// <example>
     /// <code>
@@ -68,7 +68,7 @@ namespace DolbyIO.Comms.Services
         }
 
         /// <summary>
-        /// Gets the user informations for the currently opened session.
+        /// Gets the user information for the currently opened session.
         /// </summary>
         public UserInfo User { get => _user; }
 

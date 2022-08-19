@@ -11,14 +11,14 @@ namespace DolbyIO.Comms.Services
     /// The Conference Service allows joining and leaving conferences as well as
     /// subscribing to conference events. To use the Conference Service, follow these steps:
     /// 1. Open a session using <see cref="DolbyIO.Comms.Services.Session.Open(UserInfo)">Session.Open(UserInfo)</see>.
-    /// 2. Subscribe to the events exposed through the service. (Ex. 
-    /// <see cref="DolbyIO.Comms.Services.Conference.StatusUpdated"/>,
-    /// <see cref="DolbyIO.Comms.Services.Conference.ParticipantUpdated"/>
+    /// 2. Subscribe to the events exposed through the service, for example 
+    /// <see cref="DolbyIO.Comms.Services.Conference.StatusUpdated">StatusUpdated</see> and 
+    /// <see cref="DolbyIO.Comms.Services.Conference.ParticipantUpdated">ParticipantUpdated</see>
     /// )
-    /// 3. Create a conference via the <see cref="DolbyIO.Comms.Services.Conference.Create(ConferenceOptions)"/> method.
-    /// 4. Join the created conference via the <see cref="DolbyIO.Comms.Services.Conference.Join(ConferenceInfos, JoinOptions)"/>
-    /// or <see cref="DolbyIO.Comms.Services.Conference.Listen(ConferenceInfos, ListenOptions)"/>method.
-    /// 5. Leave the conference using the <see cref="DolbyIO.Comms.Services.Conference.Leave"/> method.
+    /// 3. Create a conference via the <see cref="DolbyIO.Comms.Services.Conference.Create(ConferenceOptions)">Create</see> method.
+    /// 4. Join the created conference via the <see cref="DolbyIO.Comms.Services.Conference.Join(ConferenceInfos, JoinOptions)">Join</see> method 
+    /// or use the <see cref="DolbyIO.Comms.Services.Conference.Listen(ConferenceInfos, ListenOptions)">Listen</see> method to join the conference as a listener.
+    /// 5. Leave the conference using the <see cref="DolbyIO.Comms.Services.Conference.Leave">Leave</see> method.
     /// </summary>
     public class Conference
     {   
@@ -27,7 +27,7 @@ namespace DolbyIO.Comms.Services
         private ConferenceStatusUpdatedEventHandler _statusUpdated;
 
         /// <summary>
-        /// The conference status updated event. Raised when the conference status changes.
+        /// Emitted when a conference status has changed.
         /// See <see cref="DolbyIO.Comms.ConferenceStatus">ConferenceStatus</see>
         /// <example>
         /// <code>
@@ -50,7 +50,7 @@ namespace DolbyIO.Comms.Services
         private ParticipantAddedEventHandler _participantAdded;
 
         /// <summary>
-        /// The participant added event. Raised when a participant is added to the conference.
+        /// Emitted when a new participant has been added to a conference.
         /// <example>
         /// <code>
         /// _sdk.Conference.ParticipantAdded = delegate (Participant participant) 
@@ -72,7 +72,7 @@ namespace DolbyIO.Comms.Services
         private ParticipantUpdatedEventHandler _participantUpdated;
 
         /// <summary>
-        /// The participant updated event. Raised when a participant is updated.
+        /// Emitted when a conference participant has changed a status.
         /// <example>
         /// <code>
         /// _sdk.Conference.ParticipantUpdated = delegate (Participant participant) 
@@ -93,7 +93,7 @@ namespace DolbyIO.Comms.Services
 
         private ActiveSpeakerChangeEventHandler _activeSpeakerChange;
         /// <summary>
-        /// The active speaker change event. Raised when the active speakers are changing.
+        /// Emitted when an active speaker has changed.
         /// <example>
         /// <code>
         /// _sdk.Conference.ActiveSpeakerChange = delegate (string conferenceId, int count, string[] activeSpeakers) 
@@ -115,7 +115,7 @@ namespace DolbyIO.Comms.Services
         private ConferenceMessageReceivedEventHandler _messageReceived;
 
         /// <summary>
-        /// The message received event. Raised when a message is received while in conference.
+        /// Emitted when a participant receives a message.
         /// </summary>
         /// <example>
         /// <code>
@@ -137,7 +137,7 @@ namespace DolbyIO.Comms.Services
         private ConferenceInvitationReceivedEventHandler _invitationReceived;
 
         /// <summary>
-        /// The invitation received event. Raised when an invitation to a conference is received.
+        /// Emitted when a participant receives a conference invitation.
         /// </summary>
         /// <example>
         /// <code>
@@ -159,7 +159,7 @@ namespace DolbyIO.Comms.Services
         private DvcErrorEventHandler _dvcError;
 
         /// <summary>
-        /// The dvc error event. Raised when an error occurs in the dvc library.
+        /// Emitted when a DVC-related error occurs.
         /// </summary>
         /// <example>
         /// <code>
@@ -181,7 +181,7 @@ namespace DolbyIO.Comms.Services
         private PeerConnectionErrorEventHandler _peerConnectionError;
 
         /// <summary>
-        /// The peer connection error event. Raised when an error occurs in the peer connection.
+        /// Emitted when a peer connection problem occurs.
         /// </summary>
         /// <example>
         /// <code>
@@ -201,7 +201,7 @@ namespace DolbyIO.Comms.Services
         }
 
         /// <summary>
-        /// Indicates that the sdk is in a conference.
+        /// Indicates whether the SDK is in a conference.
         /// </summary>
         public Boolean IsInConference
         {
@@ -209,7 +209,7 @@ namespace DolbyIO.Comms.Services
         }
 
         /// <summary>
-        ///  Gets the full information about the currently active conference.
+        ///  Gets full information about the currently active conference.
         /// </summary>
         /// <returns>The ConferenceInfos describing the conference.</returns>
         public async Task<ConferenceInfos> Current()
@@ -239,10 +239,10 @@ namespace DolbyIO.Comms.Services
         }
 
         /// <summary>
-        /// Joins an existing conference as an active user who can both receive
+        /// Joins an existing conference as an active user who can receive
         /// media from the conference and inject media into the conference.
         /// </summary>
-        /// <param name="infos">The conference options that need to contain conferenceId.</param>
+        /// <param name="infos">The conference options that need to contain the conference ID.</param>
         /// <param name="options">The join options for the SDK user.</param>
         /// <returns>The result object producing the ConferenceInfos asynchronously.</returns>
         public async Task<ConferenceInfos> Join(ConferenceInfos infos, JoinOptions options)
@@ -260,7 +260,7 @@ namespace DolbyIO.Comms.Services
         /// Joins an existing conference as a listener who can receive audio and
         /// video streams, but cannot send any stream to the conference.
         /// </summary>
-        /// <param name="infos">The conference options that need to contain conferenceId.</param>
+        /// <param name="infos">The conference options that need to contain conference ID.</param>
         /// <param name="options">The listen options for the SDK user.</param>
         /// <returns></returns>
         public async Task<ConferenceInfos> Listen(ConferenceInfos infos, ListenOptions options)
@@ -279,7 +279,7 @@ namespace DolbyIO.Comms.Services
         /// </summary>
         /// <param name="spatialAudio">A boolean flag enabling spatial audio for the joining
         /// participant. The default value is true.</param>
-        /// <returns>Resulting conference informations</returns>
+        /// <returns>Resulting conference information.</returns>
         public async Task<ConferenceInfos> Demo(bool spatialAudio = true)
         {
             return await Task.Run(() => 
@@ -359,8 +359,9 @@ namespace DolbyIO.Comms.Services
         }
 
         /// <summary>
-        /// Sends a message to the current conference. The message size is
-        /// limited to 16KB and can be any kind of string, from raw to Json.
+        /// Sends a message to the current conference. The message must be in a form
+        /// of string, such as raw or JSON. The message size is
+        /// limited to 16KB.
         /// </summary>
         /// <param name="message">The message.</param>
         /// <returns></returns>

@@ -7,48 +7,47 @@ namespace DolbyIO.Comms
     }
 
     /// <summary>
-    /// The logging levels to set. The logging levels allow classifying the
+    /// The LogLevel enum gathers logging levels to set. The logging levels allow classifying the
     /// entries in the log files in terms of urgency to help to control the amount of
     /// logged information.
     /// </summary>
     public enum LogLevel {
         /// <summary>
-        /// Turns off logging.
+        /// Disables logging.
         /// </summary>
         Off = 0,    
         /// <summary>
-        /// The error level logging generates logs when an error occurs and
-        /// the SDK cannot properly function.
+        /// Generates logs only when an error occurs that does not allow
+        /// the SDK to function properly.
         /// </summary>
         Error,   
         /// <summary>
-        /// The warning level logging generates logs when the SDK detects an
+        /// Generates logs when the SDK detects an
         /// unexpected problem but is still able to work as usual.
         /// </summary>
         Warning,
         /// <summary>
-        /// The info level logging generates an informative number of logs.
+        /// Generates an informative number of logs.
         /// </summary>
         Info,
         /// <summary>
-        /// The debug level logging generates a high number of logs to provide
+        /// Generates a high number of logs to provide
         /// diagnostic information in a detailed manner.
         /// </summary>
         Debug,
         /// <summary>
-        /// The verbose level logging generates the highest number of logs,
-        /// including even the HTTP requests.
+        /// Generates the highest number of logs,
+        /// including HTTP requests.
         /// </summary>
         Verbose,
     }
 
     /// <summary>
-    /// Conference Access Permissions provided to a particpant who is invited
-    /// to a conference.
+    /// The Conference Access Permissions enum contains the available permissions for application users who are invited to a conference.
     /// </summary>
     public enum ConferenceAccessPermissions {
         /// <summary> 
-        /// Allows a participant to invite participants to a conference. 
+        /// Allows a participant to invite other participants to a conference. 
         /// </summary>
         Invite = 0,
         /// <summary>
@@ -68,7 +67,7 @@ namespace DolbyIO.Comms
         /// </summary>
         ShareScreen, 
         /// <summary>
-        /// Allows a participant to share a video during a conference.
+        /// Allows a participant to share a video file during a conference.
         /// </summary>
         ShareVideo,
         /// <summary>
@@ -76,8 +75,7 @@ namespace DolbyIO.Comms
         /// </summary>
         ShareFile,  
         /// <summary>
-        /// Allows a participant to send a message to other participants during a conference. 
-        /// Message size is limited to 16KB.
+        /// Allows a participant to send a message to other participants during a conference.
         /// </summary>
         SendMessage, 
         /// <summary>
@@ -93,13 +91,13 @@ namespace DolbyIO.Comms
         /// </summary>
         Kick,       
         /// <summary>
-        /// Allows a participant to update other participants permissions.
+        /// Allows a participant to update permissions of other participants.
         /// </summary>
         UpdatePermissions, 
     }
 
     /// <summary>
-    /// Possible values representing the current status of a conference.
+    /// The ConferenceStatus enum gathers possible statuses of a conference.
     /// </summary>
     public enum ConferenceStatus
     {
@@ -138,55 +136,55 @@ namespace DolbyIO.Comms
     }
 
     /// <summary>
-    /// The possible statuses of conference participants.
+    /// The ParticipantStatus enum gathers the possible statuses of a conference participant.
     /// </summary>
     public enum ParticipantStatus 
     {
         /// <summary>
-        /// A participant is invited to a conference and is waiting for an invitation.
+        /// The participant has been invited to a conference and is waiting for an invitation.
         /// </summary>
         Reserved = 0,
         /// <summary>
-        /// A participant received a conference invitation and is connecting to the conference.
+        /// The participant has received a conference invitation and is connecting to the conference.
         /// </summary>
         Connecting,
         /// <summary>
-        /// A participant successfully connected to the conference.
+        /// The participant has successfully connected to the conference.
         /// </summary>
         OnAir,
         /// <summary>
-        /// An invited participant declined the conference invitation.
+        /// The invited participant has declined the conference invitation.
         /// </summary>
         Decline,
         /// <summary>
-        /// A participant does not send any audio, video, or screen-share stream to the conference.
+        /// The participant does not send any audio, video, or screen-share stream to the conference.
         /// </summary>
         Inactive,
         /// <summary>
-        /// A participant left the conference.
+        /// The participant has left the conference.
         /// </summary>
         Left,
         /// <summary>
-        /// A participant experiences a peer connection problem.
+        /// The participant is experiencing a peer connection problem.
         /// </summary>
         Warning,
         /// <summary>
-        /// A participant cannot connect to the conference due to a peer connection failure.
+        /// The participant cannot connect to the conference due to a peer connection failure.
         /// </summary>
         Error
     }
 
     /// <summary>
-    /// The type of participant.
+    /// The ParticipantType enum gathers the possible participant types.
     /// </summary>
     public enum ParticipantType 
     {
         /// <summary>
-        /// A participant who can send and receive an audio and video stream during a conference.
+        /// The participant who can send and receive an audio and video stream during a conference.
         /// </summary>
         User = 0,
         /// <summary>
-        /// A participant who can receive audio and video streams, but cannot send any stream to a conference.
+        /// The participant who can receive audio and video streams, but cannot send any stream to a conference.
         /// </summary>
         Listener,
         /// @cond DO_NOT_DOCUMENT
@@ -205,14 +203,24 @@ namespace DolbyIO.Comms
     }
 
     /// <summary>
-    /// The possible spatial audio styles of the conference. Setting
+    /// The SpatialAudioStyle enum gathers the possible spatial audio styles of the conference. Setting
     /// SpatialAudioStyle is possible only if the DolbyVoice flag is set to true.
-    /// You can either use the individual or shared option.
     /// </summary>
     public enum SpatialAudioStyle
     {
+        /// <summary>
+        /// Disables spatial audio in a conference.
+        /// </summary>
         None = 0,
+        /// <summary>
+        /// Sets the spatial location that is based on the spatial scene, local participant's position, and remote participants' positions. This allows a client to control the position using the local, self-contained logic. However, the client has to communicate a large set of requests constantly to the server, which increases network traffic, log subsystem pressure, and complexity of the client-side application. This option is selected by default. We recommend this mode for A/V congruence scenarios in video conferencing and similar applications.
+        /// </summary>
         Individual,
+        /// <summary>
+        /// Sets the spatial location that is based on the spatial scene and the local participant's position, while the relative positions among participants are calculated by the Dolby.io server. This way, the spatial scene is shared by all participants, so that each client can set a position and participate in the shared scene. This approach simplifies communication between the client and the server and decreases network traffic. We recommend this mode for virtual space scenarios, such as 2D or 3D games, trade shows, virtual museums, water cooler scenarios, etc.
+        ///
+        /// **Note**: The shared style currently does not support recording conferences.
+        /// </summary>
         Shared
     }
 
