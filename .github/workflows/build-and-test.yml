@@ -25,7 +25,7 @@ jobs:
           repository: "DolbyIO/comms-sdk-cpp"
           tag: "2.0.0"
           fileName: "${{ matrix.sdk }}"
-          out-file-path: "cppsdk"
+          out-file-path: "cppsdk.zip"
 
       - run: 7z e ${{github.workspace}}/cppsdk.zip -o${{github.workspace}}/cppsdk
 
