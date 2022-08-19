@@ -7,6 +7,11 @@ jobs:
     strategy:
       matrix:
         os: [macos-latest, windows-latest]
+        include:
+          - os: macos-latest
+            sdk: cppsdk-2.0.0-macos64.zip
+          - os: windows-latest
+            sdk: cppsdk-2.0.0-windows64.zip
     
     steps:
       - uses: actions/checkout@v2
@@ -14,27 +19,15 @@ jobs:
         with:
           dotnet-version: '6.0.x'
 
-      - name: MacOS C++ SDK
-        if: ${{ matrix.os == 'macos-latest' }}
+      - name: Get C++ SDK
         uses: robinraju/release-downloader@v1.4
         with:
           repository: "DolbyIO/comms-sdk-cpp"
           tag: "2.0.0"
-          fileName: "cppsdk-2.0.0-macos64.zip"
+          fileName: "${{ matrix.sdk }}"
           out-file-path: "cppsdk"
-      
-      - name: Windows C++ SDK
-        if: ${{ matrix.os == 'windows-latest' }}
-        uses: robinraju/release-downloader@v1.4
-        with:
-          repository: "DolbyIO/comms-sdk-cpp"
-          tag: "2.0.0"
-          fileName: "cppsdk-2.0.0-win64.zip"
-          out-file-path: "${{github.workspace}}/cppsdk"
 
-      - uses: montudor/action-zip@v1
-        with:
-          args: unzip -qq ${{github.workspace}}/cppsdk.zip -d ${{github.workspace}}/cppsdk
+      - run: 7z e ${{github.workspace}}/cppsdk.zip -o ${{github.workspace}}/cppsdk
 
       - run: cmake -E make_directory ${{github.workspace}}/build
 
