@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk"> 
+
+  <PropertyGroup>
+    <TargetFramework>${DOTNET_PROJECT_FRAMEWORK}</TargetFramework>
+    <Version>${DOTNET_PROJECT_VERSION}</Version>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <OutputPath>${CMAKE_LIBRARY_OUTPUT_DIRECTORY}</OutputPath>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+  </PropertyGroup>
+  
+  ${_DOTNET_SOURCES}
+  ${_DOTNET_PACKAGES}
+  ${_DOTNET_REFERENCES}
+    
+</Project>

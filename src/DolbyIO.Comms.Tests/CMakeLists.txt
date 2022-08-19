@@ -1,0 +1,15 @@
+add_dotnet_test(
+    NAME
+        DolbyIO.Comms.Tests
+    FRAMEWORK
+        net6.0
+    SOURCES
+        Usings.cs
+        Interop/NativeTests.cs
+        SessionTests.cs
+        ConferenceTests.cs
+        MediaDeviceTests.cs
+        DolbyIOSDKTests.cs
+    REFERENCES
+        DolbyIO.Comms.Sdk
+)

@@ -1,0 +1,17 @@
+add_dotnet_library(
+    NAME
+        DolbyIO.Comms.Sdk
+    SOURCES
+        Native/Handlers.cs
+        Native/Enum.cs
+        Native/Struct.cs
+        Native/Native.cs
+        Services/Session.cs
+        Services/Conference.cs
+        Services/MediaDevice.cs
+        DolbyIOSDK.cs
+    VERSION
+        ${CSSDK_MAJOR}.${CSSDK_MINOR}.${CSSDK_PATH}
+    FRAMEWORK
+        netstandard2.1
+)

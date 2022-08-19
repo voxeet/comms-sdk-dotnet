@@ -1,0 +1,71 @@
+{
+  "metadata": [
+    {
+      "src": [
+        {
+          "files": [
+            "build/dotnet/DolbyIO.Comms.Sdk/**.csproj"
+          ],
+          "src": "../"
+        }
+      ],
+      "dest": "documentation/api",
+      "disableGitFeatures": false,
+      "disableDefaultFilter": false
+    }
+  ],
+  "build": {
+    "content": [
+      {
+        "files": [
+          "documentation/api/**.yml",
+          "documentation/api/index.md"
+        ]
+      },
+      {
+        "files": [
+          "documentation/**.md",
+          "documentation/**/toc.yml",
+          "toc.yml",
+          "*.md"
+        ]
+      }
+    ],
+    "resource": [
+      {
+        "files": [
+          "images/**"
+        ]
+      }
+    ],
+    "overwrite": [
+      {
+        "files": [
+          "apidoc/**.md"
+        ],
+        "exclude": [
+          "obj/**",
+          "_site/**"
+        ]
+      }
+    ],
+    "dest": "_site",
+    "globalMetadataFiles": [],
+    "fileMetadataFiles": [],
+    "globalMetadata": {
+      "_appName": ".NET SDK Documentation",
+      "_enableSearch": "true",
+      "_appLogoPath": "images/logo48.png"
+    },
+    "template": [
+      "default",
+      "template/darkfx"
+    ],
+    "postProcessors": [],
+    "markdownEngineName": "markdig",
+    "noLangKeyword": false,
+    "keepFileLink": false,
+    "cleanupCacheHistory": false,
+    "disableGitFeatures": false
+  }
+}
