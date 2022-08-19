@@ -15,7 +15,7 @@ namespace DolbyIO.Comms.Services
     ///  2. Set the desired input audio device by calling the 
     ///  <see cref="DolbyIO.Comms.Services.MediaDevice.SetPreferredAudioInputDevice(AudioDevice)"/> method.
     ///  3. Set the desired output audio device by calling the
-    ///  <see cref="DolbyIO.Comms.Services.MediaDevice.SetPreferredAudioOuputDevice(AudioDevice)"/> method.
+    ///  <see cref="DolbyIO.Comms.Services.MediaDevice.SetPreferredAudioOutputDevice(AudioDevice)"/> method.
     ///  4. Subscribe to <see cref="DolbyIO.Comms.Services.MediaDevice.Added"/>, 
     ///  <see cref="DolbyIO.Comms.Services.MediaDevice.Removed"/>, and 
     ///  <see cref="DolbyIO.Comms.Services.MediaDevice.Changed"/> events.
@@ -130,7 +130,7 @@ namespace DolbyIO.Comms.Services
         /// </summary>
         /// <param name="device">Structure containing information about the desired output device.</param>
         /// <returns></returns>
-        public async Task SetPreferredAudioOuputDevice(AudioDevice device)
+        public async Task SetPreferredAudioOutputDevice(AudioDevice device)
         {
             await Task.Run(() => 
             {
