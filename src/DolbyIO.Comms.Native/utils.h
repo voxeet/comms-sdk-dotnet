@@ -21,6 +21,7 @@ namespace dolbyio::comms::native {
 
   public:
     template<typename F> call(const F& f) {
+#ifndef MOCK
       try {
         f();
         result_ = result_success;
@@ -28,6 +29,9 @@ namespace dolbyio::comms::native {
         error = e.what();
         result_ = result_error;
       }
+#else
+      result_ = result_success;
+#endif
     }
 
     int result() { return result_; }

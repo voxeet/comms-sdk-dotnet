@@ -1,6 +1,6 @@
 ﻿using DolbyIO.Comms;
 namespace DolbyIO.Comms.Tests
-{    
+{   
     public class DolbyIOSDKTests
     {
         private DolbyIOSDK _sdk = new DolbyIOSDK();

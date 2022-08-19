@@ -5,7 +5,7 @@ project(DolbyIO.Comms.Native
         ${CSSDK_MAJOR}.${CSSDK_MINOR}.${CSSDK_PATH}
 )
 
-add_library(DolbyIO.Comms.Native  SHARED
+set(SOURCES
     utils.h
     sdk.h
     translators.h
@@ -13,7 +13,10 @@ add_library(DolbyIO.Comms.Native  SHARED
     conference.cc
     media_device.cc
     sdk.cc
-    $<$<BOOL:BUILD_TESTS>:tests/translators_tests.cc>
+)
+
+add_library(DolbyIO.Comms.Native  SHARED
+    ${SOURCES}
 )
 
 set_target_properties(DolbyIO.Comms.Native  PROPERTIES C_VISIBILITY_PRESET default)
@@ -25,6 +28,26 @@ target_link_libraries(DolbyIO.Comms.Native  PRIVATE
     DolbyioComms::sdk
     DolbyioComms::media
 )
+
+if (BUILD_TESTS)
+    add_library(DolbyIO.Comms.Native.Tests  SHARED
+        ${SOURCES}
+        $<$<BOOL:BUILD_TESTS>:tests/translators_tests.cc>
+    )
+
+    target_link_libraries(DolbyIO.Comms.Native.Tests  PRIVATE
+        DolbyioComms::sdk
+        DolbyioComms::media
+    )
+
+    target_compile_definitions(DolbyIO.Comms.Native.Tests PRIVATE MOCK)
+
+    set_target_properties(DolbyIO.Comms.Native.Tests  PROPERTIES C_VISIBILITY_PRESET default)
+    set_target_properties(DolbyIO.Comms.Native.Tests  PROPERTIES CXX_VISIBILITY_PRESET default)
+    set_target_properties(DolbyIO.Comms.Native.Tests  PROPERTIES CXX_STANDARD 17)
+    set_target_properties(DolbyIO.Comms.Native.Tests  PROPERTIES C_STANDARD 11)
+
+endif()
 
 if (WIN32)
     # Set target link options (allows to step into and set breakpoints for mixed-mode C++ assemblies).

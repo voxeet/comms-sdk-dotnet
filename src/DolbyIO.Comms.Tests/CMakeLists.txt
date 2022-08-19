@@ -5,11 +5,11 @@ add_dotnet_test(
         net6.0
     SOURCES
         Usings.cs
+        SdkFixture.cs
         Interop/NativeTests.cs
         SessionTests.cs
         ConferenceTests.cs
         MediaDeviceTests.cs
         DolbyIOSDKTests.cs
     REFERENCES
-        DolbyIO.Comms.Sdk
-)
+        DolbyIO.Comms.Sdk)
