@@ -22,8 +22,8 @@ public class CommandLine
         var aliasOption = new Option<string>("--alias", "Conference alias") { IsRequired = true };
         aliasOption.AddAlias("-a");
 
-        var appKeyOption = new Option<string>("--key", description: "App Key") { IsRequired = true };
-        appKeyOption.AddAlias("-k");
+        var tokenOption = new Option<string>("--token", description: "App Token") { IsRequired = true };
+        tokenOption.AddAlias("-t");
 
         var nameOption = new Option<string>("--user", description: "User Name", getDefaultValue: () => "Anonymous");
         nameOption.AddAlias("-u");
@@ -32,45 +32,45 @@ public class CommandLine
 
         var joinCommand = new Command("join", "Joins a conference");
         joinCommand.AddOption(aliasOption);
-        joinCommand.AddOption(appKeyOption);
+        joinCommand.AddOption(tokenOption);
         joinCommand.AddOption(nameOption);
 
         joinCommand.SetHandler(async (alias, appKey, name) => 
         {
             await Init(appKey, name);
             await JoinConference(alias);
-        }, aliasOption, appKeyOption, nameOption);
+        }, aliasOption, tokenOption, nameOption);
 
         var demoCommand = new Command("demo", "Experience Demo conference");
-        demoCommand.AddOption(appKeyOption);
+        demoCommand.AddOption(tokenOption);
         demoCommand.AddOption(nameOption);
 
         demoCommand.SetHandler(async (appKey, name) => 
         {
             await Init(appKey, name);
             await DemoConference();
-        }, appKeyOption, nameOption);
+        }, tokenOption, nameOption);
 
         var listenCommand = new Command("listen", "Listen to a conference");
         listenCommand.AddOption(aliasOption);
-        listenCommand.AddOption(appKeyOption);
+        listenCommand.AddOption(tokenOption);
         listenCommand.AddOption(nameOption);
 
         listenCommand.SetHandler(async (alias, appKey, name) =>
         {
             await Init(appKey, name);
             await ListenConference(alias);
-        }, aliasOption, appKeyOption, nameOption);
+        }, aliasOption, tokenOption, nameOption);
 
         var devicesCommand = new Command("devices", "List available devices");
-        devicesCommand.AddOption(appKeyOption);
+        devicesCommand.AddOption(tokenOption);
         devicesCommand.AddOption(nameOption);
 
         devicesCommand.SetHandler(async (appKey, name) => 
         {
             await Init(appKey, name);
             await ListDevices();
-        }, appKeyOption, nameOption);
+        }, tokenOption, nameOption);
 
         rootCommand.Add(joinCommand);
         rootCommand.Add(demoCommand);
