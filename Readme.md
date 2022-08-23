@@ -12,4 +12,4 @@ The C# SDK can connect to only one conference at a time. Joining multiple confer
 
 Using the Dolby.io Communications C# SDK Client applications have the ability to join Dolby Voice Conferences where they can send and receive HD voice streams, including spatial audio and shared scenes. This functionality is useful for integrating the HD Dolby Voice experience into your own game engine or virtual world experience. To offer this functionality, the C# SDK provides applications the ability to capture and playback audio, manage input/output Audio Devices, add spatial placement for participants as well as partake in a shared spatial scene.
 
-See [Gettting Started](./docs/documentation/started.md) for informations on building and creating your first application.
+See [Gettting Started](./docs/documentation/started.md) for informations about building and creating your first application.
