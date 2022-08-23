@@ -9,7 +9,7 @@ namespace DolbyIO.Comms
      * Native Interop for the DolbyIO C++ SDK
      * @nodocument
      */
-    internal class Native 
+    internal class Native
     {
         internal const string LibName = "DolbyIO.Comms.Native";
 

@@ -7,7 +7,7 @@ namespace DolbyIO.Comms.Tests
     public class NativeTests
     {
 
-        public const string LibName = "DolbyIO.Comms.Native";
+        public const string LibName = "DolbyIO.Comms.Native.Tests";
 
         [DllImport(LibName, CharSet = CharSet.Ansi)]
         public static extern void UserInfoTest(UserInfo src, out UserInfo dest);
