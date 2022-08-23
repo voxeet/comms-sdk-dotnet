@@ -5,11 +5,11 @@ public class Call
 {
     private DolbyIOSDK _sdk = new DolbyIOSDK();
 
-    public async Task Join()
+    public async Task OpenAndJoin()
     {
         try
         {
-            await _sdk.Init("My Access Token");
+            await _sdk.Init("Acess Token");
 
             // Registering event handlers
             _sdk.Conference.StatusUpdated = OnConferenceStatus;
@@ -17,41 +17,49 @@ public class Call
             // Or inline
             _sdk.Conference.ParticipantAdded = new ParticipantAddedEventHandler
             (
-                (Participant participant) => 
+                (Participant participant) =>
                 {
 
                 }
             );
 
             UserInfo user = new UserInfo();
-            user.Name = "Dummy";
+            user.Name = "My Name";
 
             user = await _sdk.Session.Open(user);
 
             ConferenceOptions options = new ConferenceOptions();
             options.Alias = "Conference alias";
-            
+
             JoinOptions joinOpts = new JoinOptions();
-            
+
             ConferenceInfos createInfos = await _sdk.Conference.Create(options);
             ConferenceInfos joinInfos = await _sdk.Conference.Join(createInfos, joinOpts);
-
-            await _sdk.Conference.Leave();
-            await _sdk.Session.Close();            
         }
         catch (DolbyIOException e)
         {
-            Console.WriteLine(e);
+            Console.WriteLine(e.Message);
         }
-        finally
+    }
+
+    public async Task LeaveAndClose()
+    {
+        try
         {
+            await _sdk.Conference.Leave();
+            await _sdk.Session.Close();
+
             _sdk.Dispose();
         }
-
-        void OnConferenceStatus(ConferenceStatus status, string conferenceId)
+        catch (DolbyIOException e)
         {
-
+            Console.WriteLine(e.Message);
         }
+    }
+
+    void OnConferenceStatus(ConferenceStatus status, string conferenceId)
+    {
+
     }
 }
 
@@ -60,6 +68,10 @@ public class Program
     public static async Task Main()
     {
         Call call = new Call();
-        await call.Join();
+        await call.OpenAndJoin();
+
+        Console.ReadKey();
+
+        await call.LeaveAndClose();
     }
 }

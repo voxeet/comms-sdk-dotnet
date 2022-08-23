@@ -1,3 +1,5 @@
+# Getting Started
+
 This guide will help you create a simple conference application (Audio-only).
 
 ## Nuget Package
@@ -30,9 +32,123 @@ For the moment if you want `docfx` to run, the build directory should be created
 
 > **_NOTE:_** The SDK is fully asynchronous and all methods can throws a [DolbyIOException](xref:DolbyIO.Comms.DolbyIOException).
 
+Applications using the .NET SDK must provide an access token when creating the SDK. The sample applications provided  require the access token to be provided as a command line parameter when launching the executable. To get the access token from the Dolby.io dashboard, follow these instructions: [Client Access Token](https://docs.dolby.io/communications-apis/docs/overview-developer-tools)
 
+> **_Step 1_**: Initialize the SDK.
+> - Create an instance of the SDK.
+> - Init the SDK with a secure authentication method.
 
- Joining a conference can be achieved in a few simple steps as demonstrated above: 
+```cs
+using DolbyIO.Comms;
+
+DolbyIOSDK _sdk = new DolbyIOSDK();
+
+try
+{
+    await _sdk.Init("Token", () => 
+    {
+        // Refresh Callback
+    });
+}
+catch (DolbyIOException e)
+{
+    // Error Handling
+}
+```
+
+## Register Event Handler
+
+> **_Step 2:_** After initializing the SDK is the right time to register your event handlers
+
+```cs
+// Registering event handlers
+_sdk.Conference.StatusUpdated = OnConferenceStatus;
+
+// Or inline
+_sdk.Conference.ParticipantAdded = new ParticipantAddedEventHandler
+(
+    (Participant participant) => 
+    {
+
+    }
+);
+```
+
+## Open a Session
+
+> **_Step 3:_** Open a session to connect your application with the Dolby.io backend.
+
+A session is a connection between the client application and the Dolby.io backend. When opening a session, you should provide a name. Commonly, this is the name of the participant who established the session. This session can remaing active for all the lifecycle of your application.
+
+```cs
+try
+{
+    UserInfo user = new UserInfo();
+    user.Name = "My Name";
+
+    user = await _sdk.Session.Open(user);
+}
+catch (DolbyIOException e)
+{
+    // Error Handling
+}
+```
+
+##  Create and Join a Conference
+
+> **_Step 4:_** Create and Join a conference, using [Conference.Create](xref:DolbyIO.Comms.Services.Conference#DolbyIO_Comms_Services_Conference_Create_DolbyIO_Comms_ConferenceOptions_) and [Conference.Join](xref:DolbyIO.Comms.Services.Conference#DolbyIO_Comms_Services_Conference_Join_DolbyIO_Comms_ConferenceInfos_DolbyIO_Comms_JoinOptions_)
+> - Create a conference, if the conference already exists, the right ConferenceInfos will be returned.
+> - Join the conference previously created.
+
+A conference is a multi-person call where participants exchange audio with one another. To distinguish between multiple conferences, you should assign a conference alias or name. When multiple participants join a conference of the same name using a token of the same Dolby.io application, they will be able to meet in a call.
+
+```cs
+try
+{
+    ConferenceOptions options = new ConferenceOptions();
+    options.Alias = "Conference alias";
+
+    JoinOptions joinOpts = new JoinOptions();
+
+    ConferenceInfos createInfos = await _sdk.Conference.Create(options);
+    ConferenceInfos joinInfos = await _sdk.Conference.Join(createInfos, joinOpts);
+}
+catch (DolbyIOException e)
+{
+    // Error Handling
+}
+```
+
+## Leave the conference
+
+> **_Step 5:_** Leave the conference when appropriate using [Conference.Leave](xref:DolbyIO.Comms.Services.Conference#DolbyIO_Comms_Services_Conference_Leave)
+
+```cs
+try
+{
+    await _sdk.Session.Leave();
+}
+catch (DolbyIOException e)
+{
+    // Error Handling
+}
+```
+
+## Close the Session and Dispose the SDK
+
+> **_Step 6:_** At the end of your application, close the session and dispose the SDK (this will release the underneath unmanaged native ressources)
+
+```cs
+try
+{
+    await _sdk.Session.Close();
+    _sdk.Dispose();
+}
+catch (DolbyIOException e)
+{
+    // Error Handling
+}
+```
 
 ## Full Example
 
@@ -44,11 +160,11 @@ public class Call
 {
     private DolbyIOSDK _sdk = new DolbyIOSDK();
 
-    public async Task Join()
+    public async Task OpenAndJoin()
     {
         try
         {
-            await _sdk.Init("My Access Token");
+            await _sdk.Init("Access Token");
 
             // Registering event handlers
             _sdk.Conference.StatusUpdated = OnConferenceStatus;
@@ -56,39 +172,62 @@ public class Call
             // Or inline
             _sdk.Conference.ParticipantAdded = new ParticipantAddedEventHandler
             (
-                (Participant participant) => 
+                (Participant participant) =>
                 {
 
                 }
             );
 
             UserInfo user = new UserInfo();
-            user.Name = "Dummy";
+            user.Name = "My Name";
 
             user = await _sdk.Session.Open(user);
 
             ConferenceOptions options = new ConferenceOptions();
             options.Alias = "Conference alias";
-            
+
             JoinOptions joinOpts = new JoinOptions();
-            
+
             ConferenceInfos createInfos = await _sdk.Conference.Create(options);
             ConferenceInfos joinInfos = await _sdk.Conference.Join(createInfos, joinOpts);
+        }
+        catch (DolbyIOException e)
+        {
+            Console.WriteLine(e.Message);
+        }
+    }
 
+    public async Task LeaveAndClose()
+    {
+        try
+        {
             await _sdk.Conference.Leave();
             await _sdk.Session.Close();
-            
+
             _sdk.Dispose();
         }
         catch (DolbyIOException e)
         {
-            Console.WriteLine(e);
+            Console.WriteLine(e.Message);
         }
+    }
 
-        void OnConferenceStatus(ConferenceStatus status, string conferenceId)
-        {
+    void OnConferenceStatus(ConferenceStatus status, string conferenceId)
+    {
 
-        }
+    }
+}
+
+public class Program
+{
+    public static async Task Main()
+    {
+        Call call = new Call();
+        await call.OpenAndJoin();
+
+        Console.ReadKey();
+
+        await call.LeaveAndClose();
     }
 }
 ```
