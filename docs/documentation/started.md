@@ -56,7 +56,7 @@ catch (DolbyIOException e)
 }
 ```
 
-## Register Event Handler
+## Register Event Handlers
 
 > **_Step 2:_** After initializing the SDK is the right time to register your event handlers
 
