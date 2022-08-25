@@ -78,6 +78,15 @@ elseif (WIN32)
                 LIBRARY_OUTPUT_DIRECTORY ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/$<0:>
                 RUNTIME_OUTPUT_DIRECTORY ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/$<0:>
                 ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/$<0:>)
+
+        if (BUILD_TESTS)
+            target_compile_options(DolbyIO.Comms.Native.Tests PUBLIC /GR /EHa /MT /Zi)
+            set_target_properties(DolbyIO.Comms.Native.Tests 
+                PROPERTIES 
+                    LIBRARY_OUTPUT_DIRECTORY ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/$<0:>
+                    RUNTIME_OUTPUT_DIRECTORY ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/$<0:>
+                    ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/$<0:>)
+        endif()
     endif (MSVC)
 
     add_custom_command(TARGET DolbyIO.Comms.Native POST_BUILD
