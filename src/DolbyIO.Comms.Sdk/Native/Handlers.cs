@@ -51,7 +51,8 @@ namespace DolbyIO.Comms
     /// <param name="conferenceId">The corresponding conference Id.</param>
     /// <param name="count">The numbers of active speakers.</param>
     /// <param name="activeSpeakers">The array of active speakers Id.</param>
-    public delegate void ActiveSpeakerChangeEventHandler(string conferenceId, int count, [MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.LPStr, SizeParamIndex = 1)] string[] activeSpeakers);
+    #nullable enable
+    public delegate void ActiveSpeakerChangeEventHandler(string conferenceId, int count, [MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.LPStr, SizeParamIndex = 1)] string[]? activeSpeakers);
     
     /// <summary>
     /// The conference message received event handler.

@@ -31,13 +31,13 @@ extern "C" {
     handle<on_active_speaker_change>(sdk->conference(), handler,
       [handler](const on_active_speaker_change::event& e) {
         char* conf_id = strdup(e.conference_id);
-        char* speakers[e.active_speakers.size()];
+        std::vector<char*> speakers(e.active_speakers.size());
 
         for (int i = 0; i < e.active_speakers.size(); i++) {
           speakers[i] = strdup(e.active_speakers.at(i));
         }
 
-        handler(conf_id, e.active_speakers.size(), speakers);    
+        handler(conf_id, e.active_speakers.size(), &speakers[0]);    
       }
     );
   }

@@ -305,10 +305,12 @@ public class CommandLine
         }    
     }
 
-    private static void OnActiveSpeakerChange(string conferenceId, int count, string[] activeSpeakers) {
-        Log.Debug($"OnActiveSpeakerChange: {conferenceId}");
-        foreach(string s in activeSpeakers) {
-            Log.Debug($"-- ActiveSpeaker : {s}");
+    private static void OnActiveSpeakerChange(string conferenceId, int count, string[]? activeSpeakers) {
+        Log.Debug($"OnActiveSpeakerChange: {conferenceId} {count}");
+        if (activeSpeakers != null) {
+            foreach(string s in activeSpeakers) {
+                Log.Debug($"-- ActiveSpeaker : {s}");
+            }
         }
     }
      

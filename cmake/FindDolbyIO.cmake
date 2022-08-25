@@ -108,6 +108,17 @@ if (WIN32)
       ${DOLBYIO_SEARCH_PATHS}
   )
 
+  find_file(DOLBYIO_LIBRARY_DVC_IMPORTED
+    HINTS
+      ${DOLBYIO_LIBRARY_PATH}
+    NAMES
+      dvclient.dll
+    PATH_SUFFIXES
+      bin
+    PATHS
+      ${DOLBYIO_SEARCH_PATHS}
+  )
+
   find_file(DOLBYIO_LIBRARY_IAPI_TEST_IMPORTED
     HINTS
       ${DOLBYIO_LIBRARY_PATH}
@@ -117,6 +128,24 @@ if (WIN32)
       bin
     PATHS
       ${DOLBYIO_SEARCH_PATHS}
+  )
+
+  add_library(avcodec SHARED IMPORTED)
+  set_target_properties(avcodec PROPERTIES
+    IMPORTED_IMPLIB ""
+    IMPORTED_LOCATION ${DOLBYIO_BINARY_DIR}/avcodec-58.dll
+  )
+
+  add_library(avformat SHARED IMPORTED)
+  set_target_properties(avformat PROPERTIES
+    IMPORTED_IMPLIB ""
+    IMPORTED_LOCATION ${DOLBYIO_BINARY_DIR}/avformat-58.dll
+  )
+
+  add_library(avutil SHARED IMPORTED)
+  set_target_properties(avutil PROPERTIES
+    IMPORTED_IMPLIB ""
+    IMPORTED_LOCATION ${DOLBYIO_BINARY_DIR}/avutil-56.dll
   )
 else()
   set(DOLBYIO_LIBRARY_SDK_IMPORTED ${DOLBYIO_LIBRARY_SDK})
@@ -150,7 +179,9 @@ set_target_properties(dvc PROPERTIES
   LINKER_LANGUAGE CXX
 )
 
-target_link_libraries(DolbyioComms::sdk INTERFACE dvc)
+if (NOT WIN32)
+  target_link_libraries(DolbyioComms::sdk INTERFACE dvc)
+endif()
 
 add_library(iapi_test SHARED IMPORTED)
 set_target_properties(iapi_test PROPERTIES
@@ -158,10 +189,6 @@ set_target_properties(iapi_test PROPERTIES
   IMPORTED_LOCATION ${DOLBYIO_LIBRARY_IAPI_TEST_IMPORTED}
   INTERFACE_INCLUDE_DIRECTORIES ${DOLBYIO_IAPI_TEST_INCLUDE_DIR}
 )
-
-if(NOT APPLE)
-	find_package(Threads)
-endif(NOT APPLE)
 
 mark_as_advanced(
   DOLBYIO_INCLUDE_DIR

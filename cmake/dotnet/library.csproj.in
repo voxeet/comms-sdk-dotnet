@@ -18,6 +18,12 @@
   ${_DOTNET_PACKAGES}
   ${_DOTNET_REFERENCES}
 
+  <PropertyGroup>
+    <RestoreAdditionalProjectSources>
+      ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}
+    </RestoreAdditionalProjectSources>
+  </PropertyGroup>
+
   <ItemGroup>
     <RuntimeOsx Include="${CMAKE_LIBRARY_OUTPUT_DIRECTORY}${DOTNET_PROJECT_NAME}.Runtime.Osx.*.nupkg"/>
     <RuntimeWin Include="${CMAKE_LIBRARY_OUTPUT_DIRECTORY}${DOTNET_PROJECT_NAME}.Runtime.Win.*.nupkg"/>
