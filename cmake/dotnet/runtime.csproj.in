@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.Build.NoTargets/3.5.6"> 
+  <PropertyGroup>
+    <TargetFramework>${DOTNET_PROJECT_FRAMEWORK}</TargetFramework>
+    <Version>${DOTNET_PROJECT_VERSION}</Version>
+    <PackageTags>native</PackageTags>
+    <IncludeBuildOutput>false</IncludeBuildOutput>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <OutputPath>${CMAKE_LIBRARY_OUTPUT_DIRECTORY}</OutputPath>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+  </PropertyGroup>
+    
+  ${_DOTNET_FILES}
+</Project>

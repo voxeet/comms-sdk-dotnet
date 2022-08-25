@@ -67,6 +67,19 @@ macro(dotnet_gen_packages)
   string(APPEND _DOTNET_PACKAGES "</ItemGroup>\n")
 endmacro()
 
+# Generates XML for runtime files
+macro(dotnet_gen_files)
+  set(_DOTNET_FILES)
+
+  string(APPEND _DOTNET_FILES "<ItemGroup>\n") 
+  
+  foreach(F ${DOTNET_PROJECT_FILES})
+    string(APPEND _DOTNET_FILES "    <Content CopyToOutputDirectory=\"PreserveNewest\" Include=\"${F}\" Link=\"%(Filename)%(Extension)\" Pack=\"true\" PackagePath=\"${DOTNET_PROJECT_OUTPUT}\"/>\n")
+  endforeach()
+  
+  string(APPEND _DOTNET_FILES "</ItemGroup>\n")
+endmacro()
+
 # Adds build commands
 macro(dotnet_build_commands)
   add_custom_command(
@@ -110,6 +123,7 @@ macro(dotnet_gen_project TEMPLATE)
   dotnet_gen_sources()
   dotnet_gen_references()
   dotnet_gen_packages()
+  dotnet_gen_files()
 
   configure_file(
     ${CMAKE_MODULE_PATH}/dotnet/${TEMPLATE}
@@ -119,7 +133,7 @@ endmacro()
 
 # Adds a dotnet library project
 function(add_dotnet_library)
-  set(options "")
+  set(options)
   set(oneValueArgs NAME VERSION FRAMEWORK)
   set(multiValueArgs SOURCES REFERENCES)
 
@@ -131,6 +145,31 @@ function(add_dotnet_library)
   dotnet_gen_project("library.csproj.in")
   dotnet_build_commands()
   dotnet_target()
+
+endfunction()
+
+# Adds a dotnet library project
+function(add_dotnet_runtime)
+  set(options "")
+  set(oneValueArgs NAME VERSION FRAMEWORK OUTPUT)
+  set(multiValueArgs FILES)
+
+  cmake_parse_arguments(DOTNET_PROJECT "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
+  
+  set(DOTNET_PROJECT_PATH ${_DOTNET_PROJECT_OUTPUT_DIR}/${DOTNET_PROJECT_NAME}/${DOTNET_PROJECT_NAME}.csproj)
+  set(DOTNET_PROJECT_BUILDTIMESTAMP ${_DOTNET_PROJECT_OUTPUT_DIR}/${DOTNET_PROJECT_NAME}/${DOTNET_PROJECT_NAME}.buildtimestamp)
+
+  dotnet_gen_files()
+
+  configure_file(
+    ${CMAKE_MODULE_PATH}/dotnet/runtime.csproj.in
+    ${_DOTNET_PROJECT_OUTPUT_DIR}/${DOTNET_PROJECT_NAME}/${DOTNET_PROJECT_NAME}.csproj.in
+  )
+
+  file(GENERATE
+    OUTPUT ${DOTNET_PROJECT_PATH}
+    INPUT  ${_DOTNET_PROJECT_OUTPUT_DIR}/${DOTNET_PROJECT_NAME}/${DOTNET_PROJECT_NAME}.csproj.in
+  )
 endfunction()
 
 # Adds a dotnet executable project

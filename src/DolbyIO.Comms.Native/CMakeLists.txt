@@ -1,9 +1,5 @@
-project(DolbyIO.Comms.Native 
-    LANGUAGES 
-        CXX
-    VERSION
-        ${CSSDK_MAJOR}.${CSSDK_MINOR}.${CSSDK_PATH}
-)
+project(DolbyIO.Comms.Native LANGUAGES CXX)
+set(PROJECT_VERSION ${CSSDK_MAJOR}.${CSSDK_MINOR}.${CSSDK_PATH})
 
 set(SOURCES
     utils.h
@@ -49,7 +45,25 @@ if (BUILD_TESTS)
 
 endif()
 
-if (WIN32)
+if (APPLE)
+    set_target_properties(DolbyIO.Comms.Native PROPERTIES BUILD_RPATH "@loader_path/../PlugIns") # Unity App compatibility
+
+    add_dotnet_runtime(
+        NAME
+            DolbyIO.Comms.Sdk.Runtime.Osx
+        FRAMEWORK
+            netstandard2.1
+        VERSION
+            ${CSSDK_MAJOR}.${CSSDK_MINOR}.${CSSDK_PATH}
+        FILES
+            $<TARGET_FILE:DolbyIO.Comms.Native>
+            $<TARGET_FILE:DolbyioComms::sdk>
+            $<TARGET_FILE:DolbyioComms::media>
+            $<TARGET_FILE:dvc>
+        OUTPUT
+            runtimes/osx-x64/native
+    )
+elseif (WIN32)
     # Set target link options (allows to step into and set breakpoints for mixed-mode C++ assemblies).
     # This will not be enabled for Release or MinSizeRel builds.
     target_link_options(DolbyIO.Comms.Native 
@@ -71,8 +85,6 @@ if (WIN32)
         COMMAND ${CMAKE_COMMAND} -E copy_if_different $<TARGET_FILE:DolbyioComms::media> "${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/$<TARGET_FILE_NAME:DolbyioComms::media>"
         COMMAND ${CMAKE_COMMAND} -E copy_if_different $<TARGET_FILE:dvc> "${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/$<TARGET_FILE_NAME:dvc>"
     )
-elseif(APPLE)
-    set_target_properties(DolbyIO.Comms.Native PROPERTIES BUILD_RPATH "@loader_path/../PlugIns") # Unity App compatibility
 endif()
 
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)

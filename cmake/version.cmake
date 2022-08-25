@@ -1,3 +1,3 @@
-set(CSSDK_MAJOR 0)
-set(CSSDK_MINOR 9)
-set(CSSDK_PATH 0)
+set(CSSDK_MAJOR 1)
+set(CSSDK_MINOR 0)
+set(CSSDK_PATH 0-beta.1)
