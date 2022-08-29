@@ -18,7 +18,9 @@ extern "C" {
   EXPORT_API void SetOnDeviceRemovedHandler(on_device_removed::type handler) {
     handle<on_device_removed>(sdk->device_management(), handler, 
       [handler](const on_device_removed::event& e) {
-
+        char uid[constants::DEVICE_GUID_SIZE];
+        std::memcpy(uid, &e.uid[0], e.uid.size());
+        handler(uid);
       }
     );
   }

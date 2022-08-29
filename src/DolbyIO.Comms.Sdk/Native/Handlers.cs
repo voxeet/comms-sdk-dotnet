@@ -101,7 +101,7 @@ namespace DolbyIO.Comms
     /// See <see cref="DolbyIO.Comms.Services.MediaDevice.Removed">MediaDevice.Removed</see>
     /// </summary>
     /// <param name="uid"></param>
-    public delegate void DeviceRemovedEventHandler(byte[] uid);
+    public delegate void DeviceRemovedEventHandler([MarshalAs(UnmanagedType.LPArray, SizeConst = Constants.DeviceUidSize, ArraySubType = UnmanagedType.U1)] byte[] uid);
 
     /// <summary>
     /// The device changed event handler.
