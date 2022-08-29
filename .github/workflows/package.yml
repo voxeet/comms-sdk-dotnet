@@ -52,7 +52,7 @@ jobs:
           name: nugets
           path: ${{ github.workspace }}/build/bin
       
-      - run: cmake --build . -t DolbyIO.Comms.Sdk
+      - run: cmake --build .
         working-directory: ${{github.workspace}}/build
 
       - run: dotnet pack dotnet/DolbyIO.Comms.Sdk/DolbyIO.Comms.Sdk.csproj
@@ -62,6 +62,9 @@ jobs:
         with:
           name: nugets
           path: ${{github.workspace}}/build/bin/DolbyIO.Comms.Sdk.*.nupkg
+      
+      - run: rm ${{github.workspace}}/build/unity/Runtime/*.dylib
+        working-directory: ${{github.workspace}}/build
 
       - run: 7z x "${{github.workspace}}/build/bin/DolbyIO.Comms.Sdk.Runtime.*.nupkg" -o${{github.workspace}}/build/unity/Runtime "runtimes/*"
         working-directory: ${{github.workspace}}/build
