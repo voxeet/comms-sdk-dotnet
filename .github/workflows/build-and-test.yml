@@ -17,8 +17,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: ./.github/actions/configure
-          with:
-            cpp-sdk: ${{ matrix.sdk }}
+        with:
+          cpp-sdk: ${{ matrix.sdk }}
 
       - name: Build
         working-directory: ${{github.workspace}}/build
