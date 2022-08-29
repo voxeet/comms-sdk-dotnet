@@ -52,7 +52,7 @@ jobs:
           name: nugets
           path: ${{ github.workspace }}//build/bin
       
-      - run: cmake --build .
+      - run: cmake --build . -t DolbyIO.Comms.Sdk
         working-directory: ${{github.workspace}}/build
 
       - run: dotnet pack dotnet/DolbyIO.Comms.Sdk/DolbyIO.Comms.Sdk.csproj
