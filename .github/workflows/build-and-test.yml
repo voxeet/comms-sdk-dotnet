@@ -11,30 +11,17 @@ jobs:
         include:
           - os: macos-latest
             sdk: cppsdk-2.0.0-macos64.zip
+            shell: bash
           - os: windows-latest
             sdk: cppsdk-2.0.0-windows64.zip
+            shell: powershell
     
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/setup-dotnet@v2
+      - uses: ./.github/actions/configure
         with:
-          dotnet-version: '6.0.x'
-
-      - name: Get C++ SDK
-        uses: robinraju/release-downloader@v1.4
-        with:
-          repository: "DolbyIO/comms-sdk-cpp"
-          tag: "2.0.0"
-          fileName: "${{ matrix.sdk }}"
-          out-file-path: "cppsdk.zip"
-
-      - run: 7z x ${{github.workspace}}/cppsdk.zip -o${{github.workspace}}/cppsdk
-
-      - run: cmake -E make_directory ${{github.workspace}}/build
-
-      - name: Configure
-        working-directory: ${{github.workspace}}/build
-        run: cmake -DDOLBYIO_LIBRARY_PATH="${{github.workspace}}/cppsdk/sdk-release" -DCMAKE_BUILD_TYPE=RelWithDebInfo ${{github.workspace}}
+          cpp-sdk: ${{ matrix.sdk }}
+          shell: ${{ matrix.shell }}
 
       - name: Build
         working-directory: ${{github.workspace}}/build

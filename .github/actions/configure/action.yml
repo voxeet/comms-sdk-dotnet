@@ -1,0 +1,36 @@
+name: "Configure Action"
+description: "Configure the .NET SDK before any other tasks"
+inputs:
+  cpp-sdk:
+    description: "The C++ SDK file name"
+    required: true
+  shell:
+    description: "The required shell"
+    required: true
+    default: bash
+  
+runs:
+  using: "composite"
+  steps:
+    - uses: actions/setup-dotnet@v2
+      with:
+        dotnet-version: '6.0.x'
+
+    - name: Get C++ SDK
+      uses: robinraju/release-downloader@v1.4
+      with:
+        repository: "DolbyIO/comms-sdk-cpp"
+        tag: "2.0.0"
+        fileName: "${{ inputs.cpp-sdk }}"
+        out-file-path: "cppsdk.zip"
+
+    - run: 7z x ${{github.workspace}}/cppsdk.zip -o${{github.workspace}}/cppsdk
+      shell: ${{ inputs.shell }}
+
+    - run: cmake -E make_directory ${{github.workspace}}/build
+      shell: ${{ inputs.shell }}
+
+    - name: Configure
+      shell: ${{ inputs.shell }}
+      working-directory: ${{github.workspace}}/build
+      run: cmake -DDOLBYIO_LIBRARY_PATH="${{github.workspace}}/cppsdk/sdk-release" -DCMAKE_BUILD_TYPE=RelWithDebInfo ${{github.workspace}}

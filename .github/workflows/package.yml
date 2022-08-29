@@ -1,0 +1,65 @@
+name: Package Nugets
+on: [push]
+
+jobs:
+  build-runtimes:
+    name: build-${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: true
+      matrix:
+        os: [macos-latest, windows-latest]
+        include:
+          - os: macos-latest
+            sdk: cppsdk-2.0.0-macos64.zip
+            shell: bash
+            runtime: DolbyIO.Comms.Sdk.Runtime.Osx
+          - os: windows-latest
+            sdk: cppsdk-2.0.0-windows64.zip
+            shell: powershell
+            runtime: DolbyIO.Comms.Sdk.Runtime.Win
+    
+    steps:
+      - uses: actions/checkout@v2
+      - uses: ./.github/actions/configure
+        with:
+          cpp-sdk: ${{ matrix.sdk }}
+          shell: ${{ matrix.shell }}
+
+      - name: Build
+        working-directory: ${{github.workspace}}/build
+        run: cmake --build . -t DolbyIO.Comms.Native
+
+      - name: Pack
+        working-directory: ${{github.workspace}}/build
+        run: dotnet pack dotnet/${{ matrix.runtime }}/${{ matrix.runtime }}.csproj
+
+      - uses: actions/upload-artifact@v3
+        with:
+          name: nugets
+          path: ${{github.workspace}}/build/bin/${{ matrix.runtime }}.*.nupkg
+
+  build-package:
+    runs-on: macos-latest
+    needs: [build-runtimes]
+    steps:
+      - uses: actions/checkout@v2
+      - uses: ./.github/actions/configure
+        with:
+          cpp-sdk: cppsdk-2.0.0-macos64.zip
+      - uses: actions/download-artifact@v3
+        with:
+          name: nugets
+          path: ${{ github.workspace }}//build/bin
+      
+      - run: cmake --build . -t DolbyIO.Comms.Sdk
+        working-directory: ${{github.workspace}}/build
+
+      - run: dotnet pack dotnet/DolbyIO.Comms.Sdk/DolbyIO.Comms.Sdk.csproj
+        working-directory: ${{github.workspace}}/build
+
+      - uses: actions/upload-artifact@v3
+        with:
+          name: nugets
+          path: ${{github.workspace}}/build/bin/DolbyIO.Comms.Sdk.*.nupkg
+
