@@ -20,9 +20,12 @@ runs:
         out-file-path: "cppsdk.zip"
 
     - run: 7z x ${{github.workspace}}/cppsdk.zip -o${{github.workspace}}/cppsdk
+      shell: bash
 
     - run: cmake -E make_directory ${{github.workspace}}/build
+      shell: bash
 
     - name: Configure
+      shell: bash
       working-directory: ${{github.workspace}}/build
       run: cmake -DDOLBYIO_LIBRARY_PATH="${{github.workspace}}/cppsdk/sdk-release" -DCMAKE_BUILD_TYPE=RelWithDebInfo ${{github.workspace}}
