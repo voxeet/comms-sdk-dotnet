@@ -43,13 +43,13 @@ jobs:
 
   build-package:
     runs-on: macos-latest
-      needs: [build-macos-latest, build-windows-lastest]
-      steps:
-        - uses: actions/checkout@v2
-        - uses: ./.github/actions/configure
-          with:
-            cpp-sdk: cppsdk-2.0.0-macos64.zip
-        - uses: actions/download-artifact@v3
-          with:
-            name: nugets
+    needs: [build-macos-latest, build-windows-lastest]
+    steps:
+      - uses: actions/checkout@v2
+      - uses: ./.github/actions/configure
+        with:
+          cpp-sdk: cppsdk-2.0.0-macos64.zip
+      - uses: actions/download-artifact@v3
+        with:
+          name: nugets
 
