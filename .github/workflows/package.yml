@@ -41,7 +41,7 @@ jobs:
 
   build-package:
     runs-on: macos-latest
-    needs: [build-macos-latest, build-windows-lastest]
+    needs: [build-macos-latest, build-windows-latest]
     steps:
       - uses: actions/checkout@v2
       - uses: ./.github/actions/configure
