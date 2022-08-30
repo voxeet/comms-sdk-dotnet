@@ -1,5 +1,5 @@
-name: Package Nugets
-on: [push]
+name: Package Artifacts
+on: workflow_dispatch
 
 jobs:
   build-runtimes:
