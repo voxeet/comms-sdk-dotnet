@@ -118,10 +118,6 @@ namespace DolbyIO.Comms
 
         public async Task SetLogLevel(LogLevel level)
         {
-            if (!_initialised)
-            {
-                throw new DolbyIOException("DolbyIOSDK is not initialized!");
-            }
             await Task.Run(() =>  Native.CheckException(Native.SetLogLevel(level)));
         }
 

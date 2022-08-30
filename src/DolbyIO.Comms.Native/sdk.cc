@@ -41,7 +41,7 @@ EXPORT_API int Init(const char* token) {
 
 EXPORT_API int SetLogLevel(uint32_t log_level) {
   return call { [&]() {
-    sdk->set_log_level((dolbyio::comms::log_level) log_level);
+    sdk::set_log_level((dolbyio::comms::log_level) log_level);
   }}.result();
 }
 

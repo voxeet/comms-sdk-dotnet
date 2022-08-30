@@ -19,6 +19,9 @@ public class CommandLine
             .WriteTo.Console()
             .CreateLogger();
 
+        var logLevelOption = new Option<int>("--loglevel", description: "Log Level", getDefaultValue: () => 0);
+        logLevelOption.AddAlias("-l");
+
         var aliasOption = new Option<string>("--alias", "Conference alias") { IsRequired = true };
         aliasOption.AddAlias("-a");
 
@@ -29,48 +32,49 @@ public class CommandLine
         nameOption.AddAlias("-u");
 
         var rootCommand = new RootCommand("DolbyIO SDK Command Line");
+        rootCommand.AddGlobalOption(logLevelOption);
 
         var joinCommand = new Command("join", "Joins a conference");
         joinCommand.AddOption(aliasOption);
         joinCommand.AddOption(tokenOption);
         joinCommand.AddOption(nameOption);
 
-        joinCommand.SetHandler(async (alias, appKey, name) => 
+        joinCommand.SetHandler(async (alias, appKey, name, logLevel) => 
         {
-            await Init(appKey, name);
+            await Init(appKey, name, logLevel);
             await JoinConference(alias);
-        }, aliasOption, tokenOption, nameOption);
+        }, aliasOption, tokenOption, nameOption, logLevelOption);
 
         var demoCommand = new Command("demo", "Experience Demo conference");
         demoCommand.AddOption(tokenOption);
         demoCommand.AddOption(nameOption);
 
-        demoCommand.SetHandler(async (appKey, name) => 
+        demoCommand.SetHandler(async (appKey, name, logLevel) => 
         {
-            await Init(appKey, name);
+            await Init(appKey, name, logLevel);
             await DemoConference();
-        }, tokenOption, nameOption);
+        }, tokenOption, nameOption, logLevelOption);
 
         var listenCommand = new Command("listen", "Listen to a conference");
         listenCommand.AddOption(aliasOption);
         listenCommand.AddOption(tokenOption);
         listenCommand.AddOption(nameOption);
 
-        listenCommand.SetHandler(async (alias, appKey, name) =>
+        listenCommand.SetHandler(async (alias, appKey, name, logLevel) =>
         {
-            await Init(appKey, name);
+            await Init(appKey, name, logLevel);
             await ListenConference(alias);
-        }, aliasOption, tokenOption, nameOption);
+        }, aliasOption, tokenOption, nameOption, logLevelOption);
 
         var devicesCommand = new Command("devices", "List available devices");
         devicesCommand.AddOption(tokenOption);
         devicesCommand.AddOption(nameOption);
 
-        devicesCommand.SetHandler(async (appKey, name) => 
+        devicesCommand.SetHandler(async (appKey, name, logLevel) => 
         {
-            await Init(appKey, name);
+            await Init(appKey, name, logLevel);
             await ListDevices();
-        }, tokenOption, nameOption);
+        }, tokenOption, nameOption, logLevelOption);
 
         rootCommand.Add(joinCommand);
         rootCommand.Add(demoCommand);
@@ -80,8 +84,6 @@ public class CommandLine
         Console.TreatControlCAsInput = false;
         Console.CancelKeyPress += OnCancelKeyPressed;
         
-        //Console.ReadKey();
-
         var res = await rootCommand.InvokeAsync(args);
 
         _sdk.Dispose();
@@ -119,12 +121,13 @@ public class CommandLine
         }
     }
 
-    private static async Task Init(string appKey, string name)
+    private static async Task Init(string appKey, string name, int loglevel)
     {
         try
         {
+            await _sdk.SetLogLevel((LogLevel)loglevel);
+            
             await _sdk.Init(appKey);
-            await _sdk.SetLogLevel(LogLevel.Off);
 
             _sdk.SignalingChannelError = OnSignalingChannelError;
             _sdk.InvalidTokenError = OnInvalidTokenError;
