@@ -1,5 +1,5 @@
-name: Package Nugets
-on: [push]
+name: Package Artifacts
+on: workflow_dispatch
 
 jobs:
   build-runtimes:
@@ -76,3 +76,12 @@ jobs:
         with:
           name: unity
           path: ${{github.workspace}}/build/unity/
+
+      - run: dotnet publish dotnet/DolbyCMD/DolbyCMD.csproj -o CmdLine
+        working-directory: ${{github.workspace}}/build
+
+      - uses: actions/upload-artifact@v3
+        with:
+          name: CmdLine
+          path: ${{github.workspace}}/build/CmdLine/
+
