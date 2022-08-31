@@ -184,8 +184,8 @@ public class CommandLine
             
             ConferenceInfos result = await _sdk.Conference.Join(infos, joinOpts);
             var permissions = result.Permissions;
-            
-            await _sdk.Conference.StartAudio();
+
+            await _sdk.Audio.Local.Start();
             await _sdk.Conference.SetSpatialEnvironment
             (
                 new Vector3(1.0f, 1.0f, 1.0f),  // Scale
@@ -229,7 +229,7 @@ public class CommandLine
         try
         {
             ConferenceInfos infos = await _sdk.Conference.Demo(true);
-            await _sdk.Conference.StartAudio();
+            await _sdk.Audio.Local.Start();
 
             await _sdk.Conference.SetSpatialPosition(_sdk.Session.User.Id, new Vector3(0.0f, 0.0f, 0.0f));
 

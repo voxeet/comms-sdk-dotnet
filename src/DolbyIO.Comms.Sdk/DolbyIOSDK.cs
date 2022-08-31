@@ -23,6 +23,7 @@ namespace DolbyIO.Comms
         private Session _session = new Session();
         private Conference _conference = new Conference();
         private MediaDevice _mediaDevice = new MediaDevice();
+        private AudioService _audio = new AudioService();
 
         public SignalingChannelErrorEventHandler SignalingChannelError
         {
@@ -95,6 +96,18 @@ namespace DolbyIO.Comms
                     throw new DolbyIOException("DolbyIOSDK is not initialized!");
                 }
                 return _mediaDevice;
+            }
+        }
+
+        public AudioService Audio
+        {
+            get 
+            {
+                if (!_initialised)
+                {
+                    throw new DolbyIOException("DolbyIOSDK is not initialized!");
+                }
+                return _audio;
             }
         }
 

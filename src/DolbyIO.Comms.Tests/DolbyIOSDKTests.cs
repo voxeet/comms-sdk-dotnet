@@ -17,13 +17,19 @@ namespace DolbyIO.Comms.Tests
         [Fact]
         public async void Test_Conference_ThrowsIfNotIntialized()
         {
-            await Assert.ThrowsAsync<DolbyIOException>(async () => await _sdk.Conference.StartAudio());
+            await Assert.ThrowsAsync<DolbyIOException>(async () => await _sdk.Conference.Leave());
         }
 
         [Fact]
         public async void Test_MediaDevice_ThrowsIfNotInitialized()
         {
             await Assert.ThrowsAsync<DolbyIOException>(async () => await _sdk.MediaDevice.GetAudioDevices());
+        }
+
+        [Fact]
+        public async void Test_Audio_ThrowsIfNotInitialized()
+        {
+            await Assert.ThrowsAsync<DolbyIOException>(async () => await _sdk.Audio.Local.Start());
         }
 
         [Fact]

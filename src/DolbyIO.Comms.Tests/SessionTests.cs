@@ -33,13 +33,9 @@ namespace DolbyIO.Comms.Tests
         [Fact]
         public async void Test_Session_CanCallNativeMethods()
         {
-            await _fixture.Sdk.Init("Dumy");
-
             UserInfo info = new UserInfo();
             await _fixture.Sdk.Session.Open(info);
             await _fixture.Sdk.Session.Close();
-
-            _fixture.Sdk.Dispose();
         }
     }
 }

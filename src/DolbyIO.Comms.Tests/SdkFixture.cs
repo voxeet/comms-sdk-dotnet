@@ -19,6 +19,12 @@ namespace DolbyIO.Comms.Tests
             }
 
             Sdk = new DolbyIOSDK();
+            Sdk.Init("dummy").Wait();
+        }
+
+        ~SdkFixture()
+        {
+            Dispose();
         }
 
         public void Dispose()
