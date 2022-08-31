@@ -8,6 +8,7 @@ set(SOURCES
     session.cc
     conference.cc
     media_device.cc
+    audio.cc
     sdk.cc
 )
 

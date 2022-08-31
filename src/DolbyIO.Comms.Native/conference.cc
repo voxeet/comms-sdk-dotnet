@@ -119,24 +119,6 @@ extern "C" {
     }}.result();
   }
 
-  EXPORT_API int Mute(bool muted) {
-    return call { [&]() {
-      wait(sdk->conference().mute(muted));
-    }}.result();
-  }
-
-  EXPORT_API int StartAudio() {
-    return call { [&]() {
-      wait(sdk->conference().start_audio());
-    }}.result();
-  }
-
-  EXPORT_API int StopAudio() {
-    return call { [&]() {
-      wait(sdk->conference().stop_audio());
-    }}.result();
-  }
-
   EXPORT_API int SetSpatialEnvironment(float scale_x, float scale_y, float scale_z, 
                                       float forward_x, float forward_y, float forward_z,
                                       float up_x, float up_y, float up_z,

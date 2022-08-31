@@ -44,10 +44,19 @@ namespace DolbyIO.Comms
         internal static extern int Mute(bool muted);
 
         [DllImport (LibName, CharSet = CharSet.Ansi)]
+        internal static extern int RemoteMute(bool muted, string participantId);
+
+        [DllImport (LibName, CharSet = CharSet.Ansi)]
         internal static extern int StartAudio();
 
         [DllImport (LibName, CharSet = CharSet.Ansi)]
         internal static extern int StopAudio();
+
+        [DllImport (LibName, CharSet = CharSet.Ansi)]
+        internal static extern int StartRemoteAudio(string participantId);
+
+        [DllImport (LibName, CharSet = CharSet.Ansi)]
+        internal static extern int StopRemoteAudio(string participantId);
         
         [DllImport (LibName, CharSet = CharSet.Ansi)]
         internal static extern int SetSpatialEnvironment(float scaleX, float scaleY, float scaleZ, 

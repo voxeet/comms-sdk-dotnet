@@ -237,6 +237,12 @@ namespace dolbyio::comms::native {
       dest->name = strdup(src.name.value_or(""));
       dest->avatar_url = strdup(src.avatar_url.value_or(""));
     }
+    
+    static void to_cpp(typename Traits::cpp_type& dest, typename Traits::c_type* src) {
+      dest.external_id = std::string(src->external_id);
+      dest.name = std::string(src->name);
+      dest.avatar_url = std::string(src->avatar_url);
+    }
   };
 
   template<typename Traits> 
@@ -249,6 +255,16 @@ namespace dolbyio::comms::native {
       dest->audible_locally = src.audible_locally.value_or(false);
 
       no_alloc_to_c(&dest->info, src.info);
+    }
+
+    static void to_cpp(typename Traits::cpp_type& dest, typename Traits::c_type* src) {
+      dest.user_id = std::string(src->id);
+      dest.type = (dolbyio::comms::participant_type)src->type;
+      dest.status = (dolbyio::comms::participant_status)src->status;
+      dest.is_sending_audio = src->is_sending_audio;
+      dest.audible_locally = src->audible_locally;
+      
+      no_alloc_to_cpp(dest.info, &src->info);
     }
   };
 }
