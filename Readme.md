@@ -1,12 +1,12 @@
 # Dolby.io Communications .NET SDK
 
-The Dolby.io Communications .NET SDK allows creating high-quality video conferencing applications. The .NET SDK communicates with the Dolby.io backend and provides conferencing functionalities, such as opening and closing sessions, joining and leaving conferences, sending and receiving messages, and injecting and receiving WebRTC media streams. An additional advantage of the SDK is the [spatial audio](https://docs.dolby.io/communications-apis/docs/guides-spatial-audio) support. This functionality is especially useful for game engines and virtual spaces. The .NET SDK allows placing conference participants spatially in a 3D-rendered audio scene and hear the participants' audio rendered at the given locations. Additionally, the SDK offers spatial audio styles to either let the local participant set remote participants' positions or allow creating a spatial scene shared by all participants, where the relative positions among participants are calculated by the Dolby.io server.
+The Dolby.io Communications .NET SDK allows you to create high-quality video conferencing applications. The .NET SDK communicates with the Dolby.io backend and provides conferencing functionalities, such as opening and closing sessions, joining and leaving conferences, sending and receiving messages, and injecting and receiving WebRTC media streams. An additional advantage of the SDK is the [spatial audio](https://docs.dolby.io/communications-apis/docs/guides-spatial-audio) support. This functionality is especially useful for game engines and virtual spaces. The .NET SDK lets you place conference participants spatially in a 3D-rendered audio scene and hear the participants' audio rendered at the given locations. Additionally, the SDK offers spatial audio styles that allow you to either locally set remote participants' positions or create a spatial scene shared by all participants, where the relative positions among participants are calculated by the Dolby.io server.
 
 # Get Started
 
-This guide explains how to create a basic audio-only conference application for mobile devices using the Dolby.io Communications .NET SDK. The starter project that you can create by following this procedure provides the foundation upon which you can add additional features as you build out your own solutions for events, collaboration, or live streaming.
+This guide explains how to create a basic audio-only conference application using the Dolby.io Communications .NET SDK. The starter project that you can create by following this procedure provides the foundation upon which you can add additional features as you build out your own solutions for events, collaboration, or live streaming.
 
-You can find complete code for the application in the [Summary](#summary) section. The application lets you create, join, and leave the conference. 
+You can find the complete code for the application in the [Summary](#summary) section. The application lets you create, join, and leave the conference. 
 
 ## Prerequisites
 
@@ -26,7 +26,7 @@ Additionally, if you plan to build the SDK from sources, not the NuGet packet ma
 
 ### 0. Install the SDK
 
-For installation, you can either use the NuGet packet manager or build the SDK from sources.
+To install the SDK, you can either use the NuGet packet manager or build the SDK from sources.
 
 #### NuGet
 
@@ -35,7 +35,7 @@ For installation, you can either use the NuGet packet manager or build the SDK f
 
 #### Sources
 
-The .NET SDK uses CMake for build chain and generating projects. To build the application from sources, use the following commands:
+The .NET SDK uses CMake for the build chain and generating projects. To build the application from sources, use the following commands:
 
 ```console
 mkdir build && cd build
@@ -151,9 +151,9 @@ catch (DolbyIOException e)
 }
 ```
 
-### 6. Close the session and dispose the SDK
+### 6. Close the session and dispose of the SDK
 
-After leaving the conference, close the session and dispose the SDK using the [Session.Close](xref:DolbyIO.Comms.Services.Session#DolbyIO_Comms_Services_Session_Close) and [DolbyIOSDK.Dispose](xref:DolbyIO.Comms.Dispose) methods.
+After leaving the conference, close the session and dispose of the SDK using the [Session.Close](xref:DolbyIO.Comms.Services.Session#DolbyIO_Comms_Services_Session_Close) and [DolbyIOSDK.Dispose](xref:DolbyIO.Comms.Dispose) methods.
 
 ```cs
 try
@@ -190,7 +190,7 @@ public class Call
             // Registering event handlers
             _sdk.Conference.StatusUpdated = OnConferenceStatus;
 
-            // Or inline
+            // or inline
             _sdk.Conference.ParticipantAdded = new ParticipantAddedEventHandler
             (
                 (Participant participant) =>
