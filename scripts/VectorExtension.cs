@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Numerics;
 
-namespace DolbyIO.Comms
+namespace DolbyIO.Comms.Unity
 {
     public static class UnityVector3Extensions
     {

@@ -11,6 +11,11 @@ if (BUILD_UNITY)
         COMMAND ${CMAKE_COMMAND} -E copy_if_different $<TARGET_FILE:dvc> "${UNITY_RUNTIME_DIRECTORY}/Runtime/$<TARGET_FILE_NAME:dvc>"
         COMMAND ${CMAKE_COMMAND} -E copy_if_different $<TARGET_FILE:DolbyIO.Comms.Native> "${UNITY_RUNTIME_DIRECTORY}/Runtime/$<TARGET_FILE_NAME:DolbyIO.Comms.Native>"
         COMMAND ${CMAKE_COMMAND} -E copy_if_different ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/DolbyIO.Comms.Sdk.dll "${UNITY_RUNTIME_DIRECTORY}/Runtime/DolbyIO.Comms.Sdk.dll"
+        
+        COMMAND ${CMAKE_COMMAND} -E copy_if_different ${CMAKE_CURRENT_SOURCE_DIR}/scripts/dolbyio.comms.asmdef "${UNITY_RUNTIME_DIRECTORY}/Runtime/dolbyio.comms.asmdef"
+        COMMAND ${CMAKE_COMMAND} -E copy_if_different ${CMAKE_CURRENT_SOURCE_DIR}/scripts/VectorExtension.cs "${UNITY_RUNTIME_DIRECTORY}/Runtime/Extensions/VectorExtension.cs"
+        COMMAND ${CMAKE_COMMAND} -E copy_if_different ${CMAKE_CURRENT_SOURCE_DIR}/scripts/DolbyIOManager.cs "${UNITY_RUNTIME_DIRECTORY}/Runtime/Components/DolbyIOManager.cs"
+        
         DEPENDS DolbyIO.Comms.Native DolbyIO.Comms.Sdk
     )
 endif()
