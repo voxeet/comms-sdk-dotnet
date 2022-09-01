@@ -28,39 +28,39 @@ extern "C" {
     );
   }
 
-EXPORT_API int Init(const char* token) {
-  return call { [&]() {
-    sdk = dolbyio::comms::sdk::create(
-      token,
-      [](std::unique_ptr<dolbyio::comms::refresh_token>&& refresh_token) {
-        (void)refresh_token;
+  EXPORT_API int Init(const char* token) {
+    return call { [&]() {
+      sdk = dolbyio::comms::sdk::create(
+        token,
+        [](std::unique_ptr<dolbyio::comms::refresh_token>&& refresh_token) {
+          (void)refresh_token;
+        }
+      ).release();
+    }}.result();
+  }
+
+  EXPORT_API int SetLogLevel(uint32_t log_level) {
+    return call { [&]() {
+      sdk::set_log_level((dolbyio::comms::log_level) log_level);
+    }}.result();
+  }
+
+  EXPORT_API int Release() {
+    return call { [&]() {
+      for (const auto& [key, value] : handlers_map)
+        wait(value->disconnect());
+
+      // Releasing sdk
+      if (sdk) {
+        delete sdk;
+        sdk = nullptr;
       }
-    ).release();
-  }}.result();
-}
+    }}.result();
+  }
 
-EXPORT_API int SetLogLevel(uint32_t log_level) {
-  return call { [&]() {
-    sdk::set_log_level((dolbyio::comms::log_level) log_level);
-  }}.result();
-}
-
-EXPORT_API int Release() {
-  return call { [&]() {
-    for (const auto& [key, value] : handlers_map)
-      wait(value->disconnect());
-
-    // Releasing sdk
-    if (sdk) {
-      delete sdk;
-      sdk = nullptr;
-    }
-  }}.result();
-}
-
-EXPORT_API char* GetLastErrorMsg() {
-  return strdup(error);
-}
+  EXPORT_API char* GetLastErrorMsg() {
+    return strdup(error);
+  }
 
 } // end of export C block
 } // dolbyio::comms::native
