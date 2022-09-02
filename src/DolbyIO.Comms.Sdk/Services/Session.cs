@@ -45,8 +45,8 @@ namespace DolbyIO.Comms.Services
         {
             return await Task.Run(() => 
             {
-                UserInfo res;
-                Native.CheckException(Native.Open(user, out res));
+                UserInfo res = new UserInfo();
+                Native.CheckException(Native.Open(user, res));
                 _user = res;
                 return res;
             });

@@ -9,6 +9,7 @@ namespace DolbyIO.Comms
      * Native Interop for the DolbyIO C++ SDK
      * @nodocument
      */
+    #nullable enable
     internal class Native
     {
         internal const string LibName = "DolbyIO.Comms.Native";
@@ -20,25 +21,25 @@ namespace DolbyIO.Comms
         internal static extern int SetLogLevel([MarshalAs(UnmanagedType.I4)] LogLevel level);
     
         [DllImport (LibName, CharSet = CharSet.Ansi)]
-        internal static extern int Open(UserInfo user, out UserInfo res);
+        internal static extern int Open(UserInfo user, [Out] UserInfo res);
 
         [DllImport(LibName, CharSet = CharSet.Ansi)]
         internal static extern int Close();
 
         [DllImport (LibName, CharSet = CharSet.Ansi)]
-        internal static extern int Create(ConferenceOptions options, out ConferenceInfos infos);
+        internal static extern int Create(ConferenceOptions options, [Out] ConferenceInfos infos);
 
         [DllImport (LibName, CharSet = CharSet.Ansi)]
-        internal static extern int Join(ConferenceInfos infos, JoinOptions options, out ConferenceInfos res);
+        internal static extern int Join(ConferenceInfos infos, JoinOptions options, [Out] ConferenceInfos res);
         
         [DllImport (LibName, CharSet = CharSet.Ansi)]
-        internal static extern int Listen(ConferenceInfos infos, ListenOptions options, out ConferenceInfos res);
+        internal static extern int Listen(ConferenceInfos infos, ListenOptions options, [Out] ConferenceInfos res);
        
         [DllImport (LibName, CharSet = CharSet.Ansi)]
-        internal static extern int Demo(bool spatialAudio, out ConferenceInfos infos);
+        internal static extern int Demo(bool spatialAudio, [Out] ConferenceInfos infos);
 
         [DllImport(LibName, CharSet = CharSet.Ansi)]
-        internal static extern int GetCurrentConference(out ConferenceInfos infos);
+        internal static extern int GetCurrentConference([Out] ConferenceInfos infos);
 
         [DllImport (LibName, CharSet = CharSet.Ansi)]
         internal static extern int Mute(bool muted);

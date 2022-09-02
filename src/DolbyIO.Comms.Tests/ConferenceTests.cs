@@ -4,6 +4,13 @@ namespace DolbyIO.Comms.Tests
     [Collection("Sdk")]
     public class ConferenceTests
     {
+        private SdkFixture _fixture;
+
+        public ConferenceTests(SdkFixture fixture)
+        {
+            _fixture = fixture;
+        }
+
         [Fact]
         public void Test_ConferenceOptions_ShouldMarshall()
         {
@@ -13,8 +20,8 @@ namespace DolbyIO.Comms.Tests
             src.Params.Stats = true;
             src.Params.SpatialAudioStyle = SpatialAudioStyle.Shared;
 
-            ConferenceOptions dest;
-            NativeTests.ConferenceOptionsTest(src, out dest);
+            ConferenceOptions dest = new ConferenceOptions();
+            NativeTests.ConferenceOptionsTest(src, dest);
 
             Assert.NotEqual(src, dest);
             Assert.Equal(src.Alias, dest.Alias);
@@ -30,8 +37,8 @@ namespace DolbyIO.Comms.Tests
             src.Alias = "TestAlias";
             src.Id = "TestId";
 
-            ConferenceInfos dest;
-            NativeTests.ConferenceInfosTest(src, out dest);
+            ConferenceInfos dest = new ConferenceInfos();
+            NativeTests.ConferenceInfosTest(src, dest);
 
             Assert.NotEqual(src, dest); // Objects are different
             Assert.Equal(src.Id, dest.Id);
@@ -54,8 +61,8 @@ namespace DolbyIO.Comms.Tests
             src.Constraints.Audio = true;
             src.Constraints.AudioProcessing = true;
 
-            JoinOptions dest;
-            NativeTests.JoinOptionsTest(src, out dest);
+            JoinOptions dest = new JoinOptions();
+            NativeTests.JoinOptionsTest(src, dest);
 
             Assert.NotEqual(src, dest);
             Assert.Equal(src.Connection.ConferenceAccessToken, dest.Connection.ConferenceAccessToken);
@@ -71,8 +78,8 @@ namespace DolbyIO.Comms.Tests
             src.Connection.ConferenceAccessToken = "AccessToken";
             src.Connection.SpatialAudio = true;
 
-            ListenOptions dest;
-            NativeTests.ListenOptionsTest(src, out dest);
+            ListenOptions dest = new ListenOptions();
+            NativeTests.ListenOptionsTest(src, dest);
 
             Assert.NotEqual(src, dest);
             Assert.Equal(src.Connection.ConferenceAccessToken, dest.Connection.ConferenceAccessToken);
@@ -82,8 +89,8 @@ namespace DolbyIO.Comms.Tests
         [Fact]
         public void Test_Participant_ShouldMarshall()
         {
-            Participant dest;
-            NativeTests.ParticipantTest(out dest);
+            Participant dest = new Participant();
+            NativeTests.ParticipantTest(dest);
 
             Assert.Equal("userId", dest.Id);
             Assert.Equal(ParticipantType.User, dest.Type);
@@ -93,6 +100,12 @@ namespace DolbyIO.Comms.Tests
             Assert.Equal("http://avatar.url", dest.Info.AvatarURL);
             Assert.True(dest.IsSendingAudio);
             Assert.True(dest.IsAudibleLocally);
+        }
+
+        [Fact]
+        public async void Test_Conference_CanCallSendMessage()
+        {
+            await _fixture.Sdk.Conference.SendMessage("test");
         }
     }
 }

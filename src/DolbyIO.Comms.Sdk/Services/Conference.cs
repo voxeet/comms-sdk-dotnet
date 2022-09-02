@@ -169,8 +169,8 @@ namespace DolbyIO.Comms.Services
         {
             return await Task.Run(() =>
             {
-                ConferenceInfos infos;
-                Native.CheckException(Native.GetCurrentConference(out infos));
+                ConferenceInfos infos = new ConferenceInfos();
+                Native.CheckException(Native.GetCurrentConference(infos));
                 return infos;
             });
         }
@@ -185,8 +185,8 @@ namespace DolbyIO.Comms.Services
         {
             return await Task.Run(() => 
             {
-                ConferenceInfos infos;
-                Native.CheckException(Native.Create(options, out infos));
+                ConferenceInfos infos = new ConferenceInfos();
+                Native.CheckException(Native.Create(options, infos));
                 return infos;
             });
         }
@@ -202,8 +202,8 @@ namespace DolbyIO.Comms.Services
         {
             return await Task.Run(() => 
             {
-                ConferenceInfos res;
-                Native.CheckException(Native.Join(infos, options, out res));
+                ConferenceInfos res = new ConferenceInfos();
+                Native.CheckException(Native.Join(infos, options, res));
                 _isInConference = true;
                 return res;
             });
@@ -220,8 +220,8 @@ namespace DolbyIO.Comms.Services
         {
             return await Task.Run(() =>
             {
-                ConferenceInfos res;
-                Native.CheckException(Native.Listen(infos, options, out res));
+                ConferenceInfos res = new ConferenceInfos();
+                Native.CheckException(Native.Listen(infos, options, res));
                 _isInConference = true;
                 return res;
             });
@@ -237,8 +237,8 @@ namespace DolbyIO.Comms.Services
         {
             return await Task.Run(() => 
             {
-                ConferenceInfos infos;
-                Native.CheckException(Native.Demo(spatialAudio, out infos));
+                ConferenceInfos infos = new ConferenceInfos();
+                Native.CheckException(Native.Demo(spatialAudio, infos));
                 _isInConference = true;
                 return infos;
             });
