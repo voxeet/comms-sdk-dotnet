@@ -20,8 +20,8 @@ namespace DolbyIO.Comms.Tests
             src.ExternalId = "TestExternalId";
             src.AvatarURL = "http://avatar.url";
 
-            UserInfo dest;
-            NativeTests.UserInfoTest(src, out dest);
+            UserInfo dest = new UserInfo();
+            NativeTests.UserInfoTest(src, dest);
 
             Assert.NotEqual(src, dest);
             Assert.Equal(src.Name, dest.Name);

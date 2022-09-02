@@ -6,18 +6,18 @@
 namespace dolbyio::comms::native::tests {
 extern "C" {
 
-  EXPORT_API void UserInfoTest(dolbyio::comms::native::user_info* src, dolbyio::comms::native::user_info** result) {
+  EXPORT_API void UserInfoTest(dolbyio::comms::native::user_info* src, dolbyio::comms::native::user_info* result) {
     auto tmp = to_cpp<dolbyio::comms::services::session::user_info>(src);
     tmp.participant_id = "anonymous";
-    (*result) = to_c<dolbyio::comms::native::user_info>(tmp);
+    no_alloc_to_c(result, tmp);
   }
 
-  EXPORT_API void ConferenceOptionsTest(dolbyio::comms::native::conference_options* src, dolbyio::comms::native::conference_options** result) {
+  EXPORT_API void ConferenceOptionsTest(dolbyio::comms::native::conference_options* src, dolbyio::comms::native::conference_options* result) {
     auto tmp = to_cpp<dolbyio::comms::services::conference::conference_options>(src);
-    (*result) = to_c<dolbyio::comms::native::conference_options>(tmp);
+    no_alloc_to_c(result, tmp);
   }
 
-  EXPORT_API void ConferenceInfosTest(dolbyio::comms::native::conference_infos* src, dolbyio::comms::native::conference_infos** result) {
+  EXPORT_API void ConferenceInfosTest(dolbyio::comms::native::conference_infos* src, dolbyio::comms::native::conference_infos* result) {
     auto infos = to_cpp<dolbyio::comms::conference_info>(src);
     
     infos.is_new = true;
@@ -25,21 +25,21 @@ extern "C" {
     infos.permissions.emplace_back(dolbyio::comms::conference_access_permissions::join);
     infos.spatial_audio_style = dolbyio::comms::spatial_audio_style::individual;
     infos.status = dolbyio::comms::conference_status::joining;
-    
-    (*result) = to_c<dolbyio::comms::native::conference_infos>(infos);
+
+    no_alloc_to_c(result, infos);
   }
 
-  EXPORT_API void JoinOptionsTest(join_options* src, join_options** result) {
+  EXPORT_API void JoinOptionsTest(join_options* src, join_options* result) {
     auto options = to_cpp<dolbyio::comms::services::conference::join_options>(src);
-    (*result) = to_c<dolbyio::comms::native::join_options>(options); 
+    no_alloc_to_c(result, options);
   }
 
-  EXPORT_API void ListenOptionsTest(listen_options* src, listen_options** result) {
+  EXPORT_API void ListenOptionsTest(listen_options* src, listen_options* result) {
     auto options = to_cpp<dolbyio::comms::services::conference::listen_options>(src);
-    (*result) = to_c<dolbyio::comms::native::listen_options>(options);
+    no_alloc_to_c(result, options);
   }
 
-  EXPORT_API void ParticipantTest(participant** result) {
+  EXPORT_API void ParticipantTest(participant* result) {
     struct dolbyio::comms::participant_info::info info { "Anonymous", "externalId", "http://avatar.url" };
 
     dolbyio::comms::participant_info participant (
@@ -51,7 +51,7 @@ extern "C" {
       true
     );
 
-    (*result) = to_c<dolbyio::comms::native::participant>(participant);
+    no_alloc_to_c(result, participant);
   }
 
   EXPORT_API void AudioDeviceTest(device* result) {

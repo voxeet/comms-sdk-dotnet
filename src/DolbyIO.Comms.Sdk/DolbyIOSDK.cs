@@ -99,6 +99,9 @@ namespace DolbyIO.Comms
             }
         }
 
+        /// <summary>
+        /// The Audio service accessor.
+        /// </summary>
         public AudioService Audio
         {
             get 
