@@ -22,28 +22,46 @@ namespace DolbyIO.Comms.Services
     /// </summary>
     public class MediaDevice
     {
+        private DeviceAddedEventHandler _added;
+
         /// <summary>
         /// The media device Added event. Raised when a new device is added to the system.
         /// </summary>
         public DeviceAddedEventHandler Added
         {
-            set { Native.SetOnDeviceAddedHandler(value); }
+            set 
+            { 
+                Native.SetOnDeviceAddedHandler(value);
+                _added = value;
+            }
         }
+
+        private DeviceRemovedEventHandler _removed;
 
         /// <summary>
         /// The media device Removed event. Raised when a device is removed from the system.
         /// </summary>
         public DeviceRemovedEventHandler Removed
         {
-            set { Native.SetOnDeviceRemovedHandler(value); }
+            set 
+            { 
+                Native.SetOnDeviceRemovedHandler(value);
+                _removed = value;
+            }
         }
+
+        private DeviceChangedEventHandler _changed;
 
         /// <summary>
         /// The media device Changed event. Raised when the currently used input or output device has changed.
         /// </summary>
         public DeviceChangedEventHandler Changed
         {
-            set { Native.SetOnDeviceChangedHandler(value); }
+            set 
+            { 
+                Native.SetOnDeviceChangedHandler(value);
+                _changed = value;
+            }
         }
 
         /// <summary>

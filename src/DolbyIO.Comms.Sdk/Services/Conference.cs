@@ -24,6 +24,8 @@ namespace DolbyIO.Comms.Services
     {   
         private volatile Boolean _isInConference = false;
 
+        private ConferenceStatusUpdatedEventHandler _statusUpdated;
+
         /// <summary>
         /// The conference status updated event. Raised when the conference status changes.
         /// See <see cref="DolbyIO.Comms.ConferenceStatus">ConferenceStatus</see>
@@ -38,8 +40,14 @@ namespace DolbyIO.Comms.Services
         /// </summary>
         public ConferenceStatusUpdatedEventHandler StatusUpdated
         {
-            set { Native.SetOnConferenceStatusUpdatedHandler(value); }
+            set 
+            { 
+                Native.SetOnConferenceStatusUpdatedHandler(value); 
+                _statusUpdated = value;
+            }
         }
+
+        private ParticipantAddedEventHandler _participantAdded;
 
         /// <summary>
         /// The participant added event. Raised when a participant is added to the conference.
@@ -54,8 +62,14 @@ namespace DolbyIO.Comms.Services
         /// </summary>
         public ParticipantAddedEventHandler ParticipantAdded
         {
-            set { Native.SetOnParticipantAddedHandler(value); }
+            set 
+            {
+                Native.SetOnParticipantAddedHandler(value); 
+                _participantAdded = value;
+            }
         }
+
+        private ParticipantUpdatedEventHandler _participantUpdated;
 
         /// <summary>
         /// The participant updated event. Raised when a participant is updated.
@@ -70,9 +84,14 @@ namespace DolbyIO.Comms.Services
         /// </summary>
         public ParticipantUpdatedEventHandler ParticipantUpdated
         {
-            set { Native.SetOnParticipantUpdatedHandler(value); }
+            set 
+            {
+                Native.SetOnParticipantUpdatedHandler(value); 
+                _participantUpdated = value;
+            }
         }
 
+        private ActiveSpeakerChangeEventHandler _activeSpeakerChange;
         /// <summary>
         /// The active speaker change event. Raised when the active speakers are changing.
         /// <example>
@@ -86,8 +105,14 @@ namespace DolbyIO.Comms.Services
         /// </summary>
         public ActiveSpeakerChangeEventHandler ActiveSpeakerChange
         {
-            set { Native.SetOnActiveSpeakerChangeHandler(value); }
+            set 
+            {
+                Native.SetOnActiveSpeakerChangeHandler(value); 
+                _activeSpeakerChange = value;
+            }
         }
+
+        private ConferenceMessageReceivedEventHandler _messageReceived;
 
         /// <summary>
         /// The message received event. Raised when a message is received while in conference.
@@ -102,8 +127,14 @@ namespace DolbyIO.Comms.Services
         /// </example>
         public ConferenceMessageReceivedEventHandler MessageReceived
         {
-            set { Native.SetOnConferenceMessageReceivedHandler(value); }
+            set 
+            { 
+                Native.SetOnConferenceMessageReceivedHandler(value);
+                _messageReceived = value;
+            }
         }
+
+        private ConferenceInvitationReceivedEventHandler _invitationReceived;
 
         /// <summary>
         /// The invitation received event. Raised when an invitation to a conference is received.
@@ -118,8 +149,14 @@ namespace DolbyIO.Comms.Services
         /// </example>
         public ConferenceInvitationReceivedEventHandler InvitationReceived
         {
-            set { Native.SetOnConferenceInvitationReceivedHandler(value); }
+            set 
+            { 
+                Native.SetOnConferenceInvitationReceivedHandler(value);
+                _invitationReceived = value;
+            }
         }
+
+        private DvcErrorEventHandler _dvcError;
 
         /// <summary>
         /// The dvc error event. Raised when an error occurs in the dvc library.
@@ -134,8 +171,14 @@ namespace DolbyIO.Comms.Services
         /// </example>
         public DvcErrorEventHandler DvcError
         {
-            set { Native.SetOnDvcErrorExceptionHandler(value); }
+            set 
+            { 
+                Native.SetOnDvcErrorExceptionHandler(value);
+                _dvcError = value;
+            }
         }
+
+        private PeerConnectionErrorEventHandler _peerConnectionError;
 
         /// <summary>
         /// The peer connection error event. Raised when an error occurs in the peer connection.
@@ -150,7 +193,11 @@ namespace DolbyIO.Comms.Services
         /// </example>
         public PeerConnectionErrorEventHandler PeerConnectionError
         {
-            set { Native.SetOnPeerConnectionFailedExceptionHandler(value); }
+            set 
+            { 
+                Native.SetOnPeerConnectionFailedExceptionHandler(value);
+                _peerConnectionError = value;
+            }
         }
 
         /// <summary>

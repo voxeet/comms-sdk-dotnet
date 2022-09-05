@@ -25,6 +25,8 @@ namespace DolbyIO.Comms
         private MediaDevice _mediaDevice = new MediaDevice();
         private AudioService _audio = new AudioService();
 
+        private SignalingChannelErrorEventHandler _signalingChannelError;
+
         public SignalingChannelErrorEventHandler SignalingChannelError
         {
             set 
@@ -33,9 +35,13 @@ namespace DolbyIO.Comms
                 {
                     throw new DolbyIOException("DolbyIOSDK is not initialized!");
                 }
+                
                 Native.SetOnSignalingChannelExceptionHandler(value);
+                _signalingChannelError = value;
             }
         }
+
+        private InvalidTokenErrorEventHandler _invalidTokenError;
 
         public InvalidTokenErrorEventHandler InvalidTokenError
         {
@@ -46,6 +52,7 @@ namespace DolbyIO.Comms
                     throw new DolbyIOException("DolbyIOSDK is not initialized!");
                 }
                 Native.SetOnInvalidTokenExceptionHandler(value);
+                _invalidTokenError = value;
             }
         }
 
