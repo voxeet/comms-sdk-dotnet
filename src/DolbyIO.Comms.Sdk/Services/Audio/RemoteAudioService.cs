@@ -3,8 +3,30 @@ using System.Threading.Tasks;
 namespace DolbyIO.Comms.Services
 {
     /// <summary>
-    /// RemoteAudioService provides remote audio functionalities.
+    /// The Remote Audio Service provides remote audio functionalities. You can start, stop and mute 
+    /// remote audio source. 
+    /// 
+    /// - See <see cref="DolbyIO.Comms.Services.RemoteAudioService.Start(string)"/> 
+    /// - See <see cref="DolbyIO.Comms.Services.RemoteAudioService.Stop(string)"/> 
+    /// - See <see cref="DolbyIO.Comms.Services.RemoteAudioService.Mute(bool, string)"/> 
+    /// 
+    /// **Those methods are only available for non-Dolby Voice conferences.**
+    /// 
     /// </summary>
+    /// <example>
+    /// <code>
+    /// try
+    /// {
+    ///     await _sdk.Audio.Remote.Start(participantId);
+    ///     await _sdk.Autio.Remote.Mute(true, participantId);
+    ///     await _sdk.Audio.Remote.Stop(participantId);
+    /// }
+    /// catch
+    /// {
+    ///     // Error handling
+    /// }
+    /// </code>
+    /// </example>
     public class RemoteAudioService
     {
         /// <summary>

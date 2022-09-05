@@ -27,6 +27,10 @@ namespace DolbyIO.Comms
 
         private SignalingChannelErrorEventHandler _signalingChannelError;
 
+        /// <summary>
+        /// The signaling channel error event. Raised when an error occurs during a SIP negociation
+        /// on the local peer connection.
+        /// </summary>
         public SignalingChannelErrorEventHandler SignalingChannelError
         {
             set 
@@ -35,7 +39,7 @@ namespace DolbyIO.Comms
                 {
                     throw new DolbyIOException("DolbyIOSDK is not initialized!");
                 }
-                
+
                 Native.SetOnSignalingChannelExceptionHandler(value);
                 _signalingChannelError = value;
             }
@@ -43,6 +47,9 @@ namespace DolbyIO.Comms
 
         private InvalidTokenErrorEventHandler _invalidTokenError;
 
+        /// <summary>
+        /// The invalid token error event. Raised when the access token is invalid or expired.
+        /// </summary>
         public InvalidTokenErrorEventHandler InvalidTokenError
         {
             set
@@ -140,6 +147,11 @@ namespace DolbyIO.Comms
             });
         }
 
+        /// <summary>
+        /// Allows to set the logging level of the library.
+        /// </summary>
+        /// <param name="level">The required logging level.</param>
+        /// <returns></returns>
         public async Task SetLogLevel(LogLevel level)
         {
             await Task.Run(() =>  Native.CheckException(Native.SetLogLevel(level)));
