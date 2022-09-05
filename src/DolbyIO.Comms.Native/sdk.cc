@@ -28,20 +28,21 @@ extern "C" {
     );
   }
 
-  EXPORT_API int Init(const char* token) {
-    return call { [&]() {
-      sdk = dolbyio::comms::sdk::create(
-        token,
-        [](std::unique_ptr<dolbyio::comms::refresh_token>&& refresh_token) {
-          (void)refresh_token;
-        }
-      ).release();
-    }}.result();
-  }
-
   EXPORT_API int SetLogLevel(uint32_t log_level) {
     return call { [&]() {
       sdk::set_log_level((dolbyio::comms::log_level) log_level);
+    }}.result();
+  }
+
+  EXPORT_API int Init(const char* token, refresh_delegate_type callback) {
+    return call { [&]() {
+      sdk = dolbyio::comms::sdk::create(
+        token,
+        [callback](std::unique_ptr<dolbyio::comms::refresh_token>&& refresh_token) {
+          char* token = callback();
+          (*refresh_token)(std::string(token));
+        }
+      ).release();
     }}.result();
   }
 

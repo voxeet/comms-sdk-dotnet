@@ -19,7 +19,7 @@ namespace DolbyIO.Comms.Tests
             }
 
             Sdk = new DolbyIOSDK();
-            Sdk.Init("dummy").Wait();
+            Sdk.Init("dummy", () => "").Wait();
         }
 
         ~SdkFixture()

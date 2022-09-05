@@ -3,9 +3,11 @@ using System;
 using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
+using System.Net.Http;
 using Serilog;
 
 using DolbyIO.Comms;
+using Command = System.CommandLine.Command;
 
 public class CommandLine
 {
@@ -113,11 +115,10 @@ public class CommandLine
         eventArgs.Cancel = false; // Terminates process
     }
 
-    private static void InputLoop()
+    private static async Task InputLoop()
     {
         while (_keepRunning)
         {
-            //var keyInfo = Console.ReadKey();
         }
     }
 
@@ -127,7 +128,11 @@ public class CommandLine
         {
             await _sdk.SetLogLevel((LogLevel)loglevel);
             
-            await _sdk.Init(appKey);
+            await _sdk.Init(appKey, () => 
+            {
+                Log.Debug("RefreshTokenCallBack called.");
+                return "dummy";
+            });
 
             _sdk.SignalingChannelError = OnSignalingChannelError;
             _sdk.InvalidTokenError = OnInvalidTokenError;
@@ -194,7 +199,7 @@ public class CommandLine
                 new Vector3(1.0f, 0.0f, 0.0f)   // Right
             );
 
-            InputLoop();
+            await InputLoop();
         }
         catch (DolbyIOException e)
         {
@@ -217,7 +222,7 @@ public class CommandLine
 
             var result = _sdk.Conference.Listen(infos, listenOptions);
 
-            InputLoop();
+            await InputLoop();
         }
         catch (DolbyIOException e) {
             Log.Error(e, "Failed to listen to conference.");
@@ -233,7 +238,7 @@ public class CommandLine
 
             await _sdk.Conference.SetSpatialPosition(_sdk.Session.User.Id, new Vector3(0.0f, 0.0f, 0.0f));
 
-            InputLoop();
+            await InputLoop();
         }
         catch (DolbyIOException e)
         {
@@ -251,7 +256,7 @@ public class CommandLine
             var device = await _sdk.MediaDevice.GetCurrentAudioInputDevice();
             await _sdk.MediaDevice.SetPreferredAudioInputDevice(device);
 
-            InputLoop();
+            await InputLoop();
         }
         catch (DolbyIOException e)
         {
@@ -286,7 +291,7 @@ public class CommandLine
 
     private static async void OnParticipantAdded(Participant participant)
     {
-        Log.Debug($"OnParticipantAdded: {participant.Id} {participant.Info.Name}");
+        Log.Debug($"OnParticipantAdded: {participant.Id} {participant.Info.Name} {participant.Status}");
         try 
         {
             var infos = await _sdk.Conference.Current();
@@ -299,12 +304,11 @@ public class CommandLine
         {
             Log.Error(e, "Failed to set spatial position");
         }
-
     }
 
     private static async void OnParticipantUpdated(Participant participant)
     {
-        Log.Debug($"OnParticipantUpdated: {participant.Id} {participant.Info.Name}");
+        Log.Debug($"OnParticipantUpdated: {participant.Id} {participant.Info.Name} {participant.Status}");
         try 
         {
             var infos = await _sdk.Conference.Current();

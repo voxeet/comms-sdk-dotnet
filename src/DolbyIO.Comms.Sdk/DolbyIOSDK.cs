@@ -117,8 +117,9 @@ namespace DolbyIO.Comms
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="appKey">Application secret key</param>
-        public async Task Init(String appKey)
+        /// <param name="appKey">Application secret key.</param>
+        /// <param name="cb">The refresh token callback.</param>
+        public async Task Init(String appKey, RefreshTokenCallBack cb)
         {
             if (_initialised)
             {
@@ -127,7 +128,7 @@ namespace DolbyIO.Comms
             
             await Task.Run(() =>
             {
-                Native.CheckException(Native.Init(appKey));
+                Native.CheckException(Native.Init(appKey, cb));
                 _initialised = true;
             });
         }

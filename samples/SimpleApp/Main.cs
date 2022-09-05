@@ -9,7 +9,9 @@ public class Call
     {
         try
         {
-            await _sdk.Init("My Access Token");
+            await _sdk.Init("My Access Token", () => {
+                return "";
+            });
 
             // Registering event handlers
             _sdk.Conference.StatusUpdated = OnConferenceStatus;
