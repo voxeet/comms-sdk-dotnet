@@ -3,6 +3,7 @@ add_dotnet_library(
         DolbyIO.Comms.Sdk
     SOURCES
         AssemblyInfo.cs
+        Native/Callback.cs
         Native/Handlers.cs
         Native/Enum.cs
         Native/Struct.cs

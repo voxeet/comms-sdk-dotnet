@@ -31,6 +31,8 @@ namespace dolbyio::comms::native {
     static constexpr const char* name = "on_invalid_token_exception";
   };
 
+  using refresh_delegate_type = char* (*)();
+
   extern dolbyio::comms::sdk* sdk;
 }
 

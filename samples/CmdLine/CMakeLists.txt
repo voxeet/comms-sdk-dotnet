@@ -14,6 +14,8 @@ add_dotnet_executable(
         "System.CommandLine_2.0.0-beta4.22272.1"
         "Serilog_2.11.0"
         "Serilog.Sinks.Console_4.0.1"
+        "System.Net.Http.Json_6.0.0"
+        "Terminal.Gui_1.7.2"
 )
 
 if(WIN32)
