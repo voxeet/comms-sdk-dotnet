@@ -1,19 +1,19 @@
 # Dolby.io Communications .NET SDK
 
-The Dolby.io Communications .NET SDK allows you to create high-quality video conferencing applications. The .NET SDK communicates with the Dolby.io backend and provides conferencing functionalities, such as opening and closing sessions, joining and leaving conferences, sending and receiving messages, and injecting and receiving WebRTC media streams. An additional advantage of the SDK is the [spatial audio](https://docs.dolby.io/communications-apis/docs/guides-spatial-audio) support. This functionality is especially useful for game engines and virtual spaces. The .NET SDK lets you place conference participants spatially in a 3D-rendered audio scene and hear the participants' audio rendered at the given locations. Additionally, the SDK offers spatial audio styles that allow you to either locally set remote participants' positions or create a spatial scene shared by all participants, where the relative positions among participants are calculated by the Dolby.io server.
+The Dolby.io Communications .NET SDK allows creating high-quality video conferencing applications with spatial audio. The SDK is especially useful for building game engines and virtual spaces for collaboration. It allows placing participants spatially in a 3D-rendered audio scene and hear the participants' audio rendered at their locations.
 
 # Get Started
 
-This guide explains how to create a basic audio-only conference application using the Dolby.io Communications .NET SDK. The starter project that you can create by following this procedure provides the foundation upon which you can add additional features as you build out your own solutions for events, collaboration, or live streaming.
+This guide explains presents a sample usage of the SDK that allows creating a basic audio-only conference application. The starter project that you can create by following this procedure provides the foundation upon which you can add additional features as you build out your own solutions for events, collaboration, or live streaming.
 
-You can find the complete code for the application in the [Summary](#summary) section. The application lets you create, join, and leave the conference. 
+You can find the complete code for the application in the [Summary](#summary) section.
 
 ## Prerequisites
 
 Make sure that you have:
 
 - A Dolby.io account. If you do not have an account, you can [sign up](https://dolby.io/signup) for a free account.
-- The [client access token](doc:overview-developer-tools#test-client-access-token) copied from the [Dolby.io dashboard](https://dashboard.dolby.io/). To create the token, log in to the Dolby.io dashboard, create an application, and navigate to the API keys section.
+- The [client access token](https://docs.dolby.io/communications-apis/docs/overview-developer-tools#client-access-token) copied from the [Dolby.io dashboard](https://dashboard.dolby.io/). To create the token, log in to the Dolby.io dashboard, create an application, and navigate to the API keys section.
 
 Additionally, if you plan to build the SDK from sources, not the NuGet packet manager, make sure that you have:
 - The [Dolby.io Communications C++ SDK 2.0](https://github.com/DolbyIO/comms-sdk-cpp/releases) for your platform
@@ -22,16 +22,13 @@ Additionally, if you plan to build the SDK from sources, not the NuGet packet ma
 - CMake 3.23
 - A macOS or Windows machine
 
-## Building the application
-
-### 0. Install the SDK
+## Installation
 
 To install the SDK, you can either use the NuGet packet manager or build the SDK from sources.
 
 #### NuGet
 
 [TODO]
-
 
 #### Sources
 
@@ -45,13 +42,15 @@ cmake --build .
 
 You can define `DOLBYIO_LIBRARY_PATH` as an environment variable.
 
-After generating your project, you can find it in the `build/dotnet` folder.
+After generating your project, you can find your project in the `build/dotnet` folder.
+
+## Sample usage
 
 ### 1. Initialize the SDK
 
-Initialize the SDK using the secure authentication method that uses a token in the application. For more information, see the [Initializing the SDK document](doc:initializing-javascript). This sample application requires the access token to be provided as a command line parameter when launching the executable. For the purpose of this application, use a [client access token](doc:overview-developer-tools#client-access-token) generated from the Dolby.io dashboard.
+Initialize the SDK using the secure authentication method that uses a token in the application. This sample application requires the access token to be provided as a command line parameter when launching the executable. For the purpose of this application, use a [client access token](https://docs.dolby.io/communications-apis/docs/overview-developer-tools#client-access-token) generated from the Dolby.io dashboard.
 
-Create a file where you want to store code for the sample application. Open the file in your favorite text editor and add there the following code to initialize the SDK using the [DolbyIOSDK.Init](xref:DolbyIO.Comms.Init) method:
+Create a file where you want to store code for the sample application. Open the file in your favorite text editor and add there the following code to initialize the SDK using the [DolbyIOSDK.Init](https://dolbyio.github.io/comms-sdk-dotnet/dolbyio_comms_sdk_dotnet/DolbyIOSDK/Init) method:
 
 ```cs
 using DolbyIO.Comms;
@@ -71,11 +70,11 @@ catch (DolbyIOException e)
 }
 ```
 
-**NOTE:** The SDK is fully asynchronous, so all methods can throw the [DolbyIOException](xref:DolbyIO.Comms.DolbyIOException).
+**NOTE:** The SDK is fully asynchronous, so all methods can throw the [DolbyIOException](https://dolbyio.github.io/comms-sdk-dotnet/dolbyio_comms_sdk_dotnet/DolbyIOSDK/DolbyIOException).
 
 ### 2. Register event handlers
 
-After initializing the SDK it is time to register your event handlers. Decide to which events you want to add event handlers and add the handlers as in the following example:
+After initializing the SDK, it is time to register your event handlers. Decide to which events you want to add event handlers and add the handlers as in the following example:
 
 ```cs
 // Registering event handlers
@@ -95,7 +94,7 @@ _sdk.Conference.ParticipantAdded = new ParticipantAddedEventHandler
 
 A session is a connection between the client application and the Dolby.io backend. When opening a session, you should provide a name. Commonly, this is the name of the participant who established the session. The session can remain active for the whole lifecycle of your application. 
 
-To open a new session, use the [Session.Open](xref:DolbyIO.Comms.Services.Session#DolbyIO_Comms_Services_Session_Open) method as in the following example:
+To open a new session, use the [Session.Open](https://dolbyio.github.io/comms-sdk-dotnet/dolbyio_comms_sdk_dotnet/Session/Open) method as in the following example:
 
 ```cs
 try
@@ -115,7 +114,7 @@ catch (DolbyIOException e)
 
 A conference is a multi-person call where participants exchange audio with one another. To distinguish between multiple conferences, you should assign a conference alias or name. When multiple participants join a conference of the same name using a token of the same Dolby.io application, they will be able to meet in a call.
 
-To create and join a conference, use the [Conference.Create](xref:DolbyIO.Comms.Services.Conference#DolbyIO_Comms_Services_Conference_Create_DolbyIO_Comms_ConferenceOptions_) and [Conference.Join](xref:DolbyIO.Comms.Services.Conference#DolbyIO_Comms_Services_Conference_Join_DolbyIO_Comms_ConferenceInfos_DolbyIO_Comms_JoinOptions_) methods as in the following example:
+To create and join a conference, use the [Conference.Create](https://dolbyio.github.io/comms-sdk-dotnet/dolbyio_comms_sdk_dotnet/Conference/Create) and [Conference.Join](https://dolbyio.github.io/comms-sdk-dotnet/dolbyio_comms_sdk_dotnet/Conference/Join) methods as in the following example:
 
 ```cs
 try
@@ -134,11 +133,11 @@ catch (DolbyIOException e)
 }
 ```
 
-If the conference already exists, the SDK returns [ConferenceInfos](xref:DolbyIO.Comms.Native.Struct#DolbyIO_Comms_Native_Struct_ConferenceInfos).
+If the conference already exists, the SDK returns [ConferenceInfos](https://dolbyio.github.io/comms-sdk-dotnet/dolbyio_comms_sdk_dotnet/Struct/ConferenceInfos).
 
 ### 5. Leave the conference
 
-To leave the conference, use the [Conference.Leave](xref:DolbyIO.Comms.Services.Conference#DolbyIO_Comms_Services_Conference_Leave) method, as in the following example:
+To leave the conference, use the [Conference.Leave](https://dolbyio.github.io/comms-sdk-dotnet/dolbyio_comms_sdk_dotnet/Conference/Leave) method, as in the following example:
 
 ```cs
 try
@@ -153,7 +152,7 @@ catch (DolbyIOException e)
 
 ### 6. Close the session and dispose of the SDK
 
-After leaving the conference, close the session and dispose of the SDK using the [Session.Close](xref:DolbyIO.Comms.Services.Session#DolbyIO_Comms_Services_Session_Close) and [DolbyIOSDK.Dispose](xref:DolbyIO.Comms.Dispose) methods.
+After leaving the conference, close the session and dispose of the SDK using the [Session.Close](https://dolbyio.github.io/comms-sdk-dotnet/dolbyio_comms_sdk_dotnet/Session/Close) and [DolbyIOSDK.Dispose](https://dolbyio.github.io/comms-sdk-dotnet/dolbyio_comms_sdk_dotnet/DolbyIOSDK/Dispose) methods.
 
 ```cs
 try
