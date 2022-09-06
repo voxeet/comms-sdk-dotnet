@@ -58,6 +58,13 @@ jobs:
       - run: dotnet pack dotnet/DolbyIO.Comms.Sdk/DolbyIO.Comms.Sdk.csproj
         working-directory: ${{github.workspace}}/build
 
+      - name: Sign Nugets
+        working-directory: ${{github.workspace}}/build/bin
+        run: |
+          echo "${{ secrets.WINDOWS_CERTIFICATE }}" | base64 --decode > certificate.pfx
+          dotnet nuget sign DolbyIO.Comms.Sdk.*.nupkg --certificate-path ./certificate.pfx --certificate-password ${{ secrets.WINDOWS_CERTIFICATE_PASSWORD}} --timestamper http://timestamp.digicert.com/
+          rm certificate.pfx
+
       - uses: actions/upload-artifact@v3
         with:
           name: nugets
