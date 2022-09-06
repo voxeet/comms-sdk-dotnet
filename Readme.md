@@ -28,7 +28,17 @@ To install the SDK, you can either use the NuGet packet manager or build the SDK
 
 #### NuGet
 
-[TODO]
+Using Dotnet:
+
+```shell
+dotnet add package DolbyIO.Comms.Sdk
+```
+
+Using PackageReference:
+
+```xml
+<PackageReference Include="DolbyIO.Comms.Sdk" Version="1.0.0-beta.1">
+```
 
 #### Sources
 
@@ -40,7 +50,7 @@ cmake .. -DDOLBYIO_LIBRARY_PATH=/path/to/c++sdk -DCMAKE_BUILD_TYPE=Debug
 cmake --build .
 ```
 
-You can define `DOLBYIO_LIBRARY_PATH` as an environment variable.
+You can define `DOLBYIO_LIBRARY_PATH` as an environment variable. `DOLBYIO_LIBRARY_PATH` is the path to the root folder containing the Dolby.io C++ SDK.
 
 After generating your project, you can find your project in the `build/dotnet` folder.
 
