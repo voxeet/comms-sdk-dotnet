@@ -37,7 +37,7 @@ dotnet add package DolbyIO.Comms.Sdk
 Using PackageReference:
 
 ```xml
-<PackageReference Include="DolbyIO.Comms.Sdk" Version="1.0.0-beta.1">
+<PackageReference Include="DolbyIO.Comms.Sdk" Version="1.0.0-beta.1"/>
 ```
 
 #### Sources
