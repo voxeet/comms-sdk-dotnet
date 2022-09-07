@@ -25,7 +25,7 @@ namespace DolbyIO.Comms.Services
     /// }
     /// </code>
     /// </example>
-    public class LocalAudioService
+    public class LocalAudio
     {
         /// <summary>
         /// Creates a WebRTC AudioTrack and attaches the AudioTrack to

@@ -27,7 +27,7 @@ namespace DolbyIO.Comms.Services
     /// }
     /// </code>
     /// </example>
-    public class RemoteAudioService
+    public class RemoteAudio
     {
         /// <summary>
         /// Allows the local participant, who used the StopRemoteAudio method

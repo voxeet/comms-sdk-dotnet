@@ -21,19 +21,19 @@ namespace DolbyIO.Comms.Services
     /// }
     /// </code>
     /// </example>
-    public class AudioService
+    public class Audio
     {
-        private LocalAudioService _local = new LocalAudioService();
-        private RemoteAudioService _remote = new RemoteAudioService();
+        private LocalAudio _local = new LocalAudio();
+        private RemoteAudio _remote = new RemoteAudio();
 
         /// <summary>
         /// The Local audio service accessor.
         /// </summary>
-        public LocalAudioService Local { get => _local; }
+        public LocalAudio Local { get => _local; }
 
         /// <summary>
         /// The Remote audio service accessor.
         /// </summary>
-        public RemoteAudioService Remote { get => _remote; }
+        public RemoteAudio Remote { get => _remote; }
     }
 }

@@ -11,9 +11,9 @@ add_dotnet_library(
         Services/Session.cs
         Services/Conference.cs
         Services/MediaDevice.cs
-        Services/Audio/AudioService.cs
-        Services/Audio/LocalAudioService.cs
-        Services/Audio/RemoteAudioService.cs
+        Services/Audio/Audio.cs
+        Services/Audio/LocalAudio.cs
+        Services/Audio/RemoteAudio.cs
         DolbyIOSDK.cs
     VERSION
         ${CSSDK_MAJOR}.${CSSDK_MINOR}.${CSSDK_PATH}
