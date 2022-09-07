@@ -64,3 +64,7 @@ public class MyScript : MonoBehaviour
     }
 }
 ```
+
+>The `DolbyIOManager` calls the Dispose method of the SDK automatically in OnApplicationQuit. You just need to leave the conference and close the session at the end of your application.
+
+After this, you are up to call the various SDK methods described in the [Getting Started](./started.md) and in the reference documentation [Reference](/documentation/api/DolbyIO.Comms.Services.html).
