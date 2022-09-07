@@ -4,8 +4,8 @@ namespace DolbyIO.Comms.Services
     /// AudioService provides Local and Remote audio functionalities. It allows you to start, stop and mute local or
     /// remote audio sources.
     /// 
-    /// - See <see cref="DolbyIO.Comms.Services.LocalAudioService"/>
-    /// - See <see cref="DolbyIO.Comms.Services.RemoteAudioService"/>
+    /// - See <see cref="DolbyIO.Comms.Services.LocalAudio"/>
+    /// - See <see cref="DolbyIO.Comms.Services.RemoteAudio"/>
     /// 
     /// </summary>
     /// <example>

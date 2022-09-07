@@ -6,9 +6,9 @@ namespace DolbyIO.Comms.Services
     /// The Remote Audio Service provides remote audio functionalities. You can start, stop and mute 
     /// remote audio source. 
     /// 
-    /// - See <see cref="DolbyIO.Comms.Services.RemoteAudioService.Start(string)"/> 
-    /// - See <see cref="DolbyIO.Comms.Services.RemoteAudioService.Stop(string)"/> 
-    /// - See <see cref="DolbyIO.Comms.Services.RemoteAudioService.Mute(bool, string)"/> 
+    /// - See <see cref="DolbyIO.Comms.Services.RemoteAudio.Start(string)"/> 
+    /// - See <see cref="DolbyIO.Comms.Services.RemoteAudio.Stop(string)"/> 
+    /// - See <see cref="DolbyIO.Comms.Services.RemoteAudio.Mute(bool, string)"/> 
     /// 
     /// **Those methods are only available for non-Dolby Voice conferences.**
     /// 

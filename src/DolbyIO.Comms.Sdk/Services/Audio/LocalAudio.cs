@@ -6,9 +6,9 @@ namespace DolbyIO.Comms.Services
     /// The Local Audio Service provides local audio functionalities. you can start, stop and mute 
     /// the local audio source.
     /// 
-    /// - See <see cref="DolbyIO.Comms.Services.LocalAudioService.Start"/>
-    /// - See <see cref="DolbyIO.Comms.Services.LocalAudioService.Stop"/>
-    /// - See <see cref="DolbyIO.Comms.Services.LocalAudioService.Mute(bool)"/>
+    /// - See <see cref="DolbyIO.Comms.Services.LocalAudio.Start"/>
+    /// - See <see cref="DolbyIO.Comms.Services.LocalAudio.Stop"/>
+    /// - See <see cref="DolbyIO.Comms.Services.LocalAudio.Mute(bool)"/>
     /// 
     /// </summary>
     /// <example>
