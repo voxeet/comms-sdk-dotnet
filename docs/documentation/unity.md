@@ -35,7 +35,7 @@ public class MyScript : MonoBehaviour
 
 The SDK needs to be initialized before any call to its functionalities using the method [Init](xref:DolbyIO.Comms.DolbyIOSDK#DolbyIO_Comms_DolbyIOSDK_Init_System_String_DolbyIO_Comms_RefreshTokenCallBack_).
 
-For information on how to retrieve an Access Token, please see: [TODO DOC TOKEN]().
+For information on how to retrieve an Access Token, please see: [Prerequisite](./started.md#prerequisites).
 
 The init method should only be called once. The best place to call it is in the Awake method of a new script you will add as a component to the previously created `ApplicationManager` GameObject.
 
