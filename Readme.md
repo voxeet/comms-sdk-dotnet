@@ -59,11 +59,11 @@ Create a file where you want to store code for the sample application. Open the 
 ```cs
 using DolbyIO.Comms;
 
-DolbyIOSDK sdk = new DolbyIOSDK();
+DolbyIOSDK _sdk = new DolbyIOSDK();
 
 try
 {
-    await sdk.Init("Token", () => 
+    await _sdk.Init("Token", () => 
     {
         // Refresh Callback
         return "Refreshed Access Token";
@@ -83,10 +83,10 @@ After initializing the SDK, it is time to register your event handlers. Decide w
 
 ```cs
 // Registering event handlers
-sdk.Conference.StatusUpdated = OnConferenceStatus;
+_sdk.Conference.StatusUpdated = OnConferenceStatus;
 
 // or inline
-sdk.Conference.ParticipantAdded = new ParticipantAddedEventHandler
+_sdk.Conference.ParticipantAdded = new ParticipantAddedEventHandler
 (
     (Participant participant) => 
     {
@@ -107,7 +107,7 @@ try
     UserInfo user = new UserInfo();
     user.Name = "My Name";
 
-    user = await sdk.Session.Open(user);
+    user = await _sdk.Session.Open(user);
 }
 catch (DolbyIOException e)
 {
@@ -129,8 +129,8 @@ try
 
     JoinOptions joinOpts = new JoinOptions();
 
-    ConferenceInfos createInfos = await sdk.Conference.Create(options);
-    ConferenceInfos joinInfos = await sdk.Conference.Join(createInfos, joinOpts);
+    ConferenceInfos createInfos = await _sdk.Conference.Create(options);
+    ConferenceInfos joinInfos = await _sdk.Conference.Join(createInfos, joinOpts);
 }
 catch (DolbyIOException e)
 {
@@ -147,7 +147,7 @@ To leave the conference, use the [Conference.Leave](https://dolbyio.github.io/co
 ```cs
 try
 {
-    await sdk.Session.Leave();
+    await _sdk.Session.Leave();
 }
 catch (DolbyIOException e)
 {
@@ -163,7 +163,7 @@ After leaving the conference, close the session and dispose of the SDK using the
 try
 {
     await _sdk.Session.Close();
-    sdk.Dispose();
+    _sdk.Dispose();
 }
 catch (DolbyIOException e)
 {
@@ -189,16 +189,16 @@ public class Call
     {
         try
         {
-            await sdk.Init("Access Token", () =>
+            await _sdk.Init("Access Token", () =>
             {
                 return "Refreshed Access Token";
             });
 
             // Registering event handlers
-            sdk.Conference.StatusUpdated = OnConferenceStatus;
+            _sdk.Conference.StatusUpdated = OnConferenceStatus;
 
             // or inline
-            sdk.Conference.ParticipantAdded = new ParticipantAddedEventHandler
+            _sdk.Conference.ParticipantAdded = new ParticipantAddedEventHandler
             (
                 (Participant participant) =>
                 {
@@ -209,15 +209,15 @@ public class Call
             UserInfo user = new UserInfo();
             user.Name = "My Name";
 
-            user = await sdk.Session.Open(user);
+            user = await _sdk.Session.Open(user);
 
             ConferenceOptions options = new ConferenceOptions();
             options.Alias = "Conference alias";
 
             JoinOptions joinOpts = new JoinOptions();
 
-            ConferenceInfos createInfos = await sdk.Conference.Create(options);
-            ConferenceInfos joinInfos = await sdk.Conference.Join(createInfos, joinOpts);
+            ConferenceInfos createInfos = await _sdk.Conference.Create(options);
+            ConferenceInfos joinInfos = await _sdk.Conference.Join(createInfos, joinOpts);
         }
         catch (DolbyIOException e)
         {
@@ -229,8 +229,8 @@ public class Call
     {
         try
         {
-            await sdk.Conference.Leave();
-            await sdk.Session.Close();
+            await _sdk.Conference.Leave();
+            await _sdk.Session.Close();
 
             _sdk.Dispose();
         }
