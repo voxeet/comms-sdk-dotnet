@@ -3,15 +3,7 @@ using System.Threading.Tasks;
 namespace DolbyIO.Comms.Services
 {
     /// <summary>
-    /// The Remote Audio Service provides remote audio functionalities. You can start, stop and mute 
-    /// remote audio source. 
-    /// 
-    /// - See <see cref="DolbyIO.Comms.Services.RemoteAudio.Start(string)"/> 
-    /// - See <see cref="DolbyIO.Comms.Services.RemoteAudio.Stop(string)"/> 
-    /// - See <see cref="DolbyIO.Comms.Services.RemoteAudio.Mute(bool, string)"/> 
-    /// 
-    /// **Those methods are only available for non-Dolby Voice conferences.**
-    /// 
+    /// The RemoteAudio service allows the local participant to <see cref="DolbyIO.Comms.Services.RemoteAudio.Mute(bool, string)">mute</see> selected remote participants and <see cref="DolbyIO.Comms.Services.RemoteAudio.Stop(string)"> stop</see> and <see cref="DolbyIO.Comms.Services.RemoteAudio.Start(string)">start</see> receiving audio from remote participants in non-Dolby Voice conferences.
     /// </summary>
     /// <example>
     /// <code>
@@ -30,7 +22,8 @@ namespace DolbyIO.Comms.Services
     public class RemoteAudio
     {
         /// <summary>
-        /// Allows the local participant, who used the StopRemoteAudio method
+        /// Allows the local participant, who used the
+        /// <see cref="DolbyIO.Comms.Services.RemoteAudioService.Stop(string)"> stop</see> method
         /// on a selected remote participant, to start receiving the remote participant's
         /// audio track.
         /// This method allows an audio track from the
@@ -39,11 +32,10 @@ namespace DolbyIO.Comms.Services
         /// this method does not enable their audio track.
         /// </summary>
         /// <remarks>
-        /// Attention: This method is only available for non-Dolby Voice conferences.
+        /// Attention: This method is only available in non-Dolby Voice conferences.
         /// </remarks>
-        /// <param name="participantId">The ID of the participant whose audio track you would
-        /// like to hear.</param>
-        /// <returns></returns>
+        /// <param name="participantId">The ID of the remote participant whose audio track should be sent to the local participant.</param>
+        /// <value>A task that represents the returned asynchronous operation.</value>
         public async Task Start(string participantId)
         {
             await Task.Run(() => Native.CheckException(Native.StartRemoteAudio(participantId))).ConfigureAwait(false);
@@ -58,26 +50,28 @@ namespace DolbyIO.Comms.Services
         /// mixed into the Dolby Voice audio stream that the SDK receives.
         /// </summary>
         /// <remarks>
-        /// Attention: This method is only available for non-Dolby Voice conferences.
+        /// Attention: This method is only available in non-Dolby Voice conferences.
         /// </remarks>
-        /// <param name="participantId">The ID of the participant whose audio track you would
-        /// like to stop.</param>
-        /// <returns></returns>
+        /// <param name="participantId">The ID of the remote participant whose audio track should not be sent to the local participant.</param>
+        /// <value>A task that represents the returned asynchronous operation.</value>
         public async Task Stop(string participantId)
         {
             await Task.Run(() => Native.CheckException(Native.StopRemoteAudio(participantId))).ConfigureAwait(false);
         }
 
         /// <summary>
-        /// Mutes and un-mutes a specified remote participant.
+        /// Stops playing the specified remote participants' audio to the local participant.
+        /// The mute method does not notify the server to stop audio stream transmission.
+        /// To stop sending an audio stream to the server, use the
+        /// <see cref="DolbyIO.Comms.Services.LocalAudioService.Stop">stopAudio</see> method.
         /// </summary>
         /// <remarks>
-        /// Attention: This method is only available for non-Dolby Voice conferences.
+        /// Attention: This method is only available in non-Dolby Voice conferences.
         /// </remarks>
         /// <param name="muted">A boolean value that indicates the required mute state. True
         /// mutes the remote participant, false un-mutes the remote participant.</param>
-        /// <param name="participantId">The ID of the remote participant to be muted.</param>
-        /// <returns></returns>
+        /// <param name="participantId">The ID of the remote participant whose audio should not be played.</param>
+        /// <value>A task that represents the returned asynchronous operation.</value>
         public async Task Mute(bool muted, string participantId)
         {
             await Task.Run(() => Native.CheckException(Native.RemoteMute(muted, participantId))).ConfigureAwait(false);

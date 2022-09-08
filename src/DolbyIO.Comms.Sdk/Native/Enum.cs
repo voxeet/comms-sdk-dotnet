@@ -43,7 +43,7 @@ namespace DolbyIO.Comms
     }
 
     /// <summary>
-    /// The Conference Access Permissions enum contains the available permissions for application users who are invited to a conference.
+    /// The ConferenceAccessPermissions enum contains the available permissions for application users who are invited to a conference.
     /// </summary>
     public enum ConferenceAccessPermissions {
         /// <summary> 

@@ -4,6 +4,9 @@ using DolbyIO.Comms.Services;
 
 namespace DolbyIO.Comms 
 {
+    /// <summary>
+    /// The DolbyIOException wraps the underlying C++ SDK exception.
+    /// </summary>
     public class DolbyIOException : Exception
     {
         public DolbyIOException(String msg)
@@ -13,8 +16,8 @@ namespace DolbyIO.Comms
     }
 
     /// <summary>
-    /// The DolbyIOSDK Class is a starting point that allows initializing the
-    /// C# SDK and accessing the underlying services.
+    /// The DolbyIOSDK class a main object that allows initializing the
+    /// .NET SDK and accessing the underlying services.
     /// </summary>
     public class DolbyIOSDK : IDisposable
     {   
@@ -23,12 +26,12 @@ namespace DolbyIO.Comms
         private Session _session = new Session();
         private Conference _conference = new Conference();
         private MediaDevice _mediaDevice = new MediaDevice();
-        private Audio _audio = new Audio();
+        private AudioService _audio = new AudioService();
 
         private SignalingChannelErrorEventHandler _signalingChannelError;
 
         /// <summary>
-        /// The signaling channel error event. Raised when an error occurs during a SIP negociation
+        /// Emitted when an error occurs during a SIP negotiation
         /// on the local peer connection.
         /// </summary>
         public SignalingChannelErrorEventHandler SignalingChannelError
@@ -48,7 +51,7 @@ namespace DolbyIO.Comms
         private InvalidTokenErrorEventHandler _invalidTokenError;
 
         /// <summary>
-        /// The invalid token error event. Raised when the access token is invalid or expired.
+        /// Emitted when the access token is invalid or expired.
         /// </summary>
         public InvalidTokenErrorEventHandler InvalidTokenError
         {
@@ -116,7 +119,7 @@ namespace DolbyIO.Comms
         /// <summary>
         /// The Audio service accessor.
         /// </summary>
-        public Audio Audio
+        public AudioService Audio
         {
             get 
             {

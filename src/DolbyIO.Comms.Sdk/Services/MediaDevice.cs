@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 namespace DolbyIO.Comms.Services
 {
     /// <summary>
-    /// The Device Management Service provides an interface for setting
+    /// The Device Management service provides an interface for setting
     /// the input and output audio devices as well as getting notifications about
     /// the added and removed devices.
     ///
@@ -14,8 +14,7 @@ namespace DolbyIO.Comms.Services
     ///  <see cref="DolbyIO.Comms.Services.MediaDevice.GetAudioDevices">GetAudioDevices</see> method.
     ///  2. Set the desired input audio device by calling the 
     ///  <see cref="DolbyIO.Comms.Services.MediaDevice.SetPreferredAudioInputDevice(AudioDevice)">SetPreferredAudioInputDevice</see> method.
-    ///  3. Set the desired output audio device by calling the
-    ///  <see cref="DolbyIO.Comms.Services.MediaDevice.SetPreferredAudioOutputDevice(AudioDevice)">SetPreferredAudioOutputDevice</see> method.
+    ///  3. Set the desired output audio device by calling the <see cref="DolbyIO.Comms.Services.MediaDevice.SetPreferredAudioOutputDevice(AudioDevice)">SetPreferredAudioOutputDevice</see> method.
     ///  4. Subscribe to the <see cref="DolbyIO.Comms.Services.MediaDevice.Added">Added</see>, 
     ///  <see cref="DolbyIO.Comms.Services.MediaDevice.Removed">Removed</see>, and 
     ///  <see cref="DolbyIO.Comms.Services.MediaDevice.Changed">Changed</see> events.
@@ -134,7 +133,7 @@ namespace DolbyIO.Comms.Services
         /// Sets the preferred input audio device.
         /// </summary>
         /// <param name="device">Structure containing information about the preferred input device.</param>
-        /// <returns></returns>
+        /// <returns>The returned asynchronous operation.</returns>
         public async Task SetPreferredAudioInputDevice(AudioDevice device)
         {
             await Task.Run(() => 
@@ -147,8 +146,8 @@ namespace DolbyIO.Comms.Services
         /// Sets the preferred output audio device.
         /// </summary>
         /// <param name="device">Structure containing information about the preferred output device.</param>
-        /// <returns></returns>
-        public async Task SetPreferredAudioOuputDevice(AudioDevice device)
+        /// <returns>The returned asynchronous operation.</returns>
+        public async Task SetPreferredAudioOutputDevice(AudioDevice device)
         {
             await Task.Run(() => 
             {
