@@ -99,7 +99,7 @@ namespace DolbyIO.Comms.Services
                 }
 
                 return devices;
-            });
+            }).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -113,7 +113,7 @@ namespace DolbyIO.Comms.Services
                 AudioDevice d;
                 Native.CheckException(Native.GetCurrentAudioInputDevice(out d));
                 return d;
-            });
+            }).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -127,7 +127,7 @@ namespace DolbyIO.Comms.Services
                 AudioDevice d;
                 Native.CheckException(Native.GetCurrentAudioOutputDevice(out d));
                 return d;
-            });
+            }).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -140,7 +140,7 @@ namespace DolbyIO.Comms.Services
             await Task.Run(() => 
             {
                 Native.CheckException(Native.SetPreferredAudioInputDevice(device));
-            });
+            }).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -153,7 +153,7 @@ namespace DolbyIO.Comms.Services
             await Task.Run(() => 
             {
                 Native.CheckException(Native.SetPreferredAudioOutputDevice(device));
-            });
+            }).ConfigureAwait(false);
         }
     }
 }

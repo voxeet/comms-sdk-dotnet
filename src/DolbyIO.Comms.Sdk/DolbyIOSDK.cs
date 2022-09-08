@@ -144,7 +144,7 @@ namespace DolbyIO.Comms
             {
                 Native.CheckException(Native.Init(appKey, cb));
                 _initialised = true;
-            });
+            }).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -154,7 +154,7 @@ namespace DolbyIO.Comms
         /// <returns></returns>
         public async Task SetLogLevel(LogLevel level)
         {
-            await Task.Run(() =>  Native.CheckException(Native.SetLogLevel(level)));
+            await Task.Run(() =>  Native.CheckException(Native.SetLogLevel(level))).ConfigureAwait(false);
         }
 
         public void Dispose()

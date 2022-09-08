@@ -46,7 +46,7 @@ namespace DolbyIO.Comms.Services
         /// <returns></returns>
         public async Task Start(string participantId)
         {
-            await Task.Run(() => Native.CheckException(Native.StartRemoteAudio(participantId)));
+            await Task.Run(() => Native.CheckException(Native.StartRemoteAudio(participantId))).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -65,7 +65,7 @@ namespace DolbyIO.Comms.Services
         /// <returns></returns>
         public async Task Stop(string participantId)
         {
-            await Task.Run(() => Native.CheckException(Native.StopRemoteAudio(participantId)));
+            await Task.Run(() => Native.CheckException(Native.StopRemoteAudio(participantId))).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -80,7 +80,7 @@ namespace DolbyIO.Comms.Services
         /// <returns></returns>
         public async Task Mute(bool muted, string participantId)
         {
-            await Task.Run(() => Native.CheckException(Native.RemoteMute(muted, participantId)));
+            await Task.Run(() => Native.CheckException(Native.RemoteMute(muted, participantId))).ConfigureAwait(false);
         }
     }
 }

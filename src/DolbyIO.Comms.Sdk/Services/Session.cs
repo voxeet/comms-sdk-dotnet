@@ -49,7 +49,7 @@ namespace DolbyIO.Comms.Services
                 Native.CheckException(Native.Open(user, res));
                 _user = res;
                 return res;
-            });
+            }).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -61,7 +61,7 @@ namespace DolbyIO.Comms.Services
             await Task.Run(() =>
             {
                 Native.CheckException(Native.Close());
-            });
+            }).ConfigureAwait(false);
         }
 
         /// <summary>

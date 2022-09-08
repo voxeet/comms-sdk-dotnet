@@ -219,7 +219,7 @@ namespace DolbyIO.Comms.Services
                 ConferenceInfos infos = new ConferenceInfos();
                 Native.CheckException(Native.GetCurrentConference(infos));
                 return infos;
-            });
+            }).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -235,7 +235,7 @@ namespace DolbyIO.Comms.Services
                 ConferenceInfos infos = new ConferenceInfos();
                 Native.CheckException(Native.Create(options, infos));
                 return infos;
-            });
+            }).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -253,7 +253,7 @@ namespace DolbyIO.Comms.Services
                 Native.CheckException(Native.Join(infos, options, res));
                 _isInConference = true;
                 return res;
-            });
+            }).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -271,7 +271,7 @@ namespace DolbyIO.Comms.Services
                 Native.CheckException(Native.Listen(infos, options, res));
                 _isInConference = true;
                 return res;
-            });
+            }).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -288,7 +288,7 @@ namespace DolbyIO.Comms.Services
                 Native.CheckException(Native.Demo(spatialAudio, infos));
                 _isInConference = true;
                 return infos;
-            });
+            }).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -320,7 +320,7 @@ namespace DolbyIO.Comms.Services
                 forward.X, forward.Y, forward.Z,
                 up.X, up.Y, up.Z,
                 right.X, right.Y, right.Z
-            )));
+            ))).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -334,7 +334,7 @@ namespace DolbyIO.Comms.Services
         /// <returns></returns>
         public async Task SetSpatialDirection(Vector3 direction)
         {
-            await Task.Run(() => Native.CheckException(Native.SetSpatialDirection(direction.X, direction.Y, direction.Z)));
+            await Task.Run(() => Native.CheckException(Native.SetSpatialDirection(direction.X, direction.Y, direction.Z))).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -355,7 +355,7 @@ namespace DolbyIO.Comms.Services
         /// <returns></returns>
         public async Task SetSpatialPosition(String participantId, Vector3 position)
         {
-            await Task.Run(() => Native.CheckException(Native.SetSpatialPosition(participantId, position.X, position.Y, position.Z)));
+            await Task.Run(() => Native.CheckException(Native.SetSpatialPosition(participantId, position.X, position.Y, position.Z))).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -366,7 +366,7 @@ namespace DolbyIO.Comms.Services
         /// <returns></returns>
         public async Task SendMessage(string message)
         {
-            await Task.Run(() => Native.CheckException(Native.SendMessage(message)));
+            await Task.Run(() => Native.CheckException(Native.SendMessage(message))).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -375,7 +375,7 @@ namespace DolbyIO.Comms.Services
         /// <param name="conferenceId">The conference ID.</param>
         /// <returns></returns>
         public async Task DeclineInvitation(string conferenceId) {
-            await Task.Run(() => Native.CheckException(Native.DeclineInvitation(conferenceId)));
+            await Task.Run(() => Native.CheckException(Native.DeclineInvitation(conferenceId))).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -387,7 +387,7 @@ namespace DolbyIO.Comms.Services
             await Task.Run(() => {
                 Native.CheckException(Native.Leave());
                 _isInConference = false;
-            });
+            }).ConfigureAwait(false);
         }
     }
 }

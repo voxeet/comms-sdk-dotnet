@@ -36,7 +36,7 @@ namespace DolbyIO.Comms.Services
         /// <returns></returns>
         public async Task Start()
         {
-            await Task.Run(() => Native.CheckException(Native.StartAudio()));
+            await Task.Run(() => Native.CheckException(Native.StartAudio())).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -48,7 +48,7 @@ namespace DolbyIO.Comms.Services
         /// <returns></returns>
         public async Task Stop()
         {
-            await Task.Run(() => Native.CheckException(Native.StopAudio()));
+            await Task.Run(() => Native.CheckException(Native.StopAudio())).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -59,7 +59,7 @@ namespace DolbyIO.Comms.Services
         /// <returns></returns>
         public async Task Mute(bool muted)
         {
-            await Task.Run(() => Native.CheckException(Native.Mute(muted)));
+            await Task.Run(() => Native.CheckException(Native.Mute(muted))).ConfigureAwait(false);
         }
     }
 }
