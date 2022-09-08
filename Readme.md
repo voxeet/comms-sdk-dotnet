@@ -72,6 +72,7 @@ try
     await _sdk.Init("Token", () => 
     {
         // Refresh Callback
+        return "Refreshed Access Token";
     });
 }
 catch (DolbyIOException e)
@@ -194,7 +195,10 @@ public class Call
     {
         try
         {
-            await _sdk.Init("Access Token");
+            await _sdk.Init("Access Token", () =>
+            {
+                return "Refreshed Access Token";
+            });
 
             // Registering event handlers
             _sdk.Conference.StatusUpdated = OnConferenceStatus;
