@@ -164,7 +164,7 @@ namespace DolbyIO.Comms.Services
         private DvcErrorEventHandler _dvcError;
 
         /// <summary>
-        /// Emitted when a DVC-related error occurs.
+        /// Emitted when an error related to the Dolby Voice Codec (DVC) occurs.
         /// </summary>
         /// <example>
         /// <code>

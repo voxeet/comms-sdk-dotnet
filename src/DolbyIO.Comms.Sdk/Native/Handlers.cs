@@ -94,6 +94,6 @@ namespace DolbyIO.Comms
     /// The <see cref="DolbyIO.Comms.Services.MediaDevice.Changed">MediaDevice.Changed</see> event handler.
     /// </summary>
     /// <param name="device">The new device.</param>
-    /// <param name="noDevice">A boolean indicating whether...</param>
+    /// <param name="noDevice">A boolean indicating whether.</param>
     public delegate void DeviceChangedEventHandler(AudioDevice device, bool noDevice);
 }

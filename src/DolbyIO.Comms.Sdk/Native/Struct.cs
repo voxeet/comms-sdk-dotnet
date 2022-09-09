@@ -373,7 +373,7 @@ namespace DolbyIO.Comms
         public readonly string Name;
 
         /// <summary>
-        /// Information whether the device captures or plays audio.
+        /// Information whether the device is the input or output device.
         /// </summary>
         /// <returns>Information whether the device is the input or output device.</returns>
         [MarshalAs(UnmanagedType.I4)]
