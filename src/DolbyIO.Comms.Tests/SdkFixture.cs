@@ -7,7 +7,7 @@ namespace DolbyIO.Comms.Tests
 {
     public class SdkFixture : IDisposable
     {
-        public DolbyIOSDK Sdk { get; private set; }
+        public DolbyIOSDK Sdk { get; }
 
         public SdkFixture()
         {
@@ -19,7 +19,7 @@ namespace DolbyIO.Comms.Tests
             }
 
             Sdk = new DolbyIOSDK();
-            Sdk.Init("dummy", () => "").Wait();
+            Sdk.InitAsync("dummy", () => "").Wait();
         }
 
         ~SdkFixture()

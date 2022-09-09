@@ -31,14 +31,14 @@ namespace DolbyIO.Comms.Tests
         }
 
         [Fact]
-        public void Test_ConferenceInfos_ShouldMarshall()
+        public void Test_Conference_ShouldMarshall()
         {
-            ConferenceInfos src = new ConferenceInfos();
+            Conference src = new Conference();
             src.Alias = "TestAlias";
             src.Id = "TestId";
 
-            ConferenceInfos dest = new ConferenceInfos();
-            NativeTests.ConferenceInfosTest(src, dest);
+            Conference dest = new Conference();
+            NativeTests.ConferenceTest(src, dest);
 
             Assert.NotEqual(src, dest); // Objects are different
             Assert.Equal(src.Id, dest.Id);
@@ -105,7 +105,7 @@ namespace DolbyIO.Comms.Tests
         [Fact]
         public async void Test_Conference_CanCallSendMessage()
         {
-            await _fixture.Sdk.Conference.SendMessage("test");
+            await _fixture.Sdk.Conference.SendMessageAsync("test");
         }
     }
 }

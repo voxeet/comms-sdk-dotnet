@@ -6,18 +6,18 @@ namespace DolbyIO.Comms.Services
     /// The Local Audio Service provides local audio functionalities. you can start, stop and mute 
     /// the local audio source.
     /// 
-    /// - See <see cref="DolbyIO.Comms.Services.LocalAudio.Start"/>
-    /// - See <see cref="DolbyIO.Comms.Services.LocalAudio.Stop"/>
-    /// - See <see cref="DolbyIO.Comms.Services.LocalAudio.Mute(bool)"/>
+    /// - See <see cref="DolbyIO.Comms.Services.LocalAudioService.StartAsync"/>
+    /// - See <see cref="DolbyIO.Comms.Services.LocalAudioService.StopAsync"/>
+    /// - See <see cref="DolbyIO.Comms.Services.LocalAudioService.MuteAsync(bool)"/>
     /// 
     /// </summary>
     /// <example>
     /// <code>
     /// try
     /// {
-    ///     await _sdk.Audio.Local.Start();
-    ///     await _sdk.Autio.Local.Mute(true);
-    ///     await _sdk.Audio.Local.Stop();
+    ///     await _sdk.Audio.Local.StartAsync();
+    ///     await _sdk.Audio.Local.MuteAsync(true);
+    ///     await _sdk.Audio.Local.StopAsync();
     /// }
     /// catch
     /// {
@@ -25,7 +25,7 @@ namespace DolbyIO.Comms.Services
     /// }
     /// </code>
     /// </example>
-    public class LocalAudio
+    public sealed class LocalAudioService
     {
         /// <summary>
         /// Creates a WebRTC AudioTrack and attaches the AudioTrack to
@@ -33,8 +33,7 @@ namespace DolbyIO.Comms.Services
         /// media_source_interface with the WebRTC Audio Source, creating the audio
         /// delivery pipeline.
         /// </summary>
-        /// <returns></returns>
-        public async Task Start()
+        public async Task StartAsync()
         {
             await Task.Run(() => Native.CheckException(Native.StartAudio())).ConfigureAwait(false);
         }
@@ -45,8 +44,7 @@ namespace DolbyIO.Comms.Services
         /// media_source_interface from the WebRTC Audio Source, which deconstructs
         /// the audio delivery pipeline.
         /// </summary>
-        /// <returns></returns>
-        public async Task Stop()
+        public async Task StopAsync()
         {
             await Task.Run(() => Native.CheckException(Native.StopAudio())).ConfigureAwait(false);
         }
@@ -56,8 +54,7 @@ namespace DolbyIO.Comms.Services
         /// </summary>
         /// <param name="muted">A boolean value that indicates the required mute state. True
         /// mutes the microphone, false un-mutes the microphone.</param>
-        /// <returns></returns>
-        public async Task Mute(bool muted)
+        public async Task MuteAsync(bool muted)
         {
             await Task.Run(() => Native.CheckException(Native.Mute(muted))).ConfigureAwait(false);
         }

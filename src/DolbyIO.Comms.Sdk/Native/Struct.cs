@@ -1,6 +1,6 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
-using System;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Runtime.CompilerServices;
@@ -49,7 +49,7 @@ namespace DolbyIO.Comms
     }
 
     /// <summary>
-    /// Informations about a conference participant.
+    /// Information about a conference participant.
     /// </summary>
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
     public class ParticipantInfo 
@@ -167,10 +167,10 @@ namespace DolbyIO.Comms
     /// <summary>
     /// Contains the conference information. This structure provides
     /// conference details that are required to join a specific conference. The SDK
-    /// returns ConferenceInfos to describe the created or joined conference.
+    /// returns Conference to describe the created or joined conference.
     /// </summary>
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
-    public class ConferenceInfos
+    public class Conference
     {
         /// <summary>
         /// The unique conference identifier.
@@ -217,10 +217,10 @@ namespace DolbyIO.Comms
             {
                 return _permissions.Take(_permissionsCount).ToList();
             }
-
             set
             {
-                if (value.Count > Constants.MaxPermissions) {
+                if (value.Count > Constants.MaxPermissions)
+                {
                     throw new DolbyIOException("Too many permissions");
                 }
                 Array.Copy(value.ToArray(), _permissions, value.Count);

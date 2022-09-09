@@ -7,15 +7,15 @@ using System.Runtime.InteropServices;
 namespace DolbyIO.Comms.Services 
 {
     /// <summary>
-    /// The Session Service is responsible for connecting SDK with the Dolby.io
+    /// The Session service is responsible for connecting SDK with the Dolby.io
     /// backend by opening and closing sessions. Opening a session is mandatory
     /// before joining conferences.
     ///
-    /// To use the Session Service, follow these steps:
-    /// 1. Open a session using the <see cref="DolbyIO.Comms.Services.Session.Open(UserInfo)"/> method.
-    /// 2. Join a conference. See <see cref="DolbyIO.Comms.Services.Conference"/>
+    /// To use the Session service, follow these steps:
+    /// 1. Open a session using the <see cref="DolbyIO.Comms.Services.SessionService.OpenAsync(UserInfo)"/> method.
+    /// 2. Join a conference. See <see cref="DolbyIO.Comms.Services.ConferenceService"/>
     /// 3. Leave the conference and close the session using the 
-    /// <see cref="DolbyIO.Comms.Services.Session.Close"/> method.
+    /// <see cref="DolbyIO.Comms.Services.SessionService.CloseAsync"/> method.
     /// </summary>
     /// <example>
     /// <code>
@@ -24,7 +24,7 @@ namespace DolbyIO.Comms.Services
     ///     UserInfo info;
     ///     info.Name = "Some Name";
     ///     
-    ///     info = await _sdk.Session.Open(info);
+    ///     info = await _sdk.Session.OpenAsync(info);
     /// }
     /// catch (DolbyIOException e)
     /// {
@@ -32,22 +32,25 @@ namespace DolbyIO.Comms.Services
     /// }
     /// </code>
     /// </example>
-    public class Session
+    public sealed class SessionService
     {
-        private UserInfo _user;
+        /// <summary>
+        /// Gets the user information for the currently opened session.
+        /// </summary>
+        public UserInfo User { get; private set; }
 
         /// <summary>
         /// Opens a new session for the specified participant.
         /// </summary>
         /// <param name="user">Information about the participant who tries to open a session.</param>
         /// <returns>The UserInfo about the opened session.</returns>
-        public async Task<UserInfo> Open(UserInfo user)
+        public async Task<UserInfo> OpenAsync(UserInfo user)
         {
             return await Task.Run(() => 
             {
                 UserInfo res = new UserInfo();
                 Native.CheckException(Native.Open(user, res));
-                _user = res;
+                User = res;
                 return res;
             }).ConfigureAwait(false);
         }
@@ -55,24 +58,12 @@ namespace DolbyIO.Comms.Services
         /// <summary>
         /// Closes the current session.
         /// </summary>
-        /// <returns></returns>
-        public async Task Close()
+        public async Task CloseAsync()
         {
             await Task.Run(() =>
             {
                 Native.CheckException(Native.Close());
             }).ConfigureAwait(false);
-        }
-
-        /// <summary>
-        /// Gets the user informations for the currently opened session.
-        /// </summary>
-        public UserInfo User
-        {
-            get
-            {
-                return _user;
-            }
         }
     }
 }

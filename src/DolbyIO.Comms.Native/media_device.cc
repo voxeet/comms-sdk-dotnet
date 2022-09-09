@@ -62,7 +62,7 @@ extern "C" {
     }}.result();
   }
 
-  EXPORT_API int SetPreferredAudioOuputDevice(dolbyio::comms::native::device dev) {
+  EXPORT_API int SetPreferredAudioOutputDevice(dolbyio::comms::native::device dev) {
     return call { [&]() {
       auto devices = wait(sdk->device_management().get_audio_devices());
       auto result = std::find_if(devices.begin(), devices.end(), [&dev](const dvc_device& device) {

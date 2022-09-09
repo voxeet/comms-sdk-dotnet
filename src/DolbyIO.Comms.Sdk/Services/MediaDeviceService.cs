@@ -5,22 +5,22 @@ using System.Threading.Tasks;
 namespace DolbyIO.Comms.Services
 {
     /// <summary>
-    /// The Device Management Service provides an interface for setting
+    /// The Device Management service provides an interface for setting
     /// the input and output audio devices as well as getting notifications about
     /// the added and removed devices.
     ///
-    /// To use the Device Management Service, follow these steps:
+    /// To use the Device Management service, follow these steps:
     ///  1. Get all current audio devices using the 
-    ///  <see cref="DolbyIO.Comms.Services.MediaDevice.GetAudioDevices"/> method.
+    ///  <see cref="DolbyIO.Comms.Services.MediaDeviceService.GetAudioDevicesAsync"/> method.
     ///  2. Set the desired input audio device by calling the 
-    ///  <see cref="DolbyIO.Comms.Services.MediaDevice.SetPreferredAudioInputDevice(AudioDevice)"/> method.
+    ///  <see cref="DolbyIO.Comms.Services.MediaDeviceService.SetPreferredAudioInputDeviceAsync(AudioDevice)"/> method.
     ///  3. Set the desired output audio device by calling the
-    ///  <see cref="DolbyIO.Comms.Services.MediaDevice.SetPreferredAudioOutputDevice(AudioDevice)"/> method.
-    ///  4. Subscribe to <see cref="DolbyIO.Comms.Services.MediaDevice.Added"/>, 
-    ///  <see cref="DolbyIO.Comms.Services.MediaDevice.Removed"/>, and 
-    ///  <see cref="DolbyIO.Comms.Services.MediaDevice.Changed"/> events.
+    ///  <see cref="DolbyIO.Comms.Services.MediaDeviceService.SetPreferredAudioOutputDeviceAsync(AudioDevice)"/> method.
+    ///  4. Subscribe to <see cref="DolbyIO.Comms.Services.MediaDeviceService.Added"/>, 
+    ///  <see cref="DolbyIO.Comms.Services.MediaDeviceService.Removed"/>, and 
+    ///  <see cref="DolbyIO.Comms.Services.MediaDeviceService.Changed"/> events.
     /// </summary>
-    public class MediaDevice
+    public sealed class MediaDeviceService
     {
         private DeviceAddedEventHandler _added;
 
@@ -75,7 +75,7 @@ namespace DolbyIO.Comms.Services
         ///     <code>
         ///         try 
         ///         {
-        ///             List&lt;AudioDevice&gt; devices = await _sdk.MediaDevice.GetAudioDevices();
+        ///             List&lt;AudioDevice&gt; devices = await _sdk.MediaDevice.GetAudioDevicesAsync();
         ///         }
         ///         catch (DolbyIOException e)
         ///         {
@@ -83,7 +83,7 @@ namespace DolbyIO.Comms.Services
         ///         }
         ///     </code>
         /// </example>
-        public async Task<List<AudioDevice>> GetAudioDevices()
+        public async Task<List<AudioDevice>> GetAudioDevicesAsync()
         {
             return await Task.Run(() => 
             {
@@ -106,7 +106,7 @@ namespace DolbyIO.Comms.Services
         ///  Gets the audio input device that is currently used by the system.
         /// </summary>
         /// <returns>Currently used input audio device.</returns>
-        public async Task<AudioDevice> GetCurrentAudioInputDevice()
+        public async Task<AudioDevice> GetCurrentAudioInputDeviceAsync()
         {
             return await Task.Run(() => 
             {
@@ -120,7 +120,7 @@ namespace DolbyIO.Comms.Services
         /// Gets the audio output device currently used by the system.
         /// </summary>
         /// <returns>Currently used output audio device.</returns>
-        public async Task<AudioDevice> GetCurrentAudioOuputDevice()
+        public async Task<AudioDevice> GetCurrentAudioOutputDeviceAsync()
         {
             return await Task.Run(() => 
             {
@@ -134,8 +134,7 @@ namespace DolbyIO.Comms.Services
         /// Sets the preferred input audio device.
         /// </summary>
         /// <param name="device">Structure containing information about the desired input device.</param>
-        /// <returns></returns>
-        public async Task SetPreferredAudioInputDevice(AudioDevice device)
+        public async Task SetPreferredAudioInputDeviceAsync(AudioDevice device)
         {
             await Task.Run(() => 
             {
@@ -147,8 +146,7 @@ namespace DolbyIO.Comms.Services
         /// Sets the preferred output audio device.
         /// </summary>
         /// <param name="device">Structure containing information about the desired output device.</param>
-        /// <returns></returns>
-        public async Task SetPreferredAudioOutputDevice(AudioDevice device)
+        public async Task SetPreferredAudioOutputDeviceAsync(AudioDevice device)
         {
             await Task.Run(() => 
             {

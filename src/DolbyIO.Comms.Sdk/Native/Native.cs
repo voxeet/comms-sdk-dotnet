@@ -1,21 +1,21 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
-using System;
 using System.Runtime.InteropServices;
 
 namespace DolbyIO.Comms
 {
     /**
-     * Native Interop for the DolbyIO C++ SDK
+     * Native Interop for the Dolby.io Communications C++ SDK
      * @nodocument
      */
     #nullable enable
-    internal class Native
+    internal sealed class Native
     {
         internal const string LibName = "DolbyIO.Comms.Native";
 
         [DllImport (LibName, CharSet = CharSet.Ansi)]
-        internal static extern int Init(String appKey, RefreshTokenCallBack cb);
+        internal static extern int Init(string accessToken, RefreshTokenCallBack cb);
 
         [DllImport (LibName, CharSet = CharSet.Ansi)]
         internal static extern int SetLogLevel([MarshalAs(UnmanagedType.I4)] LogLevel level);
@@ -27,19 +27,19 @@ namespace DolbyIO.Comms
         internal static extern int Close();
 
         [DllImport (LibName, CharSet = CharSet.Ansi)]
-        internal static extern int Create(ConferenceOptions options, [Out] ConferenceInfos infos);
+        internal static extern int Create(ConferenceOptions options, [Out] Conference conference);
 
         [DllImport (LibName, CharSet = CharSet.Ansi)]
-        internal static extern int Join(ConferenceInfos infos, JoinOptions options, [Out] ConferenceInfos res);
+        internal static extern int Join(Conference conference, JoinOptions options, [Out] Conference joinedConference);
         
         [DllImport (LibName, CharSet = CharSet.Ansi)]
-        internal static extern int Listen(ConferenceInfos infos, ListenOptions options, [Out] ConferenceInfos res);
+        internal static extern int Listen(Conference conference, ListenOptions options, [Out] Conference listenedConference);
        
         [DllImport (LibName, CharSet = CharSet.Ansi)]
-        internal static extern int Demo(bool spatialAudio, [Out] ConferenceInfos infos);
+        internal static extern int Demo(bool spatialAudio, [Out] Conference conference);
 
         [DllImport(LibName, CharSet = CharSet.Ansi)]
-        internal static extern int GetCurrentConference([Out] ConferenceInfos infos);
+        internal static extern int GetCurrentConference([Out] Conference conference);
 
         [DllImport (LibName, CharSet = CharSet.Ansi)]
         internal static extern int Mute(bool muted);
@@ -69,7 +69,7 @@ namespace DolbyIO.Comms
         internal static extern int SetSpatialDirection(float x, float y, float z);
 
         [DllImport (LibName, CharSet = CharSet.Ansi)]
-        internal static extern int SetSpatialPosition(String userId, float x, float y, float z);
+        internal static extern int SetSpatialPosition(string userId, float x, float y, float z);
 
         [DllImport (LibName, CharSet = CharSet.Ansi)]
         internal static extern int SendMessage(string message);

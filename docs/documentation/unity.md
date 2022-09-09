@@ -52,7 +52,7 @@ public class MyScript : MonoBehaviour
     {
         try
         {
-            await _sdk.Init("Access Token", () => 
+            await _sdk.InitAsync("Access Token", () => 
             {
                 return "New Access Token";
             });

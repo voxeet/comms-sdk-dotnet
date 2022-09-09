@@ -58,7 +58,7 @@ jobs:
       - run: dotnet pack dotnet/DolbyIO.Comms.Sdk/DolbyIO.Comms.Sdk.csproj
         working-directory: ${{github.workspace}}/build
 
-      - name: Sign Nugets
+      - name: Sign NuGet Package
         working-directory: ${{github.workspace}}/build/bin
         run: |
           echo "${{ secrets.WINDOWS_CERTIFICATE }}" | base64 --decode > certificate.pfx
@@ -67,7 +67,7 @@ jobs:
 
       - uses: actions/upload-artifact@v3
         with:
-          name: nugets
+          name: nuget
           path: ${{github.workspace}}/build/bin/DolbyIO.Comms.Sdk.*.nupkg
       
       - run: rm ${{github.workspace}}/build/unity/Runtime/*.dylib

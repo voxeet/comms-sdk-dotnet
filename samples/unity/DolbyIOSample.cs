@@ -22,9 +22,9 @@ public class DolbyIOSample : MonoBehaviour
         
         try
         {
-            await sdk.Init("voxeetio");
-            await sdk.Session.Open("voxeetio");
-            await sdk.Conference.Join("unity_toto", "test_unity");
+            await sdk.InitAsync("voxeetio");
+            await sdk.Session.OpenAsync("voxeetio");
+            await sdk.Conference.JoinAsync("unity_toto", "test_unity");
         }
         catch (DolbyIOException e)
         {
@@ -32,7 +32,7 @@ public class DolbyIOSample : MonoBehaviour
         }
     }
 
-    void OnConferenceStatusUpdated(int status, String conferenceId) 
+    void OnConferenceStatusUpdated(int status, string conferenceId) 
     {
         print("OnConferenceStatusUpdated: " + status);
     }

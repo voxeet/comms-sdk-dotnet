@@ -17,16 +17,16 @@ extern "C" {
     no_alloc_to_c(result, tmp);
   }
 
-  EXPORT_API void ConferenceInfosTest(dolbyio::comms::native::conference_infos* src, dolbyio::comms::native::conference_infos* result) {
-    auto infos = to_cpp<dolbyio::comms::conference_info>(src);
+  EXPORT_API void ConferenceTest(dolbyio::comms::native::conference* src, dolbyio::comms::native::conference* result) {
+    auto conference = to_cpp<dolbyio::comms::conference_info>(src);
     
-    infos.is_new = true;
-    infos.permissions.emplace_back(dolbyio::comms::conference_access_permissions::invite);
-    infos.permissions.emplace_back(dolbyio::comms::conference_access_permissions::join);
-    infos.spatial_audio_style = dolbyio::comms::spatial_audio_style::individual;
-    infos.status = dolbyio::comms::conference_status::joining;
+    conference.is_new = true;
+    conference.permissions.emplace_back(dolbyio::comms::conference_access_permissions::invite);
+    conference.permissions.emplace_back(dolbyio::comms::conference_access_permissions::join);
+    conference.spatial_audio_style = dolbyio::comms::spatial_audio_style::individual;
+    conference.status = dolbyio::comms::conference_status::joining;
 
-    no_alloc_to_c(result, infos);
+    no_alloc_to_c(result, conference);
   }
 
   EXPORT_API void JoinOptionsTest(join_options* src, join_options* result) {

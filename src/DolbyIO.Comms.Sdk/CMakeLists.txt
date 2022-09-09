@@ -8,12 +8,13 @@ add_dotnet_library(
         Native/Enum.cs
         Native/Struct.cs
         Native/Native.cs
-        Services/Session.cs
-        Services/Conference.cs
-        Services/MediaDevice.cs
-        Services/Audio/Audio.cs
-        Services/Audio/LocalAudio.cs
-        Services/Audio/RemoteAudio.cs
+        Services/SessionService.cs
+        Services/ConferenceService.cs
+        Services/MediaDeviceService.cs
+        Services/Audio/AudioService.cs
+        Services/Audio/LocalAudioService.cs
+        Services/Audio/RemoteAudioService.cs
+        DolbyIOException.cs
         DolbyIOSDK.cs
     VERSION
         ${CSSDK_MAJOR}.${CSSDK_MINOR}.${CSSDK_PATH}
