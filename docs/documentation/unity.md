@@ -1,28 +1,33 @@
-# Unity
+# Unity Plugin
 
-## Installation
+The Dolby.io Communications .NET SDK for Unity is available in the Unity store and requires the Unity package manager to be added to your project.
 
-The Dolby.io .NET SDK for unity is available on the unity store, and can be added to your project with the unity package manager.
+## Prerequisites
 
-## Supported Platforms
+Make sure that you have:
 
-For now, supported platforms includes MacOS x64 and Windows x64.
+- Apple macOS x64 or Microsoft Windows x64
+- A Dolby.io account. If you do not have an account, you can [sign up](https://dolby.io/signup) for a free account.
+- The [client access token](https://docs.dolby.io/communications-apis/docs/overview-developer-tools#client-access-token) copied from the Dolby.io dashboard. To create the token, log in to the [Dolby.io dashboard](https://dashboard.dolby.io/), create an application, and navigate to the API keys section.
 
-## Usage
+## Adding the .NET SDK to Unity  
 
-The unity plugin provides access to an instance of the SDK through a custom manager call `DolbIOManager`. To use it, create an empty `GameObject` in your scene. Call it for example `ApplicationManager`. (This name is just an example and can be modified to whatever suits your needs).
+The Unity plugin provides access to an instance of the SDK through a custom `DolbyIO Manager` manager. 
 
+1. Create an empty game object in your scene and provide a name for the object. In this example, we call the object `ApplicationManager`:
 <div style="text-align:center">
     <img style="padding:25px 0" src="~/images/unity_1.png" width="400px">
 </div>
 
-Select the newly created `GameObject` and go to the menu Components > DolbyIO > DolbyIO Manager. This will add the `DolbyIOManager` to this `GameObject`.
+2. Select the created game object and select from the Unity menu `Component` > `DolbyIO` > `DolbyIO Manager`.
 
 <div style="text-align:center">
     <img style="padding:25px 0" src="~/images/unity_2.png">
 </div>
 
-The DolbyIO .NET SDK is now available in every scripts :
+This step adds the `DolbyIO Manager` to the game object.
+
+3. Make sure that the .NET SDK is now available in all scripts:
 
 ```cs
 using Unity;
@@ -37,11 +42,13 @@ public class MyScript : MonoBehaviour
 
 ## Initialization
 
-The SDK needs to be initialized before any call to its functionalities using the method [Init](xref:DolbyIO.Comms.DolbyIOSDK#DolbyIO_Comms_DolbyIOSDK_Init_System_String_DolbyIO_Comms_RefreshTokenCallBack_).
+The SDK needs to be initialized before usage. 
 
-For information on how to retrieve an Access Token, please see: [Prerequisite](./started.md#prerequisites).
+1. Copy the access token form the Dolby.io dashboard. 
 
-The init method should only be called once. The best place to call it is in the Awake method of a new script you will add as a component to the previously created `ApplicationManager` GameObject.
+2. Call the [Init](xref:DolbyIO.Comms.DolbyIOSDK#DolbyIO_Comms_DolbyIOSDK_Init_System_String_DolbyIO_Comms_RefreshTokenCallBack_) method using the token to initialize the SDK.
+
+The Init method should be called only once. We recommend calling the Init method in the Awake method of a new script that you can add as a component of the created game object.
 
 ```cs
 using Unity;
@@ -75,7 +82,7 @@ public class MyScript : MonoBehaviour
     <img style="padding:25px 0" src="~/images/unity_3.png" width="400px">
 </div>
 
-After this, you are up to call the various SDK methods described in the [Getting Started](./started.md) and in the reference documentation [Reference](/documentation/api/DolbyIO.Comms.Services.html).
+3. Make sure that the SDK is initialized and you can call SDK methods. For more information, see the the [Getting Started](./started.md) guide and [reference](/documentation/api/DolbyIO.Comms.Services.html) documentation.
 
 ## MacOS Application Entitlements
 
