@@ -129,6 +129,11 @@ namespace DolbyIO.Comms
         }
 
         /// <summary>
+        /// Indicates that the SDK is initialized. 
+        /// </summary>
+        public bool IsInitialized { get => _initialised; }
+
+        /// <summary>
         /// 
         /// </summary>
         /// <param name="appKey">Application secret key.</param>

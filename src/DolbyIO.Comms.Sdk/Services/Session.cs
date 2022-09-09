@@ -35,6 +35,7 @@ namespace DolbyIO.Comms.Services
     public class Session
     {
         private UserInfo _user;
+        private volatile bool _isOpen = false;
 
         /// <summary>
         /// Opens a new session for the specified participant.
@@ -48,6 +49,7 @@ namespace DolbyIO.Comms.Services
                 UserInfo res = new UserInfo();
                 Native.CheckException(Native.Open(user, res));
                 _user = res;
+                _isOpen = true;
                 return res;
             }).ConfigureAwait(false);
         }
@@ -61,18 +63,18 @@ namespace DolbyIO.Comms.Services
             await Task.Run(() =>
             {
                 Native.CheckException(Native.Close());
+                _isOpen = false;
             }).ConfigureAwait(false);
         }
 
         /// <summary>
         /// Gets the user informations for the currently opened session.
         /// </summary>
-        public UserInfo User
-        {
-            get
-            {
-                return _user;
-            }
-        }
+        public UserInfo User { get => _user; }
+
+        /// <summary>
+        /// Indicates if the Session is open.
+        /// </summary>
+        public bool IsOpen { get => _isOpen; }
     }
 }
