@@ -122,7 +122,7 @@ namespace DolbyIO.Comms.Services
         /// Gets the audio output device that is currently used by the system.
         /// </summary>
         /// <returns>The currently used output audio device.</returns>
-        public async Task<AudioDevice> GetCurrentAudioOuputDevice()
+        public async Task<AudioDevice> GetCurrentAudioOutputDevice()
         {
             return await Task.Run(() => 
             {
