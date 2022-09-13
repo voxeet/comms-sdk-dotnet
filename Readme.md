@@ -58,6 +58,11 @@ cmake .. -DDOLBYIO_LIBRARY_PATH=/path/to/c++sdk -DCMAKE_BUILD_TYPE=Debug -G "Vis
 
 You can define `DOLBYIO_LIBRARY_PATH` as an environment variable. `DOLBYIO_LIBRARY_PATH` is the path to the root folder containing the Dolby.io C++ SDK.
 
+> **Note**: Currently, the SDK is only compatible with the x86_64 architecture. If you want to compile your application on a Mac with an **Apple Silicon** chip, you need to use the x64 .NET SDK, not the ARM one, and specify the architecture on which CMake should build upon:
+>```bash
+>cmake .. -DDOLBYIO_LIBRARY_PATH=/path/to/c++sdk -DCMAKE_BUILD_TYPE=Debug -DCMAKE_OSX_ARCHITECTURES=x86_64
+>```
+
 ## Sample usage
 
 ### 1. Initialize the SDK
