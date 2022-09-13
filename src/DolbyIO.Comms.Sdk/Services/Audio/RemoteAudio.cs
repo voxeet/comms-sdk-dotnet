@@ -23,7 +23,7 @@ namespace DolbyIO.Comms.Services
     {
         /// <summary>
         /// Allows the local participant, who used the
-        /// <see cref="DolbyIO.Comms.Services.RemoteAudioService.Stop(string)"> stop</see> method
+        /// <see cref="DolbyIO.Comms.Services.RemoteAudio.Stop(string)"> stop</see> method
         /// on a selected remote participant, to start receiving the remote participant's
         /// audio track.
         /// This method allows an audio track from the
@@ -63,7 +63,7 @@ namespace DolbyIO.Comms.Services
         /// Stops playing the specified remote participants' audio to the local participant.
         /// The mute method does not notify the server to stop audio stream transmission.
         /// To stop sending an audio stream to the server, use the
-        /// <see cref="DolbyIO.Comms.Services.LocalAudioService.Stop">stopAudio</see> method.
+        /// <see cref="DolbyIO.Comms.Services.LocalAudio.Stop">stopAudio</see> method.
         /// </summary>
         /// <remarks>
         /// Attention: This method is only available in non-Dolby Voice conferences.
