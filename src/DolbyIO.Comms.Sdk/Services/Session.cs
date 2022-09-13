@@ -34,8 +34,18 @@ namespace DolbyIO.Comms.Services
     /// </example>
     public class Session
     {
-        private UserInfo _user;
+        /// <summary>
+        /// Gets the local participant object that belongs to the current session.
+        /// </summary>
+        /// <returns>The UserInfo class that contains information about the participant who opened the session.</returns>
+        public UserInfo User { get; private set; }
+
         private volatile bool _isOpen = false;
+
+        /// <summary>
+        /// Indicates if the Session is open.
+        /// </summary>
+        public bool IsOpen { get => _isOpen; }
 
         /// <summary>
         /// Opens a new session for the specified participant.
@@ -48,7 +58,7 @@ namespace DolbyIO.Comms.Services
             {
                 UserInfo res = new UserInfo();
                 Native.CheckException(Native.Open(user, res));
-                _user = res;
+                User = res;
                 _isOpen = true;
                 return res;
             }).ConfigureAwait(false);
@@ -66,16 +76,5 @@ namespace DolbyIO.Comms.Services
                 _isOpen = false;
             }).ConfigureAwait(false);
         }
-
-        /// <summary>
-        /// Gets the local participant object that belongs to the current session.
-        /// </summary>
-        /// <returns>The UserInfo class that contains information about the participant who opened the session.</returns>
-        public UserInfo User { get => _user; }
-
-        /// <summary>
-        /// Indicates if the Session is open.
-        /// </summary>
-        public bool IsOpen { get => _isOpen; }
     }
 }

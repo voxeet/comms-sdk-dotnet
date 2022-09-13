@@ -2,13 +2,13 @@
 
 The Dolby.io Communications .NET SDK allows creating applications with high audio quality that you can use for conferencing, streaming, and collaborating in virtual spaces.
 
-# Get Started
+## Get Started
 
 This guide explains presents a sample usage of the SDK that allows creating a basic audio-only conference application. The starter project that you can create by following this procedure provides the foundation upon which you can add additional features as you build out your own solutions for events, collaboration, or live streaming.
 
 You can find the complete code for the application in the [Summary](#summary) section. The created application is available in the [SimpleApp](https://github.com/DolbyIO/comms-sdk-dotnet/tree/master/samples/SimpleApp) folder.
 
-## Prerequisites
+### Prerequisites
 
 Make sure that you have:
 
@@ -17,16 +17,14 @@ Make sure that you have:
 
 Additionally, if you plan to build the SDK from sources, not the NuGet packet manager, make sure that you have:
 - The [Dolby.io Communications C++ SDK 2.0](https://github.com/DolbyIO/comms-sdk-cpp/releases) for your platform
-- [Dotnet](https://dotnet.microsoft.com/en-us/download) 6.x
+- [.NET SDK 6](https://dotnet.microsoft.com/en-us/download)
 - C++ compiler compatible with C++ 17
 - CMake 3.23
 - A macOS or Windows machine
 
-## Installation
+### Sample usage
 
-To install the SDK, you can either use the NuGet packet manager or build the SDK from sources.
-
-#### NuGet
+#### 0. Install the SDK
 
 If you want to use NuGet, use the following command:
 
@@ -34,38 +32,7 @@ If you want to use NuGet, use the following command:
 dotnet add package DolbyIO.Comms.Sdk
 ```
 
-If you want to use PackageReference, use the following command:
-
-```xml
-<PackageReference Include="DolbyIO.Comms.Sdk" Version="1.0.0-beta.1"/>
-```
-
-#### Sources
-
-The .NET SDK uses CMake for the build chain and generating projects. To build the application from sources, use the following commands:
-
-```console
-mkdir build && cd build
-cmake .. -DDOLBYIO_LIBRARY_PATH=/path/to/c++sdk -DCMAKE_BUILD_TYPE=Debug
-cmake --build .
-```
-
-`cmake` allows you to generate various project files, for example, if you want to generate a Visual Studio Solution on Windows, you can add the following option when generating (`-G "Visual Studio 17 2022"`):
-
-```shell
-cmake .. -DDOLBYIO_LIBRARY_PATH=/path/to/c++sdk -DCMAKE_BUILD_TYPE=Debug -G "Visual Studio 17 2022"
-```
-
-You can define `DOLBYIO_LIBRARY_PATH` as an environment variable. `DOLBYIO_LIBRARY_PATH` is the path to the root folder containing the Dolby.io C++ SDK.
-
-> **Note**: Currently, the SDK is only compatible with the x86_64 architecture. If you want to compile your application on a Mac with an **Apple Silicon** chip, you need to use the x64 .NET SDK, not the ARM one, and specify the architecture on which CMake should build upon:
->```bash
->cmake .. -DDOLBYIO_LIBRARY_PATH=/path/to/c++sdk -DCMAKE_BUILD_TYPE=Debug -DCMAKE_OSX_ARCHITECTURES=x86_64
->```
-
-## Sample usage
-
-### 1. Initialize the SDK
+#### 1. Initialize the SDK
 
 Initialize the SDK using the secure authentication method that uses a token in the application. For the purpose of this application, use a [client access token](https://docs.dolby.io/communications-apis/docs/overview-developer-tools#client-access-token) generated from the Dolby.io dashboard.
 
@@ -78,7 +45,7 @@ DolbyIOSDK _sdk = new DolbyIOSDK();
 
 try
 {
-    await _sdk.Init("Token", () => 
+    await _sdk.Init("Access Token", () => 
     {
         // Refresh Callback
         return "Refreshed Access Token";
@@ -92,7 +59,7 @@ catch (DolbyIOException e)
 
 **NOTE:** The SDK is fully asynchronous, and all methods can throw the [DolbyIOException](https://dolbyio.github.io/comms-sdk-dotnet/documentation/api/DolbyIO.Comms.DolbyIOException.html).
 
-### 2. Register event handlers
+#### 2. Register event handlers
 
 After initializing the SDK, it is time to register your event handlers. Decide to which events you want to add event handlers and add the handlers as in the following example:
 
@@ -110,7 +77,7 @@ _sdk.Conference.ParticipantAdded = new ParticipantAddedEventHandler
 );
 ```
 
-### 3. Open a session
+#### 3. Open a session
 
 A session is a connection between the client application and the Dolby.io backend. When opening a session, you should provide a name. Commonly, this is the name of the participant who established the session. The session can remain active for the whole lifecycle of your application. 
 
@@ -130,7 +97,7 @@ catch (DolbyIOException e)
 }
 ```
 
-###  4. Create and join a conference
+#### 4. Create and join a conference
 
 A conference is a multi-person call where participants exchange audio with one another. To distinguish between multiple conferences, you should assign a conference alias or name. When multiple participants join a conference of the same name using a token of the same Dolby.io application, they will be able to meet in a call.
 
@@ -155,7 +122,7 @@ catch (DolbyIOException e)
 
 If the conference already exists, the SDK returns [ConferenceInfos](https://dolbyio.github.io/comms-sdk-dotnet/documentation/api/DolbyIO.Comms.ConferenceInfos).
 
-### 5. Leave the conference
+#### 5. Leave the conference
 
 To leave the conference, use the [Conference.Leave](https://dolbyio.github.io/comms-sdk-dotnet/documentation/api/DolbyIO.Comms.Services.Conference.html#DolbyIO_Comms_Services_Conference_Leave) method, as in the following example:
 
@@ -170,7 +137,7 @@ catch (DolbyIOException e)
 }
 ```
 
-### 6. Close the session and dispose of the SDK
+#### 6. Close the session and dispose of the SDK
 
 After leaving the conference, close the session and dispose the SDK using the [Session.Close](https://dolbyio.github.io/comms-sdk-dotnet/documentation/api/DolbyIO.Comms.Services.Session.html#DolbyIO_Comms_Services_Session_Close) and [DolbyIOSDK.Dispose](https://dolbyio.github.io/comms-sdk-dotnet/documentation/api/DolbyIO.Comms.DolbyIOSDK.html#DolbyIO_Comms_DolbyIOSDK_Dispose) methods.
 
@@ -188,7 +155,7 @@ catch (DolbyIOException e)
 
 This step causes releasing the underneath unmanaged native resources.
 
-## Summary
+### Summary
 
 All the steps combined create the following code snippet:
 
@@ -255,7 +222,7 @@ public class Call
         }
     }
 
-    void OnConferenceStatus(ConferenceStatus status, string conferenceId)
+    private void OnConferenceStatus(ConferenceStatus status, string conferenceId)
     {
 
     }
@@ -273,4 +240,35 @@ public class Program
         await call.LeaveAndClose();
     }
 }
+```
+
+## Build the SDK
+
+In order to compile the Dolby.io Communications .NET SDK, you will need to use CMake for the build chain and generating projects. To build the application from sources, use the following commands:
+
+```console
+mkdir build && cd build
+cmake .. -DDOLBYIO_LIBRARY_PATH=/path/to/c++sdk -DCMAKE_BUILD_TYPE=Debug
+cmake --build .
+```
+
+Set the environment variable `DOLBYIO_LIBRARY_PATH` as the path to the root folder containing the Dolby.io Communications C++ SDK.
+
+> **Note:** On macOS, it is necessary to unquarantine SDK libraries and sample binaries. Otherwise, quarantine attributes prevent their usage. The simplest way to unquarantine is to strip the quarantine attributes recursively for all the files in the package. The following example presents how to do it via terminal and the macOS attribute stripping command line tool: `xattr -d -r com.apple.quarantine sdk-release/`
+
+`cmake` allows you to generate various project files, for example, if you want to generate a Visual Studio solution on Windows, you can add the following option when generating (`-G "Visual Studio 17 2022"`):
+
+```shell
+cmake .. -DDOLBYIO_LIBRARY_PATH=/path/to/c++sdk -DCMAKE_BUILD_TYPE=Debug -G "Visual Studio 17 2022"
+```
+
+> **Note**: Currently, the SDK is only compatible with the x86_64 architecture. If you want to compile your application on a Mac with an **Apple Silicon** chip, you need to use the x64 .NET SDK, not the ARM one, and specify the architecture on which CMake should build upon:
+>```bash
+>cmake .. -DDOLBYIO_LIBRARY_PATH=/path/to/c++sdk -DCMAKE_BUILD_TYPE=Debug -DCMAKE_OSX_ARCHITECTURES=x86_64
+>```
+
+Run the unit tests after compiling the SDK using the following command:
+
+```shell
+ctest -VV -C RelWithDebInfo
 ```

@@ -10,7 +10,7 @@ namespace DolbyIO.Comms.Services
     /// try
     /// {
     ///     await _sdk.Audio.Remote.Start(participantId);
-    ///     await _sdk.Autio.Remote.Mute(true, participantId);
+    ///     await _sdk.Audio.Remote.Mute(true, participantId);
     ///     await _sdk.Audio.Remote.Stop(participantId);
     /// }
     /// catch
@@ -31,11 +31,7 @@ namespace DolbyIO.Comms.Services
         /// received by the SDK. If the participant does not have their audio enabled,
         /// this method does not enable their audio track.
         /// </summary>
-        /// <remarks>
-        /// Attention: This method is only available in non-Dolby Voice conferences.
-        /// </remarks>
         /// <param name="participantId">The ID of the remote participant whose audio track should be sent to the local participant.</param>
-        /// <returns>A task that represents the returned asynchronous operation.</returns>
         public async Task Start(string participantId)
         {
             await Task.Run(() => Native.CheckException(Native.StartRemoteAudio(participantId))).ConfigureAwait(false);
@@ -49,11 +45,7 @@ namespace DolbyIO.Comms.Services
         /// the audio track of the selected remote participant to be
         /// mixed into the Dolby Voice audio stream that the SDK receives.
         /// </summary>
-        /// <remarks>
-        /// Attention: This method is only available in non-Dolby Voice conferences.
-        /// </remarks>
         /// <param name="participantId">The ID of the remote participant whose audio track should not be sent to the local participant.</param>
-        /// <returns>A task that represents the returned asynchronous operation.</returns>
         public async Task Stop(string participantId)
         {
             await Task.Run(() => Native.CheckException(Native.StopRemoteAudio(participantId))).ConfigureAwait(false);
@@ -71,7 +63,6 @@ namespace DolbyIO.Comms.Services
         /// <param name="muted">A boolean value that indicates the required mute state. True
         /// mutes the remote participant, false un-mutes the remote participant.</param>
         /// <param name="participantId">The ID of the remote participant whose audio should not be played.</param>
-        /// <returns>A task that represents the returned asynchronous operation.</returns>
         public async Task Mute(bool muted, string participantId)
         {
             await Task.Run(() => Native.CheckException(Native.RemoteMute(muted, participantId))).ConfigureAwait(false);

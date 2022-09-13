@@ -1,10 +1,11 @@
 using DolbyIO.Comms;
+
 namespace DolbyIO.Comms.Tests
 {
     public class MediaDeviceTests
     {
         [Fact]
-        public void Test_AudioDevice_ShouldMashall()
+        public void Test_AudioDevice_ShouldMarshall()
         {
             AudioDevice dest;
             NativeTests.AudioDeviceTest(out dest);

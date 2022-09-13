@@ -1,9 +1,9 @@
-using System.CommandLine;
 using System;
+using System.CommandLine;
+using System.Net.Http;
 using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
-using System.Net.Http;
 using Serilog;
 
 using DolbyIO.Comms;
@@ -119,14 +119,15 @@ public class CommandLine
     {
         while (_keepRunning)
         {
+            await Task.CompletedTask;
         }
     }
 
-    private static async Task Init(string appKey, string name, int loglevel)
+    private static async Task Init(string appKey, string name, int logLevel)
     {
         try
         {
-            await _sdk.SetLogLevel((LogLevel)loglevel);
+            await _sdk.SetLogLevel((LogLevel)logLevel);
             
             await _sdk.Init(appKey, () => 
             {
@@ -167,7 +168,7 @@ public class CommandLine
 
             Log.Debug($"Session opened: {user.Id}");
         }
-        catch(DolbyIOException e)
+        catch (DolbyIOException e)
         {   
             Log.Error(e, "Failed to open session.");
         }
@@ -284,7 +285,7 @@ public class CommandLine
         Log.Debug($"OnPeerConnectionFailedException: {reason}");
     }
 
-    private static void OnConferenceStatusUpdated(ConferenceStatus status, String conferenceId) 
+    private static void OnConferenceStatusUpdated(ConferenceStatus status, string conferenceId) 
     {
         Log.Debug($"OnConferenceStatusUpdated: {conferenceId} status: {status}");
     }
@@ -326,7 +327,7 @@ public class CommandLine
     private static void OnActiveSpeakerChange(string conferenceId, int count, string[]? activeSpeakers) {
         Log.Debug($"OnActiveSpeakerChange: {conferenceId} {count}");
         if (activeSpeakers != null) {
-            foreach(string s in activeSpeakers) {
+            foreach (string s in activeSpeakers) {
                 Log.Debug($"-- ActiveSpeaker : {s}");
             }
         }

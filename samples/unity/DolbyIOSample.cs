@@ -1,9 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
-using System;
 using System.Threading.Tasks;
 using System.Runtime.InteropServices;
+using UnityEngine;
 using DolbyIO.Comms;
 
 public class DolbyIOSample : MonoBehaviour
@@ -32,7 +32,7 @@ public class DolbyIOSample : MonoBehaviour
         }
     }
 
-    void OnConferenceStatusUpdated(int status, String conferenceId) 
+    void OnConferenceStatusUpdated(int status, string conferenceId) 
     {
         print("OnConferenceStatusUpdated: " + status);
     }
