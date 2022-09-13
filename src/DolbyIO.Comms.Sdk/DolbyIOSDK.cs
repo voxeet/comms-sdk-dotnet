@@ -6,7 +6,7 @@ namespace DolbyIO.Comms
 {
     public class DolbyIOException : Exception
     {
-        public DolbyIOException(String msg)
+        public DolbyIOException(string msg)
             : base(msg)
         {
         }
@@ -18,7 +18,7 @@ namespace DolbyIO.Comms
     /// </summary>
     public class DolbyIOSDK : IDisposable
     {   
-        private volatile bool _initialised = false;
+        private volatile bool _initialized = false;
 
         private Session _session = new Session();
         private Conference _conference = new Conference();
@@ -28,14 +28,14 @@ namespace DolbyIO.Comms
         private SignalingChannelErrorEventHandler _signalingChannelError;
 
         /// <summary>
-        /// The signaling channel error event. Raised when an error occurs during a SIP negociation
+        /// The signaling channel error event. Raised when an error occurs during a SIP negotiation
         /// on the local peer connection.
         /// </summary>
         public SignalingChannelErrorEventHandler SignalingChannelError
         {
             set 
             { 
-                if (!_initialised)
+                if (!_initialized)
                 {
                     throw new DolbyIOException("DolbyIOSDK is not initialized!");
                 }
@@ -54,7 +54,7 @@ namespace DolbyIO.Comms
         {
             set
             { 
-                if (!_initialised)
+                if (!_initialized)
                 {
                     throw new DolbyIOException("DolbyIOSDK is not initialized!");
                 }
@@ -75,7 +75,7 @@ namespace DolbyIO.Comms
         {
             get 
             { 
-                if (!_initialised)
+                if (!_initialized)
                 {
                     throw new DolbyIOException("DolbyIOSDK is not initialized!");
                 }
@@ -90,7 +90,7 @@ namespace DolbyIO.Comms
         {
             get 
             { 
-                if (!_initialised)
+                if (!_initialized)
                 {
                     throw new DolbyIOException("DolbyIOSDK is not initialized!");
                 }
@@ -105,7 +105,7 @@ namespace DolbyIO.Comms
         {
             get
             {
-                if (!_initialised)
+                if (!_initialized)
                 {
                     throw new DolbyIOException("DolbyIOSDK is not initialized!");
                 }
@@ -120,7 +120,7 @@ namespace DolbyIO.Comms
         {
             get 
             {
-                if (!_initialised)
+                if (!_initialized)
                 {
                     throw new DolbyIOException("DolbyIOSDK is not initialized!");
                 }
@@ -131,35 +131,34 @@ namespace DolbyIO.Comms
         /// <summary>
         /// Indicates that the SDK is initialized. 
         /// </summary>
-        public bool IsInitialized { get => _initialised; }
+        public bool IsInitialized { get => _initialized; }
 
         /// <summary>
-        /// 
+        /// Initializes the SDK with an access token that is provided by the customer's backend.
         /// </summary>
-        /// <param name="appKey">Application secret key.</param>
+        /// <param name="accessToken">The access token provided by the customer's backend.</param>
         /// <param name="cb">The refresh token callback.</param>
-        public async Task Init(String appKey, RefreshTokenCallBack cb)
+        public async Task Init(string accessToken, RefreshTokenCallBack cb)
         {
-            if (_initialised)
+            if (_initialized)
             {
-                throw new DolbyIOException("Already initialized, call Dispose first.");
+                throw new DolbyIOException("DolbyIOSDK is already initialized, call Dispose first.");
             }
             
             await Task.Run(() =>
             {
-                Native.CheckException(Native.Init(appKey, cb));
-                _initialised = true;
+                Native.CheckException(Native.Init(accessToken, cb));
+                _initialized = true;
             }).ConfigureAwait(false);
         }
 
         /// <summary>
         /// Allows to set the logging level of the library.
         /// </summary>
-        /// <param name="level">The required logging level.</param>
-        /// <returns></returns>
-        public async Task SetLogLevel(LogLevel level)
+        /// <param name="logLevel">The required logging level.</param>
+        public async Task SetLogLevel(LogLevel logLevel)
         {
-            await Task.Run(() =>  Native.CheckException(Native.SetLogLevel(level))).ConfigureAwait(false);
+            await Task.Run(() =>  Native.CheckException(Native.SetLogLevel(logLevel))).ConfigureAwait(false);
         }
 
         public void Dispose()
@@ -170,10 +169,10 @@ namespace DolbyIO.Comms
 
         protected void Dispose(bool disposing)
         {
-            if (_initialised)
+            if (_initialized)
             {
                 Native.CheckException(Native.Release());
-                _initialised = false;
+                _initialized = false;
             }
         }
     }

@@ -35,8 +35,8 @@ public class Call
 
             JoinOptions joinOpts = new JoinOptions();
 
-            ConferenceInfos createInfos = await _sdk.Conference.Create(options);
-            ConferenceInfos joinInfos = await _sdk.Conference.Join(createInfos, joinOpts);
+            ConferenceInfo conference = await _sdk.Conference.Create(options);
+            conference = await _sdk.Conference.Join(conference, joinOpts);
         }
         catch (DolbyIOException e)
         {

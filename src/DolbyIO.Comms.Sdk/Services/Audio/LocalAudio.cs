@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 namespace DolbyIO.Comms.Services
 {
     /// <summary>
-    /// The Local Audio Service provides local audio functionalities. you can start, stop and mute 
+    /// The Local Audio service provides local audio functionalities. you can start, stop and mute 
     /// the local audio source.
     /// 
     /// - See <see cref="DolbyIO.Comms.Services.LocalAudio.Start"/>
@@ -33,7 +33,6 @@ namespace DolbyIO.Comms.Services
         /// media_source_interface with the WebRTC Audio Source, creating the audio
         /// delivery pipeline.
         /// </summary>
-        /// <returns></returns>
         public async Task Start()
         {
             await Task.Run(() => Native.CheckException(Native.StartAudio())).ConfigureAwait(false);
@@ -45,7 +44,6 @@ namespace DolbyIO.Comms.Services
         /// media_source_interface from the WebRTC Audio Source, which deconstructs
         /// the audio delivery pipeline.
         /// </summary>
-        /// <returns></returns>
         public async Task Stop()
         {
             await Task.Run(() => Native.CheckException(Native.StopAudio())).ConfigureAwait(false);
@@ -56,7 +54,6 @@ namespace DolbyIO.Comms.Services
         /// </summary>
         /// <param name="muted">A boolean value that indicates the required mute state. True
         /// mutes the microphone, false un-mutes the microphone.</param>
-        /// <returns></returns>
         public async Task Mute(bool muted)
         {
             await Task.Run(() => Native.CheckException(Native.Mute(muted))).ConfigureAwait(false);

@@ -6,7 +6,7 @@ namespace DolbyIO.Comms.Tests
         private DolbyIOSDK _sdk = new DolbyIOSDK();
 
         [Fact]
-        public async void Test_Session_ThrowsIfNotIntialized()
+        public async void Test_Session_ThrowsIfNotInitialized()
         {
             UserInfo user = new UserInfo();
             user.Name = "Anonymous";
@@ -15,7 +15,7 @@ namespace DolbyIO.Comms.Tests
         }
 
         [Fact]
-        public async void Test_Conference_ThrowsIfNotIntialized()
+        public async void Test_Conference_ThrowsIfNotInitialized()
         {
             await Assert.ThrowsAsync<DolbyIOException>(async () => await _sdk.Conference.Leave());
         }

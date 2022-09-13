@@ -6,7 +6,6 @@ namespace DolbyIO.Comms.Tests
 {
     public class NativeTests
     {
-
         public const string LibName = "DolbyIO.Comms.Native.Tests";
 
         [DllImport(LibName, CharSet = CharSet.Ansi)]
@@ -16,7 +15,7 @@ namespace DolbyIO.Comms.Tests
         public static extern void ConferenceOptionsTest(ConferenceOptions src, [Out] ConferenceOptions dest);
 
         [DllImport(LibName, CharSet = CharSet.Ansi)]
-        public static extern void ConferenceInfosTest(ConferenceInfos src, [Out] ConferenceInfos dest);
+        public static extern void ConferenceInfoTest(ConferenceInfo src, [Out] ConferenceInfo dest);
 
         [DllImport(LibName, CharSet = CharSet.Ansi)]
         public static extern void JoinOptionsTest(JoinOptions src, [Out] JoinOptions dest);

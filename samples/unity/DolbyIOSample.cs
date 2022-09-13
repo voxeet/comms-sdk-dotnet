@@ -32,7 +32,7 @@ public class DolbyIOSample : MonoBehaviour
         }
     }
 
-    void OnConferenceStatusUpdated(int status, String conferenceId) 
+    void OnConferenceStatusUpdated(int status, string conferenceId) 
     {
         print("OnConferenceStatusUpdated: " + status);
     }

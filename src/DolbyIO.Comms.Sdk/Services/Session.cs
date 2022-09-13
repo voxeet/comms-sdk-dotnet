@@ -7,11 +7,11 @@ using System.Runtime.InteropServices;
 namespace DolbyIO.Comms.Services 
 {
     /// <summary>
-    /// The Session Service is responsible for connecting SDK with the Dolby.io
+    /// The Session service is responsible for connecting SDK with the Dolby.io
     /// backend by opening and closing sessions. Opening a session is mandatory
     /// before joining conferences.
     ///
-    /// To use the Session Service, follow these steps:
+    /// To use the Session service, follow these steps:
     /// 1. Open a session using the <see cref="DolbyIO.Comms.Services.Session.Open(UserInfo)"/> method.
     /// 2. Join a conference. See <see cref="DolbyIO.Comms.Services.Conference"/>
     /// 3. Leave the conference and close the session using the 
@@ -34,8 +34,18 @@ namespace DolbyIO.Comms.Services
     /// </example>
     public class Session
     {
-        private UserInfo _user;
+
+        /// <summary>
+        /// Gets the user informations for the currently opened session.
+        /// </summary>
+        public UserInfo User { get; private set; }
+
         private volatile bool _isOpen = false;
+
+        /// <summary>
+        /// Indicates if the Session is open.
+        /// </summary>
+        public bool IsOpen { get => _isOpen; }
 
         /// <summary>
         /// Opens a new session for the specified participant.
@@ -48,7 +58,7 @@ namespace DolbyIO.Comms.Services
             {
                 UserInfo res = new UserInfo();
                 Native.CheckException(Native.Open(user, res));
-                _user = res;
+                User = res;
                 _isOpen = true;
                 return res;
             }).ConfigureAwait(false);
@@ -57,7 +67,6 @@ namespace DolbyIO.Comms.Services
         /// <summary>
         /// Closes the current session.
         /// </summary>
-        /// <returns></returns>
         public async Task Close()
         {
             await Task.Run(() =>
@@ -66,15 +75,5 @@ namespace DolbyIO.Comms.Services
                 _isOpen = false;
             }).ConfigureAwait(false);
         }
-
-        /// <summary>
-        /// Gets the user informations for the currently opened session.
-        /// </summary>
-        public UserInfo User { get => _user; }
-
-        /// <summary>
-        /// Indicates if the Session is open.
-        /// </summary>
-        public bool IsOpen { get => _isOpen; }
     }
 }

@@ -31,14 +31,14 @@ namespace DolbyIO.Comms.Tests
         }
 
         [Fact]
-        public void Test_ConferenceInfos_ShouldMarshall()
+        public void Test_ConferenceInfo_ShouldMarshall()
         {
-            ConferenceInfos src = new ConferenceInfos();
+            ConferenceInfo src = new ConferenceInfo();
             src.Alias = "TestAlias";
             src.Id = "TestId";
 
-            ConferenceInfos dest = new ConferenceInfos();
-            NativeTests.ConferenceInfosTest(src, dest);
+            ConferenceInfo dest = new ConferenceInfo();
+            NativeTests.ConferenceInfoTest(src, dest);
 
             Assert.NotEqual(src, dest); // Objects are different
             Assert.Equal(src.Id, dest.Id);

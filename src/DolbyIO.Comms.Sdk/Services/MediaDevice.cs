@@ -5,11 +5,11 @@ using System.Threading.Tasks;
 namespace DolbyIO.Comms.Services
 {
     /// <summary>
-    /// The Device Management Service provides an interface for setting
+    /// The Device Management service provides an interface for setting
     /// the input and output audio devices as well as getting notifications about
     /// the added and removed devices.
     ///
-    /// To use the Device Management Service, follow these steps:
+    /// To use the Device Management service, follow these steps:
     ///  1. Get all current audio devices using the 
     ///  <see cref="DolbyIO.Comms.Services.MediaDevice.GetAudioDevices"/> method.
     ///  2. Set the desired input audio device by calling the 
@@ -120,7 +120,7 @@ namespace DolbyIO.Comms.Services
         /// Gets the audio output device currently used by the system.
         /// </summary>
         /// <returns>Currently used output audio device.</returns>
-        public async Task<AudioDevice> GetCurrentAudioOuputDevice()
+        public async Task<AudioDevice> GetCurrentAudioOutputDevice()
         {
             return await Task.Run(() => 
             {
@@ -134,7 +134,6 @@ namespace DolbyIO.Comms.Services
         /// Sets the preferred input audio device.
         /// </summary>
         /// <param name="device">Structure containing information about the desired input device.</param>
-        /// <returns></returns>
         public async Task SetPreferredAudioInputDevice(AudioDevice device)
         {
             await Task.Run(() => 
@@ -147,7 +146,6 @@ namespace DolbyIO.Comms.Services
         /// Sets the preferred output audio device.
         /// </summary>
         /// <param name="device">Structure containing information about the desired output device.</param>
-        /// <returns></returns>
         public async Task SetPreferredAudioOutputDevice(AudioDevice device)
         {
             await Task.Run(() => 

@@ -28,7 +28,7 @@ namespace DolbyIO.Comms
     /// </summary>
     /// <param name="status">The status of the conference.</param>
     /// <param name="conferenceId">The corresponding conference Id.</param>
-    public delegate void ConferenceStatusUpdatedEventHandler([MarshalAs(UnmanagedType.I4)]ConferenceStatus status, String conferenceId);
+    public delegate void ConferenceStatusUpdatedEventHandler([MarshalAs(UnmanagedType.I4)]ConferenceStatus status, string conferenceId);
 
     /// <summary>
     /// The participant added event handler.
