@@ -35,7 +35,7 @@ namespace DolbyIO.Comms.Services
         /// Attention: This method is only available in non-Dolby Voice conferences.
         /// </remarks>
         /// <param name="participantId">The ID of the remote participant whose audio track should be sent to the local participant.</param>
-        /// <value>A task that represents the returned asynchronous operation.</value>
+        /// <returns>A task that represents the returned asynchronous operation.</returns>
         public async Task Start(string participantId)
         {
             await Task.Run(() => Native.CheckException(Native.StartRemoteAudio(participantId))).ConfigureAwait(false);
@@ -53,7 +53,7 @@ namespace DolbyIO.Comms.Services
         /// Attention: This method is only available in non-Dolby Voice conferences.
         /// </remarks>
         /// <param name="participantId">The ID of the remote participant whose audio track should not be sent to the local participant.</param>
-        /// <value>A task that represents the returned asynchronous operation.</value>
+        /// <returns>A task that represents the returned asynchronous operation.</returns>
         public async Task Stop(string participantId)
         {
             await Task.Run(() => Native.CheckException(Native.StopRemoteAudio(participantId))).ConfigureAwait(false);
@@ -71,7 +71,7 @@ namespace DolbyIO.Comms.Services
         /// <param name="muted">A boolean value that indicates the required mute state. True
         /// mutes the remote participant, false un-mutes the remote participant.</param>
         /// <param name="participantId">The ID of the remote participant whose audio should not be played.</param>
-        /// <value>A task that represents the returned asynchronous operation.</value>
+        /// <returns>A task that represents the returned asynchronous operation.</returns>
         public async Task Mute(bool muted, string participantId)
         {
             await Task.Run(() => Native.CheckException(Native.RemoteMute(muted, participantId))).ConfigureAwait(false);

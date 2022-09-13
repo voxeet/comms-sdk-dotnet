@@ -28,7 +28,7 @@ namespace DolbyIO.Comms.Services
         /// media_source_interface with the WebRTC Audio Source, creating the audio
         /// delivery pipeline.
         /// </summary>
-        /// <value>A task that represents the returned asynchronous operation.</value>
+        /// <returns>A task that represents the returned asynchronous operation.</returns>
         public async Task Start()
         {
             await Task.Run(() => Native.CheckException(Native.StartAudio())).ConfigureAwait(false);
@@ -41,7 +41,7 @@ namespace DolbyIO.Comms.Services
         /// media_source_interface from the WebRTC Audio Source, which deconstructs
         /// the audio delivery pipeline.
         /// </summary>
-        /// <value>A task that represents the returned asynchronous operation.</value>
+        /// <returns>A task that represents the returned asynchronous operation.</returns>
         public async Task Stop()
         {
             await Task.Run(() => Native.CheckException(Native.StopAudio())).ConfigureAwait(false);
@@ -52,7 +52,7 @@ namespace DolbyIO.Comms.Services
         /// </summary>
         /// <param name="muted">A boolean value that indicates the required mute state. True
         /// mutes the microphone, false un-mutes the microphone.</param>
-        /// <value>A task that represents the returned asynchronous operation.</value>
+        /// <returns>A task that represents the returned asynchronous operation.</returns>
         public async Task Mute(bool muted)
         {
             await Task.Run(() => Native.CheckException(Native.Mute(muted))).ConfigureAwait(false);
