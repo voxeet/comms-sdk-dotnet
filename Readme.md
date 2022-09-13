@@ -1,6 +1,6 @@
 # Dolby.io Communications .NET SDK
 
-The Dolby.io Communications .NET SDK allows creating applications with high audio and video quality that you can use for conferencing, streaming, and collaborating in virtual spaces.
+The Dolby.io Communications .NET SDK allows creating applications with high audio quality that you can use for conferencing, streaming, and collaborating in virtual spaces.
 
 # Get Started
 
