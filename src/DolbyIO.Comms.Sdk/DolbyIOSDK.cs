@@ -30,7 +30,7 @@ namespace DolbyIO.Comms
         private Session _session = new Session();
         private Conference _conference = new Conference();
         private MediaDevice _mediaDevice = new MediaDevice();
-        private AudioService _audio = new AudioService();
+        private Audio _audio = new Audio();
 
         private SignalingChannelErrorEventHandler _signalingChannelError;
 
