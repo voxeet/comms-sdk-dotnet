@@ -28,7 +28,7 @@ namespace DolbyIO.Comms.Services
         public LocalAudio Local { get => _local; }
 
         /// <summary>
-        /// Allows accessing audio methods impacting audio that the local participant's receives from a conference.
+        /// Allows accessing methods impacting audio that the local participant's receives from a conference.
         /// </summary>
         /// <value>The service that allows setting options impacting audio that the local participant receives.</value>
         public RemoteAudio Remote { get => _remote; }
