@@ -28,7 +28,7 @@ To install the SDK, you can either use the NuGet packet manager or build the SDK
 
 #### NuGet
 
-If you want to use NuGet and Dotnet, use the following command:
+If you want to use NuGet, use the following command:
 
 ```shell
 dotnet add package DolbyIO.Comms.Sdk
