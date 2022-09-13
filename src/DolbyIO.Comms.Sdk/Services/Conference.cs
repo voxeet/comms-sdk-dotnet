@@ -8,17 +8,16 @@ using System.Runtime.InteropServices;
 namespace DolbyIO.Comms.Services 
 {   
     /// <summary>
-    /// The Conference Service allows joining and leaving conferences as well as
+    /// The Conference service allows joining and leaving conferences as well as
     /// subscribing to conference events. To use the Conference Service, follow these steps:
-    /// 1. Open a session using <see cref="DolbyIO.Comms.Services.Session.Open(UserInfo)">Session.Open(UserInfo)</see>.
-    /// 2. Subscribe to the events exposed through the service. (Ex. 
-    /// <see cref="DolbyIO.Comms.Services.Conference.StatusUpdated"/>,
-    /// <see cref="DolbyIO.Comms.Services.Conference.ParticipantUpdated"/>
-    /// )
-    /// 3. Create a conference via the <see cref="DolbyIO.Comms.Services.Conference.Create(ConferenceOptions)"/> method.
-    /// 4. Join the created conference via the <see cref="DolbyIO.Comms.Services.Conference.Join(ConferenceInfos, JoinOptions)"/>
-    /// or <see cref="DolbyIO.Comms.Services.Conference.Listen(ConferenceInfos, ListenOptions)"/>method.
-    /// 5. Leave the conference using the <see cref="DolbyIO.Comms.Services.Conference.Leave"/> method.
+    /// 1. Open a session using <see cref="DolbyIO.Comms.Services.Session.Open(UserInfo)">session.open</see>.
+    /// 2. Subscribe to events exposed through the service, for example 
+    /// <see cref="DolbyIO.Comms.Services.Conference.StatusUpdated">statusUpdated</see> and 
+    /// <see cref="DolbyIO.Comms.Services.Conference.ParticipantUpdated">participantUpdated</see>.
+    /// 3. Create a conference using the <see cref="DolbyIO.Comms.Services.Conference.Create(ConferenceOptions)">create</see> method.
+    /// 4. Join the created conference using the <see cref="DolbyIO.Comms.Services.Conference.Join(ConferenceInfos, JoinOptions)">join</see> method
+    /// or use the <see cref="DolbyIO.Comms.Services.Conference.Listen(ConferenceInfos, ListenOptions)">listen</see> method to join the conference as a listener.
+    /// 5. Leave the conference using the <see cref="DolbyIO.Comms.Services.Conference.Leave">leave</see> method.
     /// </summary>
     public class Conference
     {   
@@ -27,7 +26,7 @@ namespace DolbyIO.Comms.Services
         private ConferenceStatusUpdatedEventHandler _statusUpdated;
 
         /// <summary>
-        /// The conference status updated event. Raised when the conference status changes.
+        /// Raised when a conference status has changed.
         /// See <see cref="DolbyIO.Comms.ConferenceStatus">ConferenceStatus</see>
         /// <example>
         /// <code>
@@ -38,6 +37,7 @@ namespace DolbyIO.Comms.Services
         /// </code>
         /// </example>
         /// </summary>
+        /// <value>The StatusUpdated event handler.</value>
         public ConferenceStatusUpdatedEventHandler StatusUpdated
         {
             set 
@@ -50,7 +50,7 @@ namespace DolbyIO.Comms.Services
         private ParticipantAddedEventHandler _participantAdded;
 
         /// <summary>
-        /// The participant added event. Raised when a participant is added to the conference.
+        /// Raised when a new participant has been added to a conference.
         /// <example>
         /// <code>
         /// _sdk.Conference.ParticipantAdded = delegate (Participant participant) 
@@ -60,6 +60,7 @@ namespace DolbyIO.Comms.Services
         /// </code>
         /// </example>
         /// </summary>
+        /// <value>The ParticipantAdded event handler.</value>
         public ParticipantAddedEventHandler ParticipantAdded
         {
             set 
@@ -72,7 +73,7 @@ namespace DolbyIO.Comms.Services
         private ParticipantUpdatedEventHandler _participantUpdated;
 
         /// <summary>
-        /// The participant updated event. Raised when a participant is updated.
+        /// Raised when a conference participant has changed a status.
         /// <example>
         /// <code>
         /// _sdk.Conference.ParticipantUpdated = delegate (Participant participant) 
@@ -82,6 +83,7 @@ namespace DolbyIO.Comms.Services
         /// </code>
         /// </example>
         /// </summary>
+        /// <value>The ParticipantUpdated event handler.</value>
         public ParticipantUpdatedEventHandler ParticipantUpdated
         {
             set 
@@ -93,7 +95,7 @@ namespace DolbyIO.Comms.Services
 
         private ActiveSpeakerChangeEventHandler _activeSpeakerChange;
         /// <summary>
-        /// The active speaker change event. Raised when the active speakers are changing.
+        /// Raised when an active speaker has changed.
         /// <example>
         /// <code>
         /// _sdk.Conference.ActiveSpeakerChange = delegate (string conferenceId, int count, string[] activeSpeakers) 
@@ -103,6 +105,7 @@ namespace DolbyIO.Comms.Services
         /// </code>
         /// </example>
         /// </summary>
+        /// <value>The ActiveSpeakerChange event handler.</value>
         public ActiveSpeakerChangeEventHandler ActiveSpeakerChange
         {
             set 
@@ -115,7 +118,7 @@ namespace DolbyIO.Comms.Services
         private ConferenceMessageReceivedEventHandler _messageReceived;
 
         /// <summary>
-        /// The message received event. Raised when a message is received while in conference.
+        /// Raised when a participant receives a message.
         /// </summary>
         /// <example>
         /// <code>
@@ -125,6 +128,7 @@ namespace DolbyIO.Comms.Services
         /// }
         /// </code>
         /// </example>
+        /// <value>The MessageReceived event handler.</value>
         public ConferenceMessageReceivedEventHandler MessageReceived
         {
             set 
@@ -137,7 +141,7 @@ namespace DolbyIO.Comms.Services
         private ConferenceInvitationReceivedEventHandler _invitationReceived;
 
         /// <summary>
-        /// The invitation received event. Raised when an invitation to a conference is received.
+        /// Raised when a participant receives a conference invitation.
         /// </summary>
         /// <example>
         /// <code>
@@ -147,6 +151,7 @@ namespace DolbyIO.Comms.Services
         /// }
         /// </code>
         /// </example>
+        /// <value>The InvitationReceived event handler.</value>
         public ConferenceInvitationReceivedEventHandler InvitationReceived
         {
             set 
@@ -159,7 +164,7 @@ namespace DolbyIO.Comms.Services
         private DvcErrorEventHandler _dvcError;
 
         /// <summary>
-        /// The dvc error event. Raised when an error occurs in the dvc library.
+        /// Raised when an error related to the Dolby Voice Codec (DVC) occurs.
         /// </summary>
         /// <example>
         /// <code>
@@ -169,6 +174,7 @@ namespace DolbyIO.Comms.Services
         /// }
         /// </code>
         /// </example>
+        /// <value>The DvcError event handler.</value>
         public DvcErrorEventHandler DvcError
         {
             set 
@@ -181,7 +187,7 @@ namespace DolbyIO.Comms.Services
         private PeerConnectionErrorEventHandler _peerConnectionError;
 
         /// <summary>
-        /// The peer connection error event. Raised when an error occurs in the peer connection.
+        /// Raised when a peer connection problem occurs.
         /// </summary>
         /// <example>
         /// <code>
@@ -191,6 +197,7 @@ namespace DolbyIO.Comms.Services
         /// }
         /// </code>
         /// </example>
+        /// <value>The PeerConnectionError event handler.</value>
         public PeerConnectionErrorEventHandler PeerConnectionError
         {
             set 
@@ -201,15 +208,16 @@ namespace DolbyIO.Comms.Services
         }
 
         /// <summary>
-        /// Indicates that the sdk is in a conference.
+        /// Indicates whether the SDK is in a conference.
         /// </summary>
+        /// <value>A boolean indicating whether the SDK is in the conference.</value>
         public Boolean IsInConference
         {
             get { return _isInConference; }
         }
 
         /// <summary>
-        ///  Gets the full information about the currently active conference.
+        ///  Gets full information about the currently active conference.
         /// </summary>
         /// <returns>The ConferenceInfos describing the conference.</returns>
         public async Task<ConferenceInfos> Current()
@@ -239,10 +247,10 @@ namespace DolbyIO.Comms.Services
         }
 
         /// <summary>
-        /// Joins an existing conference as an active user who can both receive
+        /// Joins an existing conference as an active user who can receive
         /// media from the conference and inject media into the conference.
         /// </summary>
-        /// <param name="infos">The conference options that need to contain conferenceId.</param>
+        /// <param name="infos">The conference options that need to contain the conference ID.</param>
         /// <param name="options">The join options for the SDK user.</param>
         /// <returns>The result object producing the ConferenceInfos asynchronously.</returns>
         public async Task<ConferenceInfos> Join(ConferenceInfos infos, JoinOptions options)
@@ -260,9 +268,9 @@ namespace DolbyIO.Comms.Services
         /// Joins an existing conference as a listener who can receive audio and
         /// video streams, but cannot send any stream to the conference.
         /// </summary>
-        /// <param name="infos">The conference options that need to contain conferenceId.</param>
+        /// <param name="infos">The conference options that need to contain conference ID.</param>
         /// <param name="options">The listen options for the SDK user.</param>
-        /// <returns></returns>
+        /// <returns>The result object producing the ConferenceInfos asynchronously.</returns>
         public async Task<ConferenceInfos> Listen(ConferenceInfos infos, ListenOptions options)
         {
             return await Task.Run(() =>
@@ -275,11 +283,11 @@ namespace DolbyIO.Comms.Services
         }
 
         /// <summary>
-        /// Creates a demo conference and joins to it upon completion.
+        /// Creates a demo conference and joins the conference upon completion.
         /// </summary>
-        /// <param name="spatialAudio">A boolean flag enabling spatial audio for the joining
-        /// participant. The default value is true.</param>
-        /// <returns>Resulting conference informations</returns>
+        /// <param name="spatialAudio">A boolean that indicates whether spatial audio should be enabled for the joining
+        /// participant. By default, the parameter is set to true.</param>
+        /// <returns>The result object producing the ConferenceInfos asynchronously.</returns>
         public async Task<ConferenceInfos> Demo(bool spatialAudio = true)
         {
             return await Task.Run(() => 
@@ -292,17 +300,19 @@ namespace DolbyIO.Comms.Services
         }
 
         /// <summary>
-        /// Updates the spatial audio configuration to enable experiencing
-        /// spatial audio during a conference. This method contains information
-        /// about a spatial environment of an application, so the audio renderer
-        /// understands which directions the application considers forward, up, and
-        /// right and which units it uses for distance. This method is available only
-        /// for participants who joined a conference using the join method with the
-        /// SpatialAudio parameter enabled.
+        ///Configures a spatial environment of an application, so the audio
+        /// renderer understands which directions the application considers forward,
+        /// up, and right and which units it uses for distance.
+        /// This method is available only for participants who joined a conference using the join method with enabled spatial audio. To set a spatial environment for listeners, use the [Set Spatial Listeners Audio](https://docs.dolby.io/communications-apis/reference/set-spatial-listeners-audio) REST API.
+        /// If not called, the SDK uses the default spatial environment, which consists of the following values:
+        /// - forward = (0, 0, 1), where +Z axis is in front
+        /// - up = (0, 1, 0), where +Y axis is above
+        /// - right = (1, 0, 0), where +X axis is to the right
+        /// - scale = (1, 1, 1), where one unit on any axis is 1 meter
+        ///
+        /// For more information about spatial audio, see the [Spatial Audio](https://docs.dolby.io/communications-apis/docs/guides-spatial-audio) guide.
         /// </summary>
-        /// <param name="scale">A scale that defines how to convert units from the
-        /// coordinate system of an application (pixels or centimeters) into meters
-        /// used by the spatial audio coordinate system.</param>
+        /// <param name="scale">A scale that defines how to convert units from the coordinate system of an application (pixels or centimeters) into meters used by the spatial audio coordinate system. For example, if SpatialScale is set to (100,100,100), it indicates that 100 of the applications units (cm) map to 1 meter for the audio coordinates. In such a case, if the listener's location is (0,0,0)cm and a remote participant's location is (200,200,200)cm, the listener has an impression of hearing the remote participant from the (2,2,2)m location. </param>
         /// <param name="forward">A vector describing the direction the application
         /// considers as forward. The value can be either +1, 0, or -1 and must be
         /// orthogonal to up and right.</param>
@@ -312,7 +322,7 @@ namespace DolbyIO.Comms.Services
         /// <param name="right">A vector describing the direction the application considers
         /// as right. The value can be either +1, 0, or -1 and must be orthogonal to
         /// forward and up.</param>
-        /// <returns></returns>
+        /// <returns>The returned asynchronous operation.</returns>
         public async Task SetSpatialEnvironment(Vector3 scale, Vector3 forward, Vector3 up, Vector3 right)
         {
             await Task.Run(() => Native.CheckException(Native.SetSpatialEnvironment(
@@ -324,46 +334,45 @@ namespace DolbyIO.Comms.Services
         }
 
         /// <summary>
-        /// Updates the spatial audio configuration to enable experiencing
-        /// spatial audio during a conference. This method contains information
-        /// about the direction the local participant is facing in space.
-        /// This method is available only for participants who joined a conference
-        /// using the join method with the SpatialAudio parameter enabled.
+        /// Sets the direction the local participant is facing in space. This method is available only for participants who joined the conference using the join method with enabled spatial audio. To set a spatial direction for listeners, use the [Set Spatial Listeners Audio](https://docs.dolby.io/communications-apis/reference/set-spatial-listeners-audio) REST API.
+        ///
+        /// If the local participant hears audio from the position (0,0,0) facing down the Z-axis and locates a remote participant in the position (1,0,1), the local participant hears the remote participant from their front-right. If the local participant chooses to change the direction they are facing and rotate +90 degrees about the Y-axis, then instead of hearing the speaker from the front-right position, they hear the speaker from the front-left position.
+        ///
+        /// For more information about spatial audio, see the [Spatial Audio](https://docs.dolby.io/communications-apis/docs/guides-spatial-audio) guide.
         /// </summary>
-        /// <param name="direction">The direction faced by the local participant.</param>
-        /// <returns></returns>
+        /// <param name="direction">The direction the local participant is facing in space.</param>
+        /// <returns>The returned asynchronous operation.</returns>
         public async Task SetSpatialDirection(Vector3 direction)
         {
             await Task.Run(() => Native.CheckException(Native.SetSpatialDirection(direction.X, direction.Y, direction.Z))).ConfigureAwait(false);
         }
 
         /// <summary>
-        /// Updates the spatial audio configuration to enable experiencing
-        /// spatial audio during a conference. This method contains information
-        /// about the participant's location.
-        /// This method is available only for participants who joined a conference
-        /// using the join method with the SpatialAudio parameter enabled.
-        /// Depending on the selected SpatialAudioStyle, the method requires either
-        /// providing only the position of the local participant or the positions of
-        /// all participants. When using the individual SpatialAudioStyle, remote
-        /// participants' audio is disabled until the participants are assigned
-        /// to specific locations and each time new participants join the conference,
-        /// the positions need to be updated.
+        /// Sets a participant's position in space to enable the spatial audio experience during a Dolby Voice conference. This method is available only for participants who joined the conference using the join method with enabled spatial audio. To set a spatial position for listeners, use the [Set Spatial Listeners Audio](https://docs.dolby.io/communications-apis/reference/set-spatial-listeners-audio) REST API.
+        ///
+        /// Depending on the specified participant in the participant parameter, the setSpatialPosition method impacts the location from which audio is heard or from which audio is rendered:
+        /// - When the specified participant is the local participant, setSpatialPosition sets a location from which the local participant listens to a conference. If the local participant does not have an established location, the participant hears audio from the default location (0, 0, 0).
+        /// - When the specified participant is a remote participant, setSpatialPosition ensures the remote participant's audio is rendered from the specified location in space. Setting the remote participants’ positions is required in conferences that use the individual spatial audio style. In these conferences, if a remote participant does not have an established location, the participant does not have a default position and will remain muted until a position is specified. The shared spatial audio style does not support setting the remote participants' positions. In conferences that use the shared style, the spatial scene is shared by all participants, so that each client can set a position and participate in the shared scene.
+        ///
+        /// For example, if a local participant Eric, who uses the individual spatial audio style and does not have a set direction, calls setSpatialPosition(VoxeetSDK.session.participant, {x:3,y:0,z:0}), Eric hears audio from the position (3,0,0). If Eric also calls setSpatialPosition(Sophia, {x:7,y:1,z:2}), he hears Sophia from the position (7,1,2). In this case, Eric hears Sophia 4 meters to the right, 1 meter above, and 2 meters in front.
+        ///
+        /// For more information about spatial audio, see the [Spatial Audio](https://docs.dolby.io/communications-apis/docs/guides-spatial-audio) guide.
         /// </summary>
-        /// <param name="userId">The participant whose position is updated.</param>
-        /// <param name="participantId">The location of given participant.</param>
-        /// <returns></returns>
+        /// <param name="participantId">The selected participant. Using the local participant sets the location from which the participant will hear a conference. Using a remote participant sets the position from which the participant's audio will be rendered.</param>
+        /// <param name="position">The participant's audio location.</param>
+        /// <returns>The returned asynchronous operation.</returns>
         public async Task SetSpatialPosition(String participantId, Vector3 position)
         {
             await Task.Run(() => Native.CheckException(Native.SetSpatialPosition(participantId, position.X, position.Y, position.Z))).ConfigureAwait(false);
         }
 
         /// <summary>
-        /// Sends a message to the current conference. The message size is
-        /// limited to 16KB and can be any kind of string, from raw to Json.
+        /// Sends a message to the current conference. The message must be in a form
+        /// of string, such as raw or JSON. The message size is
+        /// limited to 16KB.
         /// </summary>
         /// <param name="message">The message.</param>
-        /// <returns></returns>
+        /// <returns>The returned asynchronous operation.</returns>
         public async Task SendMessage(string message)
         {
             await Task.Run(() => Native.CheckException(Native.SendMessage(message))).ConfigureAwait(false);
@@ -373,7 +382,7 @@ namespace DolbyIO.Comms.Services
         /// Declines a conference invitation.
         /// </summary>
         /// <param name="conferenceId">The conference ID.</param>
-        /// <returns></returns>
+        /// <returns>The returned asynchronous operation.</returns>
         public async Task DeclineInvitation(string conferenceId) {
             await Task.Run(() => Native.CheckException(Native.DeclineInvitation(conferenceId))).ConfigureAwait(false);
         }
@@ -381,7 +390,7 @@ namespace DolbyIO.Comms.Services
         /// <summary>
         /// Leaves a conference.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>The returned asynchronous operation.</returns>
         public async Task Leave()
         {
             await Task.Run(() => {

@@ -5,28 +5,28 @@ using System.Threading.Tasks;
 namespace DolbyIO.Comms.Services
 {
     /// <summary>
-    /// The Device Management Service provides an interface for setting
+    /// The Device Management service provides an interface for setting
     /// the input and output audio devices as well as getting notifications about
     /// the added and removed devices.
     ///
     /// To use the Device Management Service, follow these steps:
     ///  1. Get all current audio devices using the 
-    ///  <see cref="DolbyIO.Comms.Services.MediaDevice.GetAudioDevices"/> method.
+    ///  <see cref="DolbyIO.Comms.Services.MediaDevice.GetAudioDevices">GetAudioDevices</see> method.
     ///  2. Set the desired input audio device by calling the 
-    ///  <see cref="DolbyIO.Comms.Services.MediaDevice.SetPreferredAudioInputDevice(AudioDevice)"/> method.
-    ///  3. Set the desired output audio device by calling the
-    ///  <see cref="DolbyIO.Comms.Services.MediaDevice.SetPreferredAudioOutputDevice(AudioDevice)"/> method.
-    ///  4. Subscribe to <see cref="DolbyIO.Comms.Services.MediaDevice.Added"/>, 
-    ///  <see cref="DolbyIO.Comms.Services.MediaDevice.Removed"/>, and 
-    ///  <see cref="DolbyIO.Comms.Services.MediaDevice.Changed"/> events.
+    ///  <see cref="DolbyIO.Comms.Services.MediaDevice.SetPreferredAudioInputDevice(AudioDevice)">SetPreferredAudioInputDevice</see> method.
+    ///  3. Set the desired output audio device by calling the <see cref="DolbyIO.Comms.Services.MediaDevice.SetPreferredAudioOutputDevice(AudioDevice)">SetPreferredAudioOutputDevice</see> method.
+    ///  4. Subscribe to the <see cref="DolbyIO.Comms.Services.MediaDevice.Added">Added</see>, 
+    ///  <see cref="DolbyIO.Comms.Services.MediaDevice.Removed">Removed</see>, and 
+    ///  <see cref="DolbyIO.Comms.Services.MediaDevice.Changed">Changed</see> events.
     /// </summary>
     public class MediaDevice
     {
         private DeviceAddedEventHandler _added;
 
         /// <summary>
-        /// The media device Added event. Raised when a new device is added to the system.
+        /// Raised when a new device is added to the system.
         /// </summary>
+        /// <returns>The event handler.</returns>
         public DeviceAddedEventHandler Added
         {
             set 
@@ -39,8 +39,9 @@ namespace DolbyIO.Comms.Services
         private DeviceRemovedEventHandler _removed;
 
         /// <summary>
-        /// The media device Removed event. Raised when a device is removed from the system.
+        /// Raised when a device is removed from the system.
         /// </summary>
+        /// <returns>The event handler.</returns>
         public DeviceRemovedEventHandler Removed
         {
             set 
@@ -53,8 +54,9 @@ namespace DolbyIO.Comms.Services
         private DeviceChangedEventHandler _changed;
 
         /// <summary>
-        /// The media device Changed event. Raised when the currently used input or output device has changed.
+        /// Raised when the currently used input or output device has changed.
         /// </summary>
+        /// <returns>The event handler.</returns>
         public DeviceChangedEventHandler Changed
         {
             set 
@@ -65,7 +67,7 @@ namespace DolbyIO.Comms.Services
         }
 
         /// <summary>
-        ///     Gets a list of the currently available audio devices in the system.
+        ///     Gets a list of all audio devices that are currently available in the system.
         /// </summary>
         /// <returns>
         ///     The result object producing a list containing the audio
@@ -75,7 +77,7 @@ namespace DolbyIO.Comms.Services
         ///     <code>
         ///         try 
         ///         {
-        ///             List&lt;AudioDevice&gt; devices = await _sdk.MediaDevice.GetAudioDevices();
+        ///             List&lt;AudioDevice&gt; devices = await sdk.MediaDevice.GetAudioDevices();
         ///         }
         ///         catch (DolbyIOException e)
         ///         {
@@ -105,7 +107,7 @@ namespace DolbyIO.Comms.Services
         /// <summary>
         ///  Gets the audio input device that is currently used by the system.
         /// </summary>
-        /// <returns>Currently used input audio device.</returns>
+        /// <returns>The currently used input audio device.</returns>
         public async Task<AudioDevice> GetCurrentAudioInputDevice()
         {
             return await Task.Run(() => 
@@ -117,9 +119,9 @@ namespace DolbyIO.Comms.Services
         }
 
         /// <summary>
-        /// Gets the audio output device currently used by the system.
+        /// Gets the audio output device that is currently used by the system.
         /// </summary>
-        /// <returns>Currently used output audio device.</returns>
+        /// <returns>The currently used output audio device.</returns>
         public async Task<AudioDevice> GetCurrentAudioOuputDevice()
         {
             return await Task.Run(() => 
@@ -133,8 +135,8 @@ namespace DolbyIO.Comms.Services
         /// <summary>
         /// Sets the preferred input audio device.
         /// </summary>
-        /// <param name="device">Structure containing information about the desired input device.</param>
-        /// <returns></returns>
+        /// <param name="device">Structure containing information about the preferred input device.</param>
+        /// <returns>The returned asynchronous operation.</returns>
         public async Task SetPreferredAudioInputDevice(AudioDevice device)
         {
             await Task.Run(() => 
@@ -146,8 +148,8 @@ namespace DolbyIO.Comms.Services
         /// <summary>
         /// Sets the preferred output audio device.
         /// </summary>
-        /// <param name="device">Structure containing information about the desired output device.</param>
-        /// <returns></returns>
+        /// <param name="device">Structure containing information about the preferred output device.</param>
+        /// <returns>The returned asynchronous operation.</returns>
         public async Task SetPreferredAudioOutputDevice(AudioDevice device)
         {
             await Task.Run(() => 

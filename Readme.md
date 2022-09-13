@@ -1,12 +1,12 @@
 # Dolby.io Communications .NET SDK
 
-The Dolby.io Communications .NET SDK allows creating high-quality video conferencing applications with spatial audio. The SDK is especially useful for building game engines and virtual spaces for collaboration. It allows placing participants spatially in a 3D-rendered audio scene and hear the participants' audio rendered at their locations.
+The Dolby.io Communications .NET SDK allows creating applications with high audio quality that you can use for conferencing, streaming, and collaborating in virtual spaces.
 
 # Get Started
 
 This guide explains presents a sample usage of the SDK that allows creating a basic audio-only conference application. The starter project that you can create by following this procedure provides the foundation upon which you can add additional features as you build out your own solutions for events, collaboration, or live streaming.
 
-You can find the complete code for the application in the [Summary](#summary) section.
+You can find the complete code for the application in the [Summary](#summary) section. The created application is available in the [SimpleApp](https://github.com/DolbyIO/comms-sdk-dotnet/tree/master/samples/SimpleApp) folder.
 
 ## Prerequisites
 
@@ -28,13 +28,13 @@ To install the SDK, you can either use the NuGet packet manager or build the SDK
 
 #### NuGet
 
-Using Dotnet:
+If you want to use NuGet, use the following command:
 
 ```shell
 dotnet add package DolbyIO.Comms.Sdk
 ```
 
-Using PackageReference:
+If you want to use PackageReference, use the following command:
 
 ```xml
 <PackageReference Include="DolbyIO.Comms.Sdk" Version="1.0.0-beta.1"/>
@@ -105,7 +105,7 @@ _sdk.Conference.ParticipantAdded = new ParticipantAddedEventHandler
 
 A session is a connection between the client application and the Dolby.io backend. When opening a session, you should provide a name. Commonly, this is the name of the participant who established the session. The session can remain active for the whole lifecycle of your application. 
 
-To open a new session, use the [Session.Open](https://dolbyio.github.io/comms-sdk-dotnet/dolbyio_comms_sdk_dotnet/Session/Open) method as in the following example:
+To open a new session, use the [Session.Open](https://dolbyio.github.io/comms-sdk-dotnet/documentation/api/DolbyIO.Comms.Services.Session.html#DolbyIO_Comms_Services_Session_Open_DolbyIO_Comms_UserInfo_) method as in the following example:
 
 ```cs
 try
@@ -125,7 +125,7 @@ catch (DolbyIOException e)
 
 A conference is a multi-person call where participants exchange audio with one another. To distinguish between multiple conferences, you should assign a conference alias or name. When multiple participants join a conference of the same name using a token of the same Dolby.io application, they will be able to meet in a call.
 
-To create and join a conference, use the [Conference.Create](https://dolbyio.github.io/comms-sdk-dotnet/dolbyio_comms_sdk_dotnet/Conference/Create) and [Conference.Join](https://dolbyio.github.io/comms-sdk-dotnet/dolbyio_comms_sdk_dotnet/Conference/Join) methods as in the following example:
+To create and join a conference, use the [Conference.Create](https://dolbyio.github.io/comms-sdk-dotnet/documentation/api/DolbyIO.Comms.Services.Conference.html#DolbyIO_Comms_Services_Conference_Create_DolbyIO_Comms_ConferenceOptions_) and [Conference.Join](https://dolbyio.github.io/comms-sdk-dotnet/documentation/api/DolbyIO.Comms.Services.Conference.html#DolbyIO_Comms_Services_Conference_Join_DolbyIO_Comms_ConferenceInfos_DolbyIO_Comms_JoinOptions_) methods as in the following example:
 
 ```cs
 try
@@ -144,11 +144,11 @@ catch (DolbyIOException e)
 }
 ```
 
-If the conference already exists, the SDK returns [ConferenceInfos](https://dolbyio.github.io/comms-sdk-dotnet/dolbyio_comms_sdk_dotnet/Struct/ConferenceInfos).
+If the conference already exists, the SDK returns [ConferenceInfos](https://dolbyio.github.io/comms-sdk-dotnet/documentation/api/DolbyIO.Comms.ConferenceInfos).
 
 ### 5. Leave the conference
 
-To leave the conference, use the [Conference.Leave](https://dolbyio.github.io/comms-sdk-dotnet/dolbyio_comms_sdk_dotnet/Conference/Leave) method, as in the following example:
+To leave the conference, use the [Conference.Leave](https://dolbyio.github.io/comms-sdk-dotnet/documentation/api/DolbyIO.Comms.Services.Conference.html#DolbyIO_Comms_Services_Conference_Leave) method, as in the following example:
 
 ```cs
 try
@@ -163,7 +163,7 @@ catch (DolbyIOException e)
 
 ### 6. Close the session and dispose of the SDK
 
-After leaving the conference, close the session and dispose of the SDK using the [Session.Close](https://dolbyio.github.io/comms-sdk-dotnet/dolbyio_comms_sdk_dotnet/Session/Close) and [DolbyIOSDK.Dispose](https://dolbyio.github.io/comms-sdk-dotnet/dolbyio_comms_sdk_dotnet/DolbyIOSDK/Dispose) methods.
+After leaving the conference, close the session and dispose of the SDK using the [Session.Close](https://dolbyio.github.io/comms-sdk-dotnet/documentation/api/DolbyIO.Comms.Services.Session.html#DolbyIO_Comms_Services_Session_Close) and [DolbyIOSDK.Dispose](https://dolbyio.github.io/comms-sdk-dotnet/dolbyio_comms_sdk_dotnet/DolbyIOSDK/Dispose) methods.
 
 ```cs
 try

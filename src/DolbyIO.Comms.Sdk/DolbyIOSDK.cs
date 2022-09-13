@@ -4,8 +4,15 @@ using DolbyIO.Comms.Services;
 
 namespace DolbyIO.Comms 
 {
+    /// <summary>
+    /// The DolbyIOException class is responsible for wrapping the underlying C++ SDK exceptions.
+    /// </summary>
     public class DolbyIOException : Exception
     {
+        /// <summary>
+        /// The DolbyIOException that wraps the underlying C++ SDK exception.
+        /// </summary>
+        /// <param name="msg">A message describing the error.</param>
         public DolbyIOException(String msg)
             : base(msg)
         {
@@ -13,8 +20,8 @@ namespace DolbyIO.Comms
     }
 
     /// <summary>
-    /// The DolbyIOSDK Class is a starting point that allows initializing the
-    /// C# SDK and accessing the underlying services.
+    /// The DolbyIOSDK class is the main object that allows initializing the
+    /// .NET SDK and accessing the underlying services.
     /// </summary>
     public class DolbyIOSDK : IDisposable
     {   
@@ -28,9 +35,10 @@ namespace DolbyIO.Comms
         private SignalingChannelErrorEventHandler _signalingChannelError;
 
         /// <summary>
-        /// The signaling channel error event. Raised when an error occurs during a SIP negociation
-        /// on the local peer connection.
+        /// Raised when an error occurs during a Session Initiation Protocol (SIP) negotiation
+        /// of the local participant's peer connection.
         /// </summary>
+        /// <returns>The event handler.</returns>
         public SignalingChannelErrorEventHandler SignalingChannelError
         {
             set 
@@ -48,7 +56,7 @@ namespace DolbyIO.Comms
         private InvalidTokenErrorEventHandler _invalidTokenError;
 
         /// <summary>
-        /// The invalid token error event. Raised when the access token is invalid or expired.
+        /// Raised when the access token is invalid or has expired.
         /// </summary>
         public InvalidTokenErrorEventHandler InvalidTokenError
         {
@@ -71,6 +79,7 @@ namespace DolbyIO.Comms
         /// <summary>
         /// The Session service accessor.
         /// </summary>
+        /// <returns>The Session class.</returns>
         public Session Session 
         {
             get 
@@ -86,6 +95,7 @@ namespace DolbyIO.Comms
         /// <summary>
         /// The Conference service accessor.
         /// </summary>
+        /// <returns>The Conference class.</returns>
         public Conference Conference 
         {
             get 
@@ -101,6 +111,7 @@ namespace DolbyIO.Comms
         /// <summary>
         /// The MediaDevice service accessor.
         /// </summary>
+        /// <returns>The MediaDevice class.</returns>
         public MediaDevice MediaDevice
         {
             get
@@ -116,6 +127,7 @@ namespace DolbyIO.Comms
         /// <summary>
         /// The Audio service accessor.
         /// </summary>
+        /// <returns>The Audio class.</returns>
         public Audio Audio
         {
             get 
@@ -134,10 +146,11 @@ namespace DolbyIO.Comms
         public bool IsInitialized { get => _initialised; }
 
         /// <summary>
-        /// 
+        /// Initializes the SDK using the application key.
         /// </summary>
-        /// <param name="appKey">Application secret key.</param>
+        /// <param name="appKey">The application secret key.</param>
         /// <param name="cb">The refresh token callback.</param>
+        /// <returns>A task that represents the returned asynchronous operation.</returns>
         public async Task Init(String appKey, RefreshTokenCallBack cb)
         {
             if (_initialised)
@@ -153,21 +166,28 @@ namespace DolbyIO.Comms
         }
 
         /// <summary>
-        /// Allows to set the logging level of the library.
+        /// Sets the logging level.
         /// </summary>
         /// <param name="level">The required logging level.</param>
-        /// <returns></returns>
+        /// <returns>A task that represents the returned asynchronous operation.</returns>
         public async Task SetLogLevel(LogLevel level)
         {
             await Task.Run(() =>  Native.CheckException(Native.SetLogLevel(level))).ConfigureAwait(false);
         }
 
+        /// <summary>
+        /// Releases the unmanaged resources.
+        /// </summary>
         public void Dispose()
         {
             Dispose(true);
             GC.SuppressFinalize(this);
         }
 
+        /// <summary>
+        /// Releases the unmanaged resources.
+        /// </summary>
+        /// <param name="disposing">A boolean that indicates whether the method call comes from the Dispose method (true) or from a finalizer (false).</param>
         protected void Dispose(bool disposing)
         {
             if (_initialised)

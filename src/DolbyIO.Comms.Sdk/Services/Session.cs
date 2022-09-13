@@ -7,15 +7,15 @@ using System.Runtime.InteropServices;
 namespace DolbyIO.Comms.Services 
 {
     /// <summary>
-    /// The Session Service is responsible for connecting SDK with the Dolby.io
+    /// The Session service is responsible for connecting the SDK with the Dolby.io
     /// backend by opening and closing sessions. Opening a session is mandatory
     /// before joining conferences.
     ///
     /// To use the Session Service, follow these steps:
-    /// 1. Open a session using the <see cref="DolbyIO.Comms.Services.Session.Open(UserInfo)"/> method.
-    /// 2. Join a conference. See <see cref="DolbyIO.Comms.Services.Conference"/>
+    /// 1. Open a session using the <see cref="DolbyIO.Comms.Services.Session.Open(UserInfo)">open</see> method.
+    /// 2. Join a conference using the <see cref="DolbyIO.Comms.Services.Conference">Conference service</see>.
     /// 3. Leave the conference and close the session using the 
-    /// <see cref="DolbyIO.Comms.Services.Session.Close"/> method.
+    /// <see cref="DolbyIO.Comms.Services.Session.Close">close</see> method.
     /// </summary>
     /// <example>
     /// <code>
@@ -40,8 +40,8 @@ namespace DolbyIO.Comms.Services
         /// <summary>
         /// Opens a new session for the specified participant.
         /// </summary>
-        /// <param name="user">Information about the participant who tries to open a session.</param>
-        /// <returns>The UserInfo about the opened session.</returns>
+        /// <param name="user">Information about the participant who opens the session.</param>
+        /// <returns>The task object representing the asynchronous operation that returns UserInfo.</returns>
         public async Task<UserInfo> Open(UserInfo user)
         {
             return await Task.Run(() => 
@@ -57,7 +57,7 @@ namespace DolbyIO.Comms.Services
         /// <summary>
         /// Closes the current session.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>The returned asynchronous operation.</returns>
         public async Task Close()
         {
             await Task.Run(() =>
@@ -68,8 +68,9 @@ namespace DolbyIO.Comms.Services
         }
 
         /// <summary>
-        /// Gets the user informations for the currently opened session.
+        /// Gets the local participant object that belongs to the current session.
         /// </summary>
+        /// <returns>The UserInfo class that contains information about the participant who opened the session.</returns>
         public UserInfo User { get => _user; }
 
         /// <summary>
