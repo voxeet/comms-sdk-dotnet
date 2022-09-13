@@ -50,9 +50,13 @@ cmake .. -DDOLBYIO_LIBRARY_PATH=/path/to/c++sdk -DCMAKE_BUILD_TYPE=Debug
 cmake --build .
 ```
 
-You can define `DOLBYIO_LIBRARY_PATH` as an environment variable. `DOLBYIO_LIBRARY_PATH` is the path to the root folder containing the Dolby.io C++ SDK.
+`cmake` allows you to generate various project files, for example, if you want to generate a Visual Studio Solution on Windows, you can add the following option when generating (`-G "Visual Studio 17 2022"`):
 
-After generating your project, you can find your project in the `build/dotnet` folder.
+```shell
+cmake .. -DDOLBYIO_LIBRARY_PATH=/path/to/c++sdk -DCMAKE_BUILD_TYPE=Debug -G "Visual Studio 17 2022"
+```
+
+You can define `DOLBYIO_LIBRARY_PATH` as an environment variable. `DOLBYIO_LIBRARY_PATH` is the path to the root folder containing the Dolby.io C++ SDK.
 
 ## Sample usage
 
