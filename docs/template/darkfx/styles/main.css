@@ -10,6 +10,7 @@
   --color-background-dark: #1e1e1e;
   --color-background-table-alt: #212123;
   --color-background-quote: #337ab7;
+  --color-background-logo: #f5f5f5;
 }
 
 body.light-theme {
@@ -21,6 +22,7 @@ body.light-theme {
   --color-background-subnav: #f5f5f5;
   --color-background-dark: #ddd;
   --color-background-table-alt: #f9f9f9;
+  --color-background-logo: #302d2e;
 }
 
 body {
@@ -70,7 +72,11 @@ article h4 {
 }
 
 .navbar-brand>img {
-  color: var(--color-background);
+  color: var(--color-background-logo);
+}
+
+.navbar-brand>svg {
+  fill: var(--color-background-logo);
 }
 
 .navbar {
