@@ -58,9 +58,9 @@ After generating your project, you can find your project in the `build/dotnet` f
 
 ### 1. Initialize the SDK
 
-Initialize the SDK using the secure authentication method that uses a token in the application. This sample application requires the access token to be provided as a command line parameter when launching the executable. For the purpose of this application, use a [client access token](https://docs.dolby.io/communications-apis/docs/overview-developer-tools#client-access-token) generated from the Dolby.io dashboard.
+Initialize the SDK using the secure authentication method that uses a token in the application. For the purpose of this application, use a [client access token](https://docs.dolby.io/communications-apis/docs/overview-developer-tools#client-access-token) generated from the Dolby.io dashboard.
 
-Create a file where you want to store code for the sample application. Open the file in your favorite text editor and add there the following code to initialize the SDK using the [DolbyIOSDK.Init](https://dolbyio.github.io/comms-sdk-dotnet/dolbyio_comms_sdk_dotnet/DolbyIOSDK/Init) method:
+Create a file where you want to store code for the sample application. Open the file in your favorite text editor and add there the following code to initialize the SDK using the [DolbyIOSDK.Init](https://dolbyio.github.io/comms-sdk-dotnet/documentation/api/DolbyIO.Comms.DolbyIOSDK.html#DolbyIO_Comms_DolbyIOSDK_Init_System_String_DolbyIO_Comms_RefreshTokenCallBack_) method:
 
 ```cs
 using DolbyIO.Comms;
@@ -81,7 +81,7 @@ catch (DolbyIOException e)
 }
 ```
 
-**NOTE:** The SDK is fully asynchronous, so all methods can throw the [DolbyIOException](https://dolbyio.github.io/comms-sdk-dotnet/dolbyio_comms_sdk_dotnet/DolbyIOSDK/DolbyIOException).
+**NOTE:** The SDK is fully asynchronous, and all methods can throw the [DolbyIOException](https://dolbyio.github.io/comms-sdk-dotnet/documentation/api/DolbyIO.Comms.DolbyIOException.html).
 
 ### 2. Register event handlers
 
@@ -163,7 +163,7 @@ catch (DolbyIOException e)
 
 ### 6. Close the session and dispose of the SDK
 
-After leaving the conference, close the session and dispose of the SDK using the [Session.Close](https://dolbyio.github.io/comms-sdk-dotnet/documentation/api/DolbyIO.Comms.Services.Session.html#DolbyIO_Comms_Services_Session_Close) and [DolbyIOSDK.Dispose](https://dolbyio.github.io/comms-sdk-dotnet/dolbyio_comms_sdk_dotnet/DolbyIOSDK/Dispose) methods.
+After leaving the conference, close the session and dispose the SDK using the [Session.Close](https://dolbyio.github.io/comms-sdk-dotnet/documentation/api/DolbyIO.Comms.Services.Session.html#DolbyIO_Comms_Services_Session_Close) and [DolbyIOSDK.Dispose](https://dolbyio.github.io/comms-sdk-dotnet/documentation/api/DolbyIO.Comms.DolbyIOSDK.html#DolbyIO_Comms_DolbyIOSDK_Dispose) methods.
 
 ```cs
 try
