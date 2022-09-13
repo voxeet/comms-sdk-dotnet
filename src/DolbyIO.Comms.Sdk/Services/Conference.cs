@@ -26,7 +26,7 @@ namespace DolbyIO.Comms.Services
         private ConferenceStatusUpdatedEventHandler _statusUpdated;
 
         /// <summary>
-        /// Emitted when a conference status has changed.
+        /// Raised when a conference status has changed.
         /// See <see cref="DolbyIO.Comms.ConferenceStatus">ConferenceStatus</see>
         /// <example>
         /// <code>
@@ -50,7 +50,7 @@ namespace DolbyIO.Comms.Services
         private ParticipantAddedEventHandler _participantAdded;
 
         /// <summary>
-        /// Emitted when a new participant has been added to a conference.
+        /// Raised when a new participant has been added to a conference.
         /// <example>
         /// <code>
         /// _sdk.Conference.ParticipantAdded = delegate (Participant participant) 
@@ -73,7 +73,7 @@ namespace DolbyIO.Comms.Services
         private ParticipantUpdatedEventHandler _participantUpdated;
 
         /// <summary>
-        /// Emitted when a conference participant has changed a status.
+        /// Raised when a conference participant has changed a status.
         /// <example>
         /// <code>
         /// _sdk.Conference.ParticipantUpdated = delegate (Participant participant) 
@@ -95,7 +95,7 @@ namespace DolbyIO.Comms.Services
 
         private ActiveSpeakerChangeEventHandler _activeSpeakerChange;
         /// <summary>
-        /// Emitted when an active speaker has changed.
+        /// Raised when an active speaker has changed.
         /// <example>
         /// <code>
         /// _sdk.Conference.ActiveSpeakerChange = delegate (string conferenceId, int count, string[] activeSpeakers) 
@@ -118,7 +118,7 @@ namespace DolbyIO.Comms.Services
         private ConferenceMessageReceivedEventHandler _messageReceived;
 
         /// <summary>
-        /// Emitted when a participant receives a message.
+        /// Raised when a participant receives a message.
         /// </summary>
         /// <example>
         /// <code>
@@ -141,7 +141,7 @@ namespace DolbyIO.Comms.Services
         private ConferenceInvitationReceivedEventHandler _invitationReceived;
 
         /// <summary>
-        /// Emitted when a participant receives a conference invitation.
+        /// Raised when a participant receives a conference invitation.
         /// </summary>
         /// <example>
         /// <code>
@@ -164,7 +164,7 @@ namespace DolbyIO.Comms.Services
         private DvcErrorEventHandler _dvcError;
 
         /// <summary>
-        /// Emitted when an error related to the Dolby Voice Codec (DVC) occurs.
+        /// Raised when an error related to the Dolby Voice Codec (DVC) occurs.
         /// </summary>
         /// <example>
         /// <code>
@@ -187,7 +187,7 @@ namespace DolbyIO.Comms.Services
         private PeerConnectionErrorEventHandler _peerConnectionError;
 
         /// <summary>
-        /// Emitted when a peer connection problem occurs.
+        /// Raised when a peer connection problem occurs.
         /// </summary>
         /// <example>
         /// <code>

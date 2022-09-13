@@ -265,7 +265,7 @@ namespace DolbyIO.Comms
         /// </summary>
         None = 0,
         /// <summary>
-        /// A device that does not captures audio, for example, a microphone.
+        /// A device that captures audio, for example, a microphone.
         /// </summary>
         Input,
         /// <summary>

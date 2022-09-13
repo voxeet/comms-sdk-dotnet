@@ -22,13 +22,13 @@ namespace DolbyIO.Comms.Services
         private RemoteAudio _remote = new RemoteAudio();
 
         /// <summary>
-        /// Allows accessing audio settings impacting audio that the local participant's sends to a conference.
+        /// Allows accessing methods impacting audio that the local participant's sends to a conference.
         /// </summary>
         /// <value>The service that allows setting options impacting audio sent by the local participant.</value>
         public LocalAudio Local { get => _local; }
 
         /// <summary>
-        /// Allows accessing audio settings impacting audio that the local participant's receives from a conference.
+        /// Allows accessing audio methods impacting audio that the local participant's receives from a conference.
         /// </summary>
         /// <value>The service that allows setting options impacting audio that the local participant receives.</value>
         public RemoteAudio Remote { get => _remote; }

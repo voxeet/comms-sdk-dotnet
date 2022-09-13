@@ -35,7 +35,7 @@ namespace DolbyIO.Comms
         private SignalingChannelErrorEventHandler _signalingChannelError;
 
         /// <summary>
-        /// Emitted when an error occurs during a Session Initiation Protocol (SIP) negotiation
+        /// Raised when an error occurs during a Session Initiation Protocol (SIP) negotiation
         /// of the local participant's peer connection.
         /// </summary>
         /// <returns>The event handler.</returns>
@@ -56,9 +56,8 @@ namespace DolbyIO.Comms
         private InvalidTokenErrorEventHandler _invalidTokenError;
 
         /// <summary>
-        /// Emitted when the access token is invalid or has expired.
+        /// Raised when the access token is invalid or has expired.
         /// </summary>
-        /// <returns>The event handler.</returns>
         public InvalidTokenErrorEventHandler InvalidTokenError
         {
             set
