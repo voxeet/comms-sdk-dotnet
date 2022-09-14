@@ -12,10 +12,10 @@ namespace DolbyIO.Comms.Services
     /// before joining conferences.
     ///
     /// To use the Session Service, follow these steps:
-    /// 1. Open a session using the <see cref="DolbyIO.Comms.Services.Session.Open(UserInfo)">open</see> method.
-    /// 2. Join a conference using the <see cref="DolbyIO.Comms.Services.Conference">Conference service</see>.
+    /// 1. Open a session using the <see cref="DolbyIO.Comms.Services.SessionService.Open(UserInfo)">open</see> method.
+    /// 2. Join a conference using the <see cref="DolbyIO.Comms.Services.ConferenceService">Conference service</see>.
     /// 3. Leave the conference and close the session using the 
-    /// <see cref="DolbyIO.Comms.Services.Session.Close">close</see> method.
+    /// <see cref="DolbyIO.Comms.Services.SessionService.Close">close</see> method.
     /// </summary>
     /// <example>
     /// <code>
@@ -32,7 +32,7 @@ namespace DolbyIO.Comms.Services
     /// }
     /// </code>
     /// </example>
-    public class Session
+    public class SessionService
     {
         /// <summary>
         /// Gets the local participant object that belongs to the current session.

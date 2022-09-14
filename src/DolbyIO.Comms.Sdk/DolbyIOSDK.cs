@@ -27,10 +27,10 @@ namespace DolbyIO.Comms
     {   
         private volatile bool _initialized = false;
 
-        private Session _session = new Session();
-        private Conference _conference = new Conference();
-        private MediaDevice _mediaDevice = new MediaDevice();
-        private Audio _audio = new Audio();
+        private SessionService _session = new SessionService();
+        private ConferenceService _conference = new ConferenceService();
+        private MediaDeviceService _mediaDevice = new MediaDeviceService();
+        private AudioService _audio = new AudioService();
 
         private SignalingChannelErrorEventHandler _signalingChannelError;
 
@@ -75,7 +75,7 @@ namespace DolbyIO.Comms
         /// The Session service accessor.
         /// </summary>
         /// <returns>The Session class.</returns>
-        public Session Session 
+        public SessionService Session 
         {
             get 
             { 
@@ -91,7 +91,7 @@ namespace DolbyIO.Comms
         /// The Conference service accessor.
         /// </summary>
         /// <returns>The Conference class.</returns>
-        public Conference Conference 
+        public ConferenceService Conference 
         {
             get 
             { 
@@ -107,7 +107,7 @@ namespace DolbyIO.Comms
         /// The MediaDevice service accessor.
         /// </summary>
         /// <returns>The MediaDevice class.</returns>
-        public MediaDevice MediaDevice
+        public MediaDeviceService MediaDevice
         {
             get
             {
@@ -123,7 +123,7 @@ namespace DolbyIO.Comms
         /// The Audio service accessor.
         /// </summary>
         /// <returns>The Audio class.</returns>
-        public Audio Audio
+        public AudioService Audio
         {
             get 
             {

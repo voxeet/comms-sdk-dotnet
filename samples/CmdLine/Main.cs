@@ -186,9 +186,9 @@ public class CommandLine
             JoinOptions joinOpts = new JoinOptions();
             joinOpts.Connection.SpatialAudio = true;
             
-            ConferenceInfos infos = await _sdk.Conference.Create(options);
+            Conference conference = await _sdk.Conference.Create(options);
             
-            ConferenceInfos result = await _sdk.Conference.Join(infos, joinOpts);
+            Conference result = await _sdk.Conference.Join(conference, joinOpts);
             var permissions = result.Permissions;
 
             await _sdk.Audio.Local.Start();
@@ -216,12 +216,12 @@ public class CommandLine
             options.Params.SpatialAudioStyle = SpatialAudioStyle.Individual;
             options.Alias = alias;
             
-            ConferenceInfos infos = await _sdk.Conference.Create(options);
+            Conference conference = await _sdk.Conference.Create(options);
 
             ListenOptions listenOptions = new ListenOptions();
             listenOptions.Connection.SpatialAudio = true;
 
-            var result = _sdk.Conference.Listen(infos, listenOptions);
+            var result = _sdk.Conference.Listen(conference, listenOptions);
 
             await InputLoop();
         }
@@ -234,7 +234,7 @@ public class CommandLine
     {
         try
         {
-            ConferenceInfos infos = await _sdk.Conference.Demo(true);
+            Conference infos = await _sdk.Conference.Demo(true);
             await _sdk.Audio.Local.Start();
 
             await _sdk.Conference.SetSpatialPosition(_sdk.Session.User.Id, new Vector3(0.0f, 0.0f, 0.0f));

@@ -26,7 +26,7 @@ namespace dolbyio::comms::native {
   /**
    * @brief C# ConferenceInfos C struct.
    */
-  struct conference_infos {
+  struct conference {
     char* id;
     char* alias;
     bool  is_new;
@@ -160,7 +160,7 @@ namespace dolbyio::comms::native {
   };
 
   template<typename Traits> 
-  struct translator<dolbyio::comms::native::conference_infos, dolbyio::comms::conference_info, Traits> {
+  struct translator<dolbyio::comms::native::conference, dolbyio::comms::conference_info, Traits> {
     static void to_c(typename Traits::c_type* dest, const typename Traits::cpp_type& src) {
       dest->id = strdup(src.id);
       dest->alias = strdup(src.alias.value_or(""));

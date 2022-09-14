@@ -16,21 +16,21 @@ namespace DolbyIO.Comms.Services
     /// }
     /// </code>
     /// </example>
-    public class Audio
+    public class AudioService
     {
-        private LocalAudio _local = new LocalAudio();
-        private RemoteAudio _remote = new RemoteAudio();
+        private LocalAudioService _local = new LocalAudioService();
+        private RemoteAudioService _remote = new RemoteAudioService();
 
         /// <summary>
         /// Allows accessing methods impacting audio that the local participant's sends to a conference.
         /// </summary>
         /// <value>The service that allows setting options impacting audio sent by the local participant.</value>
-        public LocalAudio Local { get => _local; }
+        public LocalAudioService Local { get => _local; }
 
         /// <summary>
         /// Allows accessing methods impacting audio that the local participant's receives from a conference.
         /// </summary>
         /// <value>The service that allows setting options impacting audio that the local participant receives.</value>
-        public RemoteAudio Remote { get => _remote; }
+        public RemoteAudioService Remote { get => _remote; }
     }
 }

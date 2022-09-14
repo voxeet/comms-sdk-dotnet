@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 namespace DolbyIO.Comms.Services
 {
     /// <summary>
-    /// The RemoteAudio service allows the local participant to <see cref="DolbyIO.Comms.Services.RemoteAudio.Mute(bool, string)">mute</see> selected remote participants and <see cref="DolbyIO.Comms.Services.RemoteAudio.Stop(string)"> stop</see> and <see cref="DolbyIO.Comms.Services.RemoteAudio.Start(string)">start</see> receiving audio from remote participants in non-Dolby Voice conferences.
+    /// The RemoteAudio service allows the local participant to <see cref="DolbyIO.Comms.Services.RemoteAudioService.Mute(bool, string)">mute</see> selected remote participants and <see cref="DolbyIO.Comms.Services.RemoteAudioService.Stop(string)"> stop</see> and <see cref="DolbyIO.Comms.Services.RemoteAudioService.Start(string)">start</see> receiving audio from remote participants in non-Dolby Voice conferences.
     /// </summary>
     /// <example>
     /// <code>
@@ -19,11 +19,11 @@ namespace DolbyIO.Comms.Services
     /// }
     /// </code>
     /// </example>
-    public class RemoteAudio
+    public class RemoteAudioService
     {
         /// <summary>
         /// Allows the local participant, who used the
-        /// <see cref="DolbyIO.Comms.Services.RemoteAudio.Stop(string)"> stop</see> method
+        /// <see cref="DolbyIO.Comms.Services.RemoteAudioService.Stop(string)"> stop</see> method
         /// on a selected remote participant, to start receiving the remote participant's
         /// audio track.
         /// This method allows an audio track from the
@@ -55,7 +55,7 @@ namespace DolbyIO.Comms.Services
         /// Stops playing the specified remote participants' audio to the local participant.
         /// The mute method does not notify the server to stop audio stream transmission.
         /// To stop sending an audio stream to the server, use the
-        /// <see cref="DolbyIO.Comms.Services.LocalAudio.Stop">stopAudio</see> method.
+        /// <see cref="DolbyIO.Comms.Services.LocalAudioService.Stop">stopAudio</see> method.
         /// </summary>
         /// <remarks>
         /// Attention: This method is only available in non-Dolby Voice conferences.

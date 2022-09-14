@@ -79,7 +79,7 @@ extern "C" {
     );
   }
   
-  EXPORT_API int Create(dolbyio::comms::native::conference_options* opts, dolbyio::comms::native::conference_infos* infos) {
+  EXPORT_API int Create(dolbyio::comms::native::conference_options* opts, dolbyio::comms::native::conference* infos) {
     return call { [&]() {
       auto options = to_cpp<dolbyio::comms::services::conference::conference_options>(opts);
       auto result = wait(sdk->conference().create(options));
@@ -87,7 +87,7 @@ extern "C" {
     }}.result();
   }
 
-  EXPORT_API int Join(dolbyio::comms::native::conference_infos* ifs, dolbyio::comms::native::join_options* opts, dolbyio::comms::native::conference_infos* res) {
+  EXPORT_API int Join(dolbyio::comms::native::conference* ifs, dolbyio::comms::native::join_options* opts, dolbyio::comms::native::conference* res) {
     return call { [&]() {
       auto options = to_cpp<dolbyio::comms::services::conference::join_options>(opts);
       auto infos = to_cpp<dolbyio::comms::conference_info>(ifs);
@@ -96,14 +96,14 @@ extern "C" {
     }}.result();
   }
 
-  EXPORT_API int Demo(bool spatial_audio, dolbyio::comms::native::conference_infos* infos) {
+  EXPORT_API int Demo(bool spatial_audio, dolbyio::comms::native::conference* conf) {
     return call { [&]() {
       auto result = wait(sdk->conference().demo(spatial_audio));
-      no_alloc_to_c(infos, result);
+      no_alloc_to_c(conf, result);
     }}.result();
   }
 
-  EXPORT_API int Listen(dolbyio::comms::native::conference_infos* ifs, dolbyio::comms::native::listen_options* opts, dolbyio::comms::native::conference_infos* res) {
+  EXPORT_API int Listen(dolbyio::comms::native::conference* ifs, dolbyio::comms::native::listen_options* opts, dolbyio::comms::native::conference* res) {
     return call { [&]() {
       auto options = to_cpp<dolbyio::comms::services::conference::listen_options>(opts);
       auto infos = to_cpp<dolbyio::comms::conference_info>(ifs);
@@ -112,7 +112,7 @@ extern "C" {
     }}.result();
   }
 
-  EXPORT_API int GetCurrentConference(dolbyio::comms::native::conference_infos* res) {
+  EXPORT_API int GetCurrentConference(dolbyio::comms::native::conference* res) {
     return call { [&]() {
       auto infos = wait(sdk->conference().get_current_conference());
       no_alloc_to_c(res, infos);
