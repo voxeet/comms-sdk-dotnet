@@ -24,7 +24,7 @@ namespace dolbyio::comms::native {
   };
 
   /**
-   * @brief C# ConferenceInfos C struct.
+   * @brief C# Conference C struct.
    */
   struct conference {
     char* id;
