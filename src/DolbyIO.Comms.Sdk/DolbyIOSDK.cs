@@ -58,6 +58,7 @@ namespace DolbyIO.Comms
         /// <summary>
         /// Raised when the access token is invalid or has expired.
         /// </summary>
+        /// <returns>The event handler.</returns>
         public InvalidTokenErrorEventHandler InvalidTokenError
         {
             set
@@ -143,6 +144,7 @@ namespace DolbyIO.Comms
         /// <summary>
         /// Indicates that the SDK is initialized. 
         /// </summary>
+        /// <returns>A boolean indicating whether the SDK is initialized.</returns>
         public bool IsInitialized { get => _initialised; }
 
         /// <summary>

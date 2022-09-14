@@ -74,8 +74,9 @@ namespace DolbyIO.Comms.Services
         public UserInfo User { get => _user; }
 
         /// <summary>
-        /// Indicates if the Session is open.
+        /// Checks whether there is an open session
         /// </summary>
+        /// <returns>A boolean that indicates whether there is an open session.</returns>
         public bool IsOpen { get => _isOpen; }
     }
 }
