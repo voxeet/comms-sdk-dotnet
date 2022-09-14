@@ -79,18 +79,18 @@ extern "C" {
     );
   }
   
-  EXPORT_API int Create(dolbyio::comms::native::conference_options* opts, dolbyio::comms::native::conference* infos) {
+  EXPORT_API int Create(dolbyio::comms::native::conference_options* opts, dolbyio::comms::native::conference* conf) {
     return call { [&]() {
       auto options = to_cpp<dolbyio::comms::services::conference::conference_options>(opts);
       auto result = wait(sdk->conference().create(options));
-      no_alloc_to_c(infos, result);
+      no_alloc_to_c(conf, result);
     }}.result();
   }
 
-  EXPORT_API int Join(dolbyio::comms::native::conference* ifs, dolbyio::comms::native::join_options* opts, dolbyio::comms::native::conference* res) {
+  EXPORT_API int Join(dolbyio::comms::native::conference* src, dolbyio::comms::native::join_options* opts, dolbyio::comms::native::conference* res) {
     return call { [&]() {
       auto options = to_cpp<dolbyio::comms::services::conference::join_options>(opts);
-      auto infos = to_cpp<dolbyio::comms::conference_info>(ifs);
+      auto infos = to_cpp<dolbyio::comms::conference_info>(src);
       auto result = wait(sdk->conference().join(infos, options));
       no_alloc_to_c(res, result);
     }}.result();

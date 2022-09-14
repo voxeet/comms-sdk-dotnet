@@ -74,7 +74,7 @@ namespace DolbyIO.Comms
         /// <summary>
         /// The Session service accessor.
         /// </summary>
-        /// <returns>The Session class.</returns>
+        /// <returns>The SessionService class.</returns>
         public SessionService Session 
         {
             get 
@@ -90,7 +90,7 @@ namespace DolbyIO.Comms
         /// <summary>
         /// The Conference service accessor.
         /// </summary>
-        /// <returns>The Conference class.</returns>
+        /// <returns>The ConferenceService class.</returns>
         public ConferenceService Conference 
         {
             get 
@@ -106,7 +106,7 @@ namespace DolbyIO.Comms
         /// <summary>
         /// The MediaDevice service accessor.
         /// </summary>
-        /// <returns>The MediaDevice class.</returns>
+        /// <returns>The MediaDeviceService class.</returns>
         public MediaDeviceService MediaDevice
         {
             get
@@ -122,7 +122,7 @@ namespace DolbyIO.Comms
         /// <summary>
         /// The Audio service accessor.
         /// </summary>
-        /// <returns>The Audio class.</returns>
+        /// <returns>The AudioService class.</returns>
         public AudioService Audio
         {
             get 

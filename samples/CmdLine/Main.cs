@@ -234,7 +234,7 @@ public class CommandLine
     {
         try
         {
-            Conference infos = await _sdk.Conference.Demo(true);
+            Conference conference = await _sdk.Conference.Demo(true);
             await _sdk.Audio.Local.Start();
 
             await _sdk.Conference.SetSpatialPosition(_sdk.Session.User.Id, new Vector3(0.0f, 0.0f, 0.0f));

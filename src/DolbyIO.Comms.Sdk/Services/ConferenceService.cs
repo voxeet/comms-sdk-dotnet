@@ -221,9 +221,9 @@ namespace DolbyIO.Comms.Services
         {
             return await Task.Run(() =>
             {
-                Conference infos = new Conference();
-                Native.CheckException(Native.GetCurrentConference(infos));
-                return infos;
+                Conference conference = new Conference();
+                Native.CheckException(Native.GetCurrentConference(conference));
+                return conference;
             }).ConfigureAwait(false);
         }
 
