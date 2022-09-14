@@ -38,6 +38,7 @@ namespace DolbyIO.Comms
         /// Raised when an error occurs during a Session Initiation Protocol (SIP) negotiation
         /// of the local participant's peer connection.
         /// </summary>
+        /// <value>The event handler.</value>
         public SignalingChannelErrorEventHandler SignalingChannelError
         {
             set 
@@ -144,7 +145,6 @@ namespace DolbyIO.Comms
         /// </summary>
         /// <param name="accessToken">The access token provided by the customer's backend.</param>
         /// <param name="cb">The refresh token callback.</param>
-        /// <returns>A task that represents the returned asynchronous operation.</returns>
         public async Task Init(string accessToken, RefreshTokenCallBack cb)
         {
             if (_initialized)

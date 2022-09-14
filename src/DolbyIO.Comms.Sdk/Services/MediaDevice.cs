@@ -26,6 +26,7 @@ namespace DolbyIO.Comms.Services
         /// <summary>
         /// Raised when a new device is added to the system.
         /// </summary>
+        /// <value>The event handler.</value>
         public DeviceAddedEventHandler Added
         {
             set 
@@ -40,6 +41,7 @@ namespace DolbyIO.Comms.Services
         /// <summary>
         /// Raised when a device is removed from the system.
         /// </summary>
+        /// <value>The event handler.</value>
         public DeviceRemovedEventHandler Removed
         {
             set 
@@ -54,6 +56,7 @@ namespace DolbyIO.Comms.Services
         /// <summary>
         /// Raised when the currently used input or output device has changed.
         /// </summary>
+        /// <value>The event handler.</value>
         public DeviceChangedEventHandler Changed
         {
             set 
