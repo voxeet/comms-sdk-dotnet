@@ -10,7 +10,7 @@ namespace DolbyIO.Comms.Services
     /// try
     /// {
     ///     await _sdk.Audio.Local.Start();
-    ///     await _sdk.Autio.Local.Mute(true);
+    ///     await _sdk.Audio.Local.Mute(true);
     ///     await _sdk.Audio.Local.Stop();
     /// }
     /// catch

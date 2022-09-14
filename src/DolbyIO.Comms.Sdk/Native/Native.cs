@@ -15,7 +15,7 @@ namespace DolbyIO.Comms
         internal const string LibName = "DolbyIO.Comms.Native";
 
         [DllImport (LibName, CharSet = CharSet.Ansi)]
-        internal static extern int Init(String appKey, RefreshTokenCallBack cb);
+        internal static extern int Init(string accessToken, RefreshTokenCallBack cb);
 
         [DllImport (LibName, CharSet = CharSet.Ansi)]
         internal static extern int SetLogLevel([MarshalAs(UnmanagedType.I4)] LogLevel level);

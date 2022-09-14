@@ -10,7 +10,7 @@ namespace DolbyIO.Comms.Services
     /// try
     /// {
     ///     await _sdk.Audio.Remote.Start(participantId);
-    ///     await _sdk.Autio.Remote.Mute(true, participantId);
+    ///     await _sdk.Audio.Remote.Mute(true, participantId);
     ///     await _sdk.Audio.Remote.Stop(participantId);
     /// }
     /// catch

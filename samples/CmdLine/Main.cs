@@ -119,14 +119,15 @@ public class CommandLine
     {
         while (_keepRunning)
         {
+            await Task.CompletedTask;
         }
     }
 
-    private static async Task Init(string appKey, string name, int loglevel)
+    private static async Task Init(string appKey, string name, int logLevel)
     {
         try
         {
-            await _sdk.SetLogLevel((LogLevel)loglevel);
+            await _sdk.SetLogLevel((LogLevel)logLevel);
             
             await _sdk.Init(appKey, () => 
             {
@@ -284,7 +285,7 @@ public class CommandLine
         Log.Debug($"OnPeerConnectionFailedException: {reason}");
     }
 
-    private static void OnConferenceStatusUpdated(ConferenceStatus status, String conferenceId) 
+    private static void OnConferenceStatusUpdated(ConferenceStatus status, string conferenceId) 
     {
         Log.Debug($"OnConferenceStatusUpdated: {conferenceId} status: {status}");
     }
@@ -331,5 +332,4 @@ public class CommandLine
             }
         }
     }
-     
 }
