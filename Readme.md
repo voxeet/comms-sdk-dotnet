@@ -24,7 +24,7 @@ Additionally, if you plan to build the SDK from sources, not the NuGet packet ma
 - CMake 3.23
 - A macOS or Windows machine
 
-### Sample usage
+### How to use
 
 #### 0. Install the SDK
 
@@ -36,9 +36,7 @@ dotnet add package DolbyIO.Comms.Sdk
 
 #### 1. Initialize the SDK
 
-Initialize the SDK using the secure authentication method that uses a token in the application. For the purpose of this application, use a [client access token](https://docs.dolby.io/communications-apis/docs/overview-developer-tools#client-access-token) generated from the Dolby.io dashboard.
-
-Create a file where you want to store code for the sample application. Open the file in your favorite text editor and add there the following code to initialize the SDK using the [DolbyIOSDK.Init](https://dolbyio.github.io/comms-sdk-dotnet/documentation/api/DolbyIO.Comms.DolbyIOSDK.html#DolbyIO_Comms_DolbyIOSDK_Init_System_String_DolbyIO_Comms_RefreshTokenCallBack_) method:
+Initialize the SDK using the secure authentication method that uses a token in the application. For the purpose of this application, use a [client access token](https://docs.dolby.io/communications-apis/docs/overview-developer-tools#client-access-token) generated from the Dolby.io dashboard. Use the following code to initialize the SDK using the [DolbyIOSDK.Init](https://dolbyio.github.io/comms-sdk-dotnet/documentation/api/DolbyIO.Comms.DolbyIOSDK.html#DolbyIO_Comms_DolbyIOSDK_Init_System_String_DolbyIO_Comms_RefreshTokenCallBack_) method:
 
 ```cs
 using DolbyIO.Comms;
@@ -256,7 +254,7 @@ cmake --build .
 
 Set the environment variable `DOLBYIO_LIBRARY_PATH` as the path to the root folder containing the Dolby.io Communications C++ SDK.
 
-> **Note:** On macOS, it is necessary to unquarantine SDK libraries and sample binaries. Otherwise, quarantine attributes prevent their usage. The simplest way to unquarantine is to strip the quarantine attributes recursively for all the files in the package. The following example presents how to do it via terminal and the macOS attribute stripping command line tool: `xattr -d -r com.apple.quarantine sdk-release/`
+> **Note**: On macOS, it is necessary to unquarantine SDK libraries and sample binaries. Otherwise, quarantine attributes prevent their usage. The simplest way to unquarantine is to strip the quarantine attributes recursively for all the files in the package. The following example presents how to do it via terminal and the macOS attribute stripping command line tool: `xattr -d -r com.apple.quarantine sdk-release/`
 
 `cmake` allows you to generate various project files, for example, if you want to generate a Visual Studio solution on Windows, you can add the following option when generating (`-G "Visual Studio 17 2022"`):
 
