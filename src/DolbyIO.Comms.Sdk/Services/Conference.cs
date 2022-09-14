@@ -21,7 +21,7 @@ namespace DolbyIO.Comms.Services
     /// </summary>
     public class Conference
     {   
-        private volatile Boolean _isInConference = false;
+        private volatile bool _isInConference = false;
 
         private ConferenceStatusUpdatedEventHandler _statusUpdated;
 
@@ -94,6 +94,7 @@ namespace DolbyIO.Comms.Services
         }
 
         private ActiveSpeakerChangeEventHandler _activeSpeakerChange;
+
         /// <summary>
         /// Raised when an active speaker has changed.
         /// <example>
@@ -208,16 +209,12 @@ namespace DolbyIO.Comms.Services
         }
 
         /// <summary>
-        /// Indicates whether the SDK is in a conference.
+        /// Gets whether the SDK is connected to a conference.
         /// </summary>
-        /// <value>A boolean indicating whether the SDK is in the conference.</value>
-        public Boolean IsInConference
-        {
-            get { return _isInConference; }
-        }
+        public bool IsInConference { get => _isInConference; }
 
         /// <summary>
-        ///  Gets full information about the currently active conference.
+        /// Gets full information about the currently active conference.
         /// </summary>
         /// <returns>The ConferenceInfos describing the conference.</returns>
         public async Task<ConferenceInfos> Current()
@@ -250,7 +247,7 @@ namespace DolbyIO.Comms.Services
         /// Joins an existing conference as an active user who can receive
         /// media from the conference and inject media into the conference.
         /// </summary>
-        /// <param name="infos">The conference options that need to contain the conference ID.</param>
+        /// <param name="infos">The conference object that needs to contain the conference ID.</param>
         /// <param name="options">The join options for the SDK user.</param>
         /// <returns>The result object producing the ConferenceInfos asynchronously.</returns>
         public async Task<ConferenceInfos> Join(ConferenceInfos infos, JoinOptions options)
@@ -268,7 +265,7 @@ namespace DolbyIO.Comms.Services
         /// Joins an existing conference as a listener who can receive audio and
         /// video streams, but cannot send any stream to the conference.
         /// </summary>
-        /// <param name="infos">The conference options that need to contain conference ID.</param>
+        /// <param name="infos">The conference object that needs to contain conference ID.</param>
         /// <param name="options">The listen options for the SDK user.</param>
         /// <returns>The result object producing the ConferenceInfos asynchronously.</returns>
         public async Task<ConferenceInfos> Listen(ConferenceInfos infos, ListenOptions options)
@@ -322,7 +319,6 @@ namespace DolbyIO.Comms.Services
         /// <param name="right">A vector describing the direction the application considers
         /// as right. The value can be either +1, 0, or -1 and must be orthogonal to
         /// forward and up.</param>
-        /// <returns>The returned asynchronous operation.</returns>
         public async Task SetSpatialEnvironment(Vector3 scale, Vector3 forward, Vector3 up, Vector3 right)
         {
             await Task.Run(() => Native.CheckException(Native.SetSpatialEnvironment(
@@ -341,7 +337,6 @@ namespace DolbyIO.Comms.Services
         /// For more information about spatial audio, see the [Spatial Audio](https://docs.dolby.io/communications-apis/docs/guides-spatial-audio) guide.
         /// </summary>
         /// <param name="direction">The direction the local participant is facing in space.</param>
-        /// <returns>The returned asynchronous operation.</returns>
         public async Task SetSpatialDirection(Vector3 direction)
         {
             await Task.Run(() => Native.CheckException(Native.SetSpatialDirection(direction.X, direction.Y, direction.Z))).ConfigureAwait(false);
@@ -360,8 +355,7 @@ namespace DolbyIO.Comms.Services
         /// </summary>
         /// <param name="participantId">The selected participant. Using the local participant sets the location from which the participant will hear a conference. Using a remote participant sets the position from which the participant's audio will be rendered.</param>
         /// <param name="position">The participant's audio location.</param>
-        /// <returns>The returned asynchronous operation.</returns>
-        public async Task SetSpatialPosition(String participantId, Vector3 position)
+        public async Task SetSpatialPosition(string participantId, Vector3 position)
         {
             await Task.Run(() => Native.CheckException(Native.SetSpatialPosition(participantId, position.X, position.Y, position.Z))).ConfigureAwait(false);
         }

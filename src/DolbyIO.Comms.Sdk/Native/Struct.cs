@@ -6,8 +6,8 @@ using System.Runtime.InteropServices;
 using System.Runtime.CompilerServices;
 
 namespace DolbyIO.Comms
-{  
-    internal class Constants 
+{
+    internal class Constants
     {
         public const int MaxPermissions = 12;
         public const int DeviceUidSize = 24;
@@ -56,7 +56,7 @@ namespace DolbyIO.Comms
     /// The ParticipantInfo class gathers information about a conference participant.
     /// </summary>
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
-    public class ParticipantInfo 
+    public class ParticipantInfo
     {
         /// <summary>
         /// The external unique identifier that an application can add

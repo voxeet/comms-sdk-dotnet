@@ -67,11 +67,11 @@ namespace DolbyIO.Comms.Services
         }
 
         /// <summary>
-        ///     Gets a list of all audio devices that are currently available in the system.
+        /// Gets a list of all audio devices that are currently available in the system.
         /// </summary>
         /// <returns>
-        ///     The result object producing a list containing the audio
-        ///     devices asynchronously.
+        /// The result object producing a list containing the audio
+        /// devices asynchronously.
         /// </returns>
         /// <example>
         ///     <code>
@@ -105,7 +105,7 @@ namespace DolbyIO.Comms.Services
         }
 
         /// <summary>
-        ///  Gets the audio input device that is currently used by the system.
+        /// Gets the audio input device that is currently used by the system.
         /// </summary>
         /// <returns>The currently used input audio device.</returns>
         public async Task<AudioDevice> GetCurrentAudioInputDevice()

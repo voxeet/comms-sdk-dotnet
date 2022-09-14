@@ -1,12 +1,12 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
-using System;
 using System.Runtime.InteropServices;
 
 namespace DolbyIO.Comms
 {
     /**
-     * Native Interop for the DolbyIO C++ SDK
+     * Native Interop for the Dolby.io Communications C++ SDK
      * @nodocument
      */
     #nullable enable
@@ -60,16 +60,16 @@ namespace DolbyIO.Comms
         internal static extern int StopRemoteAudio(string participantId);
         
         [DllImport (LibName, CharSet = CharSet.Ansi)]
-        internal static extern int SetSpatialEnvironment(float scaleX, float scaleY, float scaleZ, 
-                                                       float forwardX, float forwardY, float forwardZ,
-                                                       float upX, float upY, float upZ,
-                                                       float rightX, float rightY, float rightZ);
+        internal static extern int SetSpatialEnvironment(float scaleX, float scaleY, float scaleZ,
+                                                        float forwardX, float forwardY, float forwardZ,
+                                                        float upX, float upY, float upZ,
+                                                        float rightX, float rightY, float rightZ);
 
         [DllImport (LibName, CharSet = CharSet.Ansi)]
         internal static extern int SetSpatialDirection(float x, float y, float z);
 
         [DllImport (LibName, CharSet = CharSet.Ansi)]
-        internal static extern int SetSpatialPosition(String userId, float x, float y, float z);
+        internal static extern int SetSpatialPosition(string userId, float x, float y, float z);
 
         [DllImport (LibName, CharSet = CharSet.Ansi)]
         internal static extern int SendMessage(string message);

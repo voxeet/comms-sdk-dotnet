@@ -1,4 +1,5 @@
 using DolbyIO.Comms;
+
 namespace DolbyIO.Comms.Tests
 {
     [Collection("Sdk")]
@@ -12,7 +13,7 @@ namespace DolbyIO.Comms.Tests
         }
 
         [Fact]
-        public void Test_AudioDevice_ShouldMashall()
+        public void Test_AudioDevice_ShouldMarshall()
         {
             AudioDevice dest;
             NativeTests.AudioDeviceTest(out dest);

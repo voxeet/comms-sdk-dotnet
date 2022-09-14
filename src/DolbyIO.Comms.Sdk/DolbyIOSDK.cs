@@ -71,11 +71,6 @@ namespace DolbyIO.Comms
             }
         }
 
-        ~DolbyIOSDK()
-        {
-            Dispose(false);
-        }
-
         /// <summary>
         /// The Session service accessor.
         /// </summary>
@@ -147,11 +142,10 @@ namespace DolbyIO.Comms
 
         /// <summary>
         /// Initializes the SDK with an access token that is provided by the customer's backend.
-         /// </summary>
+        /// </summary>
         /// <param name="accessToken">The access token provided by the customer's backend.</param>
         /// <param name="cb">The refresh token callback.</param>
-        /// <returns>A task that represents the returned asynchronous operation.</returns>
-        public async Task Init(String accessToken, RefreshTokenCallBack cb)
+        public async Task Init(string accessToken, RefreshTokenCallBack cb)
         {
             if (_initialized)
             {
@@ -173,6 +167,11 @@ namespace DolbyIO.Comms
         public async Task SetLogLevel(LogLevel logLevel)
         {
             await Task.Run(() =>  Native.CheckException(Native.SetLogLevel(logLevel))).ConfigureAwait(false);
+        }
+
+        ~DolbyIOSDK()
+        {
+            Dispose(false);
         }
 
         /// <summary>
