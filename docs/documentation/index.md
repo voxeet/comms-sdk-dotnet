@@ -1,5 +1,5 @@
 # Dolby.io Communications .NET SDK
 
-The Dolby.io Communications .NET SDK allows creating applications with high audio quality that you can use for conferencing, streaming, and collaborating in virtual spaces.
+The Dolby.io Communications .NET SDK allows creating high-quality applications for conferencing, streaming, and collaborating. The .NET SDK offers an easily integration of the HD Dolby Voice experience, including spatial audio and shared scenes, into game engines and virtual spaces. 
 
-The .NET SDK depends on the C++ SDK for core functionalities and communicates with the Dolby.io backend to provide conferencing functionalities. The SDK is especially useful for integrating the HD Dolby Voice experience into your own game engine or virtual world experience. To offer this functionality, the .NET SDK provides applications the ability to capture and play audio, manage input and output audio devices, add spatial placement for participants, as well as participate in a shared spatial scene.
+The SDK depends on the C++ SDK for core functions and supports the same functionalities for client applications as the C++ SDK.
