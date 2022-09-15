@@ -3,15 +3,15 @@ using System.Threading.Tasks;
 namespace DolbyIO.Comms.Services
 {
     /// <summary>
-    /// The RemoteAudio service allows the local participant to <see cref="DolbyIO.Comms.Services.RemoteAudioService.Mute(bool, string)">mute</see> selected remote participants and <see cref="DolbyIO.Comms.Services.RemoteAudioService.Stop(string)"> stop</see> and <see cref="DolbyIO.Comms.Services.RemoteAudioService.Start(string)">start</see> receiving audio from remote participants in non-Dolby Voice conferences.
+    /// The RemoteAudio service allows the local participant to <see cref="DolbyIO.Comms.Services.RemoteAudioService.MuteAsync(bool, string)">mute</see> selected remote participants and <see cref="DolbyIO.Comms.Services.RemoteAudioService.StopAsync(string)"> stop</see> and <see cref="DolbyIO.Comms.Services.RemoteAudioService.StartAsync(string)">start</see> receiving audio from remote participants in non-Dolby Voice conferences.
     /// </summary>
     /// <example>
     /// <code>
     /// try
     /// {
-    ///     await _sdk.Audio.Remote.Start(participantId);
-    ///     await _sdk.Audio.Remote.Mute(true, participantId);
-    ///     await _sdk.Audio.Remote.Stop(participantId);
+    ///     await _sdk.Audio.Remote.StartAsync(participantId);
+    ///     await _sdk.Audio.Remote.MuteAsync(true, participantId);
+    ///     await _sdk.Audio.Remote.StopAsync(participantId);
     /// }
     /// catch
     /// {
@@ -32,7 +32,7 @@ namespace DolbyIO.Comms.Services
         /// this method does not enable their audio track.
         /// </summary>
         /// <param name="participantId">The ID of the remote participant whose audio track should be sent to the local participant.</param>
-        public async Task Start(string participantId)
+        public async Task StartAsync(string participantId)
         {
             await Task.Run(() => Native.CheckException(Native.StartRemoteAudio(participantId))).ConfigureAwait(false);
         }
@@ -46,7 +46,7 @@ namespace DolbyIO.Comms.Services
         /// mixed into the Dolby Voice audio stream that the SDK receives.
         /// </summary>
         /// <param name="participantId">The ID of the remote participant whose audio track should not be sent to the local participant.</param>
-        public async Task Stop(string participantId)
+        public async Task StopAsync(string participantId)
         {
             await Task.Run(() => Native.CheckException(Native.StopRemoteAudio(participantId))).ConfigureAwait(false);
         }
@@ -63,7 +63,7 @@ namespace DolbyIO.Comms.Services
         /// <param name="muted">A boolean value that indicates the required mute state. True
         /// mutes the remote participant, false un-mutes the remote participant.</param>
         /// <param name="participantId">The ID of the remote participant whose audio should not be played.</param>
-        public async Task Mute(bool muted, string participantId)
+        public async Task MuteAsync(bool muted, string participantId)
         {
             await Task.Run(() => Native.CheckException(Native.RemoteMute(muted, participantId))).ConfigureAwait(false);
         }

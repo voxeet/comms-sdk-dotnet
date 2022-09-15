@@ -3,15 +3,15 @@ using System.Threading.Tasks;
 namespace DolbyIO.Comms.Services
 {
     /// <summary>
-    /// The LocalAudio service allows <see cref="DolbyIO.Comms.Services.LocalAudioService.Start">enabling</see>, <see cref="DolbyIO.Comms.Services.LocalAudioService.Stop">disabling</see>, and <see cref="DolbyIO.Comms.Services.LocalAudioService.Mute(bool)">muting</see> the local participant's audio.
+    /// The LocalAudio service allows <see cref="DolbyIO.Comms.Services.LocalAudioService.StartAsync">enabling</see>, <see cref="DolbyIO.Comms.Services.LocalAudioService.StopAsync">disabling</see>, and <see cref="DolbyIO.Comms.Services.LocalAudioService.MuteAsync(bool)">muting</see> the local participant's audio.
     /// </summary>
     /// <example>
     /// <code>
     /// try
     /// {
-    ///     await _sdk.Audio.Local.Start();
-    ///     await _sdk.Audio.Local.Mute(true);
-    ///     await _sdk.Audio.Local.Stop();
+    ///     await _sdk.Audio.Local.StartAsync();
+    ///     await _sdk.Audio.Local.MuteAsync(true);
+    ///     await _sdk.Audio.Local.StopAsync();
     /// }
     /// catch
     /// {
@@ -28,7 +28,7 @@ namespace DolbyIO.Comms.Services
         /// media_source_interface with the WebRTC Audio Source, creating the audio
         /// delivery pipeline.
         /// </summary>
-        public async Task Start()
+        public async Task StartAsync()
         {
             await Task.Run(() => Native.CheckException(Native.StartAudio())).ConfigureAwait(false);
         }
@@ -40,7 +40,7 @@ namespace DolbyIO.Comms.Services
         /// media_source_interface from the WebRTC Audio Source, which deconstructs
         /// the audio delivery pipeline.
         /// </summary>
-        public async Task Stop()
+        public async Task StopAsync()
         {
             await Task.Run(() => Native.CheckException(Native.StopAudio())).ConfigureAwait(false);
         }
@@ -50,7 +50,7 @@ namespace DolbyIO.Comms.Services
         /// </summary>
         /// <param name="muted">A boolean value that indicates the required mute state. True
         /// mutes the microphone, false un-mutes the microphone.</param>
-        public async Task Mute(bool muted)
+        public async Task MuteAsync(bool muted)
         {
             await Task.Run(() => Native.CheckException(Native.Mute(muted))).ConfigureAwait(false);
         }

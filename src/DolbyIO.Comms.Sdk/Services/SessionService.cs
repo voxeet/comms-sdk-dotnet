@@ -12,19 +12,19 @@ namespace DolbyIO.Comms.Services
     /// before joining conferences.
     ///
     /// To use the Session Service, follow these steps:
-    /// 1. Open a session using the <see cref="DolbyIO.Comms.Services.SessionService.Open(UserInfo)">open</see> method.
+    /// 1. Open a session using the <see cref="DolbyIO.Comms.Services.SessionService.OpenAsync(UserInfo)">open</see> method.
     /// 2. Join a conference using the <see cref="DolbyIO.Comms.Services.ConferenceService">Conference service</see>.
     /// 3. Leave the conference and close the session using the 
-    /// <see cref="DolbyIO.Comms.Services.SessionService.Close">close</see> method.
+    /// <see cref="DolbyIO.Comms.Services.SessionService.CloseAsync">close</see> method.
     /// </summary>
     /// <example>
     /// <code>
     /// try
     /// {
-    ///     UserInfo info;
-    ///     info.Name = "Some Name";
+    ///     UserInfo user;
+    ///     user.Name = "Some Name";
     ///     
-    ///     info = await _sdk.Session.Open(info);
+    ///     user = await _sdk.Session.OpenAsync(user);
     /// }
     /// catch (DolbyIOException e)
     /// {
@@ -52,7 +52,7 @@ namespace DolbyIO.Comms.Services
         /// </summary>
         /// <param name="user">Information about the participant who opens the session.</param>
         /// <returns>The task object representing the asynchronous operation that returns UserInfo.</returns>
-        public async Task<UserInfo> Open(UserInfo user)
+        public async Task<UserInfo> OpenAsync(UserInfo user)
         {
             return await Task.Run(() => 
             {
@@ -68,7 +68,7 @@ namespace DolbyIO.Comms.Services
         /// Closes the current session.
         /// </summary>
         /// <returns>The returned asynchronous operation.</returns>
-        public async Task Close()
+        public async Task CloseAsync()
         {
             await Task.Run(() =>
             {

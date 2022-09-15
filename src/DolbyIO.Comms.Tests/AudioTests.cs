@@ -15,17 +15,17 @@ namespace DolbyIO.Comms.Tests
         [Fact]
         public async void Test_Audio_CanCallLocalMethod()
         {
-            await _fixture.Sdk.Audio.Local.Start();
-            await _fixture.Sdk.Audio.Local.Stop();
-            await _fixture.Sdk.Audio.Local.Mute(true);
+            await _fixture.Sdk.Audio.Local.StartAsync();
+            await _fixture.Sdk.Audio.Local.StopAsync();
+            await _fixture.Sdk.Audio.Local.MuteAsync(true);
         }
 
         [Fact]
         public async void Test_Audio_CanCallRemoteMethod()
         {
-            await _fixture.Sdk.Audio.Remote.Start("participantId");
-            await _fixture.Sdk.Audio.Remote.Stop("participantId");
-            await _fixture.Sdk.Audio.Remote.Mute(true, "participantId");
+            await _fixture.Sdk.Audio.Remote.StartAsync("participantId");
+            await _fixture.Sdk.Audio.Remote.StopAsync("participantId");
+            await _fixture.Sdk.Audio.Remote.MuteAsync(true, "participantId");
         }
     }
 }

@@ -105,7 +105,7 @@ namespace DolbyIO.Comms.Tests
         [Fact]
         public async void Test_Conference_CanCallSendMessage()
         {
-            await _fixture.Sdk.Conference.SendMessage("test");
+            await _fixture.Sdk.Conference.SendMessageAsync("test");
         }
     }
 }
