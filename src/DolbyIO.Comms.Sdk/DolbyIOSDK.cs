@@ -5,21 +5,6 @@ using DolbyIO.Comms.Services;
 namespace DolbyIO.Comms 
 {
     /// <summary>
-    /// The DolbyIOException class is responsible for wrapping the underlying C++ SDK exceptions.
-    /// </summary>
-    public class DolbyIOException : Exception
-    {
-        /// <summary>
-        /// The DolbyIOException that wraps the underlying C++ SDK exception.
-        /// </summary>
-        /// <param name="msg">A message describing the error.</param>
-        public DolbyIOException(string msg)
-            : base(msg)
-        {
-        }
-    }
-
-    /// <summary>
     /// The DolbyIOSDK class is the main object that allows initializing the
     /// .NET SDK and accessing the underlying services.
     /// </summary>
