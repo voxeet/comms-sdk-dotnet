@@ -112,8 +112,8 @@ try
 
     JoinOptions joinOpts = new JoinOptions();
 
-    ConferenceInfos conference = await _sdk.Conference.CreateAsync(options);
-    ConferenceInfos joinedConference = await _sdk.Conference.JoinAsync(conference, joinOpts);
+    Conference conference = await _sdk.Conference.CreateAsync(options);
+    Conference joinedConference = await _sdk.Conference.JoinAsync(conference, joinOpts);
 }
 catch (DolbyIOException e)
 {
@@ -199,8 +199,8 @@ public class Call
 
             JoinOptions joinOpts = new JoinOptions();
 
-            ConferenceInfos conference = await _sdk.Conference.CreateAsync(options);
-            ConferenceInfos joinedConference = await _sdk.Conference.JoinAsync(conference, joinOpts);
+            Conference conference = await _sdk.Conference.CreateAsync(options);
+            Conference joinedConference = await _sdk.Conference.JoinAsync(conference, joinOpts);
         }
         catch (DolbyIOException e)
         {
