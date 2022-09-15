@@ -6,7 +6,7 @@ The SDK depends on the [C++ SDK](https://github.com/DolbyIO/comms-sdk-cpp) for c
 
 ## Get Started
 
-This guide explains presents a sample usage of the SDK that allows creating a basic audio-only conference application. The starter project that you can create by following this procedure provides the foundation upon which you can add additional features as you build out your own solutions for events, collaboration, or live streaming.
+This guide presents an example of using the SDK to create a basic audio-only conference application. The starter project that you can create by following this procedure provides the foundation upon which you can add additional features as you build out your own solutions for events, collaboration, or live streaming.
 
 You can find the complete code for the application in the [Summary](#summary) section. The created application is available in the [SimpleApp](https://github.com/DolbyIO/comms-sdk-dotnet/tree/master/samples/SimpleApp) folder.
 
@@ -15,9 +15,10 @@ You can find the complete code for the application in the [Summary](#summary) se
 Make sure that you have:
 
 - A Dolby.io account. If you do not have an account, you can [sign up](https://dolby.io/signup) for a free account.
-- The [client access token](https://docs.dolby.io/communications-apis/docs/overview-developer-tools#client-access-token) copied from the [Dolby.io dashboard](https://dashboard.dolby.io/). To create the token, log in to the Dolby.io dashboard, create an application, and navigate to the API keys section.
+- The [client access token](https://docs.dolby.io/communications-apis/docs/overview-developer-tools#client-access-token) copied from the [Dolby.io dashboard](https://dashboard.dolby.io/). To create the token, log into the Dolby.io dashboard, create an application, and navigate to the API keys section.
 
 Additionally, if you plan to build the SDK from sources, not the NuGet packet manager, make sure that you have:
+
 - The [Dolby.io Communications C++ SDK 2.0](https://github.com/DolbyIO/comms-sdk-cpp/releases) for your platform
 - [.NET SDK 6](https://dotnet.microsoft.com/en-us/download)
 - C++ compiler compatible with C++ 17
@@ -61,7 +62,7 @@ catch (DolbyIOException e)
 
 #### 2. Register event handlers
 
-After initializing the SDK, it is time to register your event handlers. Decide to which events you want to add event handlers and add the handlers as in the following example:
+After initializing the SDK, it is time to register your event handlers. Decide which events you want to add event handlers to and add the handlers as in the following example:
 
 ```cs
 // Registering event handlers
@@ -153,7 +154,7 @@ catch (DolbyIOException e)
 }
 ```
 
-This step causes releasing the underneath unmanaged native resources.
+This step releases the underneath unmanaged native resources.
 
 ### Summary
 

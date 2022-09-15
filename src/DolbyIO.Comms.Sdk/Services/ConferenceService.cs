@@ -216,7 +216,7 @@ namespace DolbyIO.Comms.Services
         /// <summary>
         /// Gets full information about the currently active conference.
         /// </summary>
-        /// <returns>The ConferenceInfos describing the conference.</returns>
+        /// <returns>The Conference  object.</returns>
         public async Task<Conference> CurrentAsync()
         {
             return await Task.Run(() =>
@@ -249,7 +249,7 @@ namespace DolbyIO.Comms.Services
         /// </summary>
         /// <param name="conference">The conference object that need to contain the conference ID.</param>
         /// <param name="options">The join options for the SDK user.</param>
-        /// <returns>The result object producing the ConferenceInfos asynchronously.</returns>
+        /// <returns>The result object producing the Conference asynchronously.</returns>
         public async Task<Conference> JoinAsync(Conference conference, JoinOptions options)
         {
             return await Task.Run(() => 
@@ -267,7 +267,7 @@ namespace DolbyIO.Comms.Services
         /// </summary>
         /// <param name="conference">The conference object that need to contain conference ID.</param>
         /// <param name="options">The listen options for the SDK user.</param>
-        /// <returns>The result object producing the ConferenceInfos asynchronously.</returns>
+        /// <returns>The result object producing the Conference asynchronously.</returns>
         public async Task<Conference> ListenAsync(Conference conference, ListenOptions options)
         {
             return await Task.Run(() =>
@@ -284,7 +284,7 @@ namespace DolbyIO.Comms.Services
         /// </summary>
         /// <param name="spatialAudio">A boolean that indicates whether spatial audio should be enabled for the joining
         /// participant. By default, the parameter is set to true.</param>
-        /// <returns>The result object producing the ConferenceInfos asynchronously.</returns>
+        /// <returns>The result object producing the Conference asynchronously.</returns>
         public async Task<Conference> DemoAsync(bool spatialAudio = true)
         {
             return await Task.Run(() => 
