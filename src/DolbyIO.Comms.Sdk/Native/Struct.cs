@@ -185,12 +185,12 @@ namespace DolbyIO.Comms
     }
 
     /// <summary>
-    /// The ConferenceInfos class contains information about a conference. This structure provides
+    /// The Conference class contains information about a conference. This structure provides
     /// conference details that are required to join a specific conference. The SDK
-    /// returns ConferenceInfos to describe the created or joined conference.
+    /// returns Conference to describe the created or joined conference.
     /// </summary>
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
-    public class ConferenceInfos
+    public class Conference
     {
         /// <summary>
         /// The unique conference identifier.

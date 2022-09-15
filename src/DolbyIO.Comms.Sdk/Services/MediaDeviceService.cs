@@ -11,15 +11,15 @@ namespace DolbyIO.Comms.Services
     ///
     /// To use the Device Management Service, follow these steps:
     ///  1. Get all current audio devices using the 
-    ///  <see cref="DolbyIO.Comms.Services.MediaDevice.GetAudioDevices">GetAudioDevices</see> method.
+    ///  <see cref="DolbyIO.Comms.Services.MediaDeviceService.GetAudioDevices">GetAudioDevices</see> method.
     ///  2. Set the desired input audio device by calling the 
-    ///  <see cref="DolbyIO.Comms.Services.MediaDevice.SetPreferredAudioInputDevice(AudioDevice)">SetPreferredAudioInputDevice</see> method.
-    ///  3. Set the desired output audio device by calling the <see cref="DolbyIO.Comms.Services.MediaDevice.SetPreferredAudioOutputDevice(AudioDevice)">SetPreferredAudioOutputDevice</see> method.
-    ///  4. Subscribe to the <see cref="DolbyIO.Comms.Services.MediaDevice.Added">Added</see>, 
-    ///  <see cref="DolbyIO.Comms.Services.MediaDevice.Removed">Removed</see>, and 
-    ///  <see cref="DolbyIO.Comms.Services.MediaDevice.Changed">Changed</see> events.
+    ///  <see cref="DolbyIO.Comms.Services.MediaDeviceService.SetPreferredAudioInputDevice(AudioDevice)">SetPreferredAudioInputDevice</see> method.
+    ///  3. Set the desired output audio device by calling the <see cref="DolbyIO.Comms.Services.MediaDeviceService.SetPreferredAudioOutputDevice(AudioDevice)">SetPreferredAudioOutputDevice</see> method.
+    ///  4. Subscribe to the <see cref="DolbyIO.Comms.Services.MediaDeviceService.Added">Added</see>, 
+    ///  <see cref="DolbyIO.Comms.Services.MediaDeviceService.Removed">Removed</see>, and 
+    ///  <see cref="DolbyIO.Comms.Services.MediaDeviceService.Changed">Changed</see> events.
     /// </summary>
-    public class MediaDevice
+    public class MediaDeviceService
     {
         private DeviceAddedEventHandler _added;
 

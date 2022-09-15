@@ -16,7 +16,7 @@ namespace DolbyIO.Comms.Tests
         public static extern void ConferenceOptionsTest(ConferenceOptions src, [Out] ConferenceOptions dest);
 
         [DllImport(LibName, CharSet = CharSet.Ansi)]
-        public static extern void ConferenceInfosTest(ConferenceInfos src, [Out] ConferenceInfos dest);
+        public static extern void ConferenceTest(Conference src, [Out] Conference dest);
 
         [DllImport(LibName, CharSet = CharSet.Ansi)]
         public static extern void JoinOptionsTest(JoinOptions src, [Out] JoinOptions dest);

@@ -112,8 +112,8 @@ try
 
     JoinOptions joinOpts = new JoinOptions();
 
-    ConferenceInfos createInfos = await _sdk.Conference.Create(options);
-    ConferenceInfos joinInfos = await _sdk.Conference.Join(createInfos, joinOpts);
+    ConferenceInfos conference = await _sdk.Conference.Create(options);
+    ConferenceInfos joinedConference = await _sdk.Conference.Join(conference, joinOpts);
 }
 catch (DolbyIOException e)
 {
@@ -121,7 +121,7 @@ catch (DolbyIOException e)
 }
 ```
 
-If the conference already exists, the SDK returns [ConferenceInfos](https://dolbyio.github.io/comms-sdk-dotnet/documentation/api/DolbyIO.Comms.ConferenceInfos).
+If the conference already exists, the SDK returns [Conference](https://dolbyio.github.io/comms-sdk-dotnet/documentation/api/DolbyIO.Comms.Conference).
 
 #### 5. Leave the conference
 
@@ -199,8 +199,8 @@ public class Call
 
             JoinOptions joinOpts = new JoinOptions();
 
-            ConferenceInfos createInfos = await _sdk.Conference.Create(options);
-            ConferenceInfos joinInfos = await _sdk.Conference.Join(createInfos, joinOpts);
+            ConferenceInfos conference = await _sdk.Conference.Create(options);
+            ConferenceInfos joinedConference = await _sdk.Conference.Join(conference, joinOpts);
         }
         catch (DolbyIOException e)
         {

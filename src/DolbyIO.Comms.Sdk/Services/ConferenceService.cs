@@ -10,16 +10,16 @@ namespace DolbyIO.Comms.Services
     /// <summary>
     /// The Conference service allows joining and leaving conferences as well as
     /// subscribing to conference events. To use the Conference Service, follow these steps:
-    /// 1. Open a session using <see cref="DolbyIO.Comms.Services.Session.Open(UserInfo)">session.open</see>.
+    /// 1. Open a session using <see cref="DolbyIO.Comms.Services.SessionService.Open(UserInfo)">session.open</see>.
     /// 2. Subscribe to events exposed through the service, for example 
-    /// <see cref="DolbyIO.Comms.Services.Conference.StatusUpdated">statusUpdated</see> and 
-    /// <see cref="DolbyIO.Comms.Services.Conference.ParticipantUpdated">participantUpdated</see>.
-    /// 3. Create a conference using the <see cref="DolbyIO.Comms.Services.Conference.Create(ConferenceOptions)">create</see> method.
-    /// 4. Join the created conference using the <see cref="DolbyIO.Comms.Services.Conference.Join(ConferenceInfos, JoinOptions)">join</see> method
-    /// or use the <see cref="DolbyIO.Comms.Services.Conference.Listen(ConferenceInfos, ListenOptions)">listen</see> method to join the conference as a listener.
-    /// 5. Leave the conference using the <see cref="DolbyIO.Comms.Services.Conference.Leave">leave</see> method.
+    /// <see cref="DolbyIO.Comms.Services.ConferenceService.StatusUpdated">statusUpdated</see> and 
+    /// <see cref="DolbyIO.Comms.Services.ConferenceService.ParticipantUpdated">participantUpdated</see>.
+    /// 3. Create a conference using the <see cref="DolbyIO.Comms.Services.ConferenceService.Create(ConferenceOptions)">create</see> method.
+    /// 4. Join the created conference using the <see cref="DolbyIO.Comms.Services.ConferenceService.Join(Conference, JoinOptions)">join</see> method
+    /// or use the <see cref="DolbyIO.Comms.Services.ConferenceService.Listen(Conference, ListenOptions)">listen</see> method to join the conference as a listener.
+    /// 5. Leave the conference using the <see cref="DolbyIO.Comms.Services.ConferenceService.Leave">leave</see> method.
     /// </summary>
-    public class Conference
+    public class ConferenceService
     {   
         private volatile bool _isInConference = false;
 
@@ -217,13 +217,13 @@ namespace DolbyIO.Comms.Services
         /// Gets full information about the currently active conference.
         /// </summary>
         /// <returns>The ConferenceInfos describing the conference.</returns>
-        public async Task<ConferenceInfos> Current()
+        public async Task<Conference> Current()
         {
             return await Task.Run(() =>
             {
-                ConferenceInfos infos = new ConferenceInfos();
-                Native.CheckException(Native.GetCurrentConference(infos));
-                return infos;
+                Conference conference = new Conference();
+                Native.CheckException(Native.GetCurrentConference(conference));
+                return conference;
             }).ConfigureAwait(false);
         }
 
@@ -232,14 +232,14 @@ namespace DolbyIO.Comms.Services
         /// upon completion.
         /// </summary>
         /// <param name="options">The conference options.</param>
-        /// <returns>The result object producing the ConferenceInfos asynchronously.</returns>
-        public async Task<ConferenceInfos> Create(ConferenceOptions options)
+        /// <returns>The result object producing the Conference asynchronously.</returns>
+        public async Task<Conference> Create(ConferenceOptions options)
         {
             return await Task.Run(() => 
             {
-                ConferenceInfos infos = new ConferenceInfos();
-                Native.CheckException(Native.Create(options, infos));
-                return infos;
+                Conference conference = new Conference();
+                Native.CheckException(Native.Create(options, conference));
+                return conference;
             }).ConfigureAwait(false);
         }
 
@@ -247,15 +247,15 @@ namespace DolbyIO.Comms.Services
         /// Joins an existing conference as an active user who can receive
         /// media from the conference and inject media into the conference.
         /// </summary>
-        /// <param name="infos">The conference object that needs to contain the conference ID.</param>
+        /// <param name="conference">The conference object that need to contain the conference ID.</param>
         /// <param name="options">The join options for the SDK user.</param>
         /// <returns>The result object producing the ConferenceInfos asynchronously.</returns>
-        public async Task<ConferenceInfos> Join(ConferenceInfos infos, JoinOptions options)
+        public async Task<Conference> Join(Conference conference, JoinOptions options)
         {
             return await Task.Run(() => 
             {
-                ConferenceInfos res = new ConferenceInfos();
-                Native.CheckException(Native.Join(infos, options, res));
+                Conference res = new Conference();
+                Native.CheckException(Native.Join(conference, options, res));
                 _isInConference = true;
                 return res;
             }).ConfigureAwait(false);
@@ -265,15 +265,15 @@ namespace DolbyIO.Comms.Services
         /// Joins an existing conference as a listener who can receive audio and
         /// video streams, but cannot send any stream to the conference.
         /// </summary>
-        /// <param name="infos">The conference object that needs to contain conference ID.</param>
+        /// <param name="conference">The conference object that need to contain conference ID.</param>
         /// <param name="options">The listen options for the SDK user.</param>
         /// <returns>The result object producing the ConferenceInfos asynchronously.</returns>
-        public async Task<ConferenceInfos> Listen(ConferenceInfos infos, ListenOptions options)
+        public async Task<Conference> Listen(Conference conference, ListenOptions options)
         {
             return await Task.Run(() =>
             {
-                ConferenceInfos res = new ConferenceInfos();
-                Native.CheckException(Native.Listen(infos, options, res));
+                Conference res = new Conference();
+                Native.CheckException(Native.Listen(conference, options, res));
                 _isInConference = true;
                 return res;
             }).ConfigureAwait(false);
@@ -285,11 +285,11 @@ namespace DolbyIO.Comms.Services
         /// <param name="spatialAudio">A boolean that indicates whether spatial audio should be enabled for the joining
         /// participant. By default, the parameter is set to true.</param>
         /// <returns>The result object producing the ConferenceInfos asynchronously.</returns>
-        public async Task<ConferenceInfos> Demo(bool spatialAudio = true)
+        public async Task<Conference> Demo(bool spatialAudio = true)
         {
             return await Task.Run(() => 
             {
-                ConferenceInfos infos = new ConferenceInfos();
+                Conference infos = new Conference();
                 Native.CheckException(Native.Demo(spatialAudio, infos));
                 _isInConference = true;
                 return infos;

@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 namespace DolbyIO.Comms.Services
 {
     /// <summary>
-    /// The LocalAudio service allows <see cref="DolbyIO.Comms.Services.LocalAudio.Start">enabling</see>, <see cref="DolbyIO.Comms.Services.LocalAudio.Stop">disabling</see>, and <see cref="DolbyIO.Comms.Services.LocalAudio.Mute(bool)">muting</see> the local participant's audio.
+    /// The LocalAudio service allows <see cref="DolbyIO.Comms.Services.LocalAudioService.Start">enabling</see>, <see cref="DolbyIO.Comms.Services.LocalAudioService.Stop">disabling</see>, and <see cref="DolbyIO.Comms.Services.LocalAudioService.Mute(bool)">muting</see> the local participant's audio.
     /// </summary>
     /// <example>
     /// <code>
@@ -19,7 +19,7 @@ namespace DolbyIO.Comms.Services
     /// }
     /// </code>
     /// </example>
-    public class LocalAudio
+    public class LocalAudioService
     {
         /// <summary>
         /// Enables the local participant's audio and sends the audio to a conference.
@@ -46,7 +46,7 @@ namespace DolbyIO.Comms.Services
         }
 
         /// <summary>
-        /// Stops playing the local participant's audio to the conference. The mute method does not notify the server to stop audio stream transmission. To stop sending an audio stream to the server, use the <see cref="DolbyIO.Comms.Services.LocalAudio.Stop">stopAudio</see> method.
+        /// Stops playing the local participant's audio to the conference. The mute method does not notify the server to stop audio stream transmission. To stop sending an audio stream to the server, use the <see cref="DolbyIO.Comms.Services.LocalAudioService.Stop">stopAudio</see> method.
         /// </summary>
         /// <param name="muted">A boolean value that indicates the required mute state. True
         /// mutes the microphone, false un-mutes the microphone.</param>

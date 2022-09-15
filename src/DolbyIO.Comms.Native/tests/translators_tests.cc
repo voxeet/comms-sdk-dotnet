@@ -17,7 +17,7 @@ extern "C" {
     no_alloc_to_c(result, tmp);
   }
 
-  EXPORT_API void ConferenceInfosTest(dolbyio::comms::native::conference_infos* src, dolbyio::comms::native::conference_infos* result) {
+  EXPORT_API void ConferenceTest(dolbyio::comms::native::conference* src, dolbyio::comms::native::conference* result) {
     auto infos = to_cpp<dolbyio::comms::conference_info>(src);
     
     infos.is_new = true;

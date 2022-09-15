@@ -27,19 +27,19 @@ namespace DolbyIO.Comms
         internal static extern int Close();
 
         [DllImport (LibName, CharSet = CharSet.Ansi)]
-        internal static extern int Create(ConferenceOptions options, [Out] ConferenceInfos infos);
+        internal static extern int Create(ConferenceOptions options, [Out] Conference infos);
 
         [DllImport (LibName, CharSet = CharSet.Ansi)]
-        internal static extern int Join(ConferenceInfos infos, JoinOptions options, [Out] ConferenceInfos res);
+        internal static extern int Join(Conference conference, JoinOptions options, [Out] Conference res);
         
         [DllImport (LibName, CharSet = CharSet.Ansi)]
-        internal static extern int Listen(ConferenceInfos infos, ListenOptions options, [Out] ConferenceInfos res);
+        internal static extern int Listen(Conference conference, ListenOptions options, [Out] Conference res);
        
         [DllImport (LibName, CharSet = CharSet.Ansi)]
-        internal static extern int Demo(bool spatialAudio, [Out] ConferenceInfos infos);
+        internal static extern int Demo(bool spatialAudio, [Out] Conference conference);
 
         [DllImport(LibName, CharSet = CharSet.Ansi)]
-        internal static extern int GetCurrentConference([Out] ConferenceInfos infos);
+        internal static extern int GetCurrentConference([Out] Conference conference);
 
         [DllImport (LibName, CharSet = CharSet.Ansi)]
         internal static extern int Mute(bool muted);

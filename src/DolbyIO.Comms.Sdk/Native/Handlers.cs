@@ -28,19 +28,19 @@ namespace DolbyIO.Comms
     public delegate void ConferenceStatusUpdatedEventHandler([MarshalAs(UnmanagedType.I4)]ConferenceStatus status, string conferenceId);
 
     /// <summary>
-    /// The <see cref="DolbyIO.Comms.Services.Conference.ParticipantAdded">Conference.ParticipantAdded</see> event handler. 
+    /// The <see cref="DolbyIO.Comms.Services.ConferenceService.ParticipantAdded">Conference.ParticipantAdded</see> event handler. 
     /// </summary>
     /// <param name="participant">The added participant.</param>
     public delegate void ParticipantAddedEventHandler(Participant participant);
     
     /// <summary>
-    /// The <see cref="DolbyIO.Comms.Services.Conference.ParticipantUpdated">Conference.ParticipantUpdated</see> event handler.
+    /// The <see cref="DolbyIO.Comms.Services.ConferenceService.ParticipantUpdated">Conference.ParticipantUpdated</see> event handler.
     /// </summary>
     /// <param name="participant">The participant who changed status.</param>
     public delegate void ParticipantUpdatedEventHandler(Participant participant);
 
     /// <summary>
-    /// The <see cref="DolbyIO.Comms.Services.Conference.ActiveSpeakerChange">Conference.ActiveSpeakerChange</see> event handler. 
+    /// The <see cref="DolbyIO.Comms.Services.ConferenceService.ActiveSpeakerChange">Conference.ActiveSpeakerChange</see> event handler. 
     /// </summary>
     /// <param name="conferenceId">The corresponding conference ID.</param>
     /// <param name="count">The number of active speakers.</param>
@@ -49,7 +49,7 @@ namespace DolbyIO.Comms
     public delegate void ActiveSpeakerChangeEventHandler(string conferenceId, int count, [MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.LPStr, SizeParamIndex = 1)] string[]? activeSpeakers);
     
     /// <summary>
-    /// The <see cref="DolbyIO.Comms.Services.Conference.MessageReceived">Conference.MessageReceived</see> event handler.
+    /// The <see cref="DolbyIO.Comms.Services.ConferenceService.MessageReceived">Conference.MessageReceived</see> event handler.
     /// </summary>
     /// <param name="conferenceId">The conference ID.</param>
     /// <param name="userId">The ID of the participant who sent the message.</param>
@@ -58,7 +58,7 @@ namespace DolbyIO.Comms
     public delegate void ConferenceMessageReceivedEventHandler(string conferenceId, string userId, ParticipantInfo info, string message);
 
     /// <summary>
-    /// The <see cref="DolbyIO.Comms.Services.Conference.InvitationReceived">Conference.InvitationReceived</see> event handler.
+    /// The <see cref="DolbyIO.Comms.Services.ConferenceService.InvitationReceived">Conference.InvitationReceived</see> event handler.
     /// </summary>
     /// <param name="conferenceId">The conference ID.</param>
     /// <param name="conferenceAlias">The conference alias.</param>
@@ -66,13 +66,13 @@ namespace DolbyIO.Comms
     public delegate void ConferenceInvitationReceivedEventHandler(string conferenceId, string conferenceAlias, ParticipantInfo info);
 
     /// <summary>
-    /// The <see cref="DolbyIO.Comms.Services.Conference.DvcError">Conference.DvcError</see> event handler.
+    /// The <see cref="DolbyIO.Comms.Services.ConferenceService.DvcError">Conference.DvcError</see> event handler.
     /// </summary>
     /// <param name="reason">The reason for the error.</param>
     public delegate void DvcErrorEventHandler(string reason);
     
     /// <summary>
-    /// The <see cref="DolbyIO.Comms.Services.Conference.PeerConnectionError">Conference.PeerConnectionError</see> event handler.
+    /// The <see cref="DolbyIO.Comms.Services.ConferenceService.PeerConnectionError">Conference.PeerConnectionError</see> event handler.
     /// </summary>
     /// <param name="reason">The reason for the error.</param>
     public delegate void PeerConnectionErrorEventHandler(string reason);
@@ -80,19 +80,19 @@ namespace DolbyIO.Comms
     // -- Devices --
 
     /// <summary>
-    /// The <see cref="DolbyIO.Comms.Services.MediaDevice.Added">MediaDevice.Added</see> event handler.
+    /// The <see cref="DolbyIO.Comms.Services.MediaDeviceService.Added">MediaDevice.Added</see> event handler.
     /// </summary>
     /// <param name="device">The added device.</param>
     public delegate void DeviceAddedEventHandler(AudioDevice device);
 
     /// <summary>
-    /// The <see cref="DolbyIO.Comms.Services.MediaDevice.Removed">MediaDevice.Removed</see> event handler.
+    /// The <see cref="DolbyIO.Comms.Services.MediaDeviceService.Removed">MediaDevice.Removed</see> event handler.
     /// </summary>
     /// <param name="uid">A unique device identifier of the removed device.</param>
     public delegate void DeviceRemovedEventHandler([MarshalAs(UnmanagedType.LPArray, SizeConst = Constants.DeviceUidSize, ArraySubType = UnmanagedType.U1)] byte[] uid);
 
     /// <summary>
-    /// The <see cref="DolbyIO.Comms.Services.MediaDevice.Changed">MediaDevice.Changed</see> event handler.
+    /// The <see cref="DolbyIO.Comms.Services.MediaDeviceService.Changed">MediaDevice.Changed</see> event handler.
     /// </summary>
     /// <param name="device">The new device.</param>
     /// <param name="noDevice">A boolean indicating whether there is a device in use for the current direction. True if there is no device; otherwise, false.</param>
