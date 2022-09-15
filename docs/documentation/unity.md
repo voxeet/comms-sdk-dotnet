@@ -84,9 +84,7 @@ public class MyScript : MonoBehaviour
 
 3. Make sure that the SDK is initialized and you can call SDK methods. For more information, see the the [Getting Started](./started.md) guide and [reference](/documentation/api/DolbyIO.Comms.Services.html) documentation.
 
-## MacOS Application Entitlements
-
-For MacOS Applications to capture audio, the `Info.plist` needs to be modified. Add those keys at the end of the Info.plist:
+4. To allow macOS applications to properly capture audio, open the `Info.plist` file and add the following keys at the end of the file:
 
 ```xml
 <key>com.apple.security.device.audio-input</key>
