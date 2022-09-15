@@ -7,8 +7,8 @@ namespace DolbyIO.Comms.Services
     /// <code>
     /// try
     /// {
-    ///     await _sdk.Audio.Local.Start();
-    ///     await _sdk.Audio.Remote.Stop();
+    ///     await _sdk.Audio.Local.StartAsync();
+    ///     await _sdk.Audio.Remote.StopAsync();
     /// }
     /// catch
     /// {

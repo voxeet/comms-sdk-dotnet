@@ -46,7 +46,7 @@ The SDK needs to be initialized before usage.
 
 1. Copy the access token form the Dolby.io dashboard. 
 
-2. Call the [Init](xref:DolbyIO.Comms.DolbyIOSDK#DolbyIO_Comms_DolbyIOSDK_Init_System_String_DolbyIO_Comms_RefreshTokenCallBack_) method using the token to initialize the SDK.
+2. Call the [InitAsync](xref:DolbyIO.Comms.DolbyIOSDK#DolbyIO_Comms_DolbyIOSDK_InitAsync_System_String_DolbyIO_Comms_RefreshTokenCallBack_) method using the token to initialize the SDK.
 
 The Init method should be called only once. We recommend calling the Init method in the Awake method of a new script that you can add as a component of the created game object.
 
@@ -63,7 +63,7 @@ public class MyScript : MonoBehaviour
     {
         try
         {
-            await _sdk.Init("Access Token", () => 
+            await _sdk.InitAsync("Access Token", () => 
             {
                 return "New Access Token";
             });

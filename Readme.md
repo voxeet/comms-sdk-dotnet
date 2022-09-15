@@ -36,7 +36,7 @@ dotnet add package DolbyIO.Comms.Sdk
 
 #### 1. Initialize the SDK
 
-Initialize the SDK using the secure authentication method that uses a token in the application. For the purpose of this application, use a [client access token](https://docs.dolby.io/communications-apis/docs/overview-developer-tools#client-access-token) generated from the Dolby.io dashboard. Use the following code to initialize the SDK using the [DolbyIOSDK.Init](https://dolbyio.github.io/comms-sdk-dotnet/documentation/api/DolbyIO.Comms.DolbyIOSDK.html#DolbyIO_Comms_DolbyIOSDK_Init_System_String_DolbyIO_Comms_RefreshTokenCallBack_) method:
+Initialize the SDK using the secure authentication method that uses a token in the application. For the purpose of this application, use a [client access token](https://docs.dolby.io/communications-apis/docs/overview-developer-tools#client-access-token) generated from the Dolby.io dashboard. Use the following code to initialize the SDK using the [DolbyIOSDK.InitAsync](https://dolbyio.github.io/comms-sdk-dotnet/documentation/api/DolbyIO.Comms.DolbyIOSDK.html#DolbyIO_Comms_DolbyIOSDK_InitAsync_System_String_DolbyIO_Comms_RefreshTokenCallBack_) method:
 
 ```cs
 using DolbyIO.Comms;
@@ -45,7 +45,7 @@ DolbyIOSDK _sdk = new DolbyIOSDK();
 
 try
 {
-    await _sdk.Init("Access Token", () => 
+    await _sdk.InitAsync("Access Token", () => 
     {
         // Refresh Callback
         return "Refreshed Access Token";
@@ -81,7 +81,7 @@ _sdk.Conference.ParticipantAdded = new ParticipantAddedEventHandler
 
 A session is a connection between the client application and the Dolby.io backend. When opening a session, you should provide a name. Commonly, this is the name of the participant who established the session. The session can remain active for the whole lifecycle of your application. 
 
-To open a new session, use the [Session.Open](https://dolbyio.github.io/comms-sdk-dotnet/documentation/api/DolbyIO.Comms.Services.Session.html#DolbyIO_Comms_Services_Session_Open_DolbyIO_Comms_UserInfo_) method as in the following example:
+To open a new session, use the [Session.OpenAsync](https://dolbyio.github.io/comms-sdk-dotnet/documentation/api/DolbyIO.Comms.Services.Session.html#DolbyIO_Comms_Services_Session_OpenAsync_DolbyIO_Comms_UserInfo_) method as in the following example:
 
 ```cs
 try
@@ -89,7 +89,7 @@ try
     UserInfo user = new UserInfo();
     user.Name = "My Name";
 
-    user = await _sdk.Session.Open(user);
+    user = await _sdk.Session.OpenAsync(user);
 }
 catch (DolbyIOException e)
 {
@@ -101,7 +101,7 @@ catch (DolbyIOException e)
 
 A conference is a multi-person call where participants exchange audio with one another. To distinguish between multiple conferences, you should assign a conference alias or name. When multiple participants join a conference of the same name using a token of the same Dolby.io application, they will be able to meet in a call.
 
-To create and join a conference, use the [Conference.Create](https://dolbyio.github.io/comms-sdk-dotnet/documentation/api/DolbyIO.Comms.Services.Conference.html#DolbyIO_Comms_Services_Conference_Create_DolbyIO_Comms_ConferenceOptions_) and [Conference.Join](https://dolbyio.github.io/comms-sdk-dotnet/documentation/api/DolbyIO.Comms.Services.Conference.html#DolbyIO_Comms_Services_Conference_Join_DolbyIO_Comms_ConferenceInfos_DolbyIO_Comms_JoinOptions_) methods as in the following example:
+To create and join a conference, use the [Conference.CreateAsync](https://dolbyio.github.io/comms-sdk-dotnet/documentation/api/DolbyIO.Comms.Services.Conference.html#DolbyIO_Comms_Services_Conference_CreateAsync_DolbyIO_Comms_ConferenceOptions_) and [Conference.JoinAsync](https://dolbyio.github.io/comms-sdk-dotnet/documentation/api/DolbyIO.Comms.Services.Conference.html#DolbyIO_Comms_Services_Conference_JoinAsync_DolbyIO_Comms_ConferenceInfos_DolbyIO_Comms_JoinOptions_) methods as in the following example:
 
 ```cs
 try
@@ -111,8 +111,8 @@ try
 
     JoinOptions joinOpts = new JoinOptions();
 
-    ConferenceInfos conference = await _sdk.Conference.Create(options);
-    ConferenceInfos joinedConference = await _sdk.Conference.Join(conference, joinOpts);
+    ConferenceInfos conference = await _sdk.Conference.CreateAsync(options);
+    ConferenceInfos joinedConference = await _sdk.Conference.JoinAsync(conference, joinOpts);
 }
 catch (DolbyIOException e)
 {
@@ -124,12 +124,12 @@ If the conference already exists, the SDK returns [Conference](https://dolbyio.g
 
 #### 5. Leave the conference
 
-To leave the conference, use the [Conference.Leave](https://dolbyio.github.io/comms-sdk-dotnet/documentation/api/DolbyIO.Comms.Services.Conference.html#DolbyIO_Comms_Services_Conference_Leave) method, as in the following example:
+To leave the conference, use the [Conference.LeaveAsync](https://dolbyio.github.io/comms-sdk-dotnet/documentation/api/DolbyIO.Comms.Services.Conference.html#DolbyIO_Comms_Services_Conference_LeaveAsync) method, as in the following example:
 
 ```cs
 try
 {
-    await _sdk.Session.Leave();
+    await _sdk.Session.LeaveAsync();
 }
 catch (DolbyIOException e)
 {
@@ -139,12 +139,12 @@ catch (DolbyIOException e)
 
 #### 6. Close the session and dispose of the SDK
 
-After leaving the conference, close the session and dispose the SDK using the [Session.Close](https://dolbyio.github.io/comms-sdk-dotnet/documentation/api/DolbyIO.Comms.Services.Session.html#DolbyIO_Comms_Services_Session_Close) and [DolbyIOSDK.Dispose](https://dolbyio.github.io/comms-sdk-dotnet/documentation/api/DolbyIO.Comms.DolbyIOSDK.html#DolbyIO_Comms_DolbyIOSDK_Dispose) methods.
+After leaving the conference, close the session and dispose the SDK using the [Session.CloseAsync](https://dolbyio.github.io/comms-sdk-dotnet/documentation/api/DolbyIO.Comms.Services.Session.html#DolbyIO_Comms_Services_Session_CloseAsync) and [DolbyIOSDK.Dispose](https://dolbyio.github.io/comms-sdk-dotnet/documentation/api/DolbyIO.Comms.DolbyIOSDK.html#DolbyIO_Comms_DolbyIOSDK_Dispose) methods.
 
 ```cs
 try
 {
-    await _sdk.Session.Close();
+    await _sdk.Session.CloseAsync();
     _sdk.Dispose();
 }
 catch (DolbyIOException e)
@@ -167,11 +167,11 @@ public class Call
 {
     private DolbyIOSDK _sdk = new DolbyIOSDK();
 
-    public async Task OpenAndJoin()
+    public async Task OpenAndJoinAsync()
     {
         try
         {
-            await _sdk.Init("Access Token", () =>
+            await _sdk.InitAsync("Access Token", () =>
             {
                 return "Refreshed Access Token";
             });
@@ -191,15 +191,15 @@ public class Call
             UserInfo user = new UserInfo();
             user.Name = "My Name";
 
-            user = await _sdk.Session.Open(user);
+            user = await _sdk.Session.OpenAsync(user);
 
             ConferenceOptions options = new ConferenceOptions();
             options.Alias = "Conference alias";
 
             JoinOptions joinOpts = new JoinOptions();
 
-            ConferenceInfos conference = await _sdk.Conference.Create(options);
-            ConferenceInfos joinedConference = await _sdk.Conference.Join(conference, joinOpts);
+            ConferenceInfos conference = await _sdk.Conference.CreateAsync(options);
+            ConferenceInfos joinedConference = await _sdk.Conference.JoinAsync(conference, joinOpts);
         }
         catch (DolbyIOException e)
         {
@@ -207,12 +207,12 @@ public class Call
         }
     }
 
-    public async Task LeaveAndClose()
+    public async Task LeaveAndCloseAsync()
     {
         try
         {
-            await _sdk.Conference.Leave();
-            await _sdk.Session.Close();
+            await _sdk.Conference.LeaveAsync();
+            await _sdk.Session.CloseAsync();
 
             _sdk.Dispose();
         }
@@ -233,11 +233,11 @@ public class Program
     public static async Task Main()
     {
         Call call = new Call();
-        await call.OpenAndJoin();
+        await call.OpenAndJoinAsync();
 
         Console.ReadKey();
 
-        await call.LeaveAndClose();
+        await call.LeaveAndCloseAsync();
     }
 }
 ```

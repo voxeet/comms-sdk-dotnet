@@ -145,7 +145,7 @@ namespace DolbyIO.Comms
         /// </summary>
         /// <param name="accessToken">The access token provided by the customer's backend.</param>
         /// <param name="cb">The refresh token callback.</param>
-        public async Task Init(string accessToken, RefreshTokenCallBack cb)
+        public async Task InitAsync(string accessToken, RefreshTokenCallBack cb)
         {
             if (_initialized)
             {
@@ -164,7 +164,7 @@ namespace DolbyIO.Comms
         /// </summary>
         /// <param name="logLevel">The required logging level.</param>
         /// <returns>A task that represents the returned asynchronous operation.</returns>
-        public async Task SetLogLevel(LogLevel logLevel)
+        public async Task SetLogLevelAsync(LogLevel logLevel)
         {
             await Task.Run(() =>  Native.CheckException(Native.SetLogLevel(logLevel))).ConfigureAwait(false);
         }

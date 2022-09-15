@@ -11,25 +11,25 @@ namespace DolbyIO.Comms.Tests
             UserInfo user = new UserInfo();
             user.Name = "Anonymous";
 
-            await Assert.ThrowsAsync<DolbyIOException>(async () => await _sdk.Session.Open(user));
+            await Assert.ThrowsAsync<DolbyIOException>(async () => await _sdk.Session.OpenAsync(user));
         }
 
         [Fact]
         public async void Test_Conference_ThrowsIfNotInitialized()
         {
-            await Assert.ThrowsAsync<DolbyIOException>(async () => await _sdk.Conference.Leave());
+            await Assert.ThrowsAsync<DolbyIOException>(async () => await _sdk.Conference.LeaveAsync());
         }
 
         [Fact]
         public async void Test_MediaDevice_ThrowsIfNotInitialized()
         {
-            await Assert.ThrowsAsync<DolbyIOException>(async () => await _sdk.MediaDevice.GetAudioDevices());
+            await Assert.ThrowsAsync<DolbyIOException>(async () => await _sdk.MediaDevice.GetAudioDevicesAsync());
         }
 
         [Fact]
         public async void Test_Audio_ThrowsIfNotInitialized()
         {
-            await Assert.ThrowsAsync<DolbyIOException>(async () => await _sdk.Audio.Local.Start());
+            await Assert.ThrowsAsync<DolbyIOException>(async () => await _sdk.Audio.Local.StartAsync());
         }
 
         [Fact]

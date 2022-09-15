@@ -102,8 +102,8 @@ public class CommandLine
 
         try
         {
-            await _sdk.Conference.Leave();
-            await _sdk.Session.Close();
+            await _sdk.Conference.LeaveAsync();
+            await _sdk.Session.CloseAsync();
         }
         catch (DolbyIOException e)
         {
@@ -127,9 +127,9 @@ public class CommandLine
     {
         try
         {
-            await _sdk.SetLogLevel((LogLevel)logLevel);
+            await _sdk.SetLogLevelAsync((LogLevel)logLevel);
             
-            await _sdk.Init(appKey, () => 
+            await _sdk.InitAsync(appKey, () => 
             {
                 Log.Debug("RefreshTokenCallBack called.");
                 return "dummy";
@@ -164,7 +164,7 @@ public class CommandLine
             UserInfo user = new UserInfo();
             user.Name = name;
 
-            user = await _sdk.Session.Open(user);
+            user = await _sdk.Session.OpenAsync(user);
 
             Log.Debug($"Session opened: {user.Id}");
         }
@@ -186,13 +186,13 @@ public class CommandLine
             JoinOptions joinOpts = new JoinOptions();
             joinOpts.Connection.SpatialAudio = true;
             
-            Conference conference = await _sdk.Conference.Create(options);
+            Conference conference = await _sdk.Conference.CreateAsync(options);
             
-            Conference result = await _sdk.Conference.Join(conference, joinOpts);
+            Conference result = await _sdk.Conference.JoinAsync(conference, joinOpts);
             var permissions = result.Permissions;
 
-            await _sdk.Audio.Local.Start();
-            await _sdk.Conference.SetSpatialEnvironment
+            await _sdk.Audio.Local.StartAsync();
+            await _sdk.Conference.SetSpatialEnvironmentAsync
             (
                 new Vector3(1.0f, 1.0f, 1.0f),  // Scale
                 new Vector3(0.0f, 0.0f, -1.0f), // Forward
@@ -216,12 +216,12 @@ public class CommandLine
             options.Params.SpatialAudioStyle = SpatialAudioStyle.Individual;
             options.Alias = alias;
             
-            Conference conference = await _sdk.Conference.Create(options);
+            Conference conference = await _sdk.Conference.CreateAsync(options);
 
             ListenOptions listenOptions = new ListenOptions();
             listenOptions.Connection.SpatialAudio = true;
 
-            var result = _sdk.Conference.Listen(conference, listenOptions);
+            var result = _sdk.Conference.ListenAsync(conference, listenOptions);
 
             await InputLoop();
         }
@@ -234,10 +234,10 @@ public class CommandLine
     {
         try
         {
-            Conference conference = await _sdk.Conference.Demo(true);
-            await _sdk.Audio.Local.Start();
+            Conference conference = await _sdk.Conference.DemoAsync(true);
+            await _sdk.Audio.Local.StartAsync();
 
-            await _sdk.Conference.SetSpatialPosition(_sdk.Session.User.Id, new Vector3(0.0f, 0.0f, 0.0f));
+            await _sdk.Conference.SetSpatialPositionAsync(_sdk.Session.User.Id, new Vector3(0.0f, 0.0f, 0.0f));
 
             await InputLoop();
         }
@@ -251,11 +251,11 @@ public class CommandLine
     {
         try
         {
-            List<AudioDevice> devices = await _sdk.MediaDevice.GetAudioDevices();
+            List<AudioDevice> devices = await _sdk.MediaDevice.GetAudioDevicesAsync();
             devices.ForEach(d => Console.WriteLine(d.Uid + " : " + d.Name));
             
-            var device = await _sdk.MediaDevice.GetCurrentAudioInputDevice();
-            await _sdk.MediaDevice.SetPreferredAudioInputDevice(device);
+            var device = await _sdk.MediaDevice.GetCurrentAudioInputDeviceAsync();
+            await _sdk.MediaDevice.SetPreferredAudioInputDeviceAsync(device);
 
             await InputLoop();
         }
@@ -295,10 +295,10 @@ public class CommandLine
         Log.Debug($"OnParticipantAdded: {participant.Id} {participant.Info.Name} {participant.Status}");
         try 
         {
-            var infos = await _sdk.Conference.Current();
+            var infos = await _sdk.Conference.CurrentAsync();
             if (SpatialAudioStyle.None != infos.SpatialAudioStyle)
             {
-                await _sdk.Conference.SetSpatialPosition(participant.Id, new Vector3(0.0f, 0.0f, 0.0f));
+                await _sdk.Conference.SetSpatialPositionAsync(participant.Id, new Vector3(0.0f, 0.0f, 0.0f));
             }
         }
         catch (DolbyIOException e)
@@ -312,10 +312,10 @@ public class CommandLine
         Log.Debug($"OnParticipantUpdated: {participant.Id} {participant.Info.Name} {participant.Status}");
         try 
         {
-            var infos = await _sdk.Conference.Current();
+            var infos = await _sdk.Conference.CurrentAsync();
             if (SpatialAudioStyle.None != infos.SpatialAudioStyle)
             {
-                await _sdk.Conference.SetSpatialPosition(participant.Id, new Vector3(0.0f, 0.0f, 0.0f));
+                await _sdk.Conference.SetSpatialPositionAsync(participant.Id, new Vector3(0.0f, 0.0f, 0.0f));
             }
         }
         catch (DolbyIOException e)
