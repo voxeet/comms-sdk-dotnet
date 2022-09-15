@@ -24,12 +24,12 @@ namespace DolbyIO.Comms.Unity
                 {
                     if (AutoLeaveConference && _sdk.Conference.IsInConference)
                     {
-                        await _sdk.Conference.Leave();
+                        await _sdk.Conference.LeaveAsync();
                     }
 
                     if (AutoCloseSession && _sdk.Session.IsOpen)
                     {
-                        await _sdk.Session.Close();
+                        await _sdk.Session.CloseAsync();
                     }
 
                     _sdk.Dispose();

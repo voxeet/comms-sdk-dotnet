@@ -9,7 +9,7 @@ public class Call
     {
         try
         {
-            await _sdk.Init("My Access Token", () => {
+            await _sdk.InitAsync("My Access Token", () => {
                 return "";
             });
 
@@ -28,15 +28,15 @@ public class Call
             UserInfo user = new UserInfo();
             user.Name = "My Name";
 
-            user = await _sdk.Session.Open(user);
+            user = await _sdk.Session.OpenAsync(user);
 
             ConferenceOptions options = new ConferenceOptions();
             options.Alias = "Conference alias";
 
             JoinOptions joinOpts = new JoinOptions();
 
-            Conference conference = await _sdk.Conference.Create(options);
-            Conference joinedConference = await _sdk.Conference.Join(conference, joinOpts);
+            Conference conference = await _sdk.Conference.CreateAsync(options);
+            Conference joinedConference = await _sdk.Conference.JoinAsync(conference, joinOpts);
         }
         catch (DolbyIOException e)
         {
@@ -48,8 +48,8 @@ public class Call
     {
         try
         {
-            await _sdk.Conference.Leave();
-            await _sdk.Session.Close();
+            await _sdk.Conference.LeaveAsync();
+            await _sdk.Session.CloseAsync();
 
             _sdk.Dispose();
         }

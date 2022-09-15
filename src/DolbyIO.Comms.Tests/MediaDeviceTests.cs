@@ -33,11 +33,11 @@ namespace DolbyIO.Comms.Tests
         {
             AudioDevice device = new AudioDevice();
 
-            await _fixture.Sdk.MediaDevice.GetAudioDevices();
-            await _fixture.Sdk.MediaDevice.GetCurrentAudioInputDevice();
-            await _fixture.Sdk.MediaDevice.GetCurrentAudioOutputDevice();
-            await _fixture.Sdk.MediaDevice.SetPreferredAudioInputDevice(device);
-            await _fixture.Sdk.MediaDevice.SetPreferredAudioOutputDevice(device);
+            await _fixture.Sdk.MediaDevice.GetAudioDevicesAsync();
+            await _fixture.Sdk.MediaDevice.GetCurrentAudioInputDeviceAsync();
+            await _fixture.Sdk.MediaDevice.GetCurrentAudioOutputDeviceAsync();
+            await _fixture.Sdk.MediaDevice.SetPreferredAudioInputDeviceAsync(device);
+            await _fixture.Sdk.MediaDevice.SetPreferredAudioOutputDeviceAsync(device);
         }
     }
 }

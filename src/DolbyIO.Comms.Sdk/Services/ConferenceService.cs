@@ -10,14 +10,14 @@ namespace DolbyIO.Comms.Services
     /// <summary>
     /// The Conference service allows joining and leaving conferences as well as
     /// subscribing to conference events. To use the Conference Service, follow these steps:
-    /// 1. Open a session using <see cref="DolbyIO.Comms.Services.SessionService.Open(UserInfo)">session.open</see>.
+    /// 1. Open a session using <see cref="DolbyIO.Comms.Services.SessionService.OpenAsync(UserInfo)">session.open</see>.
     /// 2. Subscribe to events exposed through the service, for example 
     /// <see cref="DolbyIO.Comms.Services.ConferenceService.StatusUpdated">statusUpdated</see> and 
     /// <see cref="DolbyIO.Comms.Services.ConferenceService.ParticipantUpdated">participantUpdated</see>.
-    /// 3. Create a conference using the <see cref="DolbyIO.Comms.Services.ConferenceService.Create(ConferenceOptions)">create</see> method.
-    /// 4. Join the created conference using the <see cref="DolbyIO.Comms.Services.ConferenceService.Join(Conference, JoinOptions)">join</see> method
-    /// or use the <see cref="DolbyIO.Comms.Services.ConferenceService.Listen(Conference, ListenOptions)">listen</see> method to join the conference as a listener.
-    /// 5. Leave the conference using the <see cref="DolbyIO.Comms.Services.ConferenceService.Leave">leave</see> method.
+    /// 3. Create a conference using the <see cref="DolbyIO.Comms.Services.ConferenceService.CreateAsync(ConferenceOptions)">create</see> method.
+    /// 4. Join the created conference using the <see cref="DolbyIO.Comms.Services.ConferenceService.JoinAsync(Conference, JoinOptions)">join</see> method
+    /// or use the <see cref="DolbyIO.Comms.Services.ConferenceService.ListenAsync(Conference, ListenOptions)">listen</see> method to join the conference as a listener.
+    /// 5. Leave the conference using the <see cref="DolbyIO.Comms.Services.ConferenceService.LeaveAsync">leave</see> method.
     /// </summary>
     public class ConferenceService
     {   
@@ -216,8 +216,8 @@ namespace DolbyIO.Comms.Services
         /// <summary>
         /// Gets full information about the currently active conference.
         /// </summary>
-        /// <returns>The ConferenceInfos describing the conference.</returns>
-        public async Task<Conference> Current()
+        /// <returns>The Conference  object.</returns>
+        public async Task<Conference> CurrentAsync()
         {
             return await Task.Run(() =>
             {
@@ -233,7 +233,7 @@ namespace DolbyIO.Comms.Services
         /// </summary>
         /// <param name="options">The conference options.</param>
         /// <returns>The result object producing the Conference asynchronously.</returns>
-        public async Task<Conference> Create(ConferenceOptions options)
+        public async Task<Conference> CreateAsync(ConferenceOptions options)
         {
             return await Task.Run(() => 
             {
@@ -249,8 +249,8 @@ namespace DolbyIO.Comms.Services
         /// </summary>
         /// <param name="conference">The conference object that need to contain the conference ID.</param>
         /// <param name="options">The join options for the SDK user.</param>
-        /// <returns>The result object producing the ConferenceInfos asynchronously.</returns>
-        public async Task<Conference> Join(Conference conference, JoinOptions options)
+        /// <returns>The result object producing the Conference asynchronously.</returns>
+        public async Task<Conference> JoinAsync(Conference conference, JoinOptions options)
         {
             return await Task.Run(() => 
             {
@@ -267,8 +267,8 @@ namespace DolbyIO.Comms.Services
         /// </summary>
         /// <param name="conference">The conference object that need to contain conference ID.</param>
         /// <param name="options">The listen options for the SDK user.</param>
-        /// <returns>The result object producing the ConferenceInfos asynchronously.</returns>
-        public async Task<Conference> Listen(Conference conference, ListenOptions options)
+        /// <returns>The result object producing the Conference asynchronously.</returns>
+        public async Task<Conference> ListenAsync(Conference conference, ListenOptions options)
         {
             return await Task.Run(() =>
             {
@@ -284,8 +284,8 @@ namespace DolbyIO.Comms.Services
         /// </summary>
         /// <param name="spatialAudio">A boolean that indicates whether spatial audio should be enabled for the joining
         /// participant. By default, the parameter is set to true.</param>
-        /// <returns>The result object producing the ConferenceInfos asynchronously.</returns>
-        public async Task<Conference> Demo(bool spatialAudio = true)
+        /// <returns>The result object producing the Conference asynchronously.</returns>
+        public async Task<Conference> DemoAsync(bool spatialAudio = true)
         {
             return await Task.Run(() => 
             {
@@ -319,7 +319,7 @@ namespace DolbyIO.Comms.Services
         /// <param name="right">A vector describing the direction the application considers
         /// as right. The value can be either +1, 0, or -1 and must be orthogonal to
         /// forward and up.</param>
-        public async Task SetSpatialEnvironment(Vector3 scale, Vector3 forward, Vector3 up, Vector3 right)
+        public async Task SetSpatialEnvironmentAsync(Vector3 scale, Vector3 forward, Vector3 up, Vector3 right)
         {
             await Task.Run(() => Native.CheckException(Native.SetSpatialEnvironment(
                 scale.X, scale.Y, scale.Z,
@@ -337,7 +337,7 @@ namespace DolbyIO.Comms.Services
         /// For more information about spatial audio, see the [Spatial Audio](https://docs.dolby.io/communications-apis/docs/guides-spatial-audio) guide.
         /// </summary>
         /// <param name="direction">The direction the local participant is facing in space.</param>
-        public async Task SetSpatialDirection(Vector3 direction)
+        public async Task SetSpatialDirectionAsync(Vector3 direction)
         {
             await Task.Run(() => Native.CheckException(Native.SetSpatialDirection(direction.X, direction.Y, direction.Z))).ConfigureAwait(false);
         }
@@ -355,7 +355,7 @@ namespace DolbyIO.Comms.Services
         /// </summary>
         /// <param name="participantId">The selected participant. Using the local participant sets the location from which the participant will hear a conference. Using a remote participant sets the position from which the participant's audio will be rendered.</param>
         /// <param name="position">The participant's audio location.</param>
-        public async Task SetSpatialPosition(string participantId, Vector3 position)
+        public async Task SetSpatialPositionAsync(string participantId, Vector3 position)
         {
             await Task.Run(() => Native.CheckException(Native.SetSpatialPosition(participantId, position.X, position.Y, position.Z))).ConfigureAwait(false);
         }
@@ -367,7 +367,7 @@ namespace DolbyIO.Comms.Services
         /// </summary>
         /// <param name="message">The message.</param>
         /// <returns>The returned asynchronous operation.</returns>
-        public async Task SendMessage(string message)
+        public async Task SendMessageAsync(string message)
         {
             await Task.Run(() => Native.CheckException(Native.SendMessage(message))).ConfigureAwait(false);
         }
@@ -377,7 +377,7 @@ namespace DolbyIO.Comms.Services
         /// </summary>
         /// <param name="conferenceId">The conference ID.</param>
         /// <returns>The returned asynchronous operation.</returns>
-        public async Task DeclineInvitation(string conferenceId) {
+        public async Task DeclineInvitationAsync(string conferenceId) {
             await Task.Run(() => Native.CheckException(Native.DeclineInvitation(conferenceId))).ConfigureAwait(false);
         }
 
@@ -385,7 +385,7 @@ namespace DolbyIO.Comms.Services
         /// Leaves a conference.
         /// </summary>
         /// <returns>The returned asynchronous operation.</returns>
-        public async Task Leave()
+        public async Task LeaveAsync()
         {
             await Task.Run(() => {
                 Native.CheckException(Native.Leave());
