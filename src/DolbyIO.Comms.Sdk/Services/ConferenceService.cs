@@ -217,7 +217,7 @@ namespace DolbyIO.Comms.Services
         /// Gets information about the current conference.
         /// </summary>
         /// <returns>The Conference  object.</returns>
-        public async Task<Conference> CurrentAsync()
+        public async Task<Conference> GetCurrentAsync()
         {
             return await Task.Run(() =>
             {
