@@ -12,7 +12,7 @@ namespace DolbyIO.Comms.Services
         private ConferenceStatusUpdatedEventHandler _statusUpdated;
 
         /// <summary>
-        /// Sets the <see cref="ConferenceStatusUpdatedEventHandler"/> that will be raised when a conference status has changed.
+        /// Sets the <see cref="ConferenceStatusUpdatedEventHandler"/> that is raised when a conference status has changed.
         /// See <see cref="DolbyIO.Comms.ConferenceStatus">ConferenceStatus</see>
         /// <example>
         /// <code>
@@ -36,7 +36,7 @@ namespace DolbyIO.Comms.Services
         private ParticipantAddedEventHandler _participantAdded;
 
         /// <summary>
-        /// Sets the <see cref="ParticipantAddedEventHandler"/> that will be raised when a new participant has been added to a conference.
+        /// Sets the <see cref="ParticipantAddedEventHandler"/> that is raised when a new participant has been added to a conference.
         /// <example>
         /// <code>
         /// _sdk.Conference.ParticipantAdded = (Participant participant) => 
@@ -59,7 +59,7 @@ namespace DolbyIO.Comms.Services
         private ParticipantUpdatedEventHandler _participantUpdated;
 
         /// <summary>
-        /// Sets the <see cref="ParticipantUpdatedEventHandler"/> that will be raised when a conference participant has changed a status.
+        /// Sets the <see cref="ParticipantUpdatedEventHandler"/> that is raised when a conference participant has changed a status.
         /// <example>
         /// <code>
         /// _sdk.Conference.ParticipantUpdated = (Participant participant) =>
@@ -82,7 +82,7 @@ namespace DolbyIO.Comms.Services
         private ActiveSpeakerChangeEventHandler _activeSpeakerChange;
 
         /// <summary>
-        /// Sets the <see cref="ActiveSpeakerChangeEventHandler"/> that will be raised when an active speaker has changed.
+        /// Sets the <see cref="ActiveSpeakerChangeEventHandler"/> that is raised when an active speaker has changed.
         /// <example>
         /// <code>
         /// _sdk.Conference.ActiveSpeakerChange = (string conferenceId, int count, string[] activeSpeakers) => 
@@ -105,7 +105,7 @@ namespace DolbyIO.Comms.Services
         private ConferenceMessageReceivedEventHandler _messageReceived;
 
         /// <summary>
-        /// Sets the <see cref="ConferenceMessageReceivedEventHandler"/> that will be raised when a participant receives a message.
+        /// Sets the <see cref="ConferenceMessageReceivedEventHandler"/> that is raised when a participant receives a message.
         /// </summary>
         /// <example>
         /// <code>
@@ -128,7 +128,7 @@ namespace DolbyIO.Comms.Services
         private ConferenceInvitationReceivedEventHandler _invitationReceived;
 
         /// <summary>
-        /// Sets the <see cref="ConferenceInvitationReceivedEventHandler"/> that will be raised when a participant receives a conference invitation.
+        /// Sets the <see cref="ConferenceInvitationReceivedEventHandler"/> that is raised when a participant receives a conference invitation.
         /// </summary>
         /// <example>
         /// <code>
@@ -151,7 +151,7 @@ namespace DolbyIO.Comms.Services
         private DvcErrorEventHandler _dvcError;
 
         /// <summary>
-        /// Sets the <see cref="DvcErrorEventHandler"/> that will be raised when an error related to the Dolby Voice Codec (DVC) occurs.
+        /// Sets the <see cref="DvcErrorEventHandler"/> that is raised when an error related to the Dolby Voice Codec (DVC) occurs.
         /// </summary>
         /// <example>
         /// <code>
@@ -174,7 +174,7 @@ namespace DolbyIO.Comms.Services
         private PeerConnectionErrorEventHandler _peerConnectionError;
 
         /// <summary>
-        /// Sets the <see cref="PeerConnectionErrorEventHandler"/> that will be raised when a peer connection problem occurs.
+        /// Sets the <see cref="PeerConnectionErrorEventHandler"/> that is raised when a peer connection problem occurs.
         /// </summary>
         /// <example>
         /// <code>

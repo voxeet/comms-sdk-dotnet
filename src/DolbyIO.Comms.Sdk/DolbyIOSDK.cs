@@ -15,7 +15,7 @@ namespace DolbyIO.Comms
         /// Raised when an error occurs during a Session Initiation Protocol (SIP) negotiation
         /// of the local participant's peer connection.
         /// </summary>
-        /// <exception cref="DolbyIOException">Will be thrown when <see cref="InitAsync(string, RefreshTokenCallBack)"/> has not yet been called.</exception>
+        /// <exception cref="DolbyIOException">Is thrown when <see cref="InitAsync(string, RefreshTokenCallBack)"/> has not yet been called.</exception>
         public SignalingChannelErrorEventHandler SignalingChannelError
         {
             set 
@@ -35,7 +35,7 @@ namespace DolbyIO.Comms
         /// <summary>
         /// Raised when the access token is invalid or has expired.
         /// </summary>
-        /// <exception cref="DolbyIOException">Will be thrown when <see cref="InitAsync(string, RefreshTokenCallBack)"/> has not yet been called.</exception>
+        /// <exception cref="DolbyIOException">Is thrown when <see cref="InitAsync(string, RefreshTokenCallBack)"/> has not yet been called.</exception>
         public InvalidTokenErrorEventHandler InvalidTokenError
         {
             set
@@ -55,7 +55,7 @@ namespace DolbyIO.Comms
         /// <summary>
         /// Gets the Session service.
         /// </summary>
-        /// <exception cref="DolbyIOException">Will be thrown when <see cref="InitAsync(string, RefreshTokenCallBack)"/> has not yet been called.</exception>
+        /// <exception cref="DolbyIOException">Is thrown when <see cref="InitAsync(string, RefreshTokenCallBack)"/> has not yet been called.</exception>
         public SessionService Session 
         {
             get 
@@ -74,7 +74,7 @@ namespace DolbyIO.Comms
         /// <summary>
         /// Gets the Conference service.
         /// </summary>
-        /// <exception cref="DolbyIOException">Will be thrown when <see cref="InitAsync(string, RefreshTokenCallBack)"/> has not yet been called.</exception>
+        /// <exception cref="DolbyIOException">Is thrown when <see cref="InitAsync(string, RefreshTokenCallBack)"/> has not yet been called.</exception>
         public ConferenceService Conference 
         {
             get 
@@ -93,7 +93,7 @@ namespace DolbyIO.Comms
         /// <summary>
         /// Gets the MediaDevice service.
         /// </summary>
-        /// <exception cref="DolbyIOException">Will be thrown when <see cref="InitAsync(string, RefreshTokenCallBack)"/> has not yet been called.</exception>
+        /// <exception cref="DolbyIOException">Is thrown when <see cref="InitAsync(string, RefreshTokenCallBack)"/> has not yet been called.</exception>
         public MediaDeviceService MediaDevice
         {
             get
@@ -110,9 +110,9 @@ namespace DolbyIO.Comms
         private AudioService _audio = new AudioService();
 
         /// <summary>
-        /// Gets the Audio service.
+        /// Gets the audio service.
         /// </summary>
-        /// <exception cref="DolbyIOException">Will be thrown when <see cref="InitAsync(string, RefreshTokenCallBack)"/> has not yet been called.</exception>
+        /// <exception cref="DolbyIOException">Is thrown when <see cref="InitAsync(string, RefreshTokenCallBack)"/> has not yet been called.</exception>
         public AudioService Audio
         {
             get 
@@ -138,7 +138,7 @@ namespace DolbyIO.Comms
         /// </summary>
         /// <param name="accessToken">The access token provided by the customer's backend.</param>
         /// <param name="cb">The refresh token callback.</param>
-        /// <exception cref="DolbyIOException">Will be thrown when <see cref="InitAsync(string, RefreshTokenCallBack)"/> has not yet been called.</exception>
+        /// <exception cref="DolbyIOException">Is thrown when <see cref="InitAsync(string, RefreshTokenCallBack)"/> has not yet been called.</exception>
         public async Task InitAsync(string accessToken, RefreshTokenCallBack cb)
         {
             if (_initialized)

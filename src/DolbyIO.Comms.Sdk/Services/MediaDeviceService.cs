@@ -12,7 +12,7 @@ namespace DolbyIO.Comms.Services
         private DeviceAddedEventHandler _added;
 
         /// <summary>
-        /// Sets the <see cref="DeviceAddedEventHandler"/> that will be raised when a new audio or video device is added to the system.
+        /// Sets the <see cref="DeviceAddedEventHandler"/> that is raised when a new audio or video device is added to the system.
         /// </summary>
         /// <value>The <see cref="DeviceAddedEventHandler"/> event handler.</value>
         public DeviceAddedEventHandler Added
@@ -27,7 +27,7 @@ namespace DolbyIO.Comms.Services
         private DeviceRemovedEventHandler _removed;
 
         /// <summary>
-        /// Sets the <see cref="DeviceRemovedEventHandler"/> that will be raised when an audio or video device is removed from the system.
+        /// Sets the <see cref="DeviceRemovedEventHandler"/> that is raised when an audio or video device is removed from the system.
         /// </summary>
         /// <value>The <see cref="DeviceRemovedEventHandler"/> event handler.</value>
         public DeviceRemovedEventHandler Removed
@@ -42,7 +42,7 @@ namespace DolbyIO.Comms.Services
         private DeviceChangedEventHandler _changed;
 
         /// <summary>
-        /// Sets the <see cref="DeviceChangedEventHandler"/> that will be raised when the currently used input or output device has changed.
+        /// Sets the <see cref="DeviceChangedEventHandler"/> that is raised when the currently used input or output device has changed.
         /// </summary>
         /// <value>The <see cref="DeviceChangedEventHandler"/> event handler.</value>
         public DeviceChangedEventHandler Changed
