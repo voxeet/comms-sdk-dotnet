@@ -6,6 +6,13 @@ namespace DolbyIO.Comms.Services
     /// <summary>
     /// The conference service allows joining and leaving conferences as well as
     /// subscribing to conference events.
+    ///
+    /// To use the conference service, follow these steps:
+    /// 1. Open a session using <see cref="DolbyIO.Comms.Services.SessionService.OpenAsync(UserInfo)"/> from the <see cref="DolbyIO.Comms.Services.SessionService"/>..
+    /// 2. Subscribe to events exposed through the service, for example <see cref="StatusUpdated"/> and <see cref="ParticipantUpdated"/>.
+    /// 3. Create a conference using the <see cref="CreateAsync(ConferenceOptions)"/> method.
+    /// 4. Join the created conference using the <see cref="JoinAsync(Conference, JoinOptions)"/> method or use the <see cref="ListenAsync(Conference, ListenOptions)"/> method to join the conference as a listener.
+    /// 5. Leave the conference using the <see cref="LeaveAsync"/> method.
     /// </summary>
     public sealed class ConferenceService
     {
@@ -199,13 +206,14 @@ namespace DolbyIO.Comms.Services
         /// <summary>
         /// Gets whether the SDK is connected to a conference.
         /// </summary>
+        /// <value><c>true</c> if the SDK is connected to a conference; otherwise, <c>false</c>.</value>
         public bool IsInConference { get => _isInConference; }
 
         /// <summary>
         /// Gets the object that represents the currently active conference.
         /// </summary>
-        /// <returns>The <see cref="Task{Conference}"/> that represents the asynchronous operation.
-        /// The <see cref="Task{Conference}.Result"/> property returns the currently active <see cref="Conference" />.</returns>
+        /// <returns>The <xref href="System.Threading.Tasks.Task`1"/> that represents the asynchronous operation.
+        /// The <xref href="System.Threading.Tasks.Task`1.Result"/> property returns the currently active <see cref="Conference" />.</returns>
         public async Task<Conference> CurrentAsync()
         {
             return await Task.Run(() =>
@@ -220,8 +228,8 @@ namespace DolbyIO.Comms.Services
         /// Creates a conference and returns information about the conference upon completion.
         /// </summary>
         /// <param name="options">The conference options.</param>
-        /// <returns>The <see cref="Task{Conference}"/> that represents the asynchronous operation.
-        /// The <see cref="Task{Conference}.Result"/> property returns the newly created <see cref="Conference" />.</returns>
+        /// <returns>The <xref href="System.Threading.Tasks.Task`1"/> that represents the asynchronous operation.
+        /// The <xref href="System.Threading.Tasks.Task`1.Result"/> property returns the newly created <see cref="Conference" />.</returns>
         public async Task<Conference> CreateAsync(ConferenceOptions options)
         {
             return await Task.Run(() => 
@@ -237,8 +245,8 @@ namespace DolbyIO.Comms.Services
         /// </summary>
         /// <param name="conference">The conference object that represents the conference to join.</param>
         /// <param name="options">The join options for the current participant.</param>
-        /// <returns>The <see cref="Task{Conference}"/> that represents the asynchronous operation.
-        /// The <see cref="Task{Conference}.Result"/> property returns the joined <see cref="Conference" /> object.</returns>
+        /// <returns>The <xref href="System.Threading.Tasks.Task`1"/> that represents the asynchronous operation.
+        /// The <xref href="System.Threading.Tasks.Task`1.Result"/> property returns the joined <see cref="Conference" /> object.</returns>
         public async Task<Conference> JoinAsync(Conference conference, JoinOptions options)
         {
             return await Task.Run(() => 
@@ -255,8 +263,8 @@ namespace DolbyIO.Comms.Services
         /// </summary>
         /// <param name="conference">The conference object that represents the conference to listen to.</param>
         /// <param name="options">The join options for the current participant.</param>
-        /// <returns>The <see cref="Task{Conference}"/> that represents the asynchronous operation.
-        /// The <see cref="Task{Conference}.Result"/> property returns the joined <see cref="Conference" /> object.</returns>
+        /// <returns>The <xref href="System.Threading.Tasks.Task`1"/> that represents the asynchronous operation.
+        /// The <xref href="System.Threading.Tasks.Task`1.Result"/> property returns the joined <see cref="Conference" /> object.</returns>
         public async Task<Conference> ListenAsync(Conference conference, ListenOptions options)
         {
             return await Task.Run(() =>
@@ -273,8 +281,8 @@ namespace DolbyIO.Comms.Services
         /// </summary>
         /// <param name="spatialAudio">A boolean that indicates whether spatial audio should be enabled for the joining
         /// participant. By default, the parameter is set to true.</param>
-        /// <returns>The <see cref="Task{Conference}"/> that represents the asynchronous operation.
-        /// The <see cref="Task{Conference}.Result"/> property returns the joined <see cref="Conference" /> object.</returns>
+        /// <returns>The <xref href="System.Threading.Tasks.Task`1"/> that represents the asynchronous operation.
+        /// The <xref href="System.Threading.Tasks.Task`1.Result"/> property returns the joined <see cref="Conference" /> object.</returns>
         public async Task<Conference> DemoAsync(bool spatialAudio = true)
         {
             return await Task.Run(() => 
@@ -309,7 +317,7 @@ namespace DolbyIO.Comms.Services
         /// <param name="right">A vector describing the direction the application considers
         /// as right. The value can be either +1, 0, or -1 and must be orthogonal to
         /// forward and up.</param>
-        /// <returns>A <see cref="Task"/> that represents the asynchronous operation.</returns>
+        /// <returns>A <xref href="System.Threading.Tasks.Task"/> that represents the asynchronous operation.</returns>
         public async Task SetSpatialEnvironmentAsync(Vector3 scale, Vector3 forward, Vector3 up, Vector3 right)
         {
             await Task.Run(() => Native.CheckException(Native.SetSpatialEnvironment(
@@ -328,7 +336,7 @@ namespace DolbyIO.Comms.Services
         /// For more information about spatial audio, see the <see href="https://docs.dolby.io/communications-apis/docs/guides-spatial-audio">Spatial Audio</see> guide.
         /// </summary>
         /// <param name="direction">The direction the local participant is facing in space.</param>
-        /// <returns>A <see cref="Task"/> that represents the asynchronous operation.</returns>
+        /// <returns>A <xref href="System.Threading.Tasks.Task"/> that represents the asynchronous operation.</returns>
         public async Task SetSpatialDirectionAsync(Vector3 direction)
         {
             await Task.Run(() => Native.CheckException(Native.SetSpatialDirection(direction.X, direction.Y, direction.Z))).ConfigureAwait(false);
@@ -347,7 +355,7 @@ namespace DolbyIO.Comms.Services
         /// </summary>
         /// <param name="participantId">The selected participant. Using the local participant sets the location from which the participant will hear a conference. Using a remote participant sets the position from which the participant's audio will be rendered.</param>
         /// <param name="position">The participant's audio location.</param>
-        /// <returns>A <see cref="Task"/> that represents the asynchronous operation.</returns>
+        /// <returns>A <xref href="System.Threading.Tasks.Task"/> that represents the asynchronous operation.</returns>
         public async Task SetSpatialPositionAsync(string participantId, Vector3 position)
         {
             await Task.Run(() => Native.CheckException(Native.SetSpatialPosition(participantId, position.X, position.Y, position.Z))).ConfigureAwait(false);
@@ -360,7 +368,7 @@ namespace DolbyIO.Comms.Services
         /// Attention: The message size is limited to 16KB.
         /// </remarks>
         /// <param name="message">The message to send to the conference.</param>
-        /// <returns>A <see cref="Task"/> that represents the asynchronous operation.</returns>
+        /// <returns>A <xref href="System.Threading.Tasks.Task"/> that represents the asynchronous operation.</returns>
         public async Task SendMessageAsync(string message)
         {
             await Task.Run(() => Native.CheckException(Native.SendMessage(message))).ConfigureAwait(false);
@@ -370,7 +378,7 @@ namespace DolbyIO.Comms.Services
         /// Declines a conference invitation.
         /// </summary>
         /// <param name="conferenceId">The conference identifier.</param>
-        /// <returns>A <see cref="Task"/> that represents the asynchronous operation.</returns>
+        /// <returns>A <xref href="System.Threading.Tasks.Task"/> that represents the asynchronous operation.</returns>
         public async Task DeclineInvitationAsync(string conferenceId) {
             await Task.Run(() => Native.CheckException(Native.DeclineInvitation(conferenceId))).ConfigureAwait(false);
         }
@@ -378,7 +386,7 @@ namespace DolbyIO.Comms.Services
         /// <summary>
         /// Leaves a conference.
         /// </summary>
-        /// <returns>A <see cref="Task"/> that represents the asynchronous operation.</returns>
+        /// <returns>A <xref href="System.Threading.Tasks.Task"/> that represents the asynchronous operation.</returns>
         public async Task LeaveAsync()
         {
             await Task.Run(() => {

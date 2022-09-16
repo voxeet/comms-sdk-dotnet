@@ -1,8 +1,21 @@
 namespace DolbyIO.Comms.Services
 {
     /// <summary>
-    /// The audio service allows access to local and remote audio services.
+    /// The audio service offers two properties for the services that allow accessing audio methods for the <see cref="Local"/> and <see cref="Remote"/> participants.
     /// </summary>
+    /// <example>
+    /// <code>
+    /// try
+    /// {
+    ///     await _sdk.Audio.Local.StartAsync();
+    ///     await _sdk.Audio.Remote.StopAsync(participantId);
+    /// }
+    /// catch
+    /// {
+    ///     // Error handling
+    /// }
+    /// </code>
+    /// </example>
     public sealed class AudioService
     {
         private LocalAudioService _local = new LocalAudioService();

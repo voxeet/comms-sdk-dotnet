@@ -4,8 +4,14 @@ using System.Threading.Tasks;
 namespace DolbyIO.Comms.Services
 {
     /// <summary>
-    /// The device management service provides access to set the input and output audio devices
+    /// The media device service provides access to set the input and output audio devices
     /// as well as getting notifications about the added and removed devices.
+    ///
+    /// To use the media device service, follow these steps:
+    /// 1. Get all current audio devices using the <see cref="GetAudioDevicesAsync"/> method.
+    /// 2. Set the desired input audio device by calling the <see cref="SetPreferredAudioInputDeviceAsync(AudioDevice)"/> method.
+    /// 3. Set the desired output audio device by calling the <see cref="SetPreferredAudioOutputDeviceAsync(AudioDevice)"/> method.
+    /// 4. Subscribe to the <see cref="Added"/>, <see cref="Removed"/>, and <see cref="Changed"/> events.
     /// </summary>
     public sealed class MediaDeviceService
     {
@@ -57,8 +63,8 @@ namespace DolbyIO.Comms.Services
         /// <summary>
         /// Gets a list of all audio devices that are currently available in the system.
         /// </summary>
-        /// <returns>The <see cref="Task{List{AudioDevice}}"/> that represents the asynchronous operation.
-        /// The <see cref="Task{List{AudioDevice}}.Result"/> property returns a list of <see cref="AudioDevice">audio devices</see>
+        /// <returns>The <xref href="System.Threading.Tasks.Task`1"/> that represents the asynchronous operation.
+        /// The <xref href="System.Threading.Tasks.Task`1.Result"/> property returns a list of <see cref="AudioDevice">audio devices</see>
         /// that are currently available in the system.</returns>
         public async Task<List<AudioDevice>> GetAudioDevicesAsync()
         {
@@ -82,8 +88,8 @@ namespace DolbyIO.Comms.Services
         /// <summary>
         /// Gets the audio input device that is currently used by the system.
         /// </summary>
-        /// <returns>The <see cref="Task{AudioDevice}"/> that represents the asynchronous operation.
-        /// The <see cref="Task{AudioDevice}.Result"/> property returns the <see cref="AudioDevice">audio device</see>
+        /// <returns>The <xref href="System.Threading.Tasks.Task`1"/> that represents the asynchronous operation.
+        /// The <xref href="System.Threading.Tasks.Task`1.Result"/> property returns the <see cref="AudioDevice">audio device</see>
         /// that is currently used by the system.</returns>
         public async Task<AudioDevice> GetCurrentAudioInputDeviceAsync()
         {
@@ -113,7 +119,7 @@ namespace DolbyIO.Comms.Services
         /// Sets the preferred input audio device.
         /// </summary>
         /// <param name="device">The <see cref="AudioDevice"/> object to set as preferred input device.</param>
-        /// <returns>A <see cref="Task"/> that represents the asynchronous operation.</returns>
+        /// <returns>A <xref href="System.Threading.Tasks.Task"/> that represents the asynchronous operation.</returns>
         public async Task SetPreferredAudioInputDeviceAsync(AudioDevice device)
         {
             await Task.Run(() => Native.CheckException(Native.SetPreferredAudioInputDevice(device))).ConfigureAwait(false);
@@ -123,7 +129,7 @@ namespace DolbyIO.Comms.Services
         /// Sets the preferred output audio device.
         /// </summary>
         /// <param name="device">The <see cref="AudioDevice"/> object to set as preferred output device.</param>
-        /// <returns>A <see cref="Task"/> that represents the asynchronous operation.</returns>
+        /// <returns>A <xref href="System.Threading.Tasks.Task"/> that represents the asynchronous operation.</returns>
         public async Task SetPreferredAudioOutputDeviceAsync(AudioDevice device)
         {
             await Task.Run(() => Native.CheckException(Native.SetPreferredAudioOutputDevice(device))).ConfigureAwait(false);

@@ -5,6 +5,11 @@ namespace DolbyIO.Comms.Services
     /// <summary>
     /// The session service is responsible for connecting the SDK with the Dolby.io
     /// backend by opening and closing sessions.
+    ///
+    /// To use the session service, follow these steps:
+    /// 1. Open a session using the <see cref="OpenAsync(UserInfo)"/> method.
+    /// 2. Join a conference using the <see cref="DolbyIO.Comms.Services.ConferenceService"/>.
+    /// 3. Leave the conference and close the session using the <see cref="CloseAsync"/> method.
     /// </summary>
     /// <example>
     /// <code>
@@ -34,14 +39,15 @@ namespace DolbyIO.Comms.Services
         /// <summary>
         /// Gets if a session is currently open.
         /// </summary>
+        /// <value><c>true</c> if a session is open; otherwise, <c>false</c>.</value>
         public bool IsOpen { get => _isOpen; }
 
         /// <summary>
         /// Opens a new session for the specified participant.
         /// </summary>
         /// <param name="user">Information about the participant who opens the session.</param>
-        /// <returns>The <see cref="Task{UserInfo}"/> that represents the asynchronous open operation.
-        /// The <see cref="Task{UserInfo}.Result"/> property returns the <see cref="UserInfo"/> object
+        /// <returns>The <xref href="System.Threading.Tasks.Task`1"/> that represents the asynchronous open operation.
+        /// The <xref href="System.Threading.Tasks.Task`1.Result"/> property returns the <see cref="UserInfo"/> object
         /// representing the participant who opened the session.</returns>
         public async Task<UserInfo> OpenAsync(UserInfo user)
         {
@@ -58,7 +64,7 @@ namespace DolbyIO.Comms.Services
         /// <summary>
         /// Closes the current session.
         /// </summary>
-        /// <returns>A <see cref="Task"/> that represents the asynchronous operation.</returns>
+        /// <returns>A <xref href="System.Threading.Tasks.Task"/> that represents the asynchronous operation.</returns>
         public async Task CloseAsync()
         {
             await Task.Run(() =>

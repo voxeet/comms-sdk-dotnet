@@ -21,7 +21,7 @@ namespace DolbyIO.Comms
     // -- Conference --
 
     /// <summary>
-    /// The <see cref="DolbyIO.Comms.Services.Conference.StatusUpdated">Conference.StatusUpdated</see> event handler.
+    /// The <see cref="DolbyIO.Comms.Services.ConferenceService.StatusUpdated">Conference.StatusUpdated</see> event handler.
     /// </summary>
     /// <param name="status">The status of the conference.</param>
     /// <param name="conferenceId">The corresponding conference ID.</param>
