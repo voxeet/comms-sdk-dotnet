@@ -41,6 +41,9 @@ namespace DolbyIO.Comms
         [DllImport(LibName, CharSet = CharSet.Ansi)]
         internal static extern int GetCurrentConference([Out] Conference conference);
 
+        [DllImport(LibName, CharSet = CharSet.Ansi)]
+        internal static extern int GetParticipants(ref int size, out IntPtr participants);
+
         [DllImport (LibName, CharSet = CharSet.Ansi)]
         internal static extern int Mute(bool muted);
 

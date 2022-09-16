@@ -228,6 +228,33 @@ namespace DolbyIO.Comms.Services
         }
 
         /// <summary>
+        /// Gets the list of participants of the currently active conference.
+        /// </summary>
+        /// <returns>The result object producing the List<Participant> asynchronously.</returns>
+        public async Task<List<Participant>> GetParticipantsAsync()
+        {
+            return await Task.Run(() =>
+            {
+                List<Participant> participants = new List<Participant>();
+                IntPtr src;
+                int size = 0;
+
+                Native.CheckException(Native.GetParticipants(ref size, out src));
+
+                IntPtr[] tmp = new IntPtr[size];
+                Marshal.Copy(src, tmp, 0, size);
+
+                for (int i = 0; i < size; i++)
+                {
+                    var participant = Marshal.PtrToStructure<Participant>(tmp[i]);
+                    participants.Add(participant);
+                }
+
+                return participants;
+            }).ConfigureAwait(false);
+        }
+
+        /// <summary>
         /// Creates a conference and returns information about the conference
         /// upon completion.
         /// </summary>
