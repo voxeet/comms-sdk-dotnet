@@ -214,7 +214,7 @@ namespace DolbyIO.Comms.Services
         public bool IsInConference { get => _isInConference; }
 
         /// <summary>
-        /// Gets informations about the current conference.
+        /// Gets information about the current conference.
         /// </summary>
         /// <returns>The Conference  object.</returns>
         public async Task<Conference> CurrentAsync()
