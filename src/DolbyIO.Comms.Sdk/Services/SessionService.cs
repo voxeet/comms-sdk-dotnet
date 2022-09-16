@@ -1,27 +1,16 @@
-using System.Collections;
-using System.Collections.Generic;
-using System;
 using System.Threading.Tasks;
-using System.Runtime.InteropServices;
 
 namespace DolbyIO.Comms.Services 
 {
     /// <summary>
-    /// The Session service is responsible for connecting the SDK with the Dolby.io
-    /// backend by opening and closing sessions. Opening a session is mandatory
-    /// before joining conferences.
-    ///
-    /// To use the Session Service, follow these steps:
-    /// 1. Open a session using the <see cref="DolbyIO.Comms.Services.SessionService.OpenAsync(UserInfo)">open</see> method.
-    /// 2. Join a conference using the <see cref="DolbyIO.Comms.Services.ConferenceService">Conference service</see>.
-    /// 3. Leave the conference and close the session using the 
-    /// <see cref="DolbyIO.Comms.Services.SessionService.CloseAsync">close</see> method.
+    /// The session service is responsible for connecting the SDK with the Dolby.io
+    /// backend by opening and closing sessions.
     /// </summary>
     /// <example>
     /// <code>
     /// try
     /// {
-    ///     UserInfo user;
+    ///     UserInfo user = new UserInfo();
     ///     user.Name = "Some Name";
     ///     
     ///     user = await _sdk.Session.OpenAsync(user);
@@ -32,7 +21,7 @@ namespace DolbyIO.Comms.Services
     /// }
     /// </code>
     /// </example>
-    public class SessionService
+    public sealed class SessionService
     {
         /// <summary>
         /// Gets the local participant object that belongs to the current session.
@@ -43,7 +32,7 @@ namespace DolbyIO.Comms.Services
         private volatile bool _isOpen = false;
 
         /// <summary>
-        /// Indicates if the Session is open.
+        /// Gets if a session is currently open.
         /// </summary>
         public bool IsOpen { get => _isOpen; }
 
@@ -51,7 +40,9 @@ namespace DolbyIO.Comms.Services
         /// Opens a new session for the specified participant.
         /// </summary>
         /// <param name="user">Information about the participant who opens the session.</param>
-        /// <returns>The task object representing the asynchronous operation that returns UserInfo.</returns>
+        /// <returns>The <see cref="Task{UserInfo}"/> that represents the asynchronous open operation.
+        /// The <see cref="Task{UserInfo}.Result"/> property returns the <see cref="UserInfo"/> object
+        /// representing the participant who opened the session.</returns>
         public async Task<UserInfo> OpenAsync(UserInfo user)
         {
             return await Task.Run(() => 
@@ -67,12 +58,12 @@ namespace DolbyIO.Comms.Services
         /// <summary>
         /// Closes the current session.
         /// </summary>
-        /// <returns>The returned asynchronous operation.</returns>
         public async Task CloseAsync()
         {
             await Task.Run(() =>
             {
                 Native.CheckException(Native.Close());
+                User = null;
                 _isOpen = false;
             }).ConfigureAwait(false);
         }

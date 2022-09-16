@@ -3,7 +3,7 @@ using System;
 namespace DolbyIO.Comms 
 {
     /// <summary>
-    /// Represents errors that occur in the underlying C++ SDK during application execution.
+    /// Represents errors that occur in the SDK during application execution.
     /// </summary>
     public sealed class DolbyIOException : Exception
     {

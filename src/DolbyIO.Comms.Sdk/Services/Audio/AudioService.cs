@@ -1,36 +1,24 @@
 namespace DolbyIO.Comms.Services
 {
     /// <summary>
-    /// The Audio service allows enabling and disabling the local participant's and remote participants' audio. The service offers two accessors that contain options that impact either sending the local participant's audio to a conference or receiving remote participants' audio.
+    /// The audio service allows access to local and remote audio services.
     /// </summary>
-    /// <example>
-    /// <code>
-    /// try
-    /// {
-    ///     await _sdk.Audio.Local.StartAsync();
-    ///     await _sdk.Audio.Remote.StopAsync();
-    /// }
-    /// catch
-    /// {
-    ///     // Error handling
-    /// }
-    /// </code>
-    /// </example>
-    public class AudioService
+    public sealed class AudioService
     {
         private LocalAudioService _local = new LocalAudioService();
+
+        /// <summary>
+        /// Gets the local audio service.
+        /// </summary>
+        /// <value>The service that allows accessing audio methods for the local participant.</value>
+        public LocalAudioService Local { get => _local; }
+
         private RemoteAudioService _remote = new RemoteAudioService();
 
         /// <summary>
-        /// Allows accessing methods impacting audio that the local participant's sends to a conference.
+        /// Gets the remote audio service.
         /// </summary>
-        /// <value>The service that allows setting options impacting audio sent by the local participant.</value>
-        public LocalAudioService Local { get => _local; }
-
-        /// <summary>
-        /// Allows accessing methods impacting audio that the local participant's receives from a conference.
-        /// </summary>
-        /// <value>The service that allows setting options impacting audio that the local participant receives.</value>
+        /// <value>The service that allows accessing audio methods for remote participants.</value>
         public RemoteAudioService Remote { get => _remote; }
     }
 }

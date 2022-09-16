@@ -5,32 +5,24 @@ using DolbyIO.Comms.Services;
 namespace DolbyIO.Comms 
 {
     /// <summary>
-    /// The DolbyIOSDK class is the main object that allows initializing the
-    /// .NET SDK and accessing the underlying services.
+    /// Main entry point that allows the application to interact with the Dolby.io services.
     /// </summary>
-    public class DolbyIOSDK : IDisposable
-    {   
-        private volatile bool _initialized = false;
-
-        private SessionService _session = new SessionService();
-        private ConferenceService _conference = new ConferenceService();
-        private MediaDeviceService _mediaDevice = new MediaDeviceService();
-        private AudioService _audio = new AudioService();
-
+    public sealed class DolbyIOSDK : IDisposable
+    {
         private SignalingChannelErrorEventHandler _signalingChannelError;
 
         /// <summary>
         /// Raised when an error occurs during a Session Initiation Protocol (SIP) negotiation
         /// of the local participant's peer connection.
         /// </summary>
-        /// <value>The event handler.</value>
+        /// <exception cref="DolbyIOException">Will be thrown when <see cref="InitAsync(string, RefreshTokenCallBack)"/> has not yet been called.</exception>
         public SignalingChannelErrorEventHandler SignalingChannelError
         {
             set 
             { 
                 if (!_initialized)
                 {
-                    throw new DolbyIOException("DolbyIOSDK is not initialized!");
+                    throw new DolbyIOException($"{nameof(DolbyIOSDK)} is not initialized!");
                 }
 
                 Native.SetOnSignalingChannelExceptionHandler(value);
@@ -43,85 +35,101 @@ namespace DolbyIO.Comms
         /// <summary>
         /// Raised when the access token is invalid or has expired.
         /// </summary>
+        /// <exception cref="DolbyIOException">Will be thrown when <see cref="InitAsync(string, RefreshTokenCallBack)"/> has not yet been called.</exception>
         public InvalidTokenErrorEventHandler InvalidTokenError
         {
             set
             { 
                 if (!_initialized)
                 {
-                    throw new DolbyIOException("DolbyIOSDK is not initialized!");
+                    throw new DolbyIOException($"{nameof(DolbyIOSDK)} is not initialized!");
                 }
+                
                 Native.SetOnInvalidTokenExceptionHandler(value);
                 _invalidTokenError = value;
             }
         }
 
+        private SessionService _session = new SessionService();
+
         /// <summary>
-        /// The Session service accessor.
+        /// Gets the Session service.
         /// </summary>
-        /// <returns>The SessionService class.</returns>
+        /// <exception cref="DolbyIOException">Will be thrown when <see cref="InitAsync(string, RefreshTokenCallBack)"/> has not yet been called.</exception>
         public SessionService Session 
         {
             get 
             { 
                 if (!_initialized)
                 {
-                    throw new DolbyIOException("DolbyIOSDK is not initialized!");
+                    throw new DolbyIOException($"{nameof(DolbyIOSDK)} is not initialized!");
                 }
+
                 return _session; 
             } 
         }
         
+        private ConferenceService _conference = new ConferenceService();
+
         /// <summary>
-        /// The Conference service accessor.
+        /// Gets the Conference service.
         /// </summary>
-        /// <returns>The ConferenceService class.</returns>
+        /// <exception cref="DolbyIOException">Will be thrown when <see cref="InitAsync(string, RefreshTokenCallBack)"/> has not yet been called.</exception>
         public ConferenceService Conference 
         {
             get 
             { 
                 if (!_initialized)
                 {
-                    throw new DolbyIOException("DolbyIOSDK is not initialized!");
+                    throw new DolbyIOException($"{nameof(DolbyIOSDK)} is not initialized!");
                 }
+
                 return _conference; 
             } 
         }
 
+        private MediaDeviceService _mediaDevice = new MediaDeviceService();
+
         /// <summary>
-        /// The MediaDevice service accessor.
+        /// Gets the MediaDevice service.
         /// </summary>
-        /// <returns>The MediaDeviceService class.</returns>
+        /// <exception cref="DolbyIOException">Will be thrown when <see cref="InitAsync(string, RefreshTokenCallBack)"/> has not yet been called.</exception>
         public MediaDeviceService MediaDevice
         {
             get
             {
                 if (!_initialized)
                 {
-                    throw new DolbyIOException("DolbyIOSDK is not initialized!");
+                    throw new DolbyIOException($"{nameof(DolbyIOSDK)} is not initialized!");
                 }
+
                 return _mediaDevice;
             }
         }
 
+        private AudioService _audio = new AudioService();
+
         /// <summary>
-        /// The Audio service accessor.
+        /// Gets the Audio service.
         /// </summary>
-        /// <returns>The AudioService class.</returns>
+        /// <exception cref="DolbyIOException">Will be thrown when <see cref="InitAsync(string, RefreshTokenCallBack)"/> has not yet been called.</exception>
         public AudioService Audio
         {
             get 
             {
                 if (!_initialized)
                 {
-                    throw new DolbyIOException("DolbyIOSDK is not initialized!");
+                    throw new DolbyIOException($"{nameof(DolbyIOSDK)} is not initialized!");
                 }
+
                 return _audio;
             }
         }
 
+        private volatile bool _initialized = false;
+
         /// <summary>
-        /// Indicates that the SDK is initialized. 
+        /// Gets if the SDK is initialized. 
         /// </summary>
         public bool IsInitialized { get => _initialized; }
 
@@ -130,6 +138,7 @@ namespace DolbyIO.Comms
         /// </summary>
         /// <param name="accessToken">The access token provided by the customer's backend.</param>
         /// <param name="cb">The refresh token callback.</param>
+        /// <exception cref="DolbyIOException">Will be thrown when <see cref="InitAsync(string, RefreshTokenCallBack)"/> has not yet been called.</exception>
         public async Task InitAsync(string accessToken, RefreshTokenCallBack cb)
         {
             if (_initialized)
@@ -145,13 +154,12 @@ namespace DolbyIO.Comms
         }
 
         /// <summary>
-        /// Sets the logging level.
+        /// Sets the logging level for the SDK.
         /// </summary>
-        /// <param name="logLevel">The required logging level.</param>
-        /// <returns>A task that represents the returned asynchronous operation.</returns>
+        /// <param name="logLevel">The new logging level value.</param>
         public async Task SetLogLevelAsync(LogLevel logLevel)
         {
-            await Task.Run(() =>  Native.CheckException(Native.SetLogLevel(logLevel))).ConfigureAwait(false);
+            await Task.Run(() => Native.CheckException(Native.SetLogLevel(logLevel))).ConfigureAwait(false);
         }
 
         ~DolbyIOSDK()
@@ -172,7 +180,7 @@ namespace DolbyIO.Comms
         /// Releases the unmanaged resources.
         /// </summary>
         /// <param name="disposing">A boolean that indicates whether the method call comes from the Dispose method (true) or from a finalizer (false).</param>
-        protected void Dispose(bool disposing)
+        void Dispose(bool disposing)
         {
             if (_initialized)
             {
