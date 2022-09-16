@@ -1,4 +1,7 @@
+using System;
+using System.Collections.Generic;
 using System.Numerics;
+using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 
 namespace DolbyIO.Comms.Services 
@@ -225,9 +228,10 @@ namespace DolbyIO.Comms.Services
         }
 
         /// <summary>
-        /// Gets the list of participants who are present at the current conference.
+        /// Gets the list of participants that are present in the current conference.
         /// </summary>
-        /// <returns>The result object producing the List<Participant> asynchronously.</returns>
+        /// <returns>The <xref href="System.Threading.Tasks.Task`1"/> that represents the asynchronous operation.
+        /// The <xref href="System.Threading.Tasks.Task`1.Result"/> property returns a <xref href="System.Collections.Generic.List`1" /> of <see cref="Participant" /> objects.</returns>
         public async Task<List<Participant>> GetParticipantsAsync()
         {
             return await Task.Run(() =>
