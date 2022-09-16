@@ -295,8 +295,8 @@ public class CommandLine
         Log.Debug($"OnParticipantAdded: {participant.Id} {participant.Info.Name} {participant.Status}");
         try 
         {
-            var infos = await _sdk.Conference.CurrentAsync();
-            if (SpatialAudioStyle.None != infos.SpatialAudioStyle)
+            var conference = await _sdk.Conference.GetCurrentAsync();
+            if (SpatialAudioStyle.None != conference.SpatialAudioStyle)
             {
                 await _sdk.Conference.SetSpatialPositionAsync(participant.Id, new Vector3(0.0f, 0.0f, 0.0f));
             }
@@ -312,8 +312,8 @@ public class CommandLine
         Log.Debug($"OnParticipantUpdated: {participant.Id} {participant.Info.Name} {participant.Status}");
         try 
         {
-            var infos = await _sdk.Conference.CurrentAsync();
-            if (SpatialAudioStyle.None != infos.SpatialAudioStyle)
+            var conference = await _sdk.Conference.GetCurrentAsync();
+            if (SpatialAudioStyle.None != conference.SpatialAudioStyle)
             {
                 await _sdk.Conference.SetSpatialPositionAsync(participant.Id, new Vector3(0.0f, 0.0f, 0.0f));
             }

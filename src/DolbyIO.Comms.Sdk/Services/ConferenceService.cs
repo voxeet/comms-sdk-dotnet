@@ -210,17 +210,44 @@ namespace DolbyIO.Comms.Services
         public bool IsInConference { get => _isInConference; }
 
         /// <summary>
-        /// Gets the object that represents the currently active conference.
+        /// Gets information about the current conference.
         /// </summary>
         /// <returns>The <xref href="System.Threading.Tasks.Task`1"/> that represents the asynchronous operation.
         /// The <xref href="System.Threading.Tasks.Task`1.Result"/> property returns the currently active <see cref="Conference" />.</returns>
-        public async Task<Conference> CurrentAsync()
+        public async Task<Conference> GetCurrentAsync()
         {
             return await Task.Run(() =>
             {
                 Conference conference = new Conference();
                 Native.CheckException(Native.GetCurrentConference(conference));
                 return conference;
+            }).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Gets the list of participants who are present at the current conference.
+        /// </summary>
+        /// <returns>The result object producing the List<Participant> asynchronously.</returns>
+        public async Task<List<Participant>> GetParticipantsAsync()
+        {
+            return await Task.Run(() =>
+            {
+                List<Participant> participants = new List<Participant>();
+                IntPtr src;
+                int size = 0;
+
+                Native.CheckException(Native.GetParticipants(ref size, out src));
+
+                IntPtr[] tmp = new IntPtr[size];
+                Marshal.Copy(src, tmp, 0, size);
+
+                for (int i = 0; i < size; i++)
+                {
+                    var participant = Marshal.PtrToStructure<Participant>(tmp[i]);
+                    participants.Add(participant);
+                }
+
+                return participants;
             }).ConfigureAwait(false);
         }
 

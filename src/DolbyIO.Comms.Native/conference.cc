@@ -119,6 +119,22 @@ extern "C" {
     }}.result();
   }
 
+  EXPORT_API int GetParticipants(int* size, void** dest) {
+    return call { [&]() {
+      auto infos = wait(sdk->conference().get_current_conference());
+      dolbyio::comms::native::participant** tmp = (dolbyio::comms::native::participant**)malloc(sizeof(dolbyio::comms::native::participant*) * infos.participants.size());
+
+      int index = 0;
+      for(const auto& pair : infos.participants) {
+        tmp[index] = to_c<dolbyio::comms::native::participant>(pair.second);
+        index++;
+      }
+
+      (*size) = infos.participants.size();
+      (*dest) = (void*)tmp;
+    }}.result();
+  }
+
   EXPORT_API int SetSpatialEnvironment(float scale_x, float scale_y, float scale_z, 
                                       float forward_x, float forward_y, float forward_z,
                                       float up_x, float up_y, float up_z,
