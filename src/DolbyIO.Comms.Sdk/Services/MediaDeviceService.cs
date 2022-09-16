@@ -113,6 +113,7 @@ namespace DolbyIO.Comms.Services
         /// Sets the preferred input audio device.
         /// </summary>
         /// <param name="device">The <see cref="AudioDevice"/> object to set as preferred input device.</param>
+        /// <returns>A <see cref="Task"/> that represents the asynchronous operation.</returns>
         public async Task SetPreferredAudioInputDeviceAsync(AudioDevice device)
         {
             await Task.Run(() => Native.CheckException(Native.SetPreferredAudioInputDevice(device))).ConfigureAwait(false);
@@ -122,6 +123,7 @@ namespace DolbyIO.Comms.Services
         /// Sets the preferred output audio device.
         /// </summary>
         /// <param name="device">The <see cref="AudioDevice"/> object to set as preferred output device.</param>
+        /// <returns>A <see cref="Task"/> that represents the asynchronous operation.</returns>
         public async Task SetPreferredAudioOutputDeviceAsync(AudioDevice device)
         {
             await Task.Run(() => Native.CheckException(Native.SetPreferredAudioOutputDevice(device))).ConfigureAwait(false);

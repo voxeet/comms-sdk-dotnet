@@ -25,6 +25,7 @@ namespace DolbyIO.Comms.Services
         /// Start receiving the audio from a remote participant.
         /// </summary>
         /// <param name="participantId">The identifier of the remote participant whose audio should be sent to the local participant.</param>
+        /// <returns>A <see cref="Task"/> that represents the asynchronous operation.</returns>
         public async Task StartAsync(string participantId)
         {
             await Task.Run(() => Native.CheckException(Native.StartRemoteAudio(participantId))).ConfigureAwait(false);
@@ -34,6 +35,7 @@ namespace DolbyIO.Comms.Services
         /// Stop receiving the audio from a remote participant.
         /// </summary>
         /// <param name="participantId">The identifier of the remote participant whose audio should not be sent to the local participant.</param>
+        /// <returns>A <see cref="Task"/> that represents the asynchronous operation.</returns>
         public async Task StopAsync(string participantId)
         {
             await Task.Run(() => Native.CheckException(Native.StopRemoteAudio(participantId))).ConfigureAwait(false);
@@ -44,12 +46,13 @@ namespace DolbyIO.Comms.Services
         /// The mute method does not notify the server to stop audio stream transmission.
         /// To stop receiving an audio stream from the server, use the <see cref="StopAsync">StopAsync</see> method.
         /// </summary>
-        /// <remarks>
-        /// Attention: This method is only available in non-Dolby Voice conferences.
-        /// </remarks>
         /// <param name="muted">A boolean value that indicates the required mute state. True
         /// mutes the remote participant, false un-mutes the remote participant.</param>
         /// <param name="participantId">The identifier of the remote participant whose audio should not be played.</param>
+        /// <returns>A <see cref="Task"/> that represents the asynchronous operation.</returns>
+        /// <remarks>
+        /// Attention: This method is only available in non-Dolby Voice conferences.
+        /// </remarks>
         public async Task MuteAsync(bool muted, string participantId)
         {
             await Task.Run(() => Native.CheckException(Native.RemoteMute(muted, participantId))).ConfigureAwait(false);

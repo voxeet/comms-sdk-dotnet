@@ -24,6 +24,7 @@ namespace DolbyIO.Comms.Services
         /// <summary>
         /// Enables the local participant's audio and sends the audio to a conference.
         /// </summary>
+        /// <returns>A <see cref="Task"/> that represents the asynchronous operation.</returns>
         public async Task StartAsync()
         {
             await Task.Run(() => Native.CheckException(Native.StartAudio())).ConfigureAwait(false);
@@ -32,6 +33,7 @@ namespace DolbyIO.Comms.Services
         /// <summary>
         /// Disables the local participant's audio and stops sending the audio to a conference.
         /// </summary>
+        /// <returns>A <see cref="Task"/> that represents the asynchronous operation.</returns>
         public async Task StopAsync()
         {
             await Task.Run(() => Native.CheckException(Native.StopAudio())).ConfigureAwait(false);
@@ -42,6 +44,7 @@ namespace DolbyIO.Comms.Services
         /// </summary>
         /// <param name="muted">A boolean value that indicates the required mute state. True
         /// mutes the microphone, false un-mutes the microphone.</param>
+        /// <returns>A <see cref="Task"/> that represents the asynchronous operation.</returns>
         /// <remarks>
         /// To stop sending audio to the conference, use the <see cref="StopAsync">stopAudio</see> method.
         /// </remarks>

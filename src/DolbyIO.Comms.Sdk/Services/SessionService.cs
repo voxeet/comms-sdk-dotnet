@@ -58,6 +58,7 @@ namespace DolbyIO.Comms.Services
         /// <summary>
         /// Closes the current session.
         /// </summary>
+        /// <returns>A <see cref="Task"/> that represents the asynchronous operation.</returns>
         public async Task CloseAsync()
         {
             await Task.Run(() =>
