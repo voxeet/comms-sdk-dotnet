@@ -3,7 +3,17 @@
   <PropertyGroup>
     <TargetFramework>${DOTNET_PROJECT_FRAMEWORK}</TargetFramework>
     <Version>${DOTNET_PROJECT_VERSION}</Version>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <Description>
+      The Dolby.io Communications .NET SDK allows creating high-quality applications for conferencing, streaming, 
+      and collaborating. The .NET SDK offers an easily integration of the HD Dolby Voice experience, including spatial 
+      audio and shared scenes, into game engines and virtual spaces.
+    </Description>
   </PropertyGroup>
+
+  <ItemGroup>
+      <None Include="${CMAKE_SOURCE_DIR}\LICENSE" Pack="true" PackagePath=""/>
+  </ItemGroup>
 
   <PropertyGroup>
     <PlatformTarget>AnyCPU</PlatformTarget>
