@@ -3,9 +3,8 @@
   "version": "${PROJECT_VERSION}",
   "displayName": "DolbyIO .NET Sdk",
   "description": "The DolbyIO .NET Sdk",
-  "documentationUrl": "https://example.com/",
-  "changelogUrl": "https://example.com/changelog.html",
-  "licensesUrl": "https://example.com/licensing.html",
+  "documentationUrl": "https://dolbyio.github.io/comms-sdk-dotnet/documentation/index.html",
+  "licensesUrl": "https://github.com/DolbyIO/comms-sdk-dotnet/blob/main/LICENSE",
   "dependencies": {
 
   },
@@ -15,8 +14,8 @@
       "spatial"
   ],
   "author": {
-      "name": "Dolby",
+      "name": "DolbyIO",
       "email": "customer@dolby.io",
-      "url": "https://dolby.io/"
+      "url": "https://github.com/DolbyIO/comms-sdk-dotnet"
   }
 }
