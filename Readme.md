@@ -82,7 +82,7 @@ _sdk.Conference.ParticipantAdded = new ParticipantAddedEventHandler
 
 A session is a connection between the client application and the Dolby.io backend. When opening a session, you should provide a name. Commonly, this is the name of the participant who established the session. The session can remain active for the whole lifecycle of your application. 
 
-To open a new session, use the [Session.OpenAsync](https://dolbyio.github.io/comms-sdk-dotnet/documentation/api/DolbyIO.Comms.Services.Session.html#DolbyIO_Comms_Services_Session_OpenAsync_DolbyIO_Comms_UserInfo_) method as in the following example:
+To open a new session, use the [Session.OpenAsync](https://dolbyio.github.io/comms-sdk-dotnet/documentation/api/DolbyIO.Comms.Services.SessionService.html#DolbyIO_Comms_Services_SessionService_OpenAsync_DolbyIO_Comms_UserInfo_) method as in the following example:
 
 ```cs
 try
@@ -102,7 +102,7 @@ catch (DolbyIOException e)
 
 A conference is a multi-person call where participants exchange audio with one another. To distinguish between multiple conferences, you should assign a conference alias or name. When multiple participants join a conference of the same name using a token of the same Dolby.io application, they will be able to meet in a call.
 
-To create and join a conference, use the [Conference.CreateAsync](https://dolbyio.github.io/comms-sdk-dotnet/documentation/api/DolbyIO.Comms.Services.Conference.html#DolbyIO_Comms_Services_Conference_CreateAsync_DolbyIO_Comms_ConferenceOptions_) and [Conference.JoinAsync](https://dolbyio.github.io/comms-sdk-dotnet/documentation/api/DolbyIO.Comms.Services.Conference.html#DolbyIO_Comms_Services_Conference_JoinAsync_DolbyIO_Comms_ConferenceInfos_DolbyIO_Comms_JoinOptions_) methods as in the following example:
+To create and join a conference, use the [Conference.CreateAsync](hhttps://dolbyio.github.io/comms-sdk-dotnet/documentation/api/DolbyIO.Comms.Services.ConferenceService.html#DolbyIO_Comms_Services_ConferenceService_CreateAsync_DolbyIO_Comms_ConferenceOptions_) and [Conference.JoinAsync](https://dolbyio.github.io/comms-sdk-dotnet/documentation/api/DolbyIO.Comms.Services.ConferenceService.html#DolbyIO_Comms_Services_ConferenceService_JoinAsync_DolbyIO_Comms_Conference_DolbyIO_Comms_JoinOptions_) methods as in the following example:
 
 ```cs
 try
@@ -125,7 +125,7 @@ If the conference already exists, the SDK returns [Conference](https://dolbyio.g
 
 #### 5. Leave the conference
 
-To leave the conference, use the [Conference.LeaveAsync](https://dolbyio.github.io/comms-sdk-dotnet/documentation/api/DolbyIO.Comms.Services.Conference.html#DolbyIO_Comms_Services_Conference_LeaveAsync) method, as in the following example:
+To leave the conference, use the [Conference.LeaveAsync](https://dolbyio.github.io/comms-sdk-dotnet/documentation/api/DolbyIO.Comms.Services.ConferenceService.html#DolbyIO_Comms_Services_ConferenceService_LeaveAsync) method, as in the following example:
 
 ```cs
 try
@@ -140,7 +140,7 @@ catch (DolbyIOException e)
 
 #### 6. Close the session and dispose of the SDK
 
-After leaving the conference, close the session and dispose the SDK using the [Session.CloseAsync](https://dolbyio.github.io/comms-sdk-dotnet/documentation/api/DolbyIO.Comms.Services.Session.html#DolbyIO_Comms_Services_Session_CloseAsync) and [DolbyIOSDK.Dispose](https://dolbyio.github.io/comms-sdk-dotnet/documentation/api/DolbyIO.Comms.DolbyIOSDK.html#DolbyIO_Comms_DolbyIOSDK_Dispose) methods.
+After leaving the conference, close the session and dispose the SDK using the [Session.CloseAsync](https://dolbyio.github.io/comms-sdk-dotnet/documentation/api/DolbyIO.Comms.Services.SessionService.html#DolbyIO_Comms_Services_SessionService_CloseAsync) and [DolbyIOSDK.Dispose](https://dolbyio.github.io/comms-sdk-dotnet/documentation/api/DolbyIO.Comms.DolbyIOSDK.html#DolbyIO_Comms_DolbyIOSDK_Dispose) methods.
 
 ```cs
 try
