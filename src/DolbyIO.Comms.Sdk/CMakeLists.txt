@@ -14,6 +14,7 @@ add_dotnet_library(
         Services/Audio/AudioService.cs
         Services/Audio/LocalAudioService.cs
         Services/Audio/RemoteAudioService.cs
+        DolbyIOException.cs
         DolbyIOSDK.cs
     VERSION
         ${CSSDK_MAJOR}.${CSSDK_MINOR}.${CSSDK_PATH}

@@ -1,9 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
-using System.Runtime.CompilerServices;
 
 namespace DolbyIO.Comms
 {
@@ -119,7 +117,7 @@ namespace DolbyIO.Comms
         /// <summary>
         /// A boolean value that indicates whether the participant is sending audio to a conference.
         /// </summary>
-        /// <returns>If true, the participant is sending audio; otherwise, it is not.</returns>
+        /// <returns>If true, the participant is sending audio.</returns>
         [MarshalAs(UnmanagedType.U1)]
         public readonly bool IsSendingAudio = false;
 
@@ -127,7 +125,7 @@ namespace DolbyIO.Comms
         /// A boolean value that indicates whether a remote participant is audible locally. This property is always
         /// false for the local participant.
         /// </summary>
-        /// <returns>If true, the participant is audible; otherwise, it is not.</returns>
+        /// <returns>If true, the participant is audible.</returns>
         [MarshalAs(UnmanagedType.U1)]
         public readonly bool IsAudibleLocally = false;
     }
@@ -142,7 +140,7 @@ namespace DolbyIO.Comms
         /// A boolean value that indicates whether the SDK should create a Dolby Voice
         /// conference where each participant receives one audio stream.
         /// </summary>
-        /// <returns>If true, the SDK will create a Dolby Voice conference; otherwise, it will not.</returns>
+        /// <returns>If true, the SDK will create a Dolby Voice conference.</returns>
         [MarshalAs(UnmanagedType.U1)]
         public bool DolbyVoice = true;
 
@@ -150,7 +148,7 @@ namespace DolbyIO.Comms
         /// A boolean that indicates whether the conference
         /// should include additional statistics.
         /// </summary>
-        /// <returns>If true, the conference will include statistics; otherwise, it will not.</returns>
+        /// <returns>If true, the conference will include statistics.</returns>
         [MarshalAs(UnmanagedType.U1)]
         public bool Stats = false;
 
@@ -213,7 +211,7 @@ namespace DolbyIO.Comms
         /// <summary>
         /// A boolean that indicates whether the conference represented by the object has been just created.
         /// </summary>
-        /// <returns>If true, the conference is new; otherwise, it is not.</returns>
+        /// <returns>If true, the conference is new.</returns>
         [MarshalAs(UnmanagedType.U1)]
         public readonly bool IsNew;
 
@@ -281,7 +279,7 @@ namespace DolbyIO.Comms
         /// true if spatial audio style is enabled. For more information, refer to our sample
         /// application code.
         /// </summary>
-        /// <returns>If true, spatial audio is enabled; otherwise, it is not.</returns>
+        /// <returns>If true, spatial audio is enabled.</returns>
         [MarshalAs(UnmanagedType.U1)]
         public bool SpatialAudio = false;
     }
@@ -296,7 +294,7 @@ namespace DolbyIO.Comms
         /// A boolean that indicates whether the application should
         /// capture the local audio and send it to the conference.
         /// </summary>
-        /// <returns>If true, the SDK will capture audio and sent it to the conference; otherwise, will is not.</returns>
+        /// <returns>If true, the SDK will capture audio and send it to the conference.</returns>
         [MarshalAs(UnmanagedType.U1)]
         public bool Audio = false;
 
@@ -304,7 +302,7 @@ namespace DolbyIO.Comms
         /// A boolean that enables and disables audio processing on the server side for the 
         /// injected audio.
         /// </summary>
-        /// <returns>If true, audio will be processed; otherwise, will will not.</returns>
+        /// <returns>If true, audio is processed.</returns>
         [MarshalAs(UnmanagedType.U1)]
         public bool AudioProcessing = true;
 
