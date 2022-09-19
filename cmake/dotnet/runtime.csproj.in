@@ -4,7 +4,12 @@
     <Version>${DOTNET_PROJECT_VERSION}</Version>
     <PackageTags>native</PackageTags>
     <IncludeBuildOutput>false</IncludeBuildOutput>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
   </PropertyGroup>
+
+  <ItemGroup>
+      <None Include="${CMAKE_SOURCE_DIR}\LICENSE" Pack="true" PackagePath=""/>
+  </ItemGroup>
 
   <PropertyGroup>
     <OutputPath>${CMAKE_LIBRARY_OUTPUT_DIRECTORY}</OutputPath>
