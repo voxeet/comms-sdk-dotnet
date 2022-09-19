@@ -5,6 +5,15 @@
     <PackageTags>native</PackageTags>
     <IncludeBuildOutput>false</IncludeBuildOutput>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <Title>Dolby.io Communications .NET SDK</Title>
+    <Description>
+      The Dolby.io Communications .NET SDK allows creating high-quality applications for conferencing, streaming, 
+      and collaborating. The .NET SDK offers an easily integration of the HD Dolby Voice experience, including spatial 
+      audio and shared scenes, into game engines and virtual spaces.
+    </Description>
+    <Authors>Dolby.io</Authors>
+    <PackageProjectUrl>https://github.com/DolbyIO/comms-sdk-dotnet</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/DolbyIO/comms-sdk-dotnet</RepositoryUrl>
   </PropertyGroup>
 
   <ItemGroup>
