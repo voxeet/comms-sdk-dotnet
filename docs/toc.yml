@@ -1,3 +1,8 @@
 - name: .NET SDK Documentation
-  href: documentation/
-  homepage: documentation/index.md
+  href: index.md
+- name: Getting Started
+  href: started.md
+- name: Unity Plugin
+  href: unity.md
+- name: API Reference
+  href: obj/temp/api/

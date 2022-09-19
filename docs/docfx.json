@@ -9,7 +9,7 @@
           "src": "../"
         }
       ],
-      "dest": "documentation/api",
+      "dest": "obj/temp/api",
       "disableGitFeatures": false,
       "disableDefaultFilter": false,
       "filter": "filterConfig.yml"
@@ -18,15 +18,12 @@
   "build": {
     "content": [
       {
-        "files": [
-          "documentation/api/**.yml",
-          "documentation/api/index.md"
-        ]
+        "files": [ "**/*.yml" ],
+        "src": "obj/temp/api",
+        "dest": "api"
       },
       {
         "files": [
-          "documentation/**.md",
-          "documentation/**/toc.yml",
           "toc.yml",
           "*.md"
         ]

@@ -82,7 +82,7 @@ public class MyScript : MonoBehaviour
     <img style="padding:25px 0" src="~/images/unity_3.png" width="400px">
 </div>
 
-3. Make sure that the SDK is initialized and you can call SDK methods. For more information, see the the [Getting Started](./started.md) guide and [reference](/documentation/api/DolbyIO.Comms.Services.html) documentation.
+3. Make sure that the SDK is initialized and you can call SDK methods. For more information, see the the [Getting Started](./started.md) guide and [reference](xref:DolbyIO.Comms.Services) documentation.
 
 ## MacOS Application Entitlements
 
