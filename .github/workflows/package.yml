@@ -11,11 +11,11 @@ jobs:
         os: [macos-latest, windows-latest]
         include:
           - os: macos-latest
-            sdk: cppsdk-2.0.0-macos64.zip
+            sdk: cppsdk-2.1.0-macos64.zip
             shell: bash
             runtime: DolbyIO.Comms.Sdk.Runtime.Osx
           - os: windows-latest
-            sdk: cppsdk-2.0.0-windows64.zip
+            sdk: cppsdk-2.1.0-windows64.zip
             shell: powershell
             runtime: DolbyIO.Comms.Sdk.Runtime.Win
     
@@ -46,7 +46,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: ./.github/actions/configure
         with:
-          cpp-sdk: cppsdk-2.0.0-macos64.zip
+          cpp-sdk: cppsdk-2.1.0-macos64.zip
       - uses: actions/download-artifact@v3
         with:
           name: nugets

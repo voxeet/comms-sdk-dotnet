@@ -28,7 +28,7 @@ jobs:
 
       - uses: ./.github/actions/configure
         with:
-          cpp-sdk: cppsdk-2.0.0-windows64.zip
+          cpp-sdk: cppsdk-2.1.0-windows64.zip
           shell: pwsh
 
       - name: Install Docfx
