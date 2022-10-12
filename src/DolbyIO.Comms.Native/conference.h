@@ -44,7 +44,6 @@ namespace dolbyio::comms::native {
   struct media_constraints {
     bool audio;
     //bool video;
-    bool audio_processing;
     bool send_only;
   };
 
@@ -166,7 +165,7 @@ namespace dolbyio::comms::native {
       dest->alias = strdup(src.alias.value_or(""));
       dest->is_new = src.is_new;
       dest->status = to_underlying(src.status);
-      dest->spatial_audio_style = to_underlying(src.spatial_audio_style);
+      dest->spatial_audio_style = to_underlying(src.spatial_audio_style.value_or(dolbyio::comms::spatial_audio_style::disabled));
 
       for (int i = 0; i < src.permissions.size(); i++) {
         dest->permissions[i] = to_underlying(src.permissions.at(i));
@@ -206,7 +205,6 @@ namespace dolbyio::comms::native {
       no_alloc_to_c(&dest->connection, src.connection);
 
       dest->constraints.audio = src.constraints.audio;
-      dest->constraints.audio_processing = src.constraints.audio_processing;
       dest->constraints.send_only = src.constraints.send_only;
     }
 
@@ -214,7 +212,6 @@ namespace dolbyio::comms::native {
       no_alloc_to_cpp(dest.connection, &src->connection);
 
       dest.constraints.audio = src->constraints.audio;
-      dest.constraints.audio_processing = src->constraints.audio_processing;
       dest.constraints.send_only = src->constraints.send_only;
     }
   };

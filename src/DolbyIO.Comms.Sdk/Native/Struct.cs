@@ -299,14 +299,6 @@ namespace DolbyIO.Comms
         public bool Audio = false;
 
         /// <summary>
-        /// A boolean that enables and disables audio processing on the server side for the 
-        /// injected audio.
-        /// </summary>
-        /// <returns>If true, audio is processed.</returns>
-        [MarshalAs(UnmanagedType.U1)]
-        public bool AudioProcessing = true;
-
-        /// <summary>
         /// A boolean that allows a participant to join a conference as a sender. This
         /// is strictly intended for Server Side SDK applications that
         /// want to inject media without recording. This flag is

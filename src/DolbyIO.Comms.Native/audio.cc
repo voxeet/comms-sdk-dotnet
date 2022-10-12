@@ -17,25 +17,25 @@ extern "C" {
 
   EXPORT_API int StartAudio() {
     return call { [&]() {
-      wait(sdk->conference().start_audio());
+      wait(sdk->audio().local().start());
     }}.result();
   }
 
   EXPORT_API int StopAudio() {
     return call { [&]() {
-      wait(sdk->conference().stop_audio());
+      wait(sdk->audio().local().stop());
     }}.result();
   }
 
     EXPORT_API int StartRemoteAudio(char* participant_id) {
     return call { [&]() {
-      wait(sdk->conference().start_remote_audio(std::string(participant_id)));
+      wait(sdk->audio().remote().start(std::string(participant_id)));
     }}.result();
   }
 
   EXPORT_API int StopRemoteAudio(char* participant_id) {
     return call { [&]() {
-      wait(sdk->conference().stop_remote_audio(std::string(participant_id)));
+      wait(sdk->audio().remote().stop(std::string(participant_id)));
     }}.result();
   }
 
