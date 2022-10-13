@@ -15,6 +15,9 @@ if (BUILD_UNITY)
         COMMAND ${CMAKE_COMMAND} -E copy_if_different ${CMAKE_CURRENT_SOURCE_DIR}/scripts/dolbyio.comms.asmdef "${UNITY_RUNTIME_DIRECTORY}/Runtime/dolbyio.comms.asmdef"
         COMMAND ${CMAKE_COMMAND} -E copy_if_different ${CMAKE_CURRENT_SOURCE_DIR}/scripts/VectorExtension.cs "${UNITY_RUNTIME_DIRECTORY}/Runtime/Extensions/VectorExtension.cs"
         COMMAND ${CMAKE_COMMAND} -E copy_if_different ${CMAKE_CURRENT_SOURCE_DIR}/scripts/DolbyIOManager.cs "${UNITY_RUNTIME_DIRECTORY}/Runtime/Components/DolbyIOManager.cs"
+        # Visual Scripting Units
+        COMMAND ${CMAKE_COMMAND} -E make_directory "${UNITY_RUNTIME_DIRECTORY}/Runtime/Units/"
+        COMMAND ${CMAKE_COMMAND} -E copy_if_different ${CMAKE_CURRENT_SOURCE_DIR}/scripts/Units/*.cs "${UNITY_RUNTIME_DIRECTORY}/Runtime/Units/"
         
         DEPENDS DolbyIO.Comms.Native DolbyIO.Comms.Sdk
     )
