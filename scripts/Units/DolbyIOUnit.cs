@@ -70,6 +70,14 @@ namespace DolbyIO.Comms.Unity
                 }
             );
 
+            _sdk.Conference.StatusUpdated = new ConferenceStatusUpdatedEventHandler
+            (
+                (ConferenceStatus status, string conferenceId) =>
+                {
+                    DolbyIOManager.QueueOnMainThread(() => EventBus.Trigger(EventNames.ConferenceStatusUpdatedEvent, status));
+                }
+            );
+
             var userInfo = new UserInfo();
             userInfo.Name = flow.GetValue<string>(ParticipantName);
 
