@@ -9,10 +9,8 @@ namespace DolbyIO.Comms.Unity
 {
     [UnitTitle("Demo Conference")]
     [UnitCategory("DolbyIO")]
-    public class DemoUnit : Unit
+    public class DemoUnit : ConferenceUnit
     {
-        private DolbyIOSDK _sdk = DolbyIOManager.Sdk;
-
         [DoNotSerialize]
         [PortLabelHidden]
         public ControlInput inputTrigger;
@@ -26,6 +24,8 @@ namespace DolbyIO.Comms.Unity
 
         protected override void Definition()
         {
+            base.Definition();
+
             inputTrigger = ControlInputCoroutine("inputTrigger", Demo);
             outputTrigger = ControlOutput("outputTrigger");
 
@@ -35,6 +35,19 @@ namespace DolbyIO.Comms.Unity
         private IEnumerator Demo(Flow flow)
         {
             _sdk.Conference.DemoAsync(flow.GetValue<bool>(SpatialAudio)).Wait();
+           
+            var scale = flow.GetValue<Vector3>(Scale);
+            var forward = flow.GetValue<Vector3>(Forward);
+            var up = flow.GetValue<Vector3>(Up);
+            var right = flow.GetValue<Vector3>(Right);
+
+            _sdk.Conference.SetSpatialEnvironmentAsync
+            (
+                new System.Numerics.Vector3(scale.x, scale.y, scale.z),
+                new System.Numerics.Vector3(forward.x, forward.y, forward.z),
+                new System.Numerics.Vector3(up.x, up.y, up.z),
+                new System.Numerics.Vector3(right.x, right.y, right.z)
+            );
 
             yield return outputTrigger;
         }

@@ -38,6 +38,7 @@ namespace DolbyIO.Comms.Unity
             var conference = _sdk.Conference.CreateAsync(options).Result;
 
             var joinOptions = new JoinOptions();
+            joinOptions.Constraints.Audio = true;
             joinOptions.Connection.SpatialAudio = true;
 
             _sdk.Conference.JoinAsync(conference, joinOptions).Wait();
@@ -53,7 +54,7 @@ namespace DolbyIO.Comms.Unity
                 new System.Numerics.Vector3(forward.x, forward.y, forward.z),
                 new System.Numerics.Vector3(up.x, up.y, up.z),
                 new System.Numerics.Vector3(right.x, right.y, right.z)
-            );
+            ).Wait();
 
             yield return OutputTrigger;
         }

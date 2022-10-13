@@ -33,7 +33,7 @@ namespace DolbyIO.Comms.Unity
 
         protected override void Definition()
         {
-            Scale = ValueInput<Vector3>(nameof(Scale), new Vector3(1000, 1000, 1000));
+            Scale = ValueInput<Vector3>(nameof(Scale), new Vector3(1, 1, 1));
             Forward = ValueInput<Vector3>(nameof(Forward), new Vector3(0, 0, 1));
             Up = ValueInput<Vector3>(nameof(Up), new Vector3(0, 1, 0));
             Right = ValueInput<Vector3>(nameof(Right), new Vector3(1, 0, 0));

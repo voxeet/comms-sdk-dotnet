@@ -3,16 +3,19 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
+using Unity.VisualScripting;
 using DolbyIO.Comms;
 
 namespace DolbyIO.Comms.Unity
 {
     [AddComponentMenu("DolbyIO/DolbyIO Manager")]
+    [Inspectable]
     public class DolbyIOManager : MonoBehaviour
     {
         private static DolbyIOSDK _sdk = new DolbyIOSDK();
         private static List<Action> _backlog = new List<Action>();
 
+        [Inspectable]
         public static DolbyIOSDK Sdk { get => _sdk; }
         
         [Tooltip("Indicates if the DolbyIOManager should automatically leave the current conference on application quit.")]
