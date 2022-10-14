@@ -4,5 +4,7 @@
   href: started.md
 - name: Unity Plugin
   href: unity.md
+- name: Unity Visual Scripting
+  href: visualscripting.md
 - name: Api Reference
   href: api/toc.yml
