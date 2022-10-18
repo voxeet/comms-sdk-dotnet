@@ -2,8 +2,8 @@
   "name": "dolbyio.comms.sdk",
   "version": "${PROJECT_VERSION}",
   "unity": "2021.1",
-  "displayName": "DolbyIO .NET Sdk",
-  "description": "The DolbyIO .NET Sdk",
+  "displayName": "DolbyIO .NET SDK",
+  "description": "The DolbyIO .NET SDK",
   "documentationUrl": "https://api-references.dolby.io/comms-sdk-dotnet/documentation/index.html",
   "licensesUrl": "https://github.com/DolbyIO/comms-sdk-dotnet/blob/main/LICENSE",
   "dependencies": {

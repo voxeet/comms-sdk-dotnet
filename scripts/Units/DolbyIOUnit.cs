@@ -16,11 +16,11 @@ namespace DolbyIO.Comms.Unity
 
         [DoNotSerialize]
         [PortLabelHidden]
-        public ControlInput inputTrigger;
+        public ControlInput InputTrigger;
 
         [DoNotSerialize]
         [PortLabelHidden]
-        public ControlOutput outputTrigger;
+        public ControlOutput OutputTrigger;
 
         [DoNotSerialize]
         public ValueInput AccessToken;
@@ -30,10 +30,10 @@ namespace DolbyIO.Comms.Unity
 
         protected override void Definition()
         {
-            inputTrigger = ControlInputCoroutine("inputTrigger", InitAndOpen);
-            outputTrigger = ControlOutput("outputTrigger");
+            InputTrigger = ControlInputCoroutine(nameof(InputTrigger), InitAndOpen);
+            OutputTrigger = ControlOutput(nameof(OutputTrigger));
 
-            AccessToken = ValueInput<string>("AccessToken", "My Access Token");
+            AccessToken = ValueInput<string>(nameof(AccessToken), "My Access Token");
             ParticipantName = ValueInput<string>(nameof(ParticipantName), "Name");
         }
 
@@ -83,7 +83,7 @@ namespace DolbyIO.Comms.Unity
 
             _sdk.Session.OpenAsync(userInfo).Wait();
 
-            yield return outputTrigger;
+            yield return OutputTrigger;
         }
     }
 }

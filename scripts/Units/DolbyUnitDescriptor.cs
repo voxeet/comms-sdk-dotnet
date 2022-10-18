@@ -21,12 +21,6 @@ namespace DolbyIO.Comms.Unity
             }
         }
     }
-
-    // [Descriptor(typeof(DolbyIOUnit))]
-    // public class DolbyIOUnitDescriptor : DolbyUnitDescriptor<DolbyIOUnit>
-    // {
-    //     public DolbyIOUnitDescriptor(DolbyIOUnit unit) : base(unit) {}
-    // }
 }
 
 #endif

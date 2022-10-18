@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -29,8 +30,8 @@ namespace DolbyIO.Comms.Unity
 
         protected override void Definition()
         {
-            InputTrigger = ControlInput("inputTrigger", Mute);
-            OutputTrigger = ControlOutput("outputTrigger");
+            InputTrigger = ControlInput(nameof(InputTrigger), Mute);
+            OutputTrigger = ControlOutput(nameof(OutputTrigger));
             
             ParticipantId = ValueInput<string>(nameof(ParticipantId), "");
             Muted = ValueInput<bool>(nameof(Muted), false);
@@ -42,7 +43,7 @@ namespace DolbyIO.Comms.Unity
             string id = flow.GetValue<string>(ParticipantId);
             bool muted = flow.GetValue<bool>(Muted);
 
-            if (id.Equals(""))
+            if (String.IsNullOrWhiteSpace(id))
             {
                 _sdk.Audio.Local.MuteAsync(muted).Wait();
 

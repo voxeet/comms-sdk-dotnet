@@ -21,8 +21,8 @@ namespace DolbyIO.Comms.Unity
         {
             base.Definition();
 
-            InputTrigger = ControlInputCoroutine("inputTrigger", Join);
-            OutputTrigger = ControlOutput("outputTrigger");
+            InputTrigger = ControlInputCoroutine(nameof(InputTrigger), Join);
+            OutputTrigger = ControlOutput(nameof(OutputTrigger));
 
             ConferenceAlias = ValueInput<string>(nameof(ConferenceAlias), "Conference alias");
             SpatialAudioStyle = ValueInput<DolbyIO.Comms.SpatialAudioStyle>(nameof(SpatialAudioStyle), DolbyIO.Comms.SpatialAudioStyle.Shared);
@@ -32,7 +32,6 @@ namespace DolbyIO.Comms.Unity
         {
             var options = new ConferenceOptions();
             options.Alias = flow.GetValue<string>(ConferenceAlias);
-            options.Params.DolbyVoice = true;
             options.Params.SpatialAudioStyle = flow.GetValue<SpatialAudioStyle>(SpatialAudioStyle);
 
             var conference = _sdk.Conference.CreateAsync(options).Result;

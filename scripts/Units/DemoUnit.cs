@@ -12,22 +12,14 @@ namespace DolbyIO.Comms.Unity
     public class DemoUnit : ConferenceUnit
     {
         [DoNotSerialize]
-        [PortLabelHidden]
-        public ControlInput inputTrigger;
-
-        [DoNotSerialize]
-        [PortLabelHidden]
-        public ControlOutput outputTrigger;
-
-        [DoNotSerialize]
         public ValueInput SpatialAudio;
 
         protected override void Definition()
         {
             base.Definition();
 
-            inputTrigger = ControlInputCoroutine("inputTrigger", Demo);
-            outputTrigger = ControlOutput("outputTrigger");
+            InputTrigger = ControlInputCoroutine(nameof(InputTrigger), Demo);
+            OutputTrigger = ControlOutput(nameof(OutputTrigger));
 
             SpatialAudio = ValueInput<bool>(nameof(SpatialAudio), true);
         }
@@ -49,7 +41,7 @@ namespace DolbyIO.Comms.Unity
                 new System.Numerics.Vector3(right.x, right.y, right.z)
             );
 
-            yield return outputTrigger;
+            yield return OutputTrigger;
         }
     }
 }

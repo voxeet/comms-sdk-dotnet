@@ -18,8 +18,8 @@ namespace DolbyIO.Comms.Unity
         {
             base.Definition();
 
-            InputTrigger = ControlInput("inputTrigger", SetPosition);
-            OutputTrigger = ControlOutput("outputTrigger");
+            InputTrigger = ControlInput(nameof(InputTrigger), SetPosition);
+            OutputTrigger = ControlOutput(nameof(OutputTrigger));
 
             Participant = ValueInput<Participant>(nameof(Participant));
         }
