@@ -9,7 +9,7 @@
           "src": "../"
         }
       ],
-      "dest": "documentation/api",
+      "dest": "api",
       "disableGitFeatures": false,
       "disableDefaultFilter": false,
       "filter": "filterConfig.yml"
@@ -19,8 +19,8 @@
     "content": [
       {
         "files": [
-          "documentation/api/**.yml",
-          "documentation/api/index.md"
+          "api/**.yml",
+          "api/index.md"
         ]
       },
       {
