@@ -1,26 +1,20 @@
 # Unity Visual Scripting
 
-The Dolby.io Unity Plugin provides nodes for Unity Visual Scripting from 2021.* version. The nodes exposes some of the functionnalities available in the .NET SDK.
+Visual Scripting in Unity allows creating logic for games or applications without writing code, using visual, node-based graphs. The Dolby.io Communications Plugin for Unity provides nodes that allow using .NET SDK functionalities in Unity Visual Scripting 2021. The plugin can be used with Visual Scripting and C# scripting at the same time. This document describes the available nodes and events.
 
->**note:** You can use the plugin with Visual Scripting and C# Scripting at the same time.
+Before using the plugin for visual scripting, make sure that you added the .NET SDK to Unity and initialized the SDK using the [Initializing] procedure.
 
-## Prerequisites
+## Visual Scripting Nodes
 
-The prerequisites are the same as for the [Plugin](./unity.md#prerequisites).
-
-For the visual scripting nodes to work you have to add the `DolbyIOManager` as explained in [Adding the .NET SDK to Unity](./unity.md#adding-the-net-sdk-to-unity).
-
-## The Visual Scripting Nodes
-
-Nodes are accessible in the "Add Node" contextual menu, under the DolbyIO Category:
+The Dolby.io nodes are accessible in the "Add Node" contextual menu, under the DolbyIO category:
 
 <div style="text-align:center">
     <img style="padding:25px 0" src="~/images/nodes/menu.png" width="200px">
 </div>
 
-### Initializing
+### Initialize
 
-This node allows you to initialize the DolbyIO SDK and to open a session to the Dolby.io backend.
+Allows initializing the SDK and opening a session that connects the SDK with the Dolby.io backend.
 
 <div style="text-align:center">
     <img style="padding:25px 0" src="~/images/nodes/init.png" width="300px">
@@ -28,12 +22,12 @@ This node allows you to initialize the DolbyIO SDK and to open a session to the 
 
 Parameters:
 
-- **Access Token**: The access token provided by the customer's backend. See [](xref:DolbyIO.Comms.DolbyIOSDK.InitAsync(System.String,DolbyIO.Comms.RefreshTokenCallBack)).
-- **Participant Name**: The name of the participant. See [](xref:DolbyIO.Comms.UserInfo.Name).
+- **Access Token**: The [access token](xref:DolbyIO.Comms.DolbyIOSDK.InitAsync(System.String,DolbyIO.Comms.RefreshTokenCallBack)) provided by the customer's backend.
+- **Participant Name**: The [name](xref:DolbyIO.Comms.UserInfo.Name) of the participant.
 
 ### Spatial Conference
 
-This node allows you to enter a spatial conference and specify the 3D Environment settings.
+Allows entering a conference with enabled Spatial Audio and specifying the settings of the 3D environment.
 
 <div style="text-align:center">
     <img style="padding:25px 0" src="~/images/nodes/spatial.png" width="300px">
@@ -41,13 +35,13 @@ This node allows you to enter a spatial conference and specify the 3D Environmen
 
 Parameters:
 
-- **Scale, Forward, Up, Right**: Those vectors are definition for the 3D Environment you are working with. The defaults are based on the Unity Coordinates System. In most cases only the scale should be modified. See [](xref:DolbyIO.Comms.Services.ConferenceService.SetSpatialEnvironmentAsync(System.Numerics.Vector3,System.Numerics.Vector3,System.Numerics.Vector3,System.Numerics.Vector3)).
-- **Conference Alias**: The conference alias. See [](xref:DolbyIO.Comms.Conference.Alias).
-- **Spatial Audio Style**: The spatial audio style, default to Shared. See [](xref:DolbyIO.Comms.SpatialAudioStyle).
+- **Scale, Forward, Up, Right**: [Vectors](xref:DolbyIO.Comms.Services.ConferenceService.SetSpatialEnvironmentAsync(System.Numerics.Vector3,System.Numerics.Vector3,System.Numerics.Vector3,System.Numerics.Vector3)) that define the 3D environment that you are working with. The default values are based on the Unity Coordinates System. In most cases, you should only modify the scale.
+- **Conference Alias**: The conference [alias](xref:DolbyIO.Comms.Conference.Alias).
+- **Spatial Audio Style**: The [spatial audio style](xref:DolbyIO.Comms.SpatialAudioStyle) that defines how the spatial location should be communicated between the SDK and the Dolby.io server. By default, the parameter is set to `shared`.
 
 ### Demo
 
-This node allows you to experience the demo of the Dolby.io platform.
+Allows experiencing the demo of the Dolby.io platform.
 
 <div style="text-align:center">
     <img style="padding:25px 0" src="~/images/nodes/demo.png" width="200px">
@@ -55,61 +49,61 @@ This node allows you to experience the demo of the Dolby.io platform.
 
 Parameters:
 
-- **Scale, Forward, Up, Right**: Those vectors are definition for the 3D Environment you are working with. The defaults are based on the Unity Coordinates System. In most cases only the scale should be modified. See [](xref:DolbyIO.Comms.Services.ConferenceService.SetSpatialEnvironmentAsync(System.Numerics.Vector3,System.Numerics.Vector3,System.Numerics.Vector3,System.Numerics.Vector3)).
-- **Spatial Audio**: Join the demo with spatial audio or not.
+- **Scale, Forward, Up, Right**: [Vectors](xref:DolbyIO.Comms.Services.ConferenceService.SetSpatialEnvironmentAsync(System.Numerics.Vector3,System.Numerics.Vector3,System.Numerics.Vector3,System.Numerics.Vector3)) that define the 3D environment that you are working with. The default values are based on the Unity Coordinates System. In most cases, you should only modify the scale.
+- **Spatial Audio**: A boolean that indicates whether spatial audio should be enabled.
 
 ### Mute Participant
 
-This node allows you to mute yourself or a specific participant.
+Allows muting a specific participant.
 
 <div style="text-align:center">
     <img style="padding:25px 0" src="~/images/nodes/mute.png" width="250px">
 </div>
 
 Parameters:
-- **ParticipantId**: The id of the participant to mute. If no Id is provided, the node will mute the local participant.
-- **Muted**: The mute state to apply.
+- **ParticipantId**: The ID of the participant who should be muted. If the ID is not provided, the node mutes the local participant.
+- **Muted**: The required mute state.
 
 ### Local Player Position
 
-This node allows you to set the local player position.
+Allows setting the position of the local player.
 
 <div style="text-align:center">
     <img style="padding:25px 0" src="~/images/nodes/local-position.png" width="250px">
 </div>
 
 Parameters:
-- **Position**: The position of the player. See [](xref:DolbyIO.Comms.Services.ConferenceService.SetSpatialPositionAsync(System.String,System.Numerics.Vector3))
-- **Direction**: The direction of the player. See [](xref:DolbyIO.Comms.Services.ConferenceService.SetSpatialDirectionAsync(System.Numerics.Vector3))
+- **Position**: The [position](xref:DolbyIO.Comms.Services.ConferenceService.SetSpatialPositionAsync(System.String,System.Numerics.Vector3)) of the player.
+- **Direction**: The [direction](xref:DolbyIO.Comms.Services.ConferenceService.SetSpatialDirectionAsync(System.Numerics.Vector3)) that the player should be facing.
 
 ### Remote Player Position
 
-This node allows you to set the remote player position.
+Allows setting the remote player's position.
 
 <div style="text-align:center">
     <img style="padding:25px 0" src="~/images/nodes/remote-position.png" width="250px">
 </div>
 
 Parameters:
-- **Position**: The position of the player. See [](xref:DolbyIO.Comms.Services.ConferenceService.SetSpatialPositionAsync(System.String,System.Numerics.Vector3))
+- **Position**: The [position](xref:DolbyIO.Comms.Services.ConferenceService.SetSpatialPositionAsync(System.String,System.Numerics.Vector3)) of the player.
 
 
 ### Get Participants
 
-This node allows you to get all the participants of the conference.
+Allows getting objects of all participants who are present at a conference.
 
 <div style="text-align:center">
     <img style="padding:25px 0" src="~/images/nodes/participants.png" width="250px">
 </div>
 
 Parameters:
-- **Participant Ids**: A list to filter the resulting participant list.
+- **Participant Ids**: A list of participant IDs that causes returning only the objects of the listed participants.
 
 ## The Visual Scripting Events
 
 ### On Conference Status Updated Event
 
-This event is emitted when the conference status has changed. See [](xref:DolbyIO.Comms.Services.ConferenceService.StatusUpdated)
+Emitted when a conference status has [changed](xref:DolbyIO.Comms.Services.ConferenceService.StatusUpdated).
 
 <div style="text-align:center">
     <img style="padding:25px 0" src="~/images/nodes/event-conference-status.png" width="250px">
@@ -117,7 +111,7 @@ This event is emitted when the conference status has changed. See [](xref:DolbyI
 
 ### On Participant Added Event
 
-This event is emitted when a new participant has been added to the conference. See [](xref:DolbyIO.Comms.Services.ConferenceService.ParticipantAdded)
+Emitted when a new participant has been [added](xref:DolbyIO.Comms.Services.ConferenceService.ParticipantAdded) to a conference.
 
 <div style="text-align:center">
     <img style="padding:25px 0" src="~/images/nodes/event-participant-added.png" width="250px">
@@ -125,7 +119,7 @@ This event is emitted when a new participant has been added to the conference. S
 
 ### On Participant Updated Event
 
-This event is emitted when when a conference participant has changed a status. See [](xref:DolbyIO.Comms.Services.ConferenceService.ParticipantUpdated)
+Emitted when a conference participant has [changed](xref:DolbyIO.Comms.Services.ConferenceService.ParticipantUpdated) a status.
 
 <div style="text-align:center">
     <img style="padding:25px 0" src="~/images/nodes/event-participant-updated.png" width="250px">
@@ -133,7 +127,7 @@ This event is emitted when when a conference participant has changed a status. S
 
 ### On Active Speaker Change Event
 
-This event is emitted when an active speaker has changed. See [](xref:DolbyIO.Comms.Services.ConferenceService.ActiveSpeakerChange)
+Emitted when an active speaker has [changed](xref:DolbyIO.Comms.Services.ConferenceService.ActiveSpeakerChange).
 
 <div style="text-align:center">
     <img style="padding:25px 0" src="~/images/nodes/event-active-speaker.png" width="250px">
