@@ -120,6 +120,7 @@ public class CommandLine
         while (_keepRunning)
         {
             await Task.CompletedTask;
+
         }
     }
 
@@ -180,7 +181,7 @@ public class CommandLine
         {
             ConferenceOptions options = new ConferenceOptions();
             options.Params.DolbyVoice = true;
-            options.Params.SpatialAudioStyle = SpatialAudioStyle.Individual;
+            options.Params.SpatialAudioStyle = SpatialAudioStyle.Shared;
             options.Alias = alias;
             
             JoinOptions joinOpts = new JoinOptions();
@@ -195,10 +196,12 @@ public class CommandLine
             await _sdk.Conference.SetSpatialEnvironmentAsync
             (
                 new Vector3(1.0f, 1.0f, 1.0f),  // Scale
-                new Vector3(0.0f, 0.0f, -1.0f), // Forward
+                new Vector3(0.0f, 0.0f, 1.0f), // Forward
                 new Vector3(0.0f, 1.0f, 0.0f),  // Up
                 new Vector3(1.0f, 0.0f, 0.0f)   // Right
-            );
+            );  
+            
+            await _sdk.Conference.SetSpatialPositionAsync(_sdk.Session.User.Id, new Vector3(0.0f, 0.0f, 0.0f));
 
             await InputLoop();
         }
@@ -296,7 +299,7 @@ public class CommandLine
         try 
         {
             var conference = await _sdk.Conference.GetCurrentAsync();
-            if (SpatialAudioStyle.None != conference.SpatialAudioStyle)
+            if (SpatialAudioStyle.Individual == conference.SpatialAudioStyle)
             {
                 await _sdk.Conference.SetSpatialPositionAsync(participant.Id, new Vector3(0.0f, 0.0f, 0.0f));
             }
@@ -313,7 +316,7 @@ public class CommandLine
         try 
         {
             var conference = await _sdk.Conference.GetCurrentAsync();
-            if (SpatialAudioStyle.None != conference.SpatialAudioStyle)
+            if (SpatialAudioStyle.Individual == conference.SpatialAudioStyle)
             {
                 await _sdk.Conference.SetSpatialPositionAsync(participant.Id, new Vector3(0.0f, 0.0f, 0.0f));
             }
