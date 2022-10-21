@@ -1,6 +1,6 @@
 # Unity Plugin
 
-The Dolby.io Communications .NET SDK for Unity is available in the Unity store and requires the Unity package manager to be added to your project.
+The Dolby.io Communications Plugin for Unity is available in the Unity store and requires the Unity package manager to be added to your project. This document describes how to add the .NET SDK to Unity and initialize the SDK.
 
 ## Prerequisites
 
@@ -12,14 +12,14 @@ Make sure that you have:
 
 ## Adding the .NET SDK to Unity  
 
-The Unity plugin provides access to an instance of the SDK through a custom `DolbyIO Manager` manager. 
+The Dolby.io Communications Plugin for Unity provides access to an instance of the SDK through a custom `DolbyIO Manager` manager. To add the SDK to Unity, follow these steps:
 
 1. Create an empty game object in your scene and provide a name for the object. In this example, we call the object `ApplicationManager`:
 <div style="text-align:center">
     <img style="padding:25px 0" src="~/images/unity_1.png" width="400px">
 </div>
 
-2. Select the created game object and select from the Unity menu `Component` > `DolbyIO` > `DolbyIO Manager`.
+2. Select the created game object and select `Component` > `DolbyIO` > `DolbyIO Manager` from the Unity menu.
 
 <div style="text-align:center">
     <img style="padding:25px 0" src="~/images/unity_2.png">
@@ -42,7 +42,7 @@ public class MyScript : MonoBehaviour
 
 ## Initialization
 
-The SDK needs to be initialized before usage. 
+To initialize the SDK, follow these steps:
 
 1. Copy the access token form the Dolby.io dashboard. 
 
@@ -76,17 +76,17 @@ public class MyScript : MonoBehaviour
 }
 ```
 
->The `DolbyIOManager` calls the Dispose method of the SDK automatically in OnApplicationQuit. There is also options (defaults to true) to leave the current conference and close the opened session automatically.
+>The `DolbyIOManager` calls the Dispose method of the SDK automatically in OnApplicationQuit. There is also a default option to automatically leave the current conference and close the opened session.
 
 <div style="text-align:center">
     <img style="padding:25px 0" src="~/images/unity_3.png" width="400px">
 </div>
 
-3. Make sure that the SDK is initialized and you can call SDK methods. For more information, see the the [Getting Started](./started.md) guide and [reference](/documentation/api/DolbyIO.Comms.Services.html) documentation.
+3. Make sure that the SDK is initialized and that you can call SDK methods. For more information, see the the [Getting Started](./started.md) guide and [reference](/documentation/api/DolbyIO.Comms.Services.html) documentation.
 
-## MacOS Application Entitlements
+## MacOS application entitlements
 
-For MacOS Applications to capture audio, the `Info.plist` needs to be modified. Add those keys at the end of the Info.plist:
+To allow MacOS applications to capture audio, modify the `Info.plist` file by adding the following keys at the end of the file:
 
 ```xml
 <key>com.apple.security.device.audio-input</key>
