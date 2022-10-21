@@ -3,9 +3,16 @@ add_dotnet_library(
         DolbyIO.Comms.Sdk
     SOURCES
         AssemblyInfo.cs
+        Native/Enums/ConferenceAccessPermission.cs
+        Native/Enums/ConferenceStatus.cs
+        Native/Enums/DeviceDirection.cs
+        Native/Enums/LogLevel.cs
+        Native/Enums/ParticipantStatus.cs
+        Native/Enums/ParticipantType.cs
+        Native/Enums/Result.cs
+        Native/Enums/SpatialAudioStyle.cs
         Native/Callback.cs
         Native/Handlers.cs
-        Native/Enum.cs
         Native/Struct.cs
         Native/Native.cs
         Services/SessionService.cs
