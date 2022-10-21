@@ -1,5 +1,5 @@
 {
-    "name": "dolbyio.comms",
+    "name": "DolbyI0.Comms",
     "rootNamespace": "DolbyIO.Comms",
     "references": [
         "Unity.VisualScripting.Core",

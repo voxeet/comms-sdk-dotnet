@@ -1,4 +1,4 @@
-# Unity Plugin
+# Plugin
 
 The Dolby.io Communications Plugin for Unity is available in the Unity store and requires the Unity package manager to be added to your project. This document describes how to add the .NET SDK to Unity and initialize the SDK.
 
@@ -82,7 +82,7 @@ public class MyScript : MonoBehaviour
     <img style="padding:25px 0" src="~/images/unity_3.png" width="400px">
 </div>
 
-3. Make sure that the SDK is initialized and that you can call SDK methods. For more information, see the the [Getting Started](./started.md) guide and [reference](/documentation/api/DolbyIO.Comms.Services.html) documentation.
+3. Make sure that the SDK is initialized and that you can call SDK methods. For more information, see the the [Getting Started](../sdk/started.md) guide and [reference](/documentation/api/DolbyIO.Comms.Services.html) documentation.
 
 ## MacOS application entitlements
 

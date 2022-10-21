@@ -1,5 +1,8 @@
 - name: .NET SDK Documentation
-  href: documentation/
-  homepage: documentation/started.md
+  href: documentation/sdk/
+  homepage: documentation/sdk/started.md
+- name: Unity
+  href: documentation/unity/
+  homepage: documentation/unity/unity.md
 - name: Api Reference
   href: api/

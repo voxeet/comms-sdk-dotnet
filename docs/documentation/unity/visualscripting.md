@@ -1,8 +1,8 @@
-# Unity Visual Scripting
+# Visual Scripting
 
 Visual Scripting in Unity allows creating logic for games or applications without writing code, using visual, node-based graphs. The Dolby.io Communications Plugin for Unity provides nodes that allow using .NET SDK functionalities in Unity Visual Scripting 2021. The plugin can be used with Visual Scripting and C# scripting at the same time. This document describes the available nodes and events.
 
-Before using the plugin for visual scripting, make sure that you added the .NET SDK to Unity and initialized the SDK using the [Initializing] procedure.
+Before using the plugin for visual scripting, make sure that you added the .NET SDK to Unity and initialized the SDK using the [Initializing](./unity.md#initialization) procedure.
 
 ## Visual Scripting Nodes
 
@@ -99,6 +99,39 @@ Allows getting objects of all participants who are present at a conference.
 Parameters:
 - **Participant Ids**: A list of participant IDs that causes returning only the objects of the listed participants.
 
+### Get Audio Devices
+
+Allows getting available audio devices.
+
+<div style="text-align:center">
+    <img style="padding:25px 0" src="~/images/nodes/audio-devices.png" width="250px">
+</div>
+
+Parameters:
+- **Direction**: The [Direction](xref:DolbyIO.Comms.DeviceDirection) of the devices.
+
+### Set Audio Input Device
+
+Allows setting the audio input device.
+
+<div style="text-align:center">
+    <img style="padding:25px 0" src="~/images/nodes/audio-input.png" width="250px">
+</div>
+
+Parameters:
+- **Audio Device**: The [AudioDevice](xref:DolbyIO.Comms.AudioDevice) to be set.
+
+### Set Audio Output Device
+
+Allows setting the audio output device.
+
+<div style="text-align:center">
+    <img style="padding:25px 0" src="~/images/nodes/audio-output.png" width="250px">
+</div>
+
+Parameters:
+- **Audio Device**: The [AudioDevice](xref:DolbyIO.Comms.AudioDevice) to be set.
+
 ## The Visual Scripting Events
 
 ### On Conference Status Updated Event
@@ -131,6 +164,22 @@ Emitted when an active speaker has [changed](xref:DolbyIO.Comms.Services.Confere
 
 <div style="text-align:center">
     <img style="padding:25px 0" src="~/images/nodes/event-active-speaker.png" width="250px">
+</div>
+
+### On Audio Device Added
+
+Emitted when an audio device is [added](xref:DolbyIO.Comms.Services.MediaDeviceService.Added).
+
+<div style="text-align:center">
+    <img style="padding:25px 0" src="~/images/nodes/event-audio-added.png" width="250px">
+</div>
+
+### On Audio Device Changed
+
+Emitted when the active audio device has [changed](xref:DolbyIO.Comms.Services.MediaDeviceService.Changed).
+
+<div style="text-align:center">
+    <img style="padding:25px 0" src="~/images/nodes/event-audio-changed.png" width="250px">
 </div>
 
 ## Examples
