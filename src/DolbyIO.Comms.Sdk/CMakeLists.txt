@@ -11,9 +11,20 @@ add_dotnet_library(
         Native/Enums/ParticipantType.cs
         Native/Enums/Result.cs
         Native/Enums/SpatialAudioStyle.cs
+        Native/Structs/AudioDevice.cs
+        Native/Structs/Conference.cs
+        Native/Structs/ConferenceOptions.cs
+        Native/Structs/ConferenceParams.cs
+        Native/Structs/ConnectionOptions.cs
+        Native/Structs/Constants.cs
+        Native/Structs/JoinOptions.cs
+        Native/Structs/ListenOptions.cs
+        Native/Structs/MediaConstraints.cs
+        Native/Structs/Participant.cs
+        Native/Structs/ParticipantInfo.cs
+        Native/Structs/UserInfo.cs
         Native/Callback.cs
         Native/Handlers.cs
-        Native/Struct.cs
         Native/Native.cs
         Services/SessionService.cs
         Services/ConferenceService.cs
