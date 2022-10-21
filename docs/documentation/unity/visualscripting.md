@@ -108,7 +108,7 @@ Allows getting available audio devices.
 </div>
 
 Parameters:
-- **Direction**: The [Direction](xref:DolbyIO.Comms.DeviceDirection) of the devices.
+- **Direction**: The [direction](xref:DolbyIO.Comms.DeviceDirection) of the devices.
 
 ### Set Audio Input Device
 
@@ -119,7 +119,7 @@ Allows setting the audio input device.
 </div>
 
 Parameters:
-- **Audio Device**: The [AudioDevice](xref:DolbyIO.Comms.AudioDevice) to be set.
+- **Audio Device**: The [AudioDevice](xref:DolbyIO.Comms.AudioDevice) to set.
 
 ### Set Audio Output Device
 
@@ -130,7 +130,7 @@ Allows setting the audio output device.
 </div>
 
 Parameters:
-- **Audio Device**: The [AudioDevice](xref:DolbyIO.Comms.AudioDevice) to be set.
+- **Audio Device**: The [AudioDevice](xref:DolbyIO.Comms.AudioDevice) to set.
 
 ## The Visual Scripting Events
 
@@ -166,7 +166,7 @@ Emitted when an active speaker has [changed](xref:DolbyIO.Comms.Services.Confere
     <img style="padding:25px 0" src="~/images/nodes/event-active-speaker.png" width="250px">
 </div>
 
-### On Audio Device Added
+### On Audio Device Added Event
 
 Emitted when an audio device is [added](xref:DolbyIO.Comms.Services.MediaDeviceService.Added).
 
@@ -174,7 +174,7 @@ Emitted when an audio device is [added](xref:DolbyIO.Comms.Services.MediaDeviceS
     <img style="padding:25px 0" src="~/images/nodes/event-audio-added.png" width="250px">
 </div>
 
-### On Audio Device Changed
+### On Audio Device Changed Event
 
 Emitted when the active audio device has [changed](xref:DolbyIO.Comms.Services.MediaDeviceService.Changed).
 
