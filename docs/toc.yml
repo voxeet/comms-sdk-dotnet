@@ -1,3 +1,5 @@
 - name: .NET SDK Documentation
   href: documentation/
-  homepage: documentation/index.md
+  homepage: documentation/started.md
+- name: Api Reference
+  href: api/
