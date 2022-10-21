@@ -6,5 +6,7 @@ namespace DolbyIO.Comms.Unity
         public static string ParticipantAddedEvent = "ParticipantAddedEvent";
         public static string ParticipantUpdatedEvent = "ParticipantUpdatedEvent";
         public static string ActiveSpeakerChangeEvent = "ActiveSpeakerChangeEvent";
+        public static string AudioDeviceChangedEvent = "AudioDeviceChangedEvent";
+        public static string AudioDeviceAddedEvent = "AudioDeviceAddedEvent";
     }
 }

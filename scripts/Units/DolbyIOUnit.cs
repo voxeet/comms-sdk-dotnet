@@ -78,6 +78,22 @@ namespace DolbyIO.Comms.Unity
                 }
             );
 
+            _sdk.MediaDevice.Changed = new DeviceChangedEventHandler
+            (
+                (AudioDevice device, bool noDevice) =>
+                {
+                    DolbyIOManager.QueueOnMainThread(() => EventBus.Trigger(EventNames.AudioDeviceChangedEvent, device));
+                }
+            );
+
+            _sdk.MediaDevice.Added = new DeviceAddedEventHandler
+            (
+                (AudioDevice device) =>
+                {
+                    DolbyIOManager.QueueOnMainThread(() => EventBus.Trigger(EventNames.AudioDeviceAddedEvent, device));
+                }
+            );
+
             var userInfo = new UserInfo();
             userInfo.Name = flow.GetValue<string>(ParticipantName);
 
