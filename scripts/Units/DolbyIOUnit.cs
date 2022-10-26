@@ -94,6 +94,22 @@ namespace DolbyIO.Comms.Unity
                 }
             );
 
+            _sdk.InvalidTokenError = new InvalidTokenErrorEventHandler
+            (
+                (string reason, string description) => 
+                {
+                    DolbyIOManager.QueueOnMainThread(() => EventBus.Trigger(EventNames.InvalidTokenErrorEvent, $"${reason}: ${description}"));
+                }
+            );
+
+            _sdk.SignalingChannelError = new SignalingChannelErrorEventHandler
+            (
+                (string message) => 
+                {
+                    DolbyIOManager.QueueOnMainThread(() => EventBus.Trigger(EventNames.InvalidTokenErrorEvent, $"${message}"));
+                }
+            );
+
             var userInfo = new UserInfo();
             userInfo.Name = flow.GetValue<string>(ParticipantName);
 
