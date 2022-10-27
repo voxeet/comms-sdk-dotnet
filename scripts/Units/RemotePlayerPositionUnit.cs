@@ -29,19 +29,20 @@ namespace DolbyIO.Comms.Unity
             var position = flow.GetValue<Vector3>(Postition);
             var p = flow.GetValue<Participant>(Participant);
 
-            Debug.Log(p.Id);
-
-            if (p.Id != _sdk.Session.User.Id)
+            if (_sdk.IsInitialized && _sdk.Session.IsOpen && _sdk.Conference.IsInConference)
             {
-                _sdk.Conference.SetSpatialPositionAsync
-                (
-                    p.Id,
-                    new System.Numerics.Vector3(position.x, position.y, position.z)
-                )
-                .ContinueWith(t =>
+                if (p.Id != _sdk.Session.User.Id)
                 {
-                    Debug.Log(t.Exception);
-                }, TaskContinuationOptions.OnlyOnFaulted);
+                    _sdk.Conference.SetSpatialPositionAsync
+                    (
+                        p.Id,
+                        new System.Numerics.Vector3(position.x, position.y, position.z)
+                    )
+                    .ContinueWith(t =>
+                    {
+                        Debug.Log(t.Exception);
+                    }, TaskContinuationOptions.OnlyOnFaulted);
+                }
             }
 
             return OutputTrigger;

@@ -182,6 +182,22 @@ Emitted when the active audio device has [changed](xref:DolbyIO.Comms.Services.M
     <img style="padding:25px 0" src="~/images/nodes/event-audio-changed.png" width="250px">
 </div>
 
+### On Signaling Channel Error Event
+
+Emitted when an error occurs during a Session Initiation Protocol (SIP) negotiation of the local participant's peer connection.
+
+<div style="text-align:center">
+    <img style="padding:25px 0" src="~/images/nodes/event-signaling-error.png" width="250px">
+</div>
+
+### On Invalid Token Error Event
+
+Emitted when the access token is invalid or has expired.
+
+<div style="text-align:center">
+    <img style="padding:25px 0" src="~/images/nodes/event-token-error.png" width="250px">
+</div>
+
 ## Examples
 ### Joining a Conference
 

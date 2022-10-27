@@ -27,28 +27,31 @@ namespace DolbyIO.Comms.Unity
         {
             var direction = flow.GetValue<Vector3>(Direction);
             var position = flow.GetValue<Vector3>(Postition);
-    
-            _sdk.Conference.SetSpatialPositionAsync
-            (
-                _sdk.Session.User.Id,
-                new System.Numerics.Vector3(position.x, position.y, position.z)
-            )
-            .ContinueWith(t =>
-            {
-                if (t.IsFaulted)
-                {
-                    throw t.Exception;
-                }
 
-                return _sdk.Conference.SetSpatialDirectionAsync
-                (
-                    new System.Numerics.Vector3(direction.x, direction.y, direction.z)
-                );
-            })
-            .ContinueWith(t =>
+            if (_sdk.IsInitialized && _sdk.Session.IsOpen && _sdk.Conference.IsInConference)
             {
-                Debug.Log(t.Exception);
-            }, TaskContinuationOptions.OnlyOnFaulted);
+                _sdk.Conference.SetSpatialPositionAsync
+                (
+                    _sdk.Session.User.Id,
+                    new System.Numerics.Vector3(position.x, position.y, position.z)
+                )
+                .ContinueWith(t =>
+                {
+                    if (t.IsFaulted)
+                    {
+                        throw t.Exception;
+                    }
+
+                    return _sdk.Conference.SetSpatialDirectionAsync
+                    (
+                        new System.Numerics.Vector3(direction.x, direction.y, direction.z)
+                    );
+                })
+                .ContinueWith(t =>
+                {
+                    Debug.Log(t.Exception);
+                }, TaskContinuationOptions.OnlyOnFaulted);
+            }
 
             return OutputTrigger;
         }
