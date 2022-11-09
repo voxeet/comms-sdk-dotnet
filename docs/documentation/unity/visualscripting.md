@@ -1,6 +1,6 @@
 # Visual Scripting
 
-Visual Scripting in Unity allows creating logic for games or applications without writing code, using visual, node-based graphs. The Dolby.io Communications Plugin for Unity provides nodes that allow using .NET SDK functionalities in Unity Visual Scripting 2021. The plugin can be used with Visual Scripting and C# scripting at the same time. This document describes the available nodes and events.
+Visual Scripting in Unity allows creating logic for games or applications without writing code, using visual, node-based graphs. The Dolby.io Virtual World plugin for Unity provides nodes that allow using .NET SDK functionalities in Unity Visual Scripting 2021. The plugin can be used with Visual Scripting and C# scripting at the same time. This document describes the available nodes and events.
 
 Before using the plugin for visual scripting, make sure that you added the .NET SDK to Unity and initialized the SDK using the [Initializing](./unity.md#initialization) procedure.
 
