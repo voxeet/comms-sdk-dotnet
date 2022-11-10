@@ -1,6 +1,6 @@
 # Plugin
 
-The Dolby.io Virtual World plugin for Unity is available in the Unity store and requires the Unity package manager to be added to your project. This document describes how to add the .NET SDK to Unity and initialize the SDK.
+The Dolby.io Virtual World plugin for Unity requires the Unity package manager to be added to your project. This document describes how to add the .NET SDK to Unity and initialize the SDK.
 
 ## Prerequisites
 
