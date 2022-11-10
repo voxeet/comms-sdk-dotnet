@@ -1,6 +1,6 @@
 # Plugin
 
-The Dolby.io Communications Plugin for Unity is available in the Unity store and requires the Unity package manager to be added to your project. This document describes how to add the .NET SDK to Unity and initialize the SDK.
+The Dolby.io Virtual World plugin for Unity is available in the Unity store and requires the Unity package manager to be added to your project. This document describes how to add the .NET SDK to Unity and initialize the SDK.
 
 ## Prerequisites
 
@@ -12,7 +12,7 @@ Make sure that you have:
 
 ## Adding the .NET SDK to Unity  
 
-The Dolby.io Communications Plugin for Unity provides access to an instance of the SDK through a custom `DolbyIO Manager` manager. To add the SDK to Unity, follow these steps:
+The Dolby.io Virtual World plugin for Unity provides access to an instance of the SDK through a custom `DolbyIO Manager` manager. To add the SDK to Unity, follow these steps:
 
 1. Create an empty game object in your scene and provide a name for the object. In this example, we call the object `ApplicationManager`:
 <div style="text-align:center">
