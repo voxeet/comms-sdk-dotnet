@@ -14,22 +14,22 @@ namespace dolbyio::comms::native
     int32_t direction;
   };
 
-  struct on_device_added {
-    using event = dolbyio::comms::device_added;
+  struct on_audio_device_added {
+    using event = dolbyio::comms::audio_device_added;
     using type = void (*)(device dev);
-    static constexpr const char* name = "on_device_added";
+    static constexpr const char* name = "on_audio_device_added";
   };
 
-  struct on_device_removed {
-    using event = dolbyio::comms::device_removed;
+  struct on_audio_device_removed {
+    using event = dolbyio::comms::audio_device_removed;
     using type = void (*)(char uid[constants::DEVICE_GUID_SIZE]);
-    static constexpr const char* name = "on_device_removed";
+    static constexpr const char* name = "on_audio_device_removed";
   };
 
-  struct on_device_changed {
-    using event = dolbyio::comms::device_changed;
+  struct on_audio_device_changed {
+    using event = dolbyio::comms::audio_device_changed;
     using type = void (*)(device dev, bool no_device);
-    static constexpr const char* name = "on_device_changed";
+    static constexpr const char* name = "on_audio_device_changed";
   };
 
   /**

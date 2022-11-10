@@ -15,48 +15,48 @@ namespace DolbyIO.Comms.Services
     /// </summary>
     public sealed class MediaDeviceService
     {
-        private DeviceAddedEventHandler _added;
+        private AudioDeviceAddedEventHandler _audioAdded;
 
         /// <summary>
-        /// Sets the <see cref="DeviceAddedEventHandler"/> that is raised when a new audio or video device is added to the system.
+        /// Sets the <see cref="AudioDeviceAddedEventHandler"/> that is raised when a new audio or video device is added to the system.
         /// </summary>
-        /// <value>The <see cref="DeviceAddedEventHandler"/> event handler.</value>
-        public DeviceAddedEventHandler Added
+        /// <value>The <see cref="AudioDeviceAddedEventHandler"/> event handler.</value>
+        public AudioDeviceAddedEventHandler AudioAdded
         {
             set 
             { 
-                Native.SetOnDeviceAddedHandler(value);
-                _added = value;
+                Native.SetOnAudioDeviceAddedHandler(value);
+                _audioAdded = value;
             }
         }
 
-        private DeviceRemovedEventHandler _removed;
+        private AudioDeviceRemovedEventHandler _audioRemoved;
 
         /// <summary>
-        /// Sets the <see cref="DeviceRemovedEventHandler"/> that is raised when an audio or video device is removed from the system.
+        /// Sets the <see cref="AudioDeviceRemovedEventHandler"/> that is raised when an audio or video device is removed from the system.
         /// </summary>
-        /// <value>The <see cref="DeviceRemovedEventHandler"/> event handler.</value>
-        public DeviceRemovedEventHandler Removed
+        /// <value>The <see cref="AudioDeviceRemovedEventHandler"/> event handler.</value>
+        public AudioDeviceRemovedEventHandler AudioRemoved
         {
             set 
             { 
-                Native.SetOnDeviceRemovedHandler(value);
-                _removed = value;
+                Native.SetOnAudioDeviceRemovedHandler(value);
+                _audioRemoved = value;
             }
         }
 
-        private DeviceChangedEventHandler _changed;
+        private AudioDeviceChangedEventHandler _audioChanged;
 
         /// <summary>
-        /// Sets the <see cref="DeviceChangedEventHandler"/> that is raised when the currently used input or output device has changed.
+        /// Sets the <see cref="AudioDeviceChangedEventHandler"/> that is raised when the currently used input or output device has changed.
         /// </summary>
-        /// <value>The <see cref="DeviceChangedEventHandler"/> event handler.</value>
-        public DeviceChangedEventHandler Changed
+        /// <value>The <see cref="AudioDeviceChangedEventHandler"/> event handler.</value>
+        public AudioDeviceChangedEventHandler AudioChanged
         {
             set 
             { 
-                Native.SetOnDeviceChangedHandler(value);
-                _changed = value;
+                Native.SetOnAudioDeviceChangedHandler(value);
+                _audioChanged = value;
             }
         }
 

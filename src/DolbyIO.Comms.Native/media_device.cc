@@ -5,9 +5,9 @@
 namespace dolbyio::comms::native {
 extern "C" {
 
-  EXPORT_API void SetOnDeviceAddedHandler(on_device_added::type handler) {
-    handle<on_device_added>(sdk->device_management(), handler, 
-      [handler](const on_device_added::event& e) {
+  EXPORT_API void SetOnAudioDeviceAddedHandler(on_audio_device_added::type handler) {
+    handle<on_audio_device_added>(sdk->device_management(), handler, 
+      [handler](const on_audio_device_added::event& e) {
         device dev;
         no_alloc_to_c(&dev, e.device);
         handler(dev);
@@ -15,9 +15,9 @@ extern "C" {
     );
   }
 
-  EXPORT_API void SetOnDeviceRemovedHandler(on_device_removed::type handler) {
-    handle<on_device_removed>(sdk->device_management(), handler, 
-      [handler](const on_device_removed::event& e) {
+  EXPORT_API void SetOnAudioDeviceRemovedHandler(on_audio_device_removed::type handler) {
+    handle<on_audio_device_removed>(sdk->device_management(), handler, 
+      [handler](const on_audio_device_removed::event& e) {
         char uid[constants::DEVICE_GUID_SIZE];
         std::memcpy(uid, &e.uid[0], e.uid.size());
         handler(uid);
@@ -25,9 +25,9 @@ extern "C" {
     );
   }
 
-  EXPORT_API void SetOnDeviceChangedHandler(on_device_changed::type handler) {
-    handle<on_device_changed>(sdk->device_management(), handler, 
-      [handler](const on_device_changed::event& e) {
+  EXPORT_API void SetAudioOnDeviceChangedHandler(on_audio_device_changed::type handler) {
+    handle<on_audio_device_changed>(sdk->device_management(), handler, 
+      [handler](const on_audio_device_changed::event& e) {
         device dev;
         no_alloc_to_c(&dev, e.device);
         handler(dev, e.no_device);

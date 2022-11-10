@@ -121,13 +121,13 @@ namespace DolbyIO.Comms
         internal static extern void SetOnConferenceInvitationReceivedHandler(ConferenceInvitationReceivedEventHandler handler);
 
         [DllImport (LibName, CharSet = CharSet.Ansi)]
-        internal static extern void SetOnDeviceAddedHandler(DeviceAddedEventHandler handler);   
+        internal static extern void SetOnAudioDeviceAddedHandler(AudioDeviceAddedEventHandler handler);   
 
         [DllImport (LibName, CharSet = CharSet.Ansi)]
-        internal static extern void SetOnDeviceRemovedHandler(DeviceRemovedEventHandler handler);   
+        internal static extern void SetOnAudioDeviceRemovedHandler(AudioDeviceRemovedEventHandler handler);   
 
         [DllImport (LibName, CharSet = CharSet.Ansi)]
-        internal static extern void SetOnDeviceChangedHandler(DeviceChangedEventHandler handler);
+        internal static extern void SetOnAudioDeviceChangedHandler(AudioDeviceChangedEventHandler handler);
         
         [DllImport (LibName, CharSet = CharSet.Ansi)]
         internal static extern void SetOnActiveSpeakerChangeHandler(ActiveSpeakerChangeEventHandler handler);
