@@ -23,6 +23,9 @@ add_dotnet_library(
         Native/Structs/Participant.cs
         Native/Structs/ParticipantInfo.cs
         Native/Structs/UserInfo.cs
+        Native/Structs/VideoDevice.cs
+        Native/Structs/VideoSink.cs
+        Native/Structs/VideoFrame.cs
         Native/Callback.cs
         Native/Handlers.cs
         Native/Native.cs
@@ -32,6 +35,9 @@ add_dotnet_library(
         Services/Audio/AudioService.cs
         Services/Audio/LocalAudioService.cs
         Services/Audio/RemoteAudioService.cs
+        Services/Video/VideoService.cs
+        Services/Video/LocalVideoService.cs
+        Services/Video/RemoteVideoService.cs
         DolbyIOException.cs
         DolbyIOSDK.cs
     VERSION

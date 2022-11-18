@@ -54,10 +54,17 @@ extern "C" {
     no_alloc_to_c(result, participant);
   }
 
-  EXPORT_API void AudioDeviceTest(device* result) {
+  EXPORT_API void AudioDeviceTest(audio_device* result) {
     dvc_device dev("UID", "dummy device", dvc_device::direction::output, dvc_device::platform::macos, "ID");
     no_alloc_to_c(result, dev);
   }
 
+  EXPORT_API void VideoDeviceTest(video_device* result) {
+    camera_device dev;
+    dev.unique_id = "UID";
+    dev.display_name = "dummy device";
+    
+    no_alloc_to_c(result, dev);
+  }
 }
 } // namespace dolbyio::comms::native::tests

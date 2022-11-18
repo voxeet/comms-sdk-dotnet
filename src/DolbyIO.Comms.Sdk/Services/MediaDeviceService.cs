@@ -18,7 +18,7 @@ namespace DolbyIO.Comms.Services
         private AudioDeviceAddedEventHandler _audioAdded;
 
         /// <summary>
-        /// Sets the <see cref="AudioDeviceAddedEventHandler"/> that is raised when a new audio or video device is added to the system.
+        /// Sets the <see cref="AudioDeviceAddedEventHandler"/> that is raised when a new audio device is added to the system.
         /// </summary>
         /// <value>The <see cref="AudioDeviceAddedEventHandler"/> event handler.</value>
         public AudioDeviceAddedEventHandler AudioAdded
@@ -33,7 +33,7 @@ namespace DolbyIO.Comms.Services
         private AudioDeviceRemovedEventHandler _audioRemoved;
 
         /// <summary>
-        /// Sets the <see cref="AudioDeviceRemovedEventHandler"/> that is raised when an audio or video device is removed from the system.
+        /// Sets the <see cref="AudioDeviceRemovedEventHandler"/> that is raised when an audio device is removed from the system.
         /// </summary>
         /// <value>The <see cref="AudioDeviceRemovedEventHandler"/> event handler.</value>
         public AudioDeviceRemovedEventHandler AudioRemoved
@@ -48,7 +48,7 @@ namespace DolbyIO.Comms.Services
         private AudioDeviceChangedEventHandler _audioChanged;
 
         /// <summary>
-        /// Sets the <see cref="AudioDeviceChangedEventHandler"/> that is raised when the currently used input or output device has changed.
+        /// Sets the <see cref="AudioDeviceChangedEventHandler"/> that is raised when the currently used input or output audio device has changed.
         /// </summary>
         /// <value>The <see cref="AudioDeviceChangedEventHandler"/> event handler.</value>
         public AudioDeviceChangedEventHandler AudioChanged
@@ -57,6 +57,51 @@ namespace DolbyIO.Comms.Services
             { 
                 Native.SetOnAudioDeviceChangedHandler(value);
                 _audioChanged = value;
+            }
+        }
+
+        private VideoDeviceAddedEventHandler _videoAdded;
+
+        /// <summary>
+        /// Sets the <see cref="VideoDeviceAddedEventHandler"/> that is raised when a new video device is added to the system.
+        /// </summary>
+        /// <value>The <see cref="AudioDeviceAddedEventHandler"/> event handler.</value>
+        public VideoDeviceAddedEventHandler VideoAdded
+        {
+            set
+            {
+                Native.SetOnVideoDeviceAddedHandler(value);
+                _videoAdded = value;
+            }
+        }
+
+        private VideoDeviceChangedEventHandler _videoChanged;
+
+        /// <summary>
+        /// Sets the <see cref="VideoDeviceChangedEventHandler"/> that is raised when the currently used input or output video device has changed.
+        /// </summary>
+        /// <value>The <see cref="VideoDeviceChangedEventHandler"/> event handler.</value>
+        public VideoDeviceChangedEventHandler VideoChanged
+        {
+            set
+            {
+                Native.SetOnVideoDeviceChangedHandler(value);
+                _videoChanged = value;
+            }
+        }
+
+        private VideoDeviceRemovedEventHandler _videoRemoved;
+
+        /// <summary>
+        /// Sets the <see cref="VideoDeviceRemovedEventHandler"/> that is raised when a video device is removed from the system.
+        /// </summary>
+        /// <value>The <see cref="VideoDeviceRemovedEventHandler"/> event handler.</value>
+        public VideoDeviceRemovedEventHandler VideoRemoved
+        {
+            set
+            {
+                Native.SetOnVideoDeviceRemovedHandler(value);
+                _videoRemoved = value;
             }
         }
 
@@ -133,6 +178,46 @@ namespace DolbyIO.Comms.Services
         public async Task SetPreferredAudioOutputDeviceAsync(AudioDevice device)
         {
             await Task.Run(() => Native.CheckException(Native.SetPreferredAudioOutputDevice(device))).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Gets a list of all video devices that are currently available in the system.
+        /// </summary>
+        /// <returns>The <xref href="System.Threading.Tasks.Task`1"/> that represents the asynchronous operation.
+        /// The <xref href="System.Threading.Tasks.Task`1.Result"/> property returns a list of <see cref="VideoDevice">video devices</see>
+        /// that are currently available in the system.</returns>
+        public async Task<List<VideoDevice>> GetVideoDevicesAsync()
+        {
+            return await Task.Run(() => 
+            {
+                List<VideoDevice> devices = new List<VideoDevice>();
+                VideoDevice[] src = new VideoDevice[0];
+                int size = 0;
+
+                Native.CheckException(Native.GetVideoDevices(ref size, out src));
+                
+                for (int i = 0; i < size; i++)
+                {
+                    devices.Add(src[i]);
+                }
+
+                return devices;
+            }).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Gets the video device that is currently used by the system.
+        /// </summary>
+        /// The <xref href="System.Threading.Tasks.Task`1.Result"/> property returns the <see cref="VideoDevice">video device</see>
+        /// that is currently used by the system.</returns>
+        public async Task<VideoDevice> GetCurrentVideoDeviceAsync()
+        {
+            return await Task.Run(() => 
+            {
+                VideoDevice device;
+                Native.CheckException(Native.GetCurrentVideoDevice(out device));
+                return device;
+            }).ConfigureAwait(false);
         }
     }
 }

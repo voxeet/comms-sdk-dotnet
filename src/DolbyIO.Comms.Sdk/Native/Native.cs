@@ -104,6 +104,28 @@ namespace DolbyIO.Comms
         [DllImport (LibName, CharSet = CharSet.Ansi)]
         internal static extern string GetLastErrorMsg();
 
+        // Video
+        [DllImport (LibName, CharSet = CharSet.Ansi)]
+        internal static extern int GetVideoDevices(ref int size, [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 0)] out VideoDevice[] devices);
+
+        [DllImport (Native.LibName, CharSet = CharSet.Ansi)]
+        internal static extern int GetCurrentVideoDevice(out VideoDevice device);
+
+        [DllImport (Native.LibName, CharSet = CharSet.Ansi)]
+        internal static extern IntPtr CreateVideoSink(VideoSink.VideoSinkOnFrame f);
+
+        [DllImport (Native.LibName, CharSet = CharSet.Ansi)]
+        internal static extern void DeleteVideoSink(IntPtr handle);
+
+        [DllImport (Native.LibName, CharSet = CharSet.Ansi)]
+        internal static extern int SetVideoSink(IntPtr handle);
+
+        [DllImport (Native.LibName, CharSet = CharSet.Ansi)]
+        internal static extern int StartVideo();
+
+        [DllImport (Native.LibName, CharSet = CharSet.Ansi)]
+        internal static extern int StopVideo();
+
         // Events Handling
         [DllImport (LibName, CharSet = CharSet.Ansi)]
         internal static extern void SetOnConferenceStatusUpdatedHandler(ConferenceStatusUpdatedEventHandler handler);                                      
@@ -128,6 +150,15 @@ namespace DolbyIO.Comms
 
         [DllImport (LibName, CharSet = CharSet.Ansi)]
         internal static extern void SetOnAudioDeviceChangedHandler(AudioDeviceChangedEventHandler handler);
+
+        [DllImport (LibName, CharSet = CharSet.Ansi)]
+        internal static extern void SetOnVideoDeviceAddedHandler(VideoDeviceAddedEventHandler handler);   
+
+        [DllImport (LibName, CharSet = CharSet.Ansi)]
+        internal static extern void SetOnVideoDeviceRemovedHandler(VideoDeviceRemovedEventHandler handler);   
+
+        [DllImport (LibName, CharSet = CharSet.Ansi)]
+        internal static extern void SetOnVideoDeviceChangedHandler(VideoDeviceChangedEventHandler handler);
         
         [DllImport (LibName, CharSet = CharSet.Ansi)]
         internal static extern void SetOnActiveSpeakerChangeHandler(ActiveSpeakerChangeEventHandler handler);

@@ -203,6 +203,12 @@ public class CommandLine
             
             await _sdk.Conference.SetSpatialPositionAsync(_sdk.Session.User.Id, new Vector3(0.0f, 0.0f, 0.0f));
 
+            // var sink = new Sink();
+
+            // await _sdk.Video.Remote.SetVideoSinkAsync(sink);
+            Log.Debug("---------------------------------------------------------------------");
+            await _sdk.Video.Local.Start();
+
             await InputLoop();
         }
         catch (DolbyIOException e)
@@ -254,11 +260,17 @@ public class CommandLine
     {
         try
         {
-            List<AudioDevice> devices = await _sdk.MediaDevice.GetAudioDevicesAsync();
-            devices.ForEach(d => Console.WriteLine(d.Uid + " : " + d.Name));
+            List<AudioDevice> audioDevices = await _sdk.MediaDevice.GetAudioDevicesAsync();
+            audioDevices.ForEach(d => Console.WriteLine(d.Uid + " : " + d.Name));
+
+            List<VideoDevice> videoDevices = await _sdk.MediaDevice.GetVideoDevicesAsync();
+            videoDevices.ForEach(d => Console.WriteLine(d.Uid + " : " + d.Name));
             
             var device = await _sdk.MediaDevice.GetCurrentAudioInputDeviceAsync();
             await _sdk.MediaDevice.SetPreferredAudioInputDeviceAsync(device);
+
+            var videoDevice = await _sdk.MediaDevice.GetCurrentVideoDeviceAsync();
+            Log.Debug($"VideoDevice: {videoDevice.Name}");
 
             await InputLoop();
         }
@@ -334,5 +346,13 @@ public class CommandLine
                 Log.Debug($"-- ActiveSpeaker : {s}");
             }
         }
+    }
+}
+
+public class Sink : VideoSink {
+    public Sink() : base() {}
+    public override void OnFrame(string streamId, string trackId, VideoFrame frame)
+    {
+        Log.Debug($"OnFrame {streamId}");
     }
 }

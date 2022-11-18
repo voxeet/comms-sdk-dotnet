@@ -10,6 +10,8 @@ set(SOURCES
     media_device.cc
     audio.cc
     sdk.cc
+    video.cc
+    video_sink.cc
 )
 
 add_library(DolbyIO.Comms.Native  SHARED
@@ -47,6 +49,7 @@ if (BUILD_TESTS)
 endif()
 
 if (APPLE)
+
     set_target_properties(DolbyIO.Comms.Native PROPERTIES BUILD_RPATH "@loader_path/../PlugIns;@loader_path/.") # Unity App compatibility
 
     add_dotnet_runtime(

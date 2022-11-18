@@ -29,7 +29,17 @@ namespace DolbyIO.Comms.Tests
         }
 
         [Fact]
-        public async void Test_MediaDevice_CanCallMethods()
+        public void Test_VideoDevice_ShouldMarshall()
+        {
+            VideoDevice dest;
+            NativeTests.VideoDeviceTest(out dest);
+
+            Assert.Equal("UID", dest.Uid);
+            Assert.Equal("dummy device", dest.Name);
+        }
+
+        [Fact]
+        public async void Test_MediaDevice_CanCallAudioMethods()
         {
             AudioDevice device = new AudioDevice();
 
@@ -38,6 +48,13 @@ namespace DolbyIO.Comms.Tests
             await _fixture.Sdk.MediaDevice.GetCurrentAudioOutputDeviceAsync();
             await _fixture.Sdk.MediaDevice.SetPreferredAudioInputDeviceAsync(device);
             await _fixture.Sdk.MediaDevice.SetPreferredAudioOutputDeviceAsync(device);
+        }
+
+        [Fact]
+        public async void Test_MediaDevice_CanCallVideoMethods()
+        {
+            await _fixture.Sdk.MediaDevice.GetVideoDevicesAsync();
+            await _fixture.Sdk.MediaDevice.GetCurrentVideoDeviceAsync();
         }
     }
 }
