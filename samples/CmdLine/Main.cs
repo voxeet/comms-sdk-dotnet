@@ -207,7 +207,7 @@ public class CommandLine
 
             // await _sdk.Video.Remote.SetVideoSinkAsync(sink);
             Log.Debug("---------------------------------------------------------------------");
-            await _sdk.Video.Local.Start();
+            await _sdk.Video.Local.StartAsync();
 
             await InputLoop();
         }
