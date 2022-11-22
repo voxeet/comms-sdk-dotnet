@@ -118,6 +118,9 @@ namespace DolbyIO.Comms
         internal static extern void DeleteVideoSink(IntPtr handle);
 
         [DllImport (Native.LibName, CharSet = CharSet.Ansi)]
+        internal static extern void DeleteVideoFrameBuffer(IntPtr handle);
+
+        [DllImport (Native.LibName, CharSet = CharSet.Ansi)]
         internal static extern int SetVideoSink(IntPtr handle);
 
         [DllImport (Native.LibName, CharSet = CharSet.Ansi)]

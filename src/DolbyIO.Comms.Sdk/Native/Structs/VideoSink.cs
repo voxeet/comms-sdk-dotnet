@@ -30,7 +30,7 @@ namespace DolbyIO.Comms
     /// </summary>
     public abstract class VideoSink : IDisposable
     {
-        internal delegate void VideoSinkOnFrame(string streamId, string trackId, VideoFrame frame);
+        internal delegate void VideoSinkOnFrame(string streamId, string trackId, NativeVideoFrame frame);
 
         private VideoSinkHandle _handle;
 
@@ -38,7 +38,13 @@ namespace DolbyIO.Comms
 
         public VideoSink()
         {
-            _handle = new VideoSinkHandle(Native.CreateVideoSink(OnFrame));
+            _handle = new VideoSinkHandle(Native.CreateVideoSink(OnNativeFrame));
+        }
+
+        internal void OnNativeFrame(string streamId, string trackId, NativeVideoFrame nframe)
+        {
+            VideoFrame frame = new VideoFrame(nframe);
+            OnFrame(streamId, trackId, frame);
         }
 
         /// <summary>

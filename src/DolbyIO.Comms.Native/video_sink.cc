@@ -14,5 +14,11 @@ extern "C" {
     }
   }
 
+  EXPORT_API void DeleteVideoFrameBuffer(uint8_t* buffer) {
+    if (buffer != nullptr) {
+      free(buffer);
+    }
+  }
+
 } // extern "C"
 } // namespace dolbyio::comms::native

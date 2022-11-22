@@ -203,11 +203,8 @@ public class CommandLine
             
             await _sdk.Conference.SetSpatialPositionAsync(_sdk.Session.User.Id, new Vector3(0.0f, 0.0f, 0.0f));
 
-            // var sink = new Sink();
-
-            // await _sdk.Video.Remote.SetVideoSinkAsync(sink);
-            Log.Debug("---------------------------------------------------------------------");
-            await _sdk.Video.Local.StartAsync();
+            var sink = new Sink();
+            await _sdk.Video.Remote.SetVideoSinkAsync(sink);
 
             await InputLoop();
         }
@@ -353,6 +350,7 @@ public class Sink : VideoSink {
     public Sink() : base() {}
     public override void OnFrame(string streamId, string trackId, VideoFrame frame)
     {
-        Log.Debug($"OnFrame {streamId}");
+        Log.Debug($"OnFrame {streamId} {frame.Width}");
+        frame.Dispose();
     }
 }

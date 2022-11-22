@@ -1,6 +1,10 @@
 project(DolbyIO.Comms.Native LANGUAGES CXX)
 set(PROJECT_VERSION ${CSSDK_MAJOR}.${CSSDK_MINOR}.${CSSDK_PATH})
 
+if(APPLE)
+    find_library(CoreVideo CoreVideo)
+endif()
+
 set(SOURCES
     utils.h
     sdk.h
@@ -26,6 +30,7 @@ set_target_properties(DolbyIO.Comms.Native  PROPERTIES C_STANDARD 11)
 target_link_libraries(DolbyIO.Comms.Native  PRIVATE
     DolbyioComms::sdk
     DolbyioComms::media
+    ${CoreVideo}
 )
 
 if (BUILD_TESTS)
@@ -37,6 +42,7 @@ if (BUILD_TESTS)
     target_link_libraries(DolbyIO.Comms.Native.Tests  PRIVATE
         DolbyioComms::sdk
         DolbyioComms::media
+        ${CoreVideo}
     )
 
     target_compile_definitions(DolbyIO.Comms.Native.Tests PRIVATE MOCK)
