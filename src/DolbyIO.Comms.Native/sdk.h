@@ -7,6 +7,8 @@
 #define EXPORT_API 
 #endif
 
+#define DOLBYIO_COMMS_ENABLE_DEPRECATED_WAIT
+
 #include <dolbyio/comms/sdk.h>
 #include <map>
 #include "utils.h"

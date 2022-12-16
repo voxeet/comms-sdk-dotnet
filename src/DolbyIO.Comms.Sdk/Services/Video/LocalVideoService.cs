@@ -1,5 +1,7 @@
 using System.Threading.Tasks;
 
+#nullable enable
+
 namespace DolbyIO.Comms
 {
     /// <summary>
@@ -8,9 +10,12 @@ namespace DolbyIO.Comms
     /// </summary>
     public sealed class LocalVideoService
     {
-        public async Task StartAsync()
+        public async Task StartAsync(VideoDevice? device = null, VideoFrameHandler? handler = null)
         {
-            await Task.Run(() => Native.CheckException(Native.StartVideo()));
+            VideoDevice input = device ?? new VideoDevice("", "");
+            VideoFrameHandler inputHandler = handler ?? new VideoFrameHandler(new VideoFrameHandlerHandle());
+            
+            await Task.Run(() => Native.CheckException(Native.StartVideo(input, inputHandler.Handle))).ConfigureAwait(false);
         }
 
         public async Task StopAsync()

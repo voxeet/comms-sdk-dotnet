@@ -83,6 +83,11 @@ namespace dolbyio::comms::native
       dest->name = strdup(src.display_name);
       dest->uid = strdup(src.unique_id);
     }
+
+    static void to_cpp(typename Traits::cpp_type& dest, typename Traits::c_type* src) {
+      dest.display_name = std::string(src->name);
+      dest.unique_id = std::string(src->uid);
+    }
   };
 }
 

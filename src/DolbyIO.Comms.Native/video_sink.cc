@@ -8,16 +8,22 @@ extern "C" {
     return new video_sink(delegate);
   }
 
-  EXPORT_API void DeleteVideoSink(video_sink* sink) {
+  EXPORT_API bool DeleteVideoSink(video_sink* sink) {
     if (sink != nullptr) {
       delete sink;
+      return true;
     }
+
+    return false;
   }
 
-  EXPORT_API void DeleteVideoFrameBuffer(uint8_t* buffer) {
+  EXPORT_API bool DeleteVideoFrameBuffer(uint8_t* buffer) {
     if (buffer != nullptr) {
       free(buffer);
+      return true;
     }
+    
+    return false;
   }
 
 } // extern "C"

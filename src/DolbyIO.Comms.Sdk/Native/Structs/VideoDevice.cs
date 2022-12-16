@@ -19,5 +19,11 @@ namespace DolbyIO.Comms
         /// </summary>
         /// <returns>The name of the device.</returns>
         public readonly string Name;
+
+        internal VideoDevice(string uid, string name)
+        {
+            Uid = uid;
+            Name = name;
+        }
     }
 }

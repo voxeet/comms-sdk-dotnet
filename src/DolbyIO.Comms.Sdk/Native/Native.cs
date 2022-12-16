@@ -112,22 +112,31 @@ namespace DolbyIO.Comms
         internal static extern int GetCurrentVideoDevice(out VideoDevice device);
 
         [DllImport (Native.LibName, CharSet = CharSet.Ansi)]
-        internal static extern IntPtr CreateVideoSink(VideoSink.VideoSinkOnFrame f);
+        internal static extern VideoSinkHandle CreateVideoSink(VideoSink.VideoSinkOnFrame f);
 
         [DllImport (Native.LibName, CharSet = CharSet.Ansi)]
-        internal static extern void DeleteVideoSink(IntPtr handle);
+        internal static extern bool DeleteVideoSink(IntPtr handle);
 
         [DllImport (Native.LibName, CharSet = CharSet.Ansi)]
-        internal static extern void DeleteVideoFrameBuffer(IntPtr handle);
+        internal static extern bool DeleteVideoFrameBuffer(IntPtr handle);
 
         [DllImport (Native.LibName, CharSet = CharSet.Ansi)]
         internal static extern int SetVideoSink(IntPtr handle);
 
         [DllImport (Native.LibName, CharSet = CharSet.Ansi)]
-        internal static extern int StartVideo();
+        internal static extern int StartVideo(VideoDevice device, VideoFrameHandlerHandle handler);
 
         [DllImport (Native.LibName, CharSet = CharSet.Ansi)]
         internal static extern int StopVideo();
+
+        [DllImport (Native.LibName, CharSet = CharSet.Ansi)]
+        internal static extern VideoFrameHandlerHandle CreateVideoFrameHandler();
+
+        [DllImport (Native.LibName, CharSet = CharSet.Ansi)]
+        internal static extern bool DeleteVideoFrameHandler(IntPtr handle);
+
+        [DllImport (Native.LibName, CharSet = CharSet.Ansi)]
+        internal static extern int SetVideoFrameHandlerSink(VideoFrameHandlerHandle handle, VideoSinkHandle sink);
 
         // Events Handling
         [DllImport (LibName, CharSet = CharSet.Ansi)]

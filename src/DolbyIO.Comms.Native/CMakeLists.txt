@@ -16,6 +16,7 @@ set(SOURCES
     sdk.cc
     video.cc
     video_sink.cc
+    video_frame_handler.cc
 )
 
 add_library(DolbyIO.Comms.Native  SHARED

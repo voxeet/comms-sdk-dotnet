@@ -8,20 +8,27 @@ namespace DolbyIO.Comms
         public int Width;
         public int Height;
 
-        internal VideoFrame(NativeVideoFrame frame)
+        internal VideoFrame(int width, int height, IntPtr buffer)
             : base(IntPtr.Zero, true)
         {
-            Width = frame.Width;
-            Height = frame.Height;
-            SetHandle(frame.Buffer);
+            Width = width;
+            Height = height;
+            SetHandle(buffer);
         }
 
-        public override bool IsInvalid { get => handle == IntPtr.Zero; }
+        public override bool IsInvalid => handle == IntPtr.Zero || handle == new IntPtr(-1);
 
         protected override bool ReleaseHandle()
         {
-            Native.DeleteVideoFrameBuffer(handle);
-            return true;
+            return Native.DeleteVideoFrameBuffer(handle);
+        }
+
+        public byte[] GetBuffer()
+        {
+            byte[] buffer = new byte[Width * Height * 4];
+            Marshal.Copy(handle, buffer, 0, buffer.Length);
+
+            return buffer;
         }
     }
 

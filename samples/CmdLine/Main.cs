@@ -5,6 +5,7 @@ using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 using Serilog;
+using System.Runtime.InteropServices;
 
 using DolbyIO.Comms;
 using Command = System.CommandLine.Command;
@@ -13,6 +14,8 @@ public class CommandLine
 {
     private static volatile bool _keepRunning = true;
     private static DolbyIOSDK _sdk = new DolbyIOSDK();
+
+    private static Sink _sink = new Sink();
 
     public static async Task<int> Main(string[] args)
     {
@@ -203,8 +206,8 @@ public class CommandLine
             
             await _sdk.Conference.SetSpatialPositionAsync(_sdk.Session.User.Id, new Vector3(0.0f, 0.0f, 0.0f));
 
-            var sink = new Sink();
-            await _sdk.Video.Remote.SetVideoSinkAsync(sink);
+
+            await _sdk.Video.Remote.SetVideoSinkAsync(_sink);
 
             await InputLoop();
         }
@@ -350,7 +353,18 @@ public class Sink : VideoSink {
     public Sink() : base() {}
     public override void OnFrame(string streamId, string trackId, VideoFrame frame)
     {
-        Log.Debug($"OnFrame {streamId} {frame.Width}");
-        frame.Dispose();
+        using(frame)
+        {
+  
+            Log.Debug($"OnFrame {streamId} {frame.Width}x{frame.Height} : {frame.DangerousGetHandle()}");
+            try 
+            {
+                var buffer = frame.GetBuffer();
+            }
+            catch (Exception e)
+            {
+                Log.Error(e.Message);
+            }
+        }
     }
 }

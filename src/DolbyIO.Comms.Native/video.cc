@@ -1,4 +1,7 @@
 #include "sdk.h"
+#include "media_device.h"
+#include "video_frame_handler.h"
+
 #include <dispatch/dispatch.h>
 
 namespace dolbyio::comms::native {
@@ -10,9 +13,12 @@ extern "C" {
     }}.result();
   }
 
-  EXPORT_API int StartVideo() {
+  EXPORT_API int StartVideo(video_device device, dolbyio::comms::native::video_frame_handler* handler) {
     return call { [&]() {
-      wait(sdk->video().local().start());
+      camera_device input;
+      no_alloc_to_cpp(input, &device);
+
+      wait(sdk->video().local().start(input, handler));
     }}.result();
   }
 

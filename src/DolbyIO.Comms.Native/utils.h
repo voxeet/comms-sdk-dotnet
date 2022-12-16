@@ -39,7 +39,7 @@ namespace dolbyio::comms::native {
   private:
     int result_;
   };
-
+  
 } // namespace dolbyio::comms::native
 
 #endif // _UTILS_H_

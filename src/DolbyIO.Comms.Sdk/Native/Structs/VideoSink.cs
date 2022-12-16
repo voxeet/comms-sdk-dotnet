@@ -3,47 +3,28 @@ using System.Runtime.InteropServices;
 
 namespace DolbyIO.Comms
 {
-    internal sealed class VideoSinkHandle : SafeHandle
-    {
-        internal VideoSinkHandle(IntPtr handle)
-            : base(IntPtr.Zero, true)
-        {
-            SetHandle(handle);
-        }
-
-        public override bool IsInvalid { get => handle == IntPtr.Zero; }
-
-        public IntPtr GetIntPtr() 
-        {
-            return handle;
-        }
-
-        protected override bool ReleaseHandle()
-        {
-            Native.DeleteVideoSink(handle);
-            return true;
-        }
-    }
-
     /// <summary>
     /// The interface for receiving the raw video frames.
     /// </summary>
     public abstract class VideoSink : IDisposable
     {
-        internal delegate void VideoSinkOnFrame(string streamId, string trackId, NativeVideoFrame frame);
+        internal delegate void VideoSinkOnFrame(string streamId, string trackId, int width, int height, IntPtr buffer);
 
-        private VideoSinkHandle _handle;
+        internal VideoSinkHandle _handle;
 
         internal VideoSinkHandle Handle { get => _handle; }
 
+        internal VideoSinkOnFrame _delegate;
+
         public VideoSink()
         {
-            _handle = new VideoSinkHandle(Native.CreateVideoSink(OnNativeFrame));
+            _delegate = OnNativeFrame;
+            _handle = Native.CreateVideoSink(_delegate);
         }
 
-        internal void OnNativeFrame(string streamId, string trackId, NativeVideoFrame nframe)
+        internal void OnNativeFrame(string streamId, string trackId, int width, int height, IntPtr buffer)
         {
-            VideoFrame frame = new VideoFrame(nframe);
+            VideoFrame frame = new VideoFrame(width, height, buffer);
             OnFrame(streamId, trackId, frame);
         }
 
@@ -60,7 +41,16 @@ namespace DolbyIO.Comms
 
         public void Dispose()
         {
-            _handle.Dispose();
+            Dispose(disposing: true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (_handle != null && !_handle.IsInvalid)
+            {
+                _handle.Dispose();
+            }
         }
     }
 }
