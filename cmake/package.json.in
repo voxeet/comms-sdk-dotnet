@@ -1,5 +1,5 @@
 {
-  "name": "dolbyio.comms.sdk",
+  "name": "dolbyio.comms",
   "version": "${PROJECT_VERSION}",
   "unity": "2021.1",
   "displayName": "DolbyIO .NET SDK",
