@@ -1,6 +1,8 @@
 #ifndef _VIDEO_SINK_H_
 #define _VIDEO_SINK_H_
 
+#include <cmath>
+
 #include "sdk.h"
 
 #include <dolbyio/comms/media_engine/video_frame_macos.h>
@@ -31,7 +33,7 @@ namespace dolbyio::comms::native {
 #if defined(__APPLE__)
       video_frame_macos *mac_frame = frame->get_native_frame();
       CVPixelBufferRef buffer = mac_frame->get_buffer();
-      int res = CVPixelBufferLockBaseAddress(buffer, 0);
+      int res = CVPixelBufferLockBaseAddress(buffer, kCVPixelBufferLock_ReadOnly);
 
          // Sanity check for ensuring we are capturing NV12 from camera
       auto format_type = CVPixelBufferGetPixelFormatType(buffer);
@@ -57,16 +59,16 @@ namespace dolbyio::comms::native {
         uint8_t *uv_addr = &uv_buffer[(y >> 1) * uv_stride];
 
         for(int x = 0; x < width; x++) {
-          int16_t y = y_addr[x];
+          int16_t yy = y_addr[x];
           int16_t cb = uv_addr[x & ~1] - 128;
           int16_t cr = uv_addr[x | 1] - 128;
 
           uint8_t *rgb_output = &rgb_line[x * bytes_per_pixel];
 
           // BT.601 limited.
-          int16_t r = (int16_t)roundf( (y - 16) * 1.164 + cr *  1.596 );
-          int16_t g = (int16_t)roundf( (y - 16) * 1.164 + cb * -0.391 + cr * -0.813 );
-          int16_t b = (int16_t)roundf( (y - 16) * 1.164 + cb *  2.018);
+          int16_t r =  (yy - 16) * 1.164 + cr *  1.596 ;
+          int16_t g = (yy - 16) * 1.164 + cb * -0.391 + cr * -0.813 ;
+          int16_t b = (yy - 16) * 1.164 + cb *  2.018;
 
           rgb_output[0] = 0xff;
           rgb_output[1] = clamp(r);
@@ -75,7 +77,8 @@ namespace dolbyio::comms::native {
         }
       }
 
-      CVPixelBufferUnlockBaseAddress(buffer, 0);
+      CVPixelBufferUnlockBaseAddress(buffer, kCVPixelBufferLock_ReadOnly);
+
 #else
 
 #endif

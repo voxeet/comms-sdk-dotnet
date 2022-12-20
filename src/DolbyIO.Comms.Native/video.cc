@@ -2,8 +2,6 @@
 #include "media_device.h"
 #include "video_frame_handler.h"
 
-#include <dispatch/dispatch.h>
-
 namespace dolbyio::comms::native {
 extern "C" {
 

@@ -1,5 +1,7 @@
 using System.Threading.Tasks;
 
+#nullable enable
+
 namespace DolbyIO.Comms
 {
     /// <summary>
@@ -7,9 +9,10 @@ namespace DolbyIO.Comms
     /// </summary>
     public sealed class RemoteVideoService
     {
-        public async Task SetVideoSinkAsync(VideoSink sink)
+        public async Task SetVideoSinkAsync(VideoSink? sink)
         {
-            await Task.Run(() => Native.CheckException(Native.SetVideoSink(sink.Handle.GetIntPtr()))).ConfigureAwait(false);
+            VideoSinkHandle handle = sink != null ? sink.Handle : new VideoSinkHandle();
+            await Task.Run(() => Native.CheckException(Native.SetVideoSink(handle))).ConfigureAwait(false);
         }
     }
 }

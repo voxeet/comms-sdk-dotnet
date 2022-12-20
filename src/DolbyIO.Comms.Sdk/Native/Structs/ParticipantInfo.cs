@@ -26,7 +26,7 @@ namespace DolbyIO.Comms
         public readonly string Name = "";
         
         /// <summary>
-        /// The URL of the participant's avatar.
+        /// The URL of the participant's avatar.`
         /// </summary>
         /// <returns>The URL of the avatar.</returns>
         [MarshalAs(UnmanagedType.LPStr)]
