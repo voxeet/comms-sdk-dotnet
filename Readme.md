@@ -19,7 +19,7 @@ Make sure that you have:
 
 Additionally, if you plan to build the SDK from sources, not the NuGet packet manager, make sure that you have:
 
-- The [Dolby.io Communications C++ SDK 2.0](https://github.com/DolbyIO/comms-sdk-cpp/releases) for your platform
+- The [Dolby.io Communications C++ SDK 2.3.0-alpha.3](https://github.com/DolbyIO/comms-sdk-cpp/releases) for your platform
 - [.NET SDK 6](https://dotnet.microsoft.com/en-us/download)
 - C++ compiler compatible with C++ 17
 - CMake 3.23

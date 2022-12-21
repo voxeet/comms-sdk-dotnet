@@ -17,6 +17,14 @@ namespace DolbyIO.Comms
         public bool Audio = false;
 
         /// <summary>
+        /// A boolean that indicates whether the application should
+        /// capture the local video and send it to the conference.
+        /// </summary>
+        /// <returns>If true, the SDK will capture video and send it to the conference.</returns>
+        [MarshalAs(UnmanagedType.U1)]
+        public bool Video = false;
+
+        /// <summary>
         /// A boolean that allows a participant to join a conference as a sender. This
         /// is strictly intended for Server Side SDK applications that
         /// want to inject media without recording. This flag is
