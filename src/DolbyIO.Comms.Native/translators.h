@@ -57,6 +57,7 @@ namespace dolbyio::comms::native {
     static_assert(has_to_cpp_method<translator<F, T>>::value, "Implement to_c method");
     translator<F, T>::to_cpp(t, f);
   }
-}
+
+} // namespace dolbyio::comms::native
 
 #endif // _TRANSLATORS_H_

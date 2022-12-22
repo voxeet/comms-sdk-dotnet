@@ -3,8 +3,8 @@
 
 #include "sdk.h"
 
-namespace dolbyio::comms::native
-{
+namespace dolbyio::comms::native {
+
   /**
    * @brief C# AudioDevice C struct.
    */
@@ -89,6 +89,7 @@ namespace dolbyio::comms::native
       dest.unique_id = std::string(src->uid);
     }
   };
-}
+
+} // namespace dolbyio::comms::native
 
 #endif // _MEDIA_DEVICE_H_

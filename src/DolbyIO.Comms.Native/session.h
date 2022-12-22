@@ -5,6 +5,7 @@
 #include "handlers.h"
 
 namespace dolbyio::comms::native {
+  
   /**
    * @brief C# UserInfo C struct.
    */

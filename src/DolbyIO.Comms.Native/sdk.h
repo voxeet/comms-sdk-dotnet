@@ -16,6 +16,7 @@
 #include "translators.h"
 
 namespace dolbyio::comms::native {
+
   struct constants {
     static constexpr int DEVICE_GUID_SIZE = 24;
     static constexpr int MAX_PERMISSIONS = 12;
@@ -36,6 +37,7 @@ namespace dolbyio::comms::native {
   using refresh_delegate_type = char* (*)();
 
   extern dolbyio::comms::sdk* sdk;
-}
+
+} // namespace dolbyio::comms::native
 
 #endif // _PLUGIN_H_

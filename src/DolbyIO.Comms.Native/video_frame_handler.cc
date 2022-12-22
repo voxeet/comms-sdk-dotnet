@@ -25,5 +25,6 @@ extern "C" {
 
     return call<>::result_error;
   }
+  
 } // extern "C"
 } // namespace dolbyio::comms::native

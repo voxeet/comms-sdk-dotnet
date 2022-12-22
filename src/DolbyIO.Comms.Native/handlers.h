@@ -2,6 +2,7 @@
 #define _HANDLERS_H_
 
 namespace dolbyio::comms::native {  
+
   extern std::map<std::string, dolbyio::comms::event_handler_id> handlers_map;
 
   static void disconnect_handler(const char* name) {
@@ -21,6 +22,7 @@ namespace dolbyio::comms::native {
     }
 #endif
   }
-}
+
+} // namespace dolbyio::comms::native
 
 #endif // _HANDLERS_H_

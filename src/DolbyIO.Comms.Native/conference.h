@@ -5,6 +5,7 @@
 #include "handlers.h"
 
 namespace dolbyio::comms::native {
+
   /**
    * @brief C# ConferenceParams C struct.
    */
@@ -266,6 +267,7 @@ namespace dolbyio::comms::native {
       no_alloc_to_cpp(dest.info, &src->info);
     }
   };
-}
+
+} // namespace dolbyio::comms::native
 
 #endif // _CONFERENCE_H_

@@ -68,5 +68,5 @@ extern "C" {
     return strdup(error);
   }
 
-} // end of export C block
+} // extern "C"
 } // dolbyio::comms::native

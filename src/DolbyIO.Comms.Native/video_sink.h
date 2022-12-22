@@ -126,6 +126,7 @@ namespace dolbyio::comms::native {
   private:
     delegate_type delegate_;
   };
-}
+
+} // namespace dolbyio::comms::native
 
 #endif // _VIDEO_SINK_H_
