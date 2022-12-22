@@ -11,7 +11,6 @@ namespace DolbyIO.Comms
     public sealed class LocalVideoService
     {
         /// <summary>
-        /// /**
         /// Starts local video capture.
         ///
         /// This method may be called at any time, regardless of the conference state. If this method is invoked when there's

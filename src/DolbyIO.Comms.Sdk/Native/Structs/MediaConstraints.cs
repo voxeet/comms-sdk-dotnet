@@ -20,7 +20,7 @@ namespace DolbyIO.Comms
         /// A boolean that indicates whether the application should
         /// capture the local video and send it to the conference.
         /// </summary>
-        /// <returns>If true, the SDK will capture video and send it to the conference.</returns>
+        /// <returns>If true, the SDK will capture the local video and send it to the conference.</returns>
         [MarshalAs(UnmanagedType.U1)]
         public bool Video = false;
 
