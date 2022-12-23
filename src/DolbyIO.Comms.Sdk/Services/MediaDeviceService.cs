@@ -11,7 +11,7 @@ namespace DolbyIO.Comms.Services
     /// 1. Get all current audio devices using the <see cref="GetAudioDevicesAsync"/> method.
     /// 2. Set the desired input audio device by calling the <see cref="SetPreferredAudioInputDeviceAsync(AudioDevice)"/> method.
     /// 3. Set the desired output audio device by calling the <see cref="SetPreferredAudioOutputDeviceAsync(AudioDevice)"/> method.
-    /// 4. Subscribe to the <see cref="Added"/>, <see cref="Removed"/>, and <see cref="Changed"/> events.
+    /// 4. Subscribe to the <see cref="AudioDeviceAdded"/>, <see cref="AudioDeviceRemoved"/>, and <see cref="AudioDeviceChanged"/> events.
     /// </summary>
     public sealed class MediaDeviceService
     {
