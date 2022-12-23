@@ -11,7 +11,7 @@ namespace DolbyIO.Comms
         /// <summary>
         /// The unique identifier of the audio device.
         /// </summary>
-        /// <returns>The identifier.</returns>
+        /// <returns>The unique identifier of the device.</returns>
         public readonly string Uid;
 
         /// <summary>
