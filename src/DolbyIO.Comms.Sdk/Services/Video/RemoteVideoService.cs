@@ -5,16 +5,14 @@ using System.Threading.Tasks;
 namespace DolbyIO.Comms
 {
     /// <summary>
-    /// The remote video service.
+    /// The RemoteVideoService allows the local participant to locally start and stop remote participants` video streams transmission.
     /// </summary>
     public sealed class RemoteVideoService
     {
         /// <summary>
-        /// Sets the video sink to be used by all conferences.
-        ///
-        /// The video sink passed to this method will be used for passing the decoded video frames to the application. The
-        /// ownership of the sink remains with the application, and the SDK will not delete it. The application should set null
-        /// sink and ensure that the SetVideoSinkAsync() call returned before deleting the previously set sink object.
+        /// Sets a video sink to allow passing decoded video frames to an application. The set sink is used in all conferences. 
+        /// An application is responsible for the sink and the SDK does not delete it. The application should set a null
+        /// sink and ensure that the SetVideoSinkAsync() call returns before deleting the previously set sink object.
         /// </summary>
         /// <param name="sink">The VideoSink used to receive video frames.</param>
         /// <returns>A <xref href="System.Threading.Tasks.Task"/> that represents the asynchronous operation.</returns>

@@ -183,7 +183,7 @@ namespace DolbyIO.Comms.Services
         /// <summary>
         /// Gets a list of all video devices that are currently available in the system.
         /// </summary>
-        /// <returns>The <xref href="System.Threading.Tasks.Task`1"/> that represents the asynchronous operation.
+        /// <returns>The <xref href="System.Threading.Tasks.Task`1"/> that represents an asynchronous operation.
         /// The <xref href="System.Threading.Tasks.Task`1.Result"/> property returns a list of <see cref="VideoDevice">video devices</see>
         /// that are currently available in the system.</returns>
         public async Task<List<VideoDevice>> GetVideoDevicesAsync()

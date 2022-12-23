@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 namespace DolbyIO.Comms
 {
     /// <summary>
-    /// The interface for receiving the raw video frames.
+    /// The VideoSink class is an interface for receiving raw video frames.
     /// </summary>
     public abstract class VideoSink : IDisposable
     {
@@ -34,7 +34,7 @@ namespace DolbyIO.Comms
         /// </summary>
         /// <param name="streamId">The ID of the media stream to which the video track belongs. In the event of a local camera
         /// camera stream, this string may be empty.</param>
-        /// <param name="trackId">The ID of the video track to which the frame belongs. In the event of a local camera
+        /// <param name="trackId">The ID of the video track to which the video frame belongs. In the event of a local camera
         /// camera stream, this string may be empty.</param>
         /// <param name="frame">The video frame.</param>
         public abstract void OnFrame(string streamId, string trackId, VideoFrame frame);

@@ -4,12 +4,12 @@ using System.Runtime.InteropServices;
 namespace DolbyIO.Comms
 {
     /// <summary>
-    /// Object that wraps decoded ARGB8888 video frames.
+    /// The VideoFrame object wraps the decoded ARGB8888 video frames.
     /// </summary>
     public class VideoFrame : SafeHandle 
     {
         /// <summary>
-        /// The Width of the video frame.
+        /// The width of the video frame.
         /// </summary>
         public int Width;
 
@@ -34,9 +34,9 @@ namespace DolbyIO.Comms
         }
 
         /// <summary>
-        /// Get a copy of the native video frame as a byte[]
+        /// Gets a copy of the native video frame as a byte array.
         /// </summary>
-        /// <returns>A byte array containing the video frame</returns>
+        /// <returns>A byte array containing the video frame.</returns>
         public byte[] GetBuffer()
         {
             byte[] buffer = new byte[Width * Height * 4];
