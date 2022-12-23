@@ -208,7 +208,7 @@ namespace DolbyIO.Comms.Services
         /// <summary>
         /// Gets the video device that is currently used by the system.
         /// </summary>
-        /// <returns> The <xref href="System.Threading.Tasks.Task`1.Result"/> property returns the <see cref="VideoDevice">video device</see>
+        /// <returns>The <xref href="System.Threading.Tasks.Task`1.Result"/> property returns the <see cref="VideoDevice">video device</see>
         /// that is currently used by the system.</returns>
         public async Task<VideoDevice> GetCurrentVideoDeviceAsync()
         {
