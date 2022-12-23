@@ -8,8 +8,8 @@ namespace DolbyIO.Comms
     /// <summary>
     /// The video frame handler for local video streams.
     ///
-    /// The application can set the video frame handler when starting a local camera stream. The frame handler can be used to
-    /// capture the camera frames for local camera preview.
+    /// The application can set the video frame handler when starting a local camera stream. Use the frame handler to
+    /// capture camera frames for local camera preview.
     /// </summary>
     public class VideoFrameHandler : IDisposable
     {

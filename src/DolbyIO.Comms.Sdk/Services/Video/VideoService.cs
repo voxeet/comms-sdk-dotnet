@@ -1,7 +1,7 @@
 namespace DolbyIO.Comms
 {
     /// <summary>
-    /// The video service.
+    /// The VideoService allows managing the local participant's and remote participants' video.
     /// </summary>
     public sealed class VideoService
     {

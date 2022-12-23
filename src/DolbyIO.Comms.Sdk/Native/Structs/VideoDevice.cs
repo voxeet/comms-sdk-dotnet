@@ -3,7 +3,7 @@ using System.Runtime.InteropServices;
 namespace DolbyIO.Comms
 {
     /// <summary>
-    /// The Video class contains a platform-agnostic description of a video device.
+    /// The VideoDevice class contains a platform-agnostic description of a video device.
     /// </summary>
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
     public struct VideoDevice
@@ -15,7 +15,7 @@ namespace DolbyIO.Comms
         public readonly string Uid;
 
         /// <summary>
-        /// The name of the vide device.
+        /// The name of the video device.
         /// </summary>
         /// <returns>The name of the device.</returns>
         public readonly string Name;
