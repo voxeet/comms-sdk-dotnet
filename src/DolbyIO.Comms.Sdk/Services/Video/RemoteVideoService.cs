@@ -2,7 +2,7 @@ using System.Threading.Tasks;
 
 #nullable enable
 
-namespace DolbyIO.Comms
+namespace DolbyIO.Comms.Services
 {
     /// <summary>
     /// The RemoteVideoService allows the local participant to locally start and stop remote participants` video streams transmission.

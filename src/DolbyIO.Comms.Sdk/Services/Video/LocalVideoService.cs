@@ -2,7 +2,7 @@ using System.Threading.Tasks;
 
 #nullable enable
 
-namespace DolbyIO.Comms
+namespace DolbyIO.Comms.Services
 {
     /// <summary>
     /// The LocalVideoService is responsible for capturing the local participant's video
