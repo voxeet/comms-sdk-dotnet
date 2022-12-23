@@ -32,7 +32,15 @@ namespace DolbyIO.Comms.Unity
             }
         }
 
-        private void Update()
+        public static void ClearQueue()
+        {
+            lock(_backlog)
+            {
+                _backlog.Clear();
+            }
+        }
+
+        private void FixedUpdate()
         {
             lock(_backlog)
             {
@@ -59,13 +67,16 @@ namespace DolbyIO.Comms.Unity
                     {
                         await _sdk.Session.CloseAsync();
                     }
-
-                    _sdk.Dispose();
                 }
             }
             catch (DolbyIOException e)
             {
                 Debug.LogError(e);
+            }
+            finally
+            {
+                DolbyIOManager.ClearQueue();
+                _sdk.Dispose();
             }
         }
     }

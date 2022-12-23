@@ -1,6 +1,10 @@
 project(DolbyIO.Comms.Native LANGUAGES CXX)
 set(PROJECT_VERSION ${CSSDK_MAJOR}.${CSSDK_MINOR}.${CSSDK_PATH})
 
+if(APPLE)
+    find_library(CoreVideo CoreVideo)
+endif()
+
 set(SOURCES
     utils.h
     sdk.h
@@ -10,6 +14,9 @@ set(SOURCES
     media_device.cc
     audio.cc
     sdk.cc
+    video.cc
+    video_sink.cc
+    video_frame_handler.cc
 )
 
 add_library(DolbyIO.Comms.Native  SHARED
@@ -24,6 +31,7 @@ set_target_properties(DolbyIO.Comms.Native  PROPERTIES C_STANDARD 11)
 target_link_libraries(DolbyIO.Comms.Native  PRIVATE
     DolbyioComms::sdk
     DolbyioComms::media
+    ${CoreVideo}
 )
 
 if (BUILD_TESTS)
@@ -35,6 +43,7 @@ if (BUILD_TESTS)
     target_link_libraries(DolbyIO.Comms.Native.Tests  PRIVATE
         DolbyioComms::sdk
         DolbyioComms::media
+        ${CoreVideo}
     )
 
     target_compile_definitions(DolbyIO.Comms.Native.Tests PRIVATE MOCK)
@@ -47,6 +56,7 @@ if (BUILD_TESTS)
 endif()
 
 if (APPLE)
+
     set_target_properties(DolbyIO.Comms.Native PROPERTIES BUILD_RPATH "@loader_path/../PlugIns;@loader_path/.") # Unity App compatibility
 
     add_dotnet_runtime(
@@ -61,6 +71,7 @@ if (APPLE)
             $<TARGET_FILE:DolbyioComms::sdk>
             $<TARGET_FILE:DolbyioComms::media>
             $<TARGET_FILE:dvc>
+            $<TARGET_FILE:dnr>
         OUTPUT
             runtimes/osx-x64/native
     )
@@ -94,6 +105,7 @@ elseif (WIN32)
         COMMAND ${CMAKE_COMMAND} -E copy_if_different $<TARGET_FILE:DolbyioComms::sdk> "${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/$<TARGET_FILE_NAME:DolbyioComms::sdk>"
         COMMAND ${CMAKE_COMMAND} -E copy_if_different $<TARGET_FILE:DolbyioComms::media> "${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/$<TARGET_FILE_NAME:DolbyioComms::media>"
         COMMAND ${CMAKE_COMMAND} -E copy_if_different $<TARGET_FILE:dvc> "${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/$<TARGET_FILE_NAME:dvc>"
+        COMMAND ${CMAKE_COMMAND} -E copy_if_different $<TARGET_FILE:dnr> "${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/$<TARGET_FILE_NAME:dnr>"
         COMMAND ${CMAKE_COMMAND} -E copy_if_different $<TARGET_FILE:avcodec> "${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/$<TARGET_FILE_NAME:avcodec>"
         COMMAND ${CMAKE_COMMAND} -E copy_if_different $<TARGET_FILE:avformat> "${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/$<TARGET_FILE_NAME:avformat>"
         COMMAND ${CMAKE_COMMAND} -E copy_if_different $<TARGET_FILE:avutil> "${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/$<TARGET_FILE_NAME:avutil>"
@@ -111,6 +123,7 @@ elseif (WIN32)
             $<TARGET_FILE:DolbyioComms::sdk>
             $<TARGET_FILE:DolbyioComms::media>
             $<TARGET_FILE:dvc>
+            $<TARGET_FILE:dnr>
             $<TARGET_FILE:avcodec>
             $<TARGET_FILE:avformat>
             $<TARGET_FILE:avutil>

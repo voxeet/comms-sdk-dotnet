@@ -10,10 +10,10 @@ jobs:
         os: [macos-latest, windows-latest]
         include:
           - os: macos-latest
-            sdk: cppsdk-2.1.0-macos64.zip
+            sdk: cppsdk-2.3.0-alpha.3-macos64.zip
             shell: bash
           - os: windows-latest
-            sdk: cppsdk-2.1.0-windows64.zip
+            sdk: cppsdk-2.3.0-alpha.3-windows64.zip
             shell: powershell
     
     steps:

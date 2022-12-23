@@ -29,5 +29,8 @@ namespace DolbyIO.Comms.Tests
 
         [DllImport(LibName, CharSet = CharSet.Ansi)]
         public static extern void AudioDeviceTest(out AudioDevice dest);
+
+        [DllImport(LibName, CharSet = CharSet.Ansi)]
+        public static extern void VideoDeviceTest(out VideoDevice dest);
     }
 }

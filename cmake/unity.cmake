@@ -17,6 +17,7 @@ if (BUILD_UNITY)
         COMMAND ${CMAKE_COMMAND} -E copy_if_different $<TARGET_FILE:DolbyioComms::sdk> "${UNITY_RUNTIME_DIRECTORY}/Runtime/$<TARGET_FILE_NAME:DolbyioComms::sdk>"
         COMMAND ${CMAKE_COMMAND} -E copy_if_different $<TARGET_FILE:DolbyioComms::media> "${UNITY_RUNTIME_DIRECTORY}/Runtime/$<TARGET_FILE_NAME:DolbyioComms::media>"
         COMMAND ${CMAKE_COMMAND} -E copy_if_different $<TARGET_FILE:dvc> "${UNITY_RUNTIME_DIRECTORY}/Runtime/$<TARGET_FILE_NAME:dvc>"
+        COMMAND ${CMAKE_COMMAND} -E copy_if_different $<TARGET_FILE:dnr> "${UNITY_RUNTIME_DIRECTORY}/Runtime/$<TARGET_FILE_NAME:dnr>"
         COMMAND ${CMAKE_COMMAND} -E copy_if_different $<TARGET_FILE:DolbyIO.Comms.Native> "${UNITY_RUNTIME_DIRECTORY}/Runtime/$<TARGET_FILE_NAME:DolbyIO.Comms.Native>"
         COMMAND ${CMAKE_COMMAND} -E copy_if_different ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/DolbyIO.Comms.Sdk.dll "${UNITY_RUNTIME_DIRECTORY}/Runtime/DolbyIO.Comms.Sdk.dll"
         

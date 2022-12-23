@@ -20,7 +20,7 @@ runs:
       uses: robinraju/release-downloader@v1.4
       with:
         repository: "DolbyIO/comms-sdk-cpp"
-        tag: "2.1.0"
+        tag: "2.3.0-alpha.3"
         fileName: "${{ inputs.cpp-sdk }}"
         out-file-path: "cppsdk.zip"
 

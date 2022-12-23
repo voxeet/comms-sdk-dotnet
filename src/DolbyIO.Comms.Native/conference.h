@@ -5,6 +5,7 @@
 #include "handlers.h"
 
 namespace dolbyio::comms::native {
+
   /**
    * @brief C# ConferenceParams C struct.
    */
@@ -43,7 +44,7 @@ namespace dolbyio::comms::native {
    */
   struct media_constraints {
     bool audio;
-    //bool video;
+    bool video;
     bool send_only;
   };
 
@@ -205,6 +206,7 @@ namespace dolbyio::comms::native {
       no_alloc_to_c(&dest->connection, src.connection);
 
       dest->constraints.audio = src.constraints.audio;
+      dest->constraints.video = src.constraints.video;
       dest->constraints.send_only = src.constraints.send_only;
     }
 
@@ -212,6 +214,7 @@ namespace dolbyio::comms::native {
       no_alloc_to_cpp(dest.connection, &src->connection);
 
       dest.constraints.audio = src->constraints.audio;
+      dest.constraints.video = src->constraints.video;
       dest.constraints.send_only = src->constraints.send_only;
     }
   };
@@ -264,6 +267,7 @@ namespace dolbyio::comms::native {
       no_alloc_to_cpp(dest.info, &src->info);
     }
   };
-}
+
+} // namespace dolbyio::comms::native
 
 #endif // _CONFERENCE_H_

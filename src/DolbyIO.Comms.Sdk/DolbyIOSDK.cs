@@ -132,6 +132,21 @@ namespace DolbyIO.Comms
             }
         }
 
+        private VideoService _video = new VideoService();
+
+        public VideoService Video
+        {
+            get 
+            {
+                if (!_initialized)
+                {
+                    throw new DolbyIOException($"{nameof(DolbyIOSDK)} is not initialized!");
+                }
+
+                return _video;
+            }
+        }
+
         private volatile bool _initialized = false;
 
         /// <summary>

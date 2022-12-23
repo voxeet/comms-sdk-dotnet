@@ -104,6 +104,40 @@ namespace DolbyIO.Comms
         [DllImport (LibName, CharSet = CharSet.Ansi)]
         internal static extern string GetLastErrorMsg();
 
+        // Video
+        [DllImport (LibName, CharSet = CharSet.Ansi)]
+        internal static extern int GetVideoDevices(ref int size, [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 0)] out VideoDevice[] devices);
+
+        [DllImport (Native.LibName, CharSet = CharSet.Ansi)]
+        internal static extern int GetCurrentVideoDevice(out VideoDevice device);
+
+        [DllImport (Native.LibName, CharSet = CharSet.Ansi)]
+        internal static extern VideoSinkHandle CreateVideoSink(VideoSink.VideoSinkOnFrame f);
+
+        [DllImport (Native.LibName, CharSet = CharSet.Ansi)]
+        internal static extern bool DeleteVideoSink(IntPtr handle);
+
+        [DllImport (Native.LibName, CharSet = CharSet.Ansi)]
+        internal static extern bool DeleteVideoFrameBuffer(IntPtr handle);
+
+        [DllImport (Native.LibName, CharSet = CharSet.Ansi)]
+        internal static extern int SetVideoSink(VideoSinkHandle handle);
+
+        [DllImport (Native.LibName, CharSet = CharSet.Ansi)]
+        internal static extern int StartVideo(VideoDevice device, VideoFrameHandlerHandle handler);
+
+        [DllImport (Native.LibName, CharSet = CharSet.Ansi)]
+        internal static extern int StopVideo();
+
+        [DllImport (Native.LibName, CharSet = CharSet.Ansi)]
+        internal static extern VideoFrameHandlerHandle CreateVideoFrameHandler();
+
+        [DllImport (Native.LibName, CharSet = CharSet.Ansi)]
+        internal static extern bool DeleteVideoFrameHandler(IntPtr handle);
+
+        [DllImport (Native.LibName, CharSet = CharSet.Ansi)]
+        internal static extern int SetVideoFrameHandlerSink(VideoFrameHandlerHandle handle, VideoSinkHandle sink);
+
         // Events Handling
         [DllImport (LibName, CharSet = CharSet.Ansi)]
         internal static extern void SetOnConferenceStatusUpdatedHandler(ConferenceStatusUpdatedEventHandler handler);                                      
@@ -121,13 +155,22 @@ namespace DolbyIO.Comms
         internal static extern void SetOnConferenceInvitationReceivedHandler(ConferenceInvitationReceivedEventHandler handler);
 
         [DllImport (LibName, CharSet = CharSet.Ansi)]
-        internal static extern void SetOnDeviceAddedHandler(DeviceAddedEventHandler handler);   
+        internal static extern void SetOnAudioDeviceAddedHandler(AudioDeviceAddedEventHandler handler);   
 
         [DllImport (LibName, CharSet = CharSet.Ansi)]
-        internal static extern void SetOnDeviceRemovedHandler(DeviceRemovedEventHandler handler);   
+        internal static extern void SetOnAudioDeviceRemovedHandler(AudioDeviceRemovedEventHandler handler);   
 
         [DllImport (LibName, CharSet = CharSet.Ansi)]
-        internal static extern void SetOnDeviceChangedHandler(DeviceChangedEventHandler handler);
+        internal static extern void SetOnAudioDeviceChangedHandler(AudioDeviceChangedEventHandler handler);
+
+        [DllImport (LibName, CharSet = CharSet.Ansi)]
+        internal static extern void SetOnVideoDeviceAddedHandler(VideoDeviceAddedEventHandler handler);   
+
+        [DllImport (LibName, CharSet = CharSet.Ansi)]
+        internal static extern void SetOnVideoDeviceRemovedHandler(VideoDeviceRemovedEventHandler handler);   
+
+        [DllImport (LibName, CharSet = CharSet.Ansi)]
+        internal static extern void SetOnVideoDeviceChangedHandler(VideoDeviceChangedEventHandler handler);
         
         [DllImport (LibName, CharSet = CharSet.Ansi)]
         internal static extern void SetOnActiveSpeakerChangeHandler(ActiveSpeakerChangeEventHandler handler);

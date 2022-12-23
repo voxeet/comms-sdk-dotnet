@@ -5,6 +5,7 @@ using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 using Serilog;
+using System.Runtime.InteropServices;
 
 using DolbyIO.Comms;
 using Command = System.CommandLine.Command;
@@ -13,6 +14,8 @@ public class CommandLine
 {
     private static volatile bool _keepRunning = true;
     private static DolbyIOSDK _sdk = new DolbyIOSDK();
+
+    private static Sink _sink = new Sink();
 
     public static async Task<int> Main(string[] args)
     {
@@ -147,17 +150,17 @@ public class CommandLine
             _sdk.Conference.DvcError = OnDvcError;
             _sdk.Conference.PeerConnectionError = OnPeerConnectionError;
 
-            _sdk.MediaDevice.Added = new DeviceAddedEventHandler((AudioDevice device) => 
+            _sdk.MediaDevice.AudioDeviceAdded = new AudioDeviceAddedEventHandler((AudioDevice device) => 
             {
                 Log.Debug($"OnDeviceAdded: {device.Name}");
             });
 
-            _sdk.MediaDevice.Removed = new DeviceRemovedEventHandler((byte[] uid) =>
+            _sdk.MediaDevice.AudioDeviceRemoved = new AudioDeviceRemovedEventHandler((byte[] uid) =>
             {
                 Log.Debug($"OnDeviceRemoved: {uid}");
             });
 
-            _sdk.MediaDevice.Changed = new DeviceChangedEventHandler((AudioDevice device, bool noDevice) =>
+            _sdk.MediaDevice.AudioDeviceChanged = new AudioDeviceChangedEventHandler((AudioDevice device, bool noDevice) =>
             {
                 Log.Debug($"OnDeviceChanged: {device.Name}");
             });
@@ -202,6 +205,9 @@ public class CommandLine
             );  
             
             await _sdk.Conference.SetSpatialPositionAsync(_sdk.Session.User.Id, new Vector3(0.0f, 0.0f, 0.0f));
+
+
+            await _sdk.Video.Remote.SetVideoSinkAsync(_sink);
 
             await InputLoop();
         }
@@ -254,11 +260,17 @@ public class CommandLine
     {
         try
         {
-            List<AudioDevice> devices = await _sdk.MediaDevice.GetAudioDevicesAsync();
-            devices.ForEach(d => Console.WriteLine(d.Uid + " : " + d.Name));
+            List<AudioDevice> audioDevices = await _sdk.MediaDevice.GetAudioDevicesAsync();
+            audioDevices.ForEach(d => Console.WriteLine(d.Uid + " : " + d.Name));
+
+            List<VideoDevice> videoDevices = await _sdk.MediaDevice.GetVideoDevicesAsync();
+            videoDevices.ForEach(d => Console.WriteLine(d.Uid + " : " + d.Name));
             
             var device = await _sdk.MediaDevice.GetCurrentAudioInputDeviceAsync();
             await _sdk.MediaDevice.SetPreferredAudioInputDeviceAsync(device);
+
+            var videoDevice = await _sdk.MediaDevice.GetCurrentVideoDeviceAsync();
+            Log.Debug($"VideoDevice: {videoDevice.Name}");
 
             await InputLoop();
         }
@@ -332,6 +344,26 @@ public class CommandLine
         if (activeSpeakers != null) {
             foreach (string s in activeSpeakers) {
                 Log.Debug($"-- ActiveSpeaker : {s}");
+            }
+        }
+    }
+}
+
+public class Sink : VideoSink {
+    public Sink() : base() {}
+    public override void OnFrame(string streamId, string trackId, VideoFrame frame)
+    {
+        using(frame)
+        {
+  
+            Log.Debug($"OnFrame {streamId} {frame.Width}x{frame.Height} : {frame.DangerousGetHandle()}");
+            try 
+            {
+                var buffer = frame.GetBuffer();
+            }
+            catch (Exception e)
+            {
+                Log.Error(e.Message);
             }
         }
     }

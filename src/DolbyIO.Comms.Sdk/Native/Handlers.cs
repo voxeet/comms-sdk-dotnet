@@ -80,21 +80,39 @@ namespace DolbyIO.Comms
     // -- Devices --
 
     /// <summary>
-    /// The <see cref="DolbyIO.Comms.Services.MediaDeviceService.Added">MediaDevice.Added</see> event handler.
+    /// The <see cref="DolbyIO.Comms.Services.MediaDeviceService.AudioDeviceAdded">MediaDevice.AudioAdded</see> event handler.
     /// </summary>
-    /// <param name="device">The added device.</param>
-    public delegate void DeviceAddedEventHandler(AudioDevice device);
+    /// <param name="device">The added audio device.</param>
+    public delegate void AudioDeviceAddedEventHandler(AudioDevice device);
 
     /// <summary>
-    /// The <see cref="DolbyIO.Comms.Services.MediaDeviceService.Removed">MediaDevice.Removed</see> event handler.
+    /// The <see cref="DolbyIO.Comms.Services.MediaDeviceService.AudioDeviceRemoved">MediaDevice.AudioRemoved</see> event handler.
     /// </summary>
-    /// <param name="uid">A unique device identifier of the removed device.</param>
-    public delegate void DeviceRemovedEventHandler([MarshalAs(UnmanagedType.LPArray, SizeConst = Constants.DeviceUidSize, ArraySubType = UnmanagedType.U1)] byte[] uid);
+    /// <param name="uid">A unique device identifier of the removed audio device.</param>
+    public delegate void AudioDeviceRemovedEventHandler([MarshalAs(UnmanagedType.LPArray, SizeConst = Constants.DeviceUidSize, ArraySubType = UnmanagedType.U1)] byte[] uid);
 
     /// <summary>
-    /// The <see cref="DolbyIO.Comms.Services.MediaDeviceService.Changed">MediaDevice.Changed</see> event handler.
+    /// The <see cref="DolbyIO.Comms.Services.MediaDeviceService.AudioDeviceChanged">MediaDevice.AudioChanged</see> event handler.
     /// </summary>
-    /// <param name="device">The new device.</param>
+    /// <param name="device">The new audio device.</param>
     /// <param name="noDevice">A boolean indicating whether there is a device in use for the current direction. True if there is no device; otherwise, false.</param>
-    public delegate void DeviceChangedEventHandler(AudioDevice device, bool noDevice);
+    public delegate void AudioDeviceChangedEventHandler(AudioDevice device, bool noDevice);
+
+    /// <summary>
+    /// The <see cref="DolbyIO.Comms.Services.MediaDeviceService.VideoDeviceAdded">MediaDevice.VideoAdded</see> event handler.
+    /// </summary>
+    /// <param name="device">The added video device.</param>
+    public delegate void VideoDeviceAddedEventHandler(VideoDevice device);
+    
+    /// <summary>
+    /// The <see cref="DolbyIO.Comms.Services.MediaDeviceService.VideoDeviceChanged">MediaDevice.VideoChanged</see> event handler.
+    /// </summary>
+    /// <param name="device">The new video device.</param>
+    public delegate void VideoDeviceChangedEventHandler(VideoDevice device);
+
+    /// <summary>
+    /// The <see cref="DolbyIO.Comms.Services.MediaDeviceService.VideoDeviceRemoved">MediaDevice.VideoRemoved</see> event handler.
+    /// </summary>
+    /// <param name="uid">A unique device identifier of the removed video device.</param>
+    public delegate void VideoDeviceRemovedEventHandler(string uid);
 }

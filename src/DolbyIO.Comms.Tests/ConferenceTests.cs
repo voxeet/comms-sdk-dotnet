@@ -59,6 +59,7 @@ namespace DolbyIO.Comms.Tests
             src.Connection.SpatialAudio = true;
 
             src.Constraints.Audio = true;
+            src.Constraints.Video = true;
 
             JoinOptions dest = new JoinOptions();
             NativeTests.JoinOptionsTest(src, dest);
@@ -67,6 +68,7 @@ namespace DolbyIO.Comms.Tests
             Assert.Equal(src.Connection.ConferenceAccessToken, dest.Connection.ConferenceAccessToken);
             Assert.Equal(src.Connection.SpatialAudio, dest.Connection.SpatialAudio);
             Assert.Equal(src.Constraints.Audio, dest.Constraints.Audio);
+            Assert.Equal(src.Constraints.Video, dest.Constraints.Video);
         }
 
         [Fact]

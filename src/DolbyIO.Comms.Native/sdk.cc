@@ -30,7 +30,12 @@ extern "C" {
 
   EXPORT_API int SetLogLevel(uint32_t log_level) {
     return call { [&]() {
-      sdk::set_log_level((dolbyio::comms::log_level) log_level);
+      dolbyio::comms::sdk::log_settings settings;
+      
+      settings.media_log_level = (dolbyio::comms::log_level)log_level;
+      settings.sdk_log_level = (dolbyio::comms::log_level)log_level;
+
+      sdk::set_log_settings(settings);
     }}.result();
   }
 
@@ -63,5 +68,5 @@ extern "C" {
     return strdup(error);
   }
 
-} // end of export C block
+} // extern "C"
 } // dolbyio::comms::native
