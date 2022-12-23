@@ -150,17 +150,17 @@ public class CommandLine
             _sdk.Conference.DvcError = OnDvcError;
             _sdk.Conference.PeerConnectionError = OnPeerConnectionError;
 
-            _sdk.MediaDevice.AudioAdded = new AudioDeviceAddedEventHandler((AudioDevice device) => 
+            _sdk.MediaDevice.AudioDeviceAdded = new AudioDeviceAddedEventHandler((AudioDevice device) => 
             {
                 Log.Debug($"OnDeviceAdded: {device.Name}");
             });
 
-            _sdk.MediaDevice.AudioRemoved = new AudioDeviceRemovedEventHandler((byte[] uid) =>
+            _sdk.MediaDevice.AudioDeviceRemoved = new AudioDeviceRemovedEventHandler((byte[] uid) =>
             {
                 Log.Debug($"OnDeviceRemoved: {uid}");
             });
 
-            _sdk.MediaDevice.AudioChanged = new AudioDeviceChangedEventHandler((AudioDevice device, bool noDevice) =>
+            _sdk.MediaDevice.AudioDeviceChanged = new AudioDeviceChangedEventHandler((AudioDevice device, bool noDevice) =>
             {
                 Log.Debug($"OnDeviceChanged: {device.Name}");
             });

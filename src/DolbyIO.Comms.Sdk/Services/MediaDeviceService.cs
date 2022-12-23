@@ -15,93 +15,93 @@ namespace DolbyIO.Comms.Services
     /// </summary>
     public sealed class MediaDeviceService
     {
-        private AudioDeviceAddedEventHandler _audioAdded;
+        private AudioDeviceAddedEventHandler _audioDeviceAdded;
 
         /// <summary>
         /// Sets the <see cref="AudioDeviceAddedEventHandler"/> that is raised when a new audio device is added to the system.
         /// </summary>
         /// <value>The <see cref="AudioDeviceAddedEventHandler"/> event handler.</value>
-        public AudioDeviceAddedEventHandler AudioAdded
+        public AudioDeviceAddedEventHandler AudioDeviceAdded
         {
             set 
             { 
                 Native.SetOnAudioDeviceAddedHandler(value);
-                _audioAdded = value;
+                _audioDeviceAdded = value;
             }
         }
 
-        private AudioDeviceRemovedEventHandler _audioRemoved;
+        private AudioDeviceRemovedEventHandler _audioDeviceRemoved;
 
         /// <summary>
         /// Sets the <see cref="AudioDeviceRemovedEventHandler"/> that is raised when an audio device is removed from the system.
         /// </summary>
         /// <value>The <see cref="AudioDeviceRemovedEventHandler"/> event handler.</value>
-        public AudioDeviceRemovedEventHandler AudioRemoved
+        public AudioDeviceRemovedEventHandler AudioDeviceRemoved
         {
             set 
             { 
                 Native.SetOnAudioDeviceRemovedHandler(value);
-                _audioRemoved = value;
+                _audioDeviceRemoved = value;
             }
         }
 
-        private AudioDeviceChangedEventHandler _audioChanged;
+        private AudioDeviceChangedEventHandler _audioDeviceChanged;
 
         /// <summary>
         /// Sets the <see cref="AudioDeviceChangedEventHandler"/> that is raised when the currently used input or output audio device has changed.
         /// </summary>
         /// <value>The <see cref="AudioDeviceChangedEventHandler"/> event handler.</value>
-        public AudioDeviceChangedEventHandler AudioChanged
+        public AudioDeviceChangedEventHandler AudioDeviceChanged
         {
             set 
             { 
                 Native.SetOnAudioDeviceChangedHandler(value);
-                _audioChanged = value;
+                _audioDeviceChanged = value;
             }
         }
 
-        private VideoDeviceAddedEventHandler _videoAdded;
+        private VideoDeviceAddedEventHandler _videoDeviceAdded;
 
         /// <summary>
         /// Sets the <see cref="VideoDeviceAddedEventHandler"/> that is raised when a new video device is added to the system.
         /// </summary>
         /// <value>The <see cref="AudioDeviceAddedEventHandler"/> event handler.</value>
-        public VideoDeviceAddedEventHandler VideoAdded
+        public VideoDeviceAddedEventHandler VideoDeviceAdded
         {
             set
             {
                 Native.SetOnVideoDeviceAddedHandler(value);
-                _videoAdded = value;
+                _videoDeviceAdded = value;
             }
         }
 
-        private VideoDeviceChangedEventHandler _videoChanged;
+        private VideoDeviceChangedEventHandler _videoDeviceChanged;
 
         /// <summary>
         /// Sets the <see cref="VideoDeviceChangedEventHandler"/> that is raised when the currently used input or output video device has changed.
         /// </summary>
         /// <value>The <see cref="VideoDeviceChangedEventHandler"/> event handler.</value>
-        public VideoDeviceChangedEventHandler VideoChanged
+        public VideoDeviceChangedEventHandler VideoDeviceChanged
         {
             set
             {
                 Native.SetOnVideoDeviceChangedHandler(value);
-                _videoChanged = value;
+                _videoDeviceChanged = value;
             }
         }
 
-        private VideoDeviceRemovedEventHandler _videoRemoved;
+        private VideoDeviceRemovedEventHandler _videoDeviceRemoved;
 
         /// <summary>
         /// Sets the <see cref="VideoDeviceRemovedEventHandler"/> that is raised when a video device is removed from the system.
         /// </summary>
         /// <value>The <see cref="VideoDeviceRemovedEventHandler"/> event handler.</value>
-        public VideoDeviceRemovedEventHandler VideoRemoved
+        public VideoDeviceRemovedEventHandler VideoDeviceRemoved
         {
             set
             {
                 Native.SetOnVideoDeviceRemovedHandler(value);
-                _videoRemoved = value;
+                _videoDeviceRemoved = value;
             }
         }
 

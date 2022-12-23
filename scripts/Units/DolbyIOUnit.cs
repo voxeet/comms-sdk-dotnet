@@ -78,7 +78,7 @@ namespace DolbyIO.Comms.Unity
                 }
             );
 
-            _sdk.MediaDevice.AudioChanged = new AudioDeviceChangedEventHandler
+            _sdk.MediaDevice.AudioDeviceChanged = new AudioDeviceChangedEventHandler
             (
                 (AudioDevice device, bool noDevice) =>
                 {
@@ -86,7 +86,7 @@ namespace DolbyIO.Comms.Unity
                 }
             );
 
-            _sdk.MediaDevice.AudioAdded = new AudioDeviceAddedEventHandler
+            _sdk.MediaDevice.AudioDeviceAdded = new AudioDeviceAddedEventHandler
             (
                 (AudioDevice device) =>
                 {
