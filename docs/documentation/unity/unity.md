@@ -12,7 +12,7 @@ Make sure that you have:
 
 ## Installing from archive
 
-You can install the Unity plugin from the package manager. First download `unity.zip` archive on the [Release](https://github.com/DolbyIO/comms-sdk-dotnet/releases) page, and extract it to a suitable folder.
+You can install the Unity plugin from the package manager. First download `unity.zip` archive in the [Release](https://github.com/DolbyIO/comms-sdk-dotnet/releases) page, and extract it to a suitable folder.
 
 Open the package manager from the Unity Editor and click the <img src="~/images/plus_sign.png" height="20px"/> sign in the upper left corner. Search for the package.json file located where you extracted the aforementioned plugin archive.
 
