@@ -71,6 +71,7 @@ if (APPLE)
             $<TARGET_FILE:DolbyioComms::sdk>
             $<TARGET_FILE:DolbyioComms::media>
             $<TARGET_FILE:dvc>
+            $<TARGET_FILE:dnr>
         OUTPUT
             runtimes/osx-x64/native
     )
@@ -104,6 +105,7 @@ elseif (WIN32)
         COMMAND ${CMAKE_COMMAND} -E copy_if_different $<TARGET_FILE:DolbyioComms::sdk> "${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/$<TARGET_FILE_NAME:DolbyioComms::sdk>"
         COMMAND ${CMAKE_COMMAND} -E copy_if_different $<TARGET_FILE:DolbyioComms::media> "${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/$<TARGET_FILE_NAME:DolbyioComms::media>"
         COMMAND ${CMAKE_COMMAND} -E copy_if_different $<TARGET_FILE:dvc> "${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/$<TARGET_FILE_NAME:dvc>"
+        COMMAND ${CMAKE_COMMAND} -E copy_if_different $<TARGET_FILE:dnr> "${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/$<TARGET_FILE_NAME:dnr>"
         COMMAND ${CMAKE_COMMAND} -E copy_if_different $<TARGET_FILE:avcodec> "${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/$<TARGET_FILE_NAME:avcodec>"
         COMMAND ${CMAKE_COMMAND} -E copy_if_different $<TARGET_FILE:avformat> "${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/$<TARGET_FILE_NAME:avformat>"
         COMMAND ${CMAKE_COMMAND} -E copy_if_different $<TARGET_FILE:avutil> "${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/$<TARGET_FILE_NAME:avutil>"
@@ -121,6 +123,7 @@ elseif (WIN32)
             $<TARGET_FILE:DolbyioComms::sdk>
             $<TARGET_FILE:DolbyioComms::media>
             $<TARGET_FILE:dvc>
+            $<TARGET_FILE:dnr>
             $<TARGET_FILE:avcodec>
             $<TARGET_FILE:avformat>
             $<TARGET_FILE:avutil>
