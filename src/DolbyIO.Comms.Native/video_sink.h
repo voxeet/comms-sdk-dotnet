@@ -80,14 +80,13 @@ namespace dolbyio::comms::native {
       }
 
       CVPixelBufferUnlockBaseAddress(buffer, kCVPixelBufferLock_ReadOnly);
-
 #else
       auto frame_i420 = frame->get_i420_frame();
 
       size_t width = frame->width();
       size_t height = frame->height();
 
-      uint8_t *resbuffer = (uint8_t *)malloc(sizeof(uint8_t) * width * height * bytes_per_pixel);
+      uint8_t* resbuffer = (uint8_t *)malloc(sizeof(uint8_t) * width * height * bytes_per_pixel);
 
       const uint8_t* y_addr = frame_i420->get_y();
       const uint8_t* u_addr = frame_i420->get_u();
@@ -97,28 +96,26 @@ namespace dolbyio::comms::native {
       int u_stride = frame_i420->stride_u();
       int v_stride = frame_i420->stride_v();
 
-      uint8_t yy, cb, cr = 0;
+      int16_t yy, cb, cr = 0;
       uint16_t r, g, b = 0;
 
       for (int j = 0; j < height; j++) {
         for (int i = 0; i < width; i++) {
           yy = y_addr[j * y_stride + i];
-          cb = u_addr[(j / 2) * (width / 2) + (i / 2)];
-          cr = v_addr[(j / 2) * (width / 2) + (i / 2)];
+          cb = u_addr[(j / 2) * u_stride + (i / 2)] - 128;
+          cr = v_addr[(j / 2) * v_stride + (i / 2)] - 128;
 
-          
-          r = yy + (1.4065 * (cr - 128));
-          g = yy - (0.3455 * (cb - 128)) - (0.7169 * (cr - 128));
-          b = yy + (1.7790 * (cb - 128));
+          r = (yy) * 1.164 + cr *  1.596 ;
+          g = (yy) * 1.164 + cb * -0.391 + cr * -0.813 ;
+          b = (yy) * 1.164 + cb *  2.018;
 
           int index = (j * width * bytes_per_pixel) + (i * bytes_per_pixel);
           resbuffer[index + 0] = 0xff;
-          resbuffer[index + 1] = (uint8_t)clamp(r);
-          resbuffer[index + 2] = (uint8_t)clamp(g);
-          resbuffer[index + 3] = (uint8_t)clamp(b);
+          resbuffer[index + 1] = clamp(r);
+          resbuffer[index + 2] = clamp(g);
+          resbuffer[index + 3] = clamp(b);
         }
       }
-
 #endif
       delegate_(strdup(stream_id), strdup(track_id), width, height, resbuffer);
     }
