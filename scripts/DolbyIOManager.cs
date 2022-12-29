@@ -44,7 +44,7 @@ namespace DolbyIO.Comms.Unity
 
             using (var client = new HttpClient())
             {
-                var request = new HttpRequestMessage(HttpMethod.Post, "https://api.dolby.io/v1/auth/token");
+                var request = new HttpRequestMessage(HttpMethod.Post, " https://session.voxeet.com/v1/oauth2/token");
                 var auth = $"{Uri.EscapeUriString(key)}:{Uri.EscapeUriString(secret)}";
                 
                 request.Headers.Authorization = new AuthenticationHeaderValue("Basic", $"{Convert.ToBase64String(Encoding.UTF8.GetBytes(auth))}");
