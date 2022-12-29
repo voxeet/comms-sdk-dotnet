@@ -31,12 +31,12 @@ namespace DolbyIO.Comms.Unity
         public bool AutoCloseSession = true;
 
         /// <summary>
-        /// For convenience during early development and prototyping, a GetToken (linked) method is provided for you to 
+        /// For convenience during early development and prototyping, a method is provided for you to 
         /// acquire a client access token directly from the application. However, please note Dolby does not recommend 
         /// using this mechanism in the production software for (security best practices)[https://docs.dolby.io/communications-apis/docs/guides-client-authentication] reasons.
         /// </summary>
-        /// <param name="key">The customer key.</param>
-        /// <param name="secret">The customer secret.</param>
+        /// <param name="key">The App key.</param>
+        /// <param name="secret">The App Secret.</param>
         /// <returns>An asynchronous task containing the token.</returns>
         public static async Task<string> GetToken(string key, string secret)
         {
