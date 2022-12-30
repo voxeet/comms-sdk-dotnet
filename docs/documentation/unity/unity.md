@@ -1,24 +1,22 @@
 # Plugin
-
-The Dolby.io Virtual World plugin for Unity requires the Unity package manager to be added to your project. This document describes how to add the .NET SDK to Unity and initialize the SDK.
+This document describes how to install and write code with the Dolby.io Virtual World plugin for Unity.
 
 ## Prerequisites
 
 Make sure that you have:
 
-- Apple macOS x64 or Microsoft Windows x64
+- Apple MacOS x64 or Microsoft Windows 10 x64
 - A Dolby.io account. If you do not have an account, you can [sign up](https://dolby.io/signup) for a free account.
 - The [client access token](https://docs.dolby.io/communications-apis/docs/overview-developer-tools#client-access-token) copied from the Dolby.io dashboard. To create the token, log in to the [Dolby.io dashboard](https://dashboard.dolby.io/), create an application, and navigate to the API keys section.
 
-## Installing from archive
+## Installation
 
-You can install the Unity plugin from the package manager. First download `dolbyio-comms-unity-plugin` archive in the [Release](https://github.com/DolbyIO/comms-sdk-dotnet/releases) page, and extract it to a suitable folder.
+You can install the Unity plugin from the Unity Package Manager. First download `dolbyio-comms-unity-plugin` archive in the [Release](https://github.com/DolbyIO/comms-sdk-dotnet/releases) page, and extract it to a suitable folder.
 
-Open the package manager from the Unity Editor and click the <img src="~/images/plus_sign.png" height="20px"/> sign in the upper left corner. Search for the package.json file located where you extracted the aforementioned plugin archive.
+Open the Package Manager from the Unity Editor and click the <img src="~/images/plus_sign.png" height="20px"/> sign in the upper left corner. Select "Add package from disk", and look for the `package.json` file located where you extracted the aforementioned plugin archive.
 
-## Adding the .NET SDK to Unity  
-
-The Dolby.io Virtual World plugin for Unity provides access to an instance of the SDK through a custom `DolbyIO Manager` manager. To add the SDK to Unity, follow these steps:
+## Setting up the Game Object
+The Unity plugin provides access to an instance of the SDK through a custom `DolbyIO Manager` manager. To add the SDK to Unity, follow these steps:
 
 1. Create an empty game object in your scene and provide a name for the object. In this example, we call the object `ApplicationManager`:
 <div style="text-align:center">
