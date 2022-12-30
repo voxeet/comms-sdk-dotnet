@@ -2,8 +2,8 @@
   "name": "dolbyio.comms",
   "version": "${PROJECT_VERSION}",
   "unity": "2021.1",
-  "displayName": "DolbyIO Comms Unity Plugin",
-  "description": "The DolbyIO Comms Unity Plugin",
+  "displayName": "DolbyIO Communications",
+  "description": "The DolbyIO Virtual World Plugin for Unity",
   "documentationUrl": "https://api-references.dolby.io/comms-sdk-dotnet/documentation/unity/unity.html",
   "licensesUrl": "https://github.com/DolbyIO/comms-sdk-dotnet/blob/main/LICENSE",
   "dependencies": {
