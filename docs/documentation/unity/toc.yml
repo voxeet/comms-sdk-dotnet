@@ -1,4 +1,11 @@
 - name: Plugin
   href: unity.md
 - name: Visual Scripting
-  href: visualscripting.md
+  href: visualscripting/nodes.md
+  items:
+    - name: Nodes
+      href: visualscripting/nodes.md
+    - name: Events
+      href: visualscripting/events.md
+    - name: Samples
+      href: visualscripting/samples.md

@@ -1,0 +1,144 @@
+# Visual Scripting
+
+Visual Scripting in Unity allows creating logic for virtual world applications using visual, node-based graphs without writing code. The Dolby.io Virtual World plugin is compatible with Unity Visual Scripting 2021. The plugin can be used with Visual Scripting and C# scripting at the same time. 
+
+Before using the plugin for visual scripting, make sure that you added the .NET SDK to Unity and initialized the SDK using the [Initializing](../unity.md#initialization) procedure.
+
+### Nodes
+
+Nodes are the most basic part of scripts in Visual Scripting. A node can listen for events, get the value of a variable, modify a component on a GameObject, and more.
+Once the plugin is successfully installed, the Dolby.io nodes are accessible in the `Add Node` contextual menu, under the DolbyIO category:
+<div style="text-align:left">
+    <img style="padding:25px 0" src="~/images/nodes/menu.png" width="500px">
+</div>
+
+---
+### Initialize
+
+Initialize the SDK and connects to the Dolby.io platform. In your production application deployment, please follow our security best practice [here](https://docs.dolby.io/communications-apis/docs/guides-client-authentication) to setup a server through which you can acquire a temporary client access token. 
+<div style="text-align:left">
+    <img style="padding:25px 0" src="~/images/nodes/init.png" width="300px">
+</div>
+
+| Name  | Direction | Type | Description  |
+|---|:---|:---|:---|
+| **Access Token** | Input | String| The [access token](xref:DolbyIO.Comms.DolbyIOSDK.InitAsync(System.String,DolbyIO.Comms.RefreshTokenCallBack)) provided by the customer's backend. |
+| **Participant Name** | Input | String | The [name](xref:DolbyIO.Comms.UserInfo.Name) of the local participant. |
+
+---
+### Spatial Conference
+
+Connect to a conference with preferred spatial audio style and the settings of the 3D environment. If the conference does not exist, this operation will automatically create the conference. 
+<div style="text-align:left">
+    <img style="padding:25px 0" src="~/images/nodes/spatial.png" width="300px">
+</div>
+
+| Name  | Direction | Type | Description  |
+|---|:---|:---|:---|
+| **Scale, Forward, Up, Right** | Input | Vector3| [Vectors](xref:DolbyIO.Comms.Services.ConferenceService.SetSpatialEnvironmentAsync(System.Numerics.Vector3,System.Numerics.Vector3,System.Numerics.Vector3,System.Numerics.Vector3)) that define the 3D environment that you are working with. The default values are based on the Unity Coordinates System. In most cases, you should only modify the scale.|
+| **Conference Alias** | Input | String | The conference [alias](xref:DolbyIO.Comms.Conference.Alias), a nickname that is used to identify the conference. |
+| **Spatial Audio Style** | Input | Spatial Audio Style | The [spatial audio style](xref:DolbyIO.Comms.SpatialAudioStyle) that defines how the spatial location should be communicated between the SDK and the Dolby.io platform. By default, the parameter is set to `shared` indicating the client application just reports its own position within the virtual world.|
+
+---
+### Demo
+
+The Demo conference node allows connecting to a conference that has several bots injecting audio. This makes it easier for testing the connection during the prototyping phase.
+<div style="text-align:left">
+    <img style="padding:25px 0" src="~/images/nodes/demo.png" width="200px">
+</div>
+
+| Name  | Direction | Type | Description  |
+|---|:---|:---|:---|
+| **Scale, Forward, Up, Right** | Input | Vector3| [Vectors](xref:DolbyIO.Comms.Services.ConferenceService.SetSpatialEnvironmentAsync(System.Numerics.Vector3,System.Numerics.Vector3,System.Numerics.Vector3,System.Numerics.Vector3)) that define the 3D environment that you are working with. The default values are based on the Unity Coordinates System. In most cases, you should only modify the scale.|
+| **Spatial Audio** | Input | Boolean | Whether you want to enable spatial audio for the demo| 
+
+---
+### Mute Participant
+
+Allows muting a participant. This node works for both local participant (e.g., mute myself) and remote participant (e.g., mute others for me). 
+<div style="text-align:left">
+    <img style="padding:25px 0" src="~/images/nodes/mute.png" width="250px">
+</div>
+
+| Name  | Direction | Type | Description  |
+|---|:---|:---|:---|
+| **ParticipantId** | Input | String| The ID of the participant who should be muted. If the ID is not provided, the node mutes the local participant|
+| **Muted** | Input | Boolean | The required mute state.| 
+
+---
+### Local Player Position
+
+Allows setting the position of the local player.
+<div style="text-align:left">
+    <img style="padding:25px 0" src="~/images/nodes/local-position.png" width="250px">
+</div>
+
+| Name  | Direction | Type | Description  |
+|---|:---|:---|:---|
+| **Position** | Input | Vector3| The [position](xref:DolbyIO.Comms.Services.ConferenceService.SetSpatialPositionAsync(System.String,System.Numerics.Vector3)) of the player.|
+| **Direction** | Input | Vector3 | The [direction](xref:DolbyIO.Comms.Services.ConferenceService.SetSpatialDirectionAsync(System.Numerics.Vector3)) that the player should be facing.| 
+
+---
+### Remote Player Position
+
+Set the remote participant's spatial audio position for the local participant. This is only applicable when the spatial audio style was set as `individual` in the Spatial Conference node where each client needs to inform the server how they would like the platform to render the remote participant's audio for them.  
+<div style="text-align:left">
+    <img style="padding:25px 0" src="~/images/nodes/remote-position.png" width="250px">
+</div>
+
+| Name  | Direction | Type | Description  |
+|---|:---|:---|:---|
+| **Position** | Input | Vector3| The [position](xref:DolbyIO.Comms.Services.ConferenceService.SetSpatialPositionAsync(System.String,System.Numerics.Vector3)) of the player.|
+
+
+---
+### Get Participants
+
+Retrieve a list of participants present in the conference. 
+<div style="text-align:left">
+    <img style="padding:25px 0" src="~/images/nodes/participants.png" width="250px">
+</div>
+
+| Name  | Direction | Type | Description  |
+|---|:---|:---|:---|
+| **Participant Ids** | Input | String Array| A list of participant IDs that can be used to filter the complete list of participants in a conference.\
+An empty list indicates no filter applied and all participants present in the conference will be returned.|
+| **Participants** | Output | List of Participants| A list of participant [objects](xref:DolbyIO.Comms.Participant).|
+
+---
+### Get Audio Devices
+
+Retrieve a list of available audio devices.
+<div style="text-align:left">
+    <img style="padding:25px 0" src="~/images/nodes/audio-devices.png" width="250px">
+</div>
+
+| Name  | Direction | Type | Description  |
+|---|:---|:---|:---|
+| **Direction** | Input | Device Direction | `input`, `output` or `both` indicating `microphone`, `speaker/headphone` or `both` types.|
+| **Audio Devices** | Output | Audio Devices | A list of [audio devices](xref:DolbyIO.Comms.AudioDevice) filtered by the `Direction` input. 
+
+
+---
+### Set Audio Input Device
+
+Configures active audio input as the specified device.
+<div style="text-align:left">
+    <img style="padding:25px 0" src="~/images/nodes/audio-input.png" width="250px">
+</div>
+
+| Name  | Direction | Type | Description  |
+|---|:---|:---|:---|
+| **Audio Device** | Input | Audio Device | The user preferred [AudioDevice](xref:DolbyIO.Comms.AudioDevice) for audio capture.|
+
+---
+### Set Audio Output Device
+
+Configures active audio output as the specified device.
+<div style="text-align:left">
+    <img style="padding:25px 0" src="~/images/nodes/audio-output.png" width="250px">
+</div>
+
+| Name  | Direction | Type | Description  |
+|---|:---|:---|:---|
+| **Audio Device** | Input | Audio Device | The user preferred [AudioDevice](xref:DolbyIO.Comms.AudioDevice) for audio rendering.|

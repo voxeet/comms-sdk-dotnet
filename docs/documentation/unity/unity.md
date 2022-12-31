@@ -15,18 +15,18 @@ You can install the Unity plugin from the Unity Package Manager. First download 
 
 Open the Package Manager from the Unity Editor and click the <img src="~/images/plus_sign.png" height="20px"/> sign in the upper left corner. Select "Add package from disk", and look for the `package.json` file located where you extracted the aforementioned plugin archive.
 
-## Setting up the Game Object
+## Setting up the GameObject
 The Unity plugin provides access to an instance of the SDK through a custom `DolbyIO Manager` manager. To add the SDK to Unity, follow these steps:
 
 1. Create an empty game object in your scene and provide a name for the object. In this example, we call the object `ApplicationManager`:
-<div style="text-align:center">
+<div style="text-align:left">
     <img style="padding:25px 0" src="~/images/unity_1.png" width="400px">
 </div>
 
 2. Select the created game object and select `Component` > `DolbyIO` > `DolbyIO Manager` from the Unity menu.
 
-<div style="text-align:center">
-    <img style="padding:25px 0" src="~/images/unity_2.png">
+<div style="text-align:left">
+    <img style="padding:25px 0" src="~/images/unity_2.png" width="800px">
 </div>
 
 This step adds the `DolbyIO Manager` to the game object.
@@ -80,9 +80,9 @@ public class MyScript : MonoBehaviour
 }
 ```
 
->The `DolbyIOManager` calls the Dispose method of the SDK automatically in OnApplicationQuit. There is also a default option to automatically leave the current conference and close the opened session.
+> The `DolbyIOManager` calls the Dispose method of the SDK automatically in OnApplicationQuit. There is also a default option to automatically leave the current conference and close the opened session.
 
-<div style="text-align:center">
+<div style="text-align:left">
     <img style="padding:25px 0" src="~/images/unity_3.png" width="400px">
 </div>
 
