@@ -101,8 +101,7 @@ Retrieve a list of participants present in the conference.
 
 | Name  | Direction | Type | Description  |
 |---|:---|:---|:---|
-| **Participant Ids** | Input | String Array| A list of participant IDs that can be used to filter the complete list of participants in a conference.\
-An empty list indicates no filter applied and all participants present in the conference will be returned.|
+| **Participant Ids** | Input | String Array| A list of participant IDs that can be used to filter the complete list of participants in a conference. An empty list indicates no filter applied and all participants present in the conference will be returned.|
 | **Participants** | Output | List of Participants| A list of participant [objects](xref:DolbyIO.Comms.Participant).|
 
 ---
@@ -116,7 +115,7 @@ Retrieve a list of available audio devices.
 | Name  | Direction | Type | Description  |
 |---|:---|:---|:---|
 | **Direction** | Input | Device Direction | `input`, `output` or `both` indicating `microphone`, `speaker/headphone` or `both` types.|
-| **Audio Devices** | Output | Audio Devices | A list of [audio devices](xref:DolbyIO.Comms.AudioDevice) filtered by the `Direction` input. 
+| **Audio Devices** | Output | Audio Devices | A list of [audio devices](xref:DolbyIO.Comms.AudioDevice) filtered by the `Direction` input.|
 
 
 ---
