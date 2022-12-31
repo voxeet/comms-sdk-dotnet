@@ -1,5 +1,5 @@
 ## Initialize and connect to a demo conference
-This example demonstrates how to initialize the Unity plugin and connect to a demo conference using visual scripting. The Demo conference node allows connecting to a conference that has several bots injecting audio. This makes it easier for testing the connection during the prototyping phase.
+This example demonstrates how to initialize the Unity plugin and connect to a demo conference using visual scripting. The Demo conference node allows connecting to a conference that has several bots injecting audio, making it easier to test the connection and project setup during the prototyping phase.
 
 To start fresh, you can create a new project from Unity Hub using one of the provided templates, such as `Core 3D`. The following video shows the workflow.
 
@@ -25,8 +25,12 @@ Connect the `On Start` event to the input trigger of `Initialize` node, of which
 
 To keep things simple for now, uncheck the `Spatial Audio` option in `Demo Conference` node. This is because unless you've provided your spatial position, the default platform behavior for spatial audio conference is `no rendering`, which means you won't hear any audio. Unchecking the `Spatial Audio` flag informs the platform to always render the audio for the local participant.  
 
-### Step 3. Get a Dolby.io token from the dashboard
+### Step 3. Set up the Client Access Token
 You should have signed up in Dolby.io by now. In the app that is automatically created for you in the dashboard, acquire a temporary Client Access Token and paste in the `Initialize` node. For security reasons the token you acquired will expire in 12 hours, you will have to provide a new token after the expiration. 
+
+Alternatively, you can add [Get Token](../visualscripting/nodes.md#gettoken) node to the graph, and pass the `App Key` and `App Secret` to the node. Connecting the output of the node to the `Access Token` input of the `Initialize` node will generate a Client Access Token from the Unity app and initialize the plugin.
+
+> Please note using `Get Token` effectively includes the permanent app credential in your Unity app, which is not safe for production deployment. Please follow our [security best practices](https://docs.dolby.io/communications-apis/docs/guides-client-authentication) and setup a backend server to retrieve temporary access token on behalf of the Unity app. 
 
 Once this is all done, close the visual script editing window and run the app, if everything works you should be able to hear the audio coming from the Dolby.io service, this confirms you have proper setup of development environment as well as Unity plugin installed ready to go.
 

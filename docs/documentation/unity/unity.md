@@ -33,62 +33,6 @@ The Unity plugin provides access to an instance of the SDK through a custom `Dol
         <img style="padding:25px 0" src="~/images/unity_2.png" width="800px">
     </div>
 
-3. Make sure that the .NET SDK is now available in all scripts:
-    ```cs
-    using Unity;
-    using DolbyIO.Comms;
-    using DolbyIO.Comms.Unity;
-
-    public class MyScript : MonoBehaviour
-    {
-        private DolbyIOSDK _sdk = DolbyIOManager.Sdk;
-    }
-    ```
-
-## Initialization
-
-To initialize the SDK, follow these steps:
-
-1. Copy the access token form the Dolby.io dashboard. 
-
-2. Call the [InitAsync](xref:DolbyIO.Comms.DolbyIOSDK#DolbyIO_Comms_DolbyIOSDK_InitAsync_System_String_DolbyIO_Comms_RefreshTokenCallBack_) method using the token to initialize the SDK.
-
-The Init method should be called only once. We recommend calling the Init method in the Awake method of a new script that you can add as a component of the created game object.
-
-```cs
-using Unity;
-using DolbyIO.Comms;
-using DolbyIO.Comms.Unity;
-
-public class MyScript : MonoBehaviour
-{
-    private DolbyIOSDK _sdk = DolbyIOManager.Sdk;
-
-    async void Awake()
-    {
-        try
-        {
-            await _sdk.InitAsync("Access Token", () => 
-            {
-                return "New Access Token";
-            });
-        }
-        catch (DolbyIOException e)
-        {
-            Debug.LogError(e.Message);
-        }
-    }
-}
-```
-
-> The `DolbyIOManager` calls the Dispose method of the SDK automatically in OnApplicationQuit. There is also a default option to automatically leave the current conference and close the opened session.
-
-<div style="text-align:left">
-    <img style="padding:25px 0" src="~/images/unity_3.png" width="400px">
-</div>
-
-3. Make sure that the SDK is initialized and that you can call SDK methods. For more information, see the the [Getting Started](../sdk/started.md) guide and [reference](/documentation/api/DolbyIO.Comms.Services.html) documentation.
-
 ## MacOS application entitlements
 
 To allow MacOS applications to capture audio, modify the `Info.plist` file by adding the following keys at the end of the file:

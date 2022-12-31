@@ -15,15 +15,34 @@ Once the plugin is successfully installed, the Dolby.io nodes are accessible in 
 ---
 ### Initialize
 
-Initialize the SDK and connects to the Dolby.io platform. In your production application deployment, please follow our security best practice [here](https://docs.dolby.io/communications-apis/docs/guides-client-authentication) to setup a server through which you can acquire a temporary client access token. 
+Initialize the SDK and connects to the Dolby.io platform. During onboarding and prototyping phase, you can obtain a client access token from the Dolby.io dashboard, or use the [GetToken](#gettoken) node to retrieve a token directly.
+
+>In your production application deployment, please follow our security best practice [here](https://docs.dolby.io/communications-apis/docs/guides-client-authentication) to setup a server through which you can acquire a temporary client access token and pass to this node.
+
 <div style="text-align:left">
     <img style="padding:25px 0" src="~/images/nodes/init.png" width="300px">
 </div>
 
 | Name  | Direction | Type | Description  |
 |---|:---|:---|:---|
-| **Access Token** | Input | String| The [access token](xref:DolbyIO.Comms.DolbyIOSDK.InitAsync(System.String,DolbyIO.Comms.RefreshTokenCallBack)) provided by the customer's backend. |
+| **Access Token** | Input | String or function| The [access token](xref:DolbyIO.Comms.DolbyIOSDK.InitAsync(System.String,DolbyIO.Comms.RefreshTokenCallBack)) provided by your backend server. Alternatively, pass in the output from the [GetToken](#gettoken) node.|
 | **Participant Name** | Input | String | The [name](xref:DolbyIO.Comms.UserInfo.Name) of the local participant. |
+
+---
+### GetToken
+
+A helper node that retrieves a Client Access Token directly from within the Unity application. 
+
+>Using this node effectively distributes the permanent app credential with your Unity application which is not safe for production deployment. Follow our security best practice [here](https://docs.dolby.io/communications-apis/docs/guides-client-authentication) to setup a server through which you can acquire a temporary client access token. 
+<div style="text-align:left">
+    <img style="padding:25px 0" src="~/images/nodes/init.png" width="300px">
+</div>
+
+| Name  | Direction | Type | Description  |
+|---|:---|:---|:---|
+| **App Key** | Input | String| The app key from the Dolby.io dashboard. |
+| **App Secret** | Input | String | The app secret from the Dolby.io dashboard. |
+| **Token** | Output | String | The generated client access token, expires in 1 hour. |
 
 ---
 ### Spatial Conference

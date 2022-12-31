@@ -32,8 +32,8 @@ dotnet add package DolbyIO.Comms.Sdk
 
 >On MacOS, it is necessary to unquarantine SDK libraries. Otherwise, quarantine attributes prevent their usage. The simplest way to unquarantine is to strip the quarantine attributes recursively for all the files in the package. Follow the steps below:
 >- Open **Terminal**
->- Assuming you have unzipped the SDK under `~/Downloads/dolbyio-comms-unity-plugin`
->- Run this command `xattr -d -r com.apple.quarantine ~/Downloads/dolbyio-comms-unity-plugin`
+>- Assuming you have unzipped the SDK under `~/Downloads/dolbyio-comms-dotnet-sdk`
+>- Run this command `xattr -d -r com.apple.quarantine ~/Downloads/dolbyio-comms-dotnet-sdk`
 
 #### 1. Initialize the SDK
 
