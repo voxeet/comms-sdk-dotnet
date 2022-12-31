@@ -115,7 +115,7 @@ Retrieve a list of available audio devices.
 | Name  | Direction | Type | Description  |
 |---|:---|:---|:---|
 | **Direction** | Input | Device Direction | `input`, `output` or `both` indicating `microphone`, `speaker/headphone` or `both` types.|
-| **Audio Devices** | Output | Audio Devices | A list of [audio devices](xref:DolbyIO.Comms.AudioDevice) filtered by the `Direction` input.|
+| **Audio Devices** | Output | List of Audio Devices | A list of [audio devices](xref:DolbyIO.Comms.AudioDevice) filtered by the `Direction` input.|
 
 
 ---

@@ -15,34 +15,36 @@ You can install the Unity plugin from the Unity Package Manager. First download 
 
 Open the Package Manager from the Unity Editor and click the <img src="~/images/plus_sign.png" height="20px"/> sign in the upper left corner. Select "Add package from disk", and look for the `package.json` file located where you extracted the aforementioned plugin archive.
 
+On MacOS, it is necessary to unquarantine SDK libraries. Otherwise, quarantine attributes prevent their usage. The simplest way to unquarantine is to strip the quarantine attributes recursively for all the files in the package. Follow the steps below:
+
+- Open **Terminal**
+- Assuming you have unzipped the SDK under `~/Downloads/dolbyio-comms-unity-plugin`
+- Run this command `xattr -d -r com.apple.quarantine ~/Downloads/dolbyio-comms-unity-plugin`
+
 ## Setting up the GameObject
 The Unity plugin provides access to an instance of the SDK through a custom `DolbyIO Manager` manager. To add the SDK to Unity, follow these steps:
 
 1. Create an empty game object in your scene and provide a name for the object. In this example, we call the object `ApplicationManager`:
-<div style="text-align:left">
-    <img style="padding:25px 0" src="~/images/unity_1.png" width="400px">
-</div>
+    <div style="text-align:left">
+        <img style="padding:25px 0" src="~/images/unity_1.png" width="400px">
+    </div>
 
-2. Select the created game object and select `Component` > `DolbyIO` > `DolbyIO Manager` from the Unity menu.
-
-<div style="text-align:left">
-    <img style="padding:25px 0" src="~/images/unity_2.png" width="800px">
-</div>
-
-This step adds the `DolbyIO Manager` to the game object.
+2. Select the created game object and select `Component` > `DolbyIO` > `DolbyIO Manager` from the Unity menu. This step adds the `DolbyIO Manager` to the game object.
+    <div style="text-align:left">
+        <img style="padding:25px 0" src="~/images/unity_2.png" width="800px">
+    </div>
 
 3. Make sure that the .NET SDK is now available in all scripts:
+    ```cs
+    using Unity;
+    using DolbyIO.Comms;
+    using DolbyIO.Comms.Unity;
 
-```cs
-using Unity;
-using DolbyIO.Comms;
-using DolbyIO.Comms.Unity;
-
-public class MyScript : MonoBehaviour
-{
-    private DolbyIOSDK _sdk = DolbyIOManager.Sdk;
-}
-```
+    public class MyScript : MonoBehaviour
+    {
+        private DolbyIOSDK _sdk = DolbyIOManager.Sdk;
+    }
+    ```
 
 ## Initialization
 
