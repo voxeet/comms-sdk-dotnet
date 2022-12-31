@@ -15,11 +15,10 @@ You can install the Unity plugin from the Unity Package Manager. First download 
 
 Open the Package Manager from the Unity Editor and click the <img src="~/images/plus_sign.png" height="20px"/> sign in the upper left corner. Select "Add package from disk", and look for the `package.json` file located where you extracted the aforementioned plugin archive.
 
-On MacOS, it is necessary to unquarantine SDK libraries. Otherwise, quarantine attributes prevent their usage. The simplest way to unquarantine is to strip the quarantine attributes recursively for all the files in the package. Follow the steps below:
-
-- Open **Terminal**
-- Assuming you have unzipped the SDK under `~/Downloads/dolbyio-comms-unity-plugin`
-- Run this command `xattr -d -r com.apple.quarantine ~/Downloads/dolbyio-comms-unity-plugin`
+>On MacOS, it is necessary to unquarantine SDK libraries. Otherwise, quarantine attributes prevent their usage. The simplest way to unquarantine is to strip the quarantine attributes recursively for all the files in the package. Follow the steps below:
+>- Open **Terminal**
+>- Assuming you have unzipped the SDK under `~/Downloads/dolbyio-comms-unity-plugin`
+>- Run this command `xattr -d -r com.apple.quarantine ~/Downloads/dolbyio-comms-unity-plugin`
 
 ## Setting up the GameObject
 The Unity plugin provides access to an instance of the SDK through a custom `DolbyIO Manager` manager. To add the SDK to Unity, follow these steps:

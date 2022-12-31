@@ -29,6 +29,12 @@ Use the following command to install the .NET SDK from NuGet into your .NET proj
 ```shell
 dotnet add package DolbyIO.Comms.Sdk
 ```
+
+>On MacOS, it is necessary to unquarantine SDK libraries. Otherwise, quarantine attributes prevent their usage. The simplest way to unquarantine is to strip the quarantine attributes recursively for all the files in the package. Follow the steps below:
+>- Open **Terminal**
+>- Assuming you have unzipped the SDK under `~/Downloads/dolbyio-comms-unity-plugin`
+>- Run this command `xattr -d -r com.apple.quarantine ~/Downloads/dolbyio-comms-unity-plugin`
+
 #### 1. Initialize the SDK
 
 Initialize the SDK using the secure authentication method that uses a token in the application. For the purpose of this application, use a [client access token](https://docs.dolby.io/communications-apis/docs/overview-developer-tools#client-access-token) generated from the Dolby.io dashboard. Use the following code to initialize the SDK using the [DolbyIOSDK.InitAsync](https://api-references.dolby.io/comms-sdk-dotnet/api/DolbyIO.Comms.DolbyIOSDK.html#DolbyIO_Comms_DolbyIOSDK_InitAsync_System_String_DolbyIO_Comms_RefreshTokenCallBack_) method:
@@ -256,9 +262,6 @@ cmake --build .
 ```
 
 The .NET SDK depends on the [C++ SDK](https://github.com/DolbyIO/comms-sdk-cpp) for core functions and supports the same functionalities for client applications as the C++ SDK. Set the environment variable `DOLBYIO_LIBRARY_PATH` as the path to the root folder containing the Dolby.io Communications C++ SDK. 
-
-
-> **Note**: On macOS, it is necessary to unquarantine SDK libraries and sample binaries. Otherwise, quarantine attributes prevent their usage. The simplest way to unquarantine is to strip the quarantine attributes recursively for all the files in the package. The following example presents how to do it via terminal and the macOS attribute stripping command line tool: `xattr -d -r com.apple.quarantine sdk-release/`
 
 `cmake` allows you to generate various project files, for example, if you want to generate a Visual Studio solution on Windows, you can add the following option when generating (`-G "Visual Studio 17 2022"`):
 
