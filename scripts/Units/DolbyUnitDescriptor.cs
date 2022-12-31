@@ -6,9 +6,10 @@ using Unity.VisualScripting;
 
 namespace DolbyIO.Comms.Unity
 {
-    public class DolbyUnitDescriptor<T> : UnitDescriptor<T> where T : Unit
+    [Descriptor(typeof(IDolbyUnit))]
+    public class DolbyUnitDescriptor : UnitDescriptor<IDolbyUnit>
     {
-        public DolbyUnitDescriptor(T node) : base(node) { }
+        public DolbyUnitDescriptor(IDolbyUnit node) : base(node) { }
         
         protected override void DefinedPort(IUnitPort port, UnitPortDescription description)
         {

@@ -8,6 +8,7 @@ namespace DolbyIO.Comms.Unity
         {
             {"AccessToken", "The access token provided by the customer's backend."},
             {"ParticipantName", "The name of the participant."},
+            {"ParticipantId", "The ID of the participant."},
             {"SpatialAudio", "A boolean that enables spatial audio for the joining participant. This boolean must be set to true if spatial audio style is enabled. For more information, refer to our sample application code."},
             {"Scale", "A scale that defines how to convert units from the coordinate system of an application (pixels or centimeters) into meters used by the spatial audio coordinate system."},
             {"Forward", "A vector describing the direction the application considers as forward. The value can be either +1, 0, or -1 and must be orthogonal to up and right."},

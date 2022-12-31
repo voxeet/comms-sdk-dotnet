@@ -11,7 +11,7 @@ namespace DolbyIO.Comms.Unity
 {
     [UnitTitle("Get Participants")]
     [UnitCategory("DolbyIO")]
-    public class ParticipantsUnit : Unit
+    public class ParticipantsUnit : Unit, IDolbyUnit
     {
         private DolbyIOSDK _sdk = DolbyIOManager.Sdk;
 
