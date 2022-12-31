@@ -8,4 +8,7 @@
     - name: Events
       href: visualscripting/events.md
     - name: Samples
-      href: visualscripting/samples.md
+      href: samples/demo.md
+      items:
+        - name: Demo Conference
+          href: samples/demo.md
