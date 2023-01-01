@@ -1,12 +1,16 @@
-# Dolby.io Communications .NET SDK
+[![Build and Test](https://github.com/DolbyIO/comms-sdk-dotnet/actions/workflows/build-and-test.yml/badge.svg)](https://github.com/DolbyIO/comms-sdk-dotnet/actions/workflows/build-and-test.yml)
+[![Deploy Docfx Documentation](https://github.com/DolbyIO/comms-sdk-dotnet/actions/workflows/pages.yml/badge.svg)](https://github.com/DolbyIO/comms-sdk-dotnet/actions/workflows/pages.yml)
+[![Package Artifacts](https://github.com/DolbyIO/comms-sdk-dotnet/actions/workflows/package.yml/badge.svg)](https://github.com/DolbyIO/comms-sdk-dotnet/actions/workflows/package.yml)
 
-The Dolby.io Communications .NET SDK allows creating high-quality applications for conferencing, streaming, and collaborating. With the .NET SDK you can easily integrate the HD Dolby Voice experience, including spatial audio and shared scenes, into game engines and virtual spaces.
+# Dolby.io Communications .NET SDK and Unity plugin
 
-The SDK depends on the [C++ SDK](https://github.com/DolbyIO/comms-sdk-cpp) for core functions and supports the same functionalities for client applications as the C++ SDK.
+With the .NET SDK and Virtual World plugin for Unity you can easily integrate Dolby quality spatial communications capabilities into your virtual world applications.
 
 ## Get Started
 
-This guide presents an example of using the SDK to create a basic audio-only conference application. The starter project that you can create by following this procedure provides the foundation upon which you can add additional features as you build out your own solutions for events, collaboration, or live streaming.
+The Unity plugin is built on top of the .NET SDK with visual scripting support. Refer to this [article](https://api-references.dolby.io/comms-sdk-dotnet/documentation/unity/unity.html) for installing and using of the Unity plugin.
+
+The following guide presents an example of using the SDK to create a basic .NET audio-only conference application. The starter project that you can create by following this procedure provides the foundation upon which you can add additional features as you build out your application.
 
 You can find the complete code for the application in the [Summary](#summary) section. The created application is available in the [SimpleApp](https://github.com/DolbyIO/comms-sdk-dotnet/tree/master/samples/SimpleApp) folder.
 
@@ -17,23 +21,20 @@ Make sure that you have:
 - A Dolby.io account. If you do not have an account, you can [sign up](https://dolby.io/signup) for a free account.
 - The [client access token](https://docs.dolby.io/communications-apis/docs/overview-developer-tools#client-access-token) copied from the [Dolby.io dashboard](https://dashboard.dolby.io/). To create the token, log into the Dolby.io dashboard, create an application, and navigate to the API keys section.
 
-Additionally, if you plan to build the SDK from sources, not the NuGet packet manager, make sure that you have:
-
-- The [Dolby.io Communications C++ SDK 2.3.0-alpha.3](https://github.com/DolbyIO/comms-sdk-cpp/releases) for your platform
-- [.NET SDK 6](https://dotnet.microsoft.com/en-us/download)
-- C++ compiler compatible with C++ 17
-- CMake 3.23
-- A macOS or Windows machine
-
 ### How to use
 
 #### 0. Install the SDK
 
-If you want to use NuGet, use the following command:
+Use the following command to install the .NET SDK from NuGet into your .NET project:
 
 ```shell
 dotnet add package DolbyIO.Comms.Sdk
 ```
+
+>On MacOS, it is necessary to unquarantine SDK libraries. Otherwise, quarantine attributes prevent their usage. The simplest way to unquarantine is to strip the quarantine attributes recursively for all the files in the package. Follow the steps below:
+>- Open **Terminal**
+>- Assuming you have unzipped the SDK under `~/Downloads/dolbyio-comms-dotnet-sdk`
+>- Run this command `xattr -d -r com.apple.quarantine ~/Downloads/dolbyio-comms-dotnet-sdk`
 
 #### 1. Initialize the SDK
 
@@ -245,6 +246,14 @@ public class Program
 
 ## Build the SDK
 
+If you want to build the SDK from source code, make sure that you have:
+
+- The [Dolby.io Communications C++ SDK 2.3.0-alpha.3](https://github.com/DolbyIO/comms-sdk-cpp/releases) for your platform
+- [.NET SDK 6](https://dotnet.microsoft.com/en-us/download)
+- C++ compiler compatible with C++ 17
+- CMake 3.23
+- A macOS or Windows machine
+
 In order to compile the Dolby.io Communications .NET SDK, you will need to use CMake for the build chain and generating projects. To build the application from sources, use the following commands:
 
 ```console
@@ -253,9 +262,7 @@ cmake .. -DDOLBYIO_LIBRARY_PATH=/path/to/c++sdk -DCMAKE_BUILD_TYPE=Debug
 cmake --build .
 ```
 
-Set the environment variable `DOLBYIO_LIBRARY_PATH` as the path to the root folder containing the Dolby.io Communications C++ SDK.
-
-> **Note**: On macOS, it is necessary to unquarantine SDK libraries and sample binaries. Otherwise, quarantine attributes prevent their usage. The simplest way to unquarantine is to strip the quarantine attributes recursively for all the files in the package. The following example presents how to do it via terminal and the macOS attribute stripping command line tool: `xattr -d -r com.apple.quarantine sdk-release/`
+The .NET SDK depends on the [C++ SDK](https://github.com/DolbyIO/comms-sdk-cpp) for core functions and supports the same functionalities for client applications as the C++ SDK. Set the environment variable `DOLBYIO_LIBRARY_PATH` as the path to the root folder containing the Dolby.io Communications C++ SDK. 
 
 `cmake` allows you to generate various project files, for example, if you want to generate a Visual Studio solution on Windows, you can add the following option when generating (`-G "Visual Studio 17 2022"`):
 
