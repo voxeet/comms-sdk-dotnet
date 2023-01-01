@@ -2,7 +2,7 @@
 
 Visual Scripting in Unity allows creating logic for virtual world applications using visual, node-based graphs without writing code. The Dolby.io Virtual World plugin is compatible with Unity Visual Scripting 2021. The plugin can be used with Visual Scripting and C# scripting at the same time. 
 
-Before using the plugin for visual scripting, make sure that you added the .NET SDK to Unity and initialized the SDK using the [Initializing](../unity.md#initialization) procedure.
+Before using the plugin for visual scripting, make sure that you added the .NET SDK to Unity and initialized the SDK using the [Initializing](../unity.md) procedure.
 
 ### Nodes
 
@@ -25,7 +25,7 @@ Initialize the SDK and connects to the Dolby.io platform. During onboarding and 
 
 | Name  | Direction | Type | Description  |
 |---|:---|:---|:---|
-| **Access Token** | Input | String or function| The [access token](xref:DolbyIO.Comms.DolbyIOSDK.InitAsync(System.String,DolbyIO.Comms.RefreshTokenCallBack)) provided by your backend server. Alternatively, pass in the output from the [GetToken](#gettoken) node.|
+| **Access Token** | Input | String or Function| The [access token](xref:DolbyIO.Comms.DolbyIOSDK.InitAsync(System.String,DolbyIO.Comms.RefreshTokenCallBack)) provided by your backend server, linked to the ouput of a String node. Alternatively, pass in the output from the [GetToken](#gettoken) node.|
 | **Participant Name** | Input | String | The [name](xref:DolbyIO.Comms.UserInfo.Name) of the local participant. |
 
 ---
@@ -35,14 +35,14 @@ A helper node that retrieves a Client Access Token directly from within the Unit
 
 >Using this node effectively distributes the permanent app credential with your Unity application which is not safe for production deployment. Follow our security best practice [here](https://docs.dolby.io/communications-apis/docs/guides-client-authentication) to setup a server through which you can acquire a temporary client access token. 
 <div style="text-align:left">
-    <img style="padding:25px 0" src="~/images/nodes/init.png" width="300px">
+    <img style="padding:25px 0" src="~/images/nodes/get-token.png" width="300px">
 </div>
 
 | Name  | Direction | Type | Description  |
 |---|:---|:---|:---|
 | **App Key** | Input | String| The app key from the Dolby.io dashboard. |
 | **App Secret** | Input | String | The app secret from the Dolby.io dashboard. |
-| **Token** | Output | String | The generated client access token, expires in 1 hour. |
+| **Token Action** | Output | System.Func<string> | A function that returns the access token. Can be linked to the initialize node. |
 
 ---
 ### Spatial Conference
@@ -83,32 +83,6 @@ Allows muting a participant. This node works for both local participant (e.g., m
 |---|:---|:---|:---|
 | **ParticipantId** | Input | String| The ID of the participant who should be muted. If the ID is not provided, the node mutes the local participant|
 | **Muted** | Input | Boolean | The required mute state.| 
-
----
-### Local Player Position
-
-Allows setting the position of the local player.
-<div style="text-align:left">
-    <img style="padding:25px 0" src="~/images/nodes/local-position.png" width="250px">
-</div>
-
-| Name  | Direction | Type | Description  |
-|---|:---|:---|:---|
-| **Position** | Input | Vector3| The [position](xref:DolbyIO.Comms.Services.ConferenceService.SetSpatialPositionAsync(System.String,System.Numerics.Vector3)) of the player.|
-| **Direction** | Input | Vector3 | The [direction](xref:DolbyIO.Comms.Services.ConferenceService.SetSpatialDirectionAsync(System.Numerics.Vector3)) that the player should be facing.| 
-
----
-### Remote Player Position
-
-Set the remote participant's spatial audio position for the local participant. This is only applicable when the spatial audio style was set as `individual` in the Spatial Conference node where each client needs to inform the server how they would like the platform to render the remote participant's audio for them.  
-<div style="text-align:left">
-    <img style="padding:25px 0" src="~/images/nodes/remote-position.png" width="250px">
-</div>
-
-| Name  | Direction | Type | Description  |
-|---|:---|:---|:---|
-| **Position** | Input | Vector3| The [position](xref:DolbyIO.Comms.Services.ConferenceService.SetSpatialPositionAsync(System.String,System.Numerics.Vector3)) of the player.|
-
 
 ---
 ### Get Participants
@@ -160,3 +134,39 @@ Configures active audio output as the specified device.
 | Name  | Direction | Type | Description  |
 |---|:---|:---|:---|
 | **Audio Device** | Input | Audio Device | The user preferred [AudioDevice](xref:DolbyIO.Comms.AudioDevice) for audio rendering.|
+
+---
+### Set Local Player Direction
+
+Allows setting the direction of the local player.
+<div style="text-align:left">
+    <img style="padding:25px 0" src="~/images/nodes/local-direction.png" width="220px">
+</div>
+
+| Name  | Direction | Type | Description  |
+|---|:---|:---|:---|
+| **Direction** | Input | Vector3 | The [direction](xref:DolbyIO.Comms.Services.ConferenceService.SetSpatialDirectionAsync(System.Numerics.Vector3)) that the player should be facing.| 
+
+---
+### Set Local Player Position
+
+Allows setting the position of the local player.
+<div style="text-align:left">
+    <img style="padding:25px 0" src="~/images/nodes/local-position.png" width="220px">
+</div>
+
+| Name  | Direction | Type | Description  |
+|---|:---|:---|:---|
+| **Position** | Input | Vector3| The [position](xref:DolbyIO.Comms.Services.ConferenceService.SetSpatialPositionAsync(System.String,System.Numerics.Vector3)) of the player.|
+
+---
+### Set Remote Player Position
+
+Set the remote participant's spatial audio position for the local participant. This is only applicable when the spatial audio style was set as `individual` in the Spatial Conference node where each client needs to inform the server how they would like the platform to render the remote participant's audio for them.  
+<div style="text-align:left">
+    <img style="padding:25px 0" src="~/images/nodes/remote-position.png" width="250px">
+</div>
+
+| Name  | Direction | Type | Description  |
+|---|:---|:---|:---|
+| **Position** | Input | Vector3| The [position](xref:DolbyIO.Comms.Services.ConferenceService.SetSpatialPositionAsync(System.String,System.Numerics.Vector3)) of the player.|
