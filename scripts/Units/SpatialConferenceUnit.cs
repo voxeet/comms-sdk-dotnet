@@ -55,8 +55,6 @@ namespace DolbyIO.Comms.Unity
                 new System.Numerics.Vector3(right.x, right.y, right.z)
             ).Wait();
 
-            _sdk.Video.Local.StartAsync().Wait();
-
             yield return OutputTrigger;
         }
     }

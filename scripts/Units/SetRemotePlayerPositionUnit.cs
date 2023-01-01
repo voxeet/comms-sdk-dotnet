@@ -7,26 +7,38 @@ using DolbyIO.Comms;
 
 namespace DolbyIO.Comms.Unity
 {
-    [UnitTitle("Remote Player Position")]
+    [UnitTitle("Set Remote Player Position")]
     [UnitCategory("DolbyIO")]
-    public class RemotePlayerPositionUnit : PositionUnit
+    public class SetRemotePlayerPositionUnit : Unit, IDolbyUnit
     {
+        protected DolbyIOSDK _sdk = DolbyIOManager.Sdk;
+        
+        [DoNotSerialize]
+        [PortLabelHidden]
+        public ControlInput InputTrigger;
+
+        [DoNotSerialize]
+        [PortLabelHidden]
+        public ControlOutput OutputTrigger;
+
+        [DoNotSerialize]
+        public ValueInput Position;
+
         [DoNotSerialize]
         public ValueInput Participant;
 
         protected override void Definition()
         {
-            base.Definition();
-
             InputTrigger = ControlInput(nameof(InputTrigger), SetPosition);
             OutputTrigger = ControlOutput(nameof(OutputTrigger));
-
+            
+            Position = ValueInput<Vector3>(nameof(Position), new Vector3(0, 1.0f, 0));
             Participant = ValueInput<Participant>(nameof(Participant));
         }
 
         private ControlOutput SetPosition(Flow flow)
         {
-            var position = flow.GetValue<Vector3>(Postition);
+            var position = flow.GetValue<Vector3>(Position);
             var p = flow.GetValue<Participant>(Participant);
 
             if (_sdk.IsInitialized && _sdk.Session.IsOpen && _sdk.Conference.IsInConference)

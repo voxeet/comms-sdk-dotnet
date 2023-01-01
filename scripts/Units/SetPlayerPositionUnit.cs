@@ -7,26 +7,33 @@ using DolbyIO.Comms;
 
 namespace DolbyIO.Comms.Unity
 {
-    [UnitTitle("Player Position")]
+    [UnitTitle("Set Player Position")]
     [UnitCategory("DolbyIO")]
-    public class PlayerPositionUnit : PositionUnit
+    public class SetPlayerPositionUnit : Unit, IDolbyUnit
     {
+        protected DolbyIOSDK _sdk = DolbyIOManager.Sdk;
+        
         [DoNotSerialize]
-        public ValueInput Direction;
+        [PortLabelHidden]
+        public ControlInput InputTrigger;
+
+        [DoNotSerialize]
+        [PortLabelHidden]
+        public ControlOutput OutputTrigger;
+
+        [DoNotSerialize]
+        public ValueInput Position;
 
         protected override void Definition()
         {
-            base.Definition();
-
             InputTrigger = ControlInput(nameof(InputTrigger), SetPosition);
             OutputTrigger = ControlOutput(nameof(OutputTrigger));
-            Direction = ValueInput<Vector3>(nameof(Direction), new Vector3(0, 1.0f, 0));
+            Position = ValueInput<Vector3>(nameof(Position), new Vector3(0, 1.0f, 0));
         }
 
         private ControlOutput SetPosition(Flow flow)
         {
-            var direction = flow.GetValue<Vector3>(Direction);
-            var position = flow.GetValue<Vector3>(Postition);
+            var position = flow.GetValue<Vector3>(Position);
 
             if (_sdk.IsInitialized && _sdk.Session.IsOpen && _sdk.Conference.IsInConference)
             {
@@ -37,19 +44,7 @@ namespace DolbyIO.Comms.Unity
                 )
                 .ContinueWith(t =>
                 {
-                    if (t.IsFaulted)
-                    {
-                        throw t.Exception;
-                    }
-
-                    return _sdk.Conference.SetSpatialDirectionAsync
-                    (
-                        new System.Numerics.Vector3(direction.x, direction.y, direction.z)
-                    );
-                })
-                .ContinueWith(t =>
-                {
-                    Debug.Log(t.Exception);
+                    Debug.LogError(t.Exception);
                 }, TaskContinuationOptions.OnlyOnFaulted);
             }
 

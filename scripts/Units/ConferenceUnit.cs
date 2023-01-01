@@ -7,7 +7,7 @@ using DolbyIO.Comms;
 
 namespace DolbyIO.Comms.Unity
 {
-    public class ConferenceUnit : Unit
+    public class ConferenceUnit : Unit, IDolbyUnit
     {
         protected DolbyIOSDK _sdk = DolbyIOManager.Sdk;
 
