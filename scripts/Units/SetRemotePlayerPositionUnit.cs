@@ -22,7 +22,7 @@ namespace DolbyIO.Comms.Unity
         public ControlOutput OutputTrigger;
 
         [DoNotSerialize]
-        public ValueInput Postition;
+        public ValueInput Position;
 
         [DoNotSerialize]
         public ValueInput Participant;
@@ -32,13 +32,13 @@ namespace DolbyIO.Comms.Unity
             InputTrigger = ControlInput(nameof(InputTrigger), SetPosition);
             OutputTrigger = ControlOutput(nameof(OutputTrigger));
             
-            Postition = ValueInput<Vector3>(nameof(Postition), new Vector3(0, 1.0f, 0));
+            Position = ValueInput<Vector3>(nameof(Position), new Vector3(0, 1.0f, 0));
             Participant = ValueInput<Participant>(nameof(Participant));
         }
 
         private ControlOutput SetPosition(Flow flow)
         {
-            var position = flow.GetValue<Vector3>(Postition);
+            var position = flow.GetValue<Vector3>(Position);
             var p = flow.GetValue<Participant>(Participant);
 
             if (_sdk.IsInitialized && _sdk.Session.IsOpen && _sdk.Conference.IsInConference)

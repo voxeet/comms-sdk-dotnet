@@ -21,6 +21,8 @@ namespace DolbyIO.Comms.Unity
         private static DolbyIOSDK _sdk = new DolbyIOSDK();
         private static List<Action> _backlog = new List<Action>();
 
+        private static HttpClient _client = new HttpClient();
+
         [Inspectable]
         public static DolbyIOSDK Sdk { get => _sdk; }
         
@@ -42,30 +44,25 @@ namespace DolbyIO.Comms.Unity
         {
             return await Task.Run(async () =>
             {
-                string result = "";
+                using var request = new HttpRequestMessage(HttpMethod.Post, "https://session.voxeet.com/v1/oauth2/token");
+                var auth = $"{Uri.EscapeUriString(key)}:{Uri.EscapeUriString(secret)}";
 
-                using (var client = new HttpClient())
+                request.Headers.Authorization = new AuthenticationHeaderValue("Basic", $"{Convert.ToBase64String(Encoding.UTF8.GetBytes(auth))}");
+                request.Content = new FormUrlEncodedContent(new Dictionary<string, string> { { "grant_type", "client_credentials" } });
+
+                using var response = await _client.SendAsync(request);
+                response.EnsureSuccessStatusCode();
+
+                var jsonString = await response.Content.ReadAsStringAsync();
+                var json = JsonConvert.DeserializeObject<Dictionary<string, string>>(jsonString);
+
+                string accessToken = jsonString;
+                if (!json.TryGetValue("access_token", out accessToken))
                 {
-                    var request = new HttpRequestMessage(HttpMethod.Post, " https://session.voxeet.com/v1/oauth2/token");
-                    var auth = $"{Uri.EscapeUriString(key)}:{Uri.EscapeUriString(secret)}";
-
-                    request.Headers.Authorization = new AuthenticationHeaderValue("Basic", $"{Convert.ToBase64String(Encoding.UTF8.GetBytes(auth))}");
-                    request.Content = new FormUrlEncodedContent(new Dictionary<string, string> { { "grant_type", "client_credentials" } });
-
-                    var response = await client.SendAsync(request);
-                    response.EnsureSuccessStatusCode();
-
-                    var jsonString = await response.Content.ReadAsStringAsync();
-                    var json = JsonConvert.DeserializeObject<Dictionary<string, string>>(jsonString);
-
-                    result = jsonString;
-                    if (!json.TryGetValue("access_token", out result))
-                    {
-                        throw new Exception("Unable to access json token");
-                    }
+                    throw new Exception("Unable to read the json token");
                 }
-
-                return result;
+                
+                return accessToken;
             })
             .ConfigureAwait(false);
         }

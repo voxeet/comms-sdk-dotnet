@@ -22,18 +22,18 @@ namespace DolbyIO.Comms.Unity
         public ControlOutput OutputTrigger;
 
         [DoNotSerialize]
-        public ValueInput Postition;
+        public ValueInput Position;
 
         protected override void Definition()
         {
             InputTrigger = ControlInput(nameof(InputTrigger), SetPosition);
             OutputTrigger = ControlOutput(nameof(OutputTrigger));
-            Postition = ValueInput<Vector3>(nameof(Postition), new Vector3(0, 1.0f, 0));
+            Position = ValueInput<Vector3>(nameof(Position), new Vector3(0, 1.0f, 0));
         }
 
         private ControlOutput SetPosition(Flow flow)
         {
-            var position = flow.GetValue<Vector3>(Postition);
+            var position = flow.GetValue<Vector3>(Position);
 
             if (_sdk.IsInitialized && _sdk.Session.IsOpen && _sdk.Conference.IsInConference)
             {
