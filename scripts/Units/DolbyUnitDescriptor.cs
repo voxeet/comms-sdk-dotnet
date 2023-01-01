@@ -6,7 +6,6 @@ using Unity.VisualScripting;
 
 namespace DolbyIO.Comms.Unity
 {
-    [Descriptor(typeof(IDolbyUnit))]
     public class DolbyUnitDescriptor : UnitDescriptor<IDolbyUnit>
     {
         public DolbyUnitDescriptor(IDolbyUnit node) : base(node) { }
