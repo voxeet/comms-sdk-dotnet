@@ -1,5 +1,5 @@
 # Plugin
-This document describes how to install and write code with the Dolby.io Virtual World plugin for Unity.
+This document describes how to install and use the Dolby.io Virtual World plugin for Unity.
 
 ## Prerequisites
 

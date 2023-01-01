@@ -20,7 +20,7 @@ The newly created script graph contains `On Start`, which is the initial trigger
 Add the following nodes to the script graph:
 - Unity **String** literal, alternatively, add [Get Token](../visualscripting/nodes.md#get-token) node.
 - [Initialize](../visualscripting/nodes.md#initialize).
-- [Demo Conference](../visualscripting/nodes.md#demo).
+- [Demo Conference](../visualscripting/nodes.md#demo-conference).
 
 Connect the `On Start` event to the input trigger of `Initialize` node, of which the output trigger connects to the `Demo Conference` input trigger. 
 
@@ -34,11 +34,11 @@ The following visual scripting example illustrates how to connect the nodes toge
     <img style="padding:25px 0" src="~/images/samples/demo/string-token-initialize.png" width="450px">
 </div>
 
-Alternatively, you can add the [Get Token](../visualscripting/nodes.md#gettoken) node to the graph, and pass the `App Key` and `App Secret` to the node. Connecting the output of the node to the `Access Token` input of the `Initialize` node will generate a Client Access Token from the Unity app and initialize the plugin.
+Alternatively, you can add the [Get Token](../visualscripting/nodes.md#get-token) node to the graph, and pass the `App Key` and `App Secret` to the node. Connecting the output of the node to the `Access Token` input of the `Initialize` node will generate a Client Access Token from the Unity app and initialize the plugin.
 
 > Please note using `Get Token` effectively includes the permanent app credential in your Unity app, which is not safe for production deployment. Please follow our [security best practices](https://docs.dolby.io/communications-apis/docs/guides-client-authentication) and setup a backend server to retrieve temporary access token on behalf of the Unity app. 
 
-The following visual scripting example illustrates how to connect the nodes together if you decided to use the [Get Token](../visualscripting/nodes.md#gettoken) node.
+The following visual scripting example illustrates how to connect the nodes together if you decided to use the [Get Token](../visualscripting/nodes.md#get-token) node.
 <div style="text-align:left">
     <img style="padding:25px 0" src="~/images/samples/demo/get-token-initialize.png" width="450px">
 </div>

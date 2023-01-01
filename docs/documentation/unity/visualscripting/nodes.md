@@ -2,8 +2,6 @@
 
 Visual Scripting in Unity allows creating logic for virtual world applications using visual, node-based graphs without writing code. The Dolby.io Virtual World plugin is compatible with Unity Visual Scripting 2021. The plugin can be used with Visual Scripting and C# scripting at the same time. 
 
-Before using the plugin for visual scripting, make sure that you added the .NET SDK to Unity and initialized the SDK using the [Initializing](../unity.md) procedure.
-
 ### Nodes
 
 Nodes are the most basic part of scripts in Visual Scripting. A node can listen for events, get the value of a variable, modify a component on a GameObject, and more.
@@ -15,7 +13,7 @@ Once the plugin is successfully installed, the Dolby.io nodes are accessible in 
 ---
 ### Initialize
 
-Initialize the SDK and connects to the Dolby.io platform. During onboarding and prototyping phase, you can obtain a client access token from the Dolby.io dashboard, or use the [GetToken](#gettoken) node to retrieve a token directly.
+Initialize the SDK and connects to the Dolby.io platform. During onboarding and prototyping phase, you can obtain a client access token from the Dolby.io dashboard, or use the [GetToken](#get-token) node to retrieve a token directly.
 
 >In your production application deployment, please follow our security best practice [here](https://docs.dolby.io/communications-apis/docs/guides-client-authentication) to setup a server through which you can acquire a temporary client access token and pass to this node.
 
@@ -25,7 +23,7 @@ Initialize the SDK and connects to the Dolby.io platform. During onboarding and 
 
 | Name  | Direction | Type | Description  |
 |---|:---|:---|:---|
-| **Access Token** | Input | String or Function| The [access token](xref:DolbyIO.Comms.DolbyIOSDK.InitAsync(System.String,DolbyIO.Comms.RefreshTokenCallBack)) provided by your backend server, linked to the ouput of a String node. Alternatively, pass in the output from the [GetToken](#gettoken) node.|
+| **Access Token** | Input | String or Function| The [access token](xref:DolbyIO.Comms.DolbyIOSDK.InitAsync(System.String,DolbyIO.Comms.RefreshTokenCallBack)) provided by your backend server, linked to the ouput of a String node. Alternatively, pass in the output from the [GetToken](#get-token) node.|
 | **Participant Name** | Input | String | The [name](xref:DolbyIO.Comms.UserInfo.Name) of the local participant. |
 
 ---
