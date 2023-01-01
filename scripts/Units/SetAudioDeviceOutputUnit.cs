@@ -10,7 +10,7 @@ namespace DolbyIO.Comms.Unity
 {
     [UnitTitle("Set Audio Device Output")]
     [UnitCategory("DolbyIO")]
-    public class SetAudioDeviceOutputUnit : Unit
+    public class SetAudioDeviceOutputUnit : Unit, IDolbyUnit
     {
         protected DolbyIOSDK _sdk = DolbyIOManager.Sdk;
 

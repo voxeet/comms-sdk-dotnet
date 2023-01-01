@@ -10,7 +10,7 @@ namespace DolbyIO.Comms.Unity
 {
     [UnitTitle("Get Audio Devices")]
     [UnitCategory("DolbyIO")]
-    public class AudioDeviceUnit : Unit
+    public class AudioDeviceUnit : Unit, IDolbyUnit
     {
         protected DolbyIOSDK _sdk = DolbyIOManager.Sdk;
 
@@ -23,7 +23,7 @@ namespace DolbyIO.Comms.Unity
         public ControlOutput OutputTrigger;
 
         [DoNotSerialize]
-        public ValueInput Direction;
+        public ValueInput DeviceDirection;
 
         [DoNotSerialize]
         public ValueOutput AudioDevices;
@@ -33,13 +33,13 @@ namespace DolbyIO.Comms.Unity
             InputTrigger = ControlInput(nameof(InputTrigger), GetDevices);
             OutputTrigger = ControlOutput(nameof(OutputTrigger));
 
-            Direction = ValueInput<DolbyIO.Comms.DeviceDirection>(nameof(Direction), DolbyIO.Comms.DeviceDirection.Input);
+            DeviceDirection = ValueInput<DolbyIO.Comms.DeviceDirection>(nameof(DeviceDirection), DolbyIO.Comms.DeviceDirection.Input);
             AudioDevices = ValueOutput<List<DolbyIO.Comms.AudioDevice>>(nameof(AudioDevices));
         }
 
         private ControlOutput GetDevices(Flow flow)
         {
-            var direction = flow.GetValue<DolbyIO.Comms.DeviceDirection>(Direction);
+            var direction = flow.GetValue<DolbyIO.Comms.DeviceDirection>(DeviceDirection);
             var devices = _sdk.MediaDevice.GetAudioDevicesAsync().Result;
 
             flow.SetValue(AudioDevices, devices.FindAll(d => d.Direction == direction));

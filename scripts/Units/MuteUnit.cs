@@ -10,7 +10,7 @@ namespace DolbyIO.Comms.Unity
 {
     [UnitTitle("Mute Participant")]
     [UnitCategory("DolbyIO")]
-    public class MuteUnit : Unit
+    public class MuteUnit : Unit, IDolbyUnit
     {
         protected DolbyIOSDK _sdk = DolbyIOManager.Sdk;
 

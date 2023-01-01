@@ -10,7 +10,7 @@ namespace DolbyIO.Comms.Unity
 {
     [UnitTitle("Initialize")]
     [UnitCategory("DolbyIO")]
-    public class DolbyIOUnit : Unit
+    public class DolbyIOUnit : Unit, IDolbyUnit
     {
         private DolbyIOSDK _sdk = DolbyIOManager.Sdk;
 
@@ -33,17 +33,33 @@ namespace DolbyIO.Comms.Unity
             InputTrigger = ControlInputCoroutine(nameof(InputTrigger), InitAndOpen);
             OutputTrigger = ControlOutput(nameof(OutputTrigger));
 
-            AccessToken = ValueInput<string>(nameof(AccessToken), "My Access Token");
+            AccessToken = ValueInput<System.Object>(nameof(AccessToken), "My Access Token");
             ParticipantName = ValueInput<string>(nameof(ParticipantName), "Name");
         }
 
         private IEnumerator InitAndOpen(Flow flow)
         {
-            _sdk.InitAsync(flow.GetValue<string>(AccessToken), () =>
+            System.Object token = flow.GetValue<System.Object>(AccessToken);
+            if (token.GetType() == typeof(string))
             {
-                return flow.GetValue<string>(AccessToken);
-            }).Wait();
-
+                _sdk.InitAsync(flow.GetValue<string>(AccessToken), () =>
+                {
+                    return flow.GetValue<string>(AccessToken);
+                }).Wait();
+            } 
+            else if (token.GetType() == typeof(System.Func<string>))
+            {
+                System.Func<string> tokenAction = flow.GetValue<System.Func<string>>(AccessToken);
+                _sdk.InitAsync(tokenAction(), () =>
+                {
+                    return tokenAction();
+                }).Wait();
+            }
+            else
+            {
+                Debug.LogError("An access token or a method to get an access token must be provided");
+            }
+          
             _sdk.Conference.ParticipantAdded = new ParticipantAddedEventHandler(Participant =>
             {
                 DolbyIOManager.QueueOnMainThread(() => EventBus.Trigger(EventNames.ParticipantAddedEvent, Participant));
