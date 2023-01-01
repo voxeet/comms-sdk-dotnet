@@ -1,6 +1,7 @@
-![](https://github.com/DolbyIO/comms-sdk-dotnet/actions/workflows/build-and-test.yml/badge.svg)
-![](https://github.com/DolbyIO/comms-sdk-dotnet/actions/workflows/pages.yml/badge.svg)
-![](https://github.com/DolbyIO/comms-sdk-dotnet/actions/workflows/package.yml/badge.svg)
+[![Build and Test](https://github.com/DolbyIO/comms-sdk-dotnet/actions/workflows/build-and-test.yml/badge.svg)](https://github.com/DolbyIO/comms-sdk-dotnet/actions/workflows/build-and-test.yml)
+[![Deploy Docfx Documentation](https://github.com/DolbyIO/comms-sdk-dotnet/actions/workflows/pages.yml/badge.svg)](https://github.com/DolbyIO/comms-sdk-dotnet/actions/workflows/pages.yml)
+[![Package Artifacts](https://github.com/DolbyIO/comms-sdk-dotnet/actions/workflows/package.yml/badge.svg)](https://github.com/DolbyIO/comms-sdk-dotnet/actions/workflows/package.yml)
+
 # Dolby.io Communications .NET SDK and Unity plugin
 
 With the .NET SDK and Virtual World plugin for Unity you can easily integrate Dolby quality spatial communications capabilities into your virtual world applications.
