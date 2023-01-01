@@ -29,7 +29,7 @@ Initialize the SDK and connects to the Dolby.io platform. During onboarding and 
 | **Participant Name** | Input | String | The [name](xref:DolbyIO.Comms.UserInfo.Name) of the local participant. |
 
 ---
-### GetToken
+### Get Token
 
 A helper node that retrieves a Client Access Token directly from within the Unity application. 
 
@@ -42,7 +42,7 @@ A helper node that retrieves a Client Access Token directly from within the Unit
 |---|:---|:---|:---|
 | **App Key** | Input | String| The app key from the Dolby.io dashboard. |
 | **App Secret** | Input | String | The app secret from the Dolby.io dashboard. |
-| **Token Action** | Output | System.Func<string> | A function that returns the access token. Can be linked to the initialize node. |
+| **Token Action** | Output | System.Func<string> | A function that returns the access token. It can be linked to the [Initialize](#Initialize) node. |
 
 ---
 ### Spatial Conference
@@ -59,9 +59,9 @@ Connect to a conference with preferred spatial audio style and the settings of t
 | **Spatial Audio Style** | Input | Spatial Audio Style | The [spatial audio style](xref:DolbyIO.Comms.SpatialAudioStyle) that defines how the spatial location should be communicated between the SDK and the Dolby.io platform. By default, the parameter is set to `shared` indicating the client application just reports its own position within the virtual world.|
 
 ---
-### Demo
+### Demo Conference
 
-The Demo conference node allows connecting to a conference that has several bots injecting audio. This makes it easier for testing the connection during the prototyping phase.
+The Demo Conference node allows connecting to a conference that has several bots injecting audio. This makes it easier for testing the connection during the prototyping phase.
 <div style="text-align:left">
     <img style="padding:25px 0" src="~/images/nodes/demo.png" width="200px">
 </div>
