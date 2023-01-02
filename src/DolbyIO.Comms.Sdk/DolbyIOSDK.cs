@@ -9,6 +9,7 @@ namespace DolbyIO.Comms
     /// </summary>
     public sealed class DolbyIOSDK : IDisposable
     {
+        private RefreshTokenCallBack _refreshCallback;
         private SignalingChannelErrorEventHandler _signalingChannelError;
 
         /// <summary>
@@ -168,10 +169,10 @@ namespace DolbyIO.Comms
             {
                 throw new DolbyIOException("Already initialized, call Dispose first.");
             }
-            
+            _refreshCallback = cb;
             await Task.Run(() =>
             {
-                Native.CheckException(Native.Init(accessToken, cb));
+                Native.CheckException(Native.Init(accessToken, _refreshCallback));
                 _initialized = true;
             }).ConfigureAwait(false);
         }
