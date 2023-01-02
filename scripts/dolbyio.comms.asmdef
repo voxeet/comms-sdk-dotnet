@@ -1,6 +1,5 @@
 {
-    "name": "DolbyI0.Comms",
-    "rootNamespace": "DolbyIO.Comms",
+    "name": "DolbyI0.Comms.Unity",
     "references": [
         "Unity.VisualScripting.Core",
         "Unity.VisualScripting.Core.Editor",
