@@ -13,9 +13,9 @@ Once the plugin is successfully installed, the Dolby.io nodes are accessible in 
 ---
 ### Initialize
 
-Initialize the SDK and connects to the Dolby.io platform. During onboarding and prototyping phase, you can obtain a client access token from the Dolby.io dashboard, or use the [GetToken](#get-token) node to retrieve a token directly.
+Initializes the SDK and connects to the Dolby.io platform. During the onboarding and prototyping phase, you can obtain a client access token from the Dolby.io dashboard, or use the [GetToken](#get-token) node to retrieve a token directly.
 
->In your production application deployment, please follow our security best practice [here](https://docs.dolby.io/communications-apis/docs/guides-client-authentication) to setup a server through which you can acquire a temporary client access token and pass to this node.
+>In your production application deployment, please follow our security best practice [here](https://docs.dolby.io/communications-apis/docs/guides-client-authentication) to set up a server through which you can acquire a temporary client access token that you can pass to this node.
 
 <div style="text-align:left">
     <img style="padding:25px 0" src="~/images/nodes/init.png" width="300px">
@@ -23,15 +23,15 @@ Initialize the SDK and connects to the Dolby.io platform. During onboarding and 
 
 | Name  | Direction | Type | Description  |
 |---|:---|:---|:---|
-| **Access Token** | Input | String or Function| The [access token](xref:DolbyIO.Comms.DolbyIOSDK.InitAsync(System.String,DolbyIO.Comms.RefreshTokenCallBack)) provided by your backend server, linked to the ouput of a String node. Alternatively, pass in the output from the [GetToken](#get-token) node.|
+| **Access Token** | Input | String or Function| The [client access token](xref:DolbyIO.Comms.DolbyIOSDK.InitAsync(System.String,DolbyIO.Comms.RefreshTokenCallBack)) provided by your backend server, linked to the output of a String node. Alternatively, the output from the [GetToken](#get-token) node.|
 | **Participant Name** | Input | String | The [name](xref:DolbyIO.Comms.UserInfo.Name) of the local participant. |
 
 ---
 ### Get Token
 
-A helper node that retrieves a Client Access Token directly from within the Unity application. 
+A helper node that retrieves a client access token directly from within the Unity application. 
 
->Using this node effectively distributes the permanent app credential with your Unity application which is not safe for production deployment. Follow our security best practice [here](https://docs.dolby.io/communications-apis/docs/guides-client-authentication) to setup a server through which you can acquire a temporary client access token. 
+>Using this node effectively distributes the permanent app credential with your Unity application which is not safe for production deployment. Follow our security best practice [here](https://docs.dolby.io/communications-apis/docs/guides-client-authentication) to set up a server through which you can acquire a temporary client access token. 
 <div style="text-align:left">
     <img style="padding:25px 0" src="~/images/nodes/get-token.png" width="300px">
 </div>
@@ -45,7 +45,7 @@ A helper node that retrieves a Client Access Token directly from within the Unit
 ---
 ### Spatial Conference
 
-Connect to a conference with preferred spatial audio style and the settings of the 3D environment. If the conference does not exist, this operation will automatically create the conference. 
+Connects to a conference with preferred spatial audio style and the settings of the 3D environment. If the conference does not exist, this operation automatically creates the conference. 
 <div style="text-align:left">
     <img style="padding:25px 0" src="~/images/nodes/spatial.png" width="300px">
 </div>
@@ -59,7 +59,7 @@ Connect to a conference with preferred spatial audio style and the settings of t
 ---
 ### Demo Conference
 
-The Demo Conference node allows connecting to a conference that has several bots injecting audio. This makes it easier for testing the connection during the prototyping phase.
+Allows connecting to a conference that has several bots injecting audio. This makes it easier for testing the connection during the prototyping phase.
 <div style="text-align:left">
     <img style="padding:25px 0" src="~/images/nodes/demo.png" width="200px">
 </div>
@@ -67,7 +67,7 @@ The Demo Conference node allows connecting to a conference that has several bots
 | Name  | Direction | Type | Description  |
 |---|:---|:---|:---|
 | **Scale, Forward, Up, Right** | Input | Vector3| [Vectors](xref:DolbyIO.Comms.Services.ConferenceService.SetSpatialEnvironmentAsync(System.Numerics.Vector3,System.Numerics.Vector3,System.Numerics.Vector3,System.Numerics.Vector3)) that define the 3D environment that you are working with. The default values are based on the Unity Coordinates System. In most cases, you should only modify the scale.|
-| **Spatial Audio** | Input | Boolean | Whether you want to enable spatial audio for the demo| 
+| **Spatial Audio** | Input | Boolean | Information whether you want to enable spatial audio for the demo. | 
 
 ---
 ### Mute Participant
@@ -79,13 +79,13 @@ Allows muting a participant. This node works for both local participant (e.g., m
 
 | Name  | Direction | Type | Description  |
 |---|:---|:---|:---|
-| **ParticipantId** | Input | String| The ID of the participant who should be muted. If the ID is not provided, the node mutes the local participant|
+| **ParticipantId** | Input | String| The ID of the participant who should be muted. If the ID is not provided, the node mutes the local participant. |
 | **Muted** | Input | Boolean | The required mute state.| 
 
 ---
 ### Get Participants
 
-Retrieve a list of participants present in the conference. 
+Retrieves a list of participants present in the conference. 
 <div style="text-align:left">
     <img style="padding:25px 0" src="~/images/nodes/participants.png" width="250px">
 </div>
@@ -98,14 +98,14 @@ Retrieve a list of participants present in the conference.
 ---
 ### Get Audio Devices
 
-Retrieve a list of available audio devices.
+Retrieves a list of available audio devices.
 <div style="text-align:left">
     <img style="padding:25px 0" src="~/images/nodes/audio-devices.png" width="250px">
 </div>
 
 | Name  | Direction | Type | Description  |
 |---|:---|:---|:---|
-| **Direction** | Input | Device Direction | `input`, `output` or `both` indicating `microphone`, `speaker/headphone` or `both` types.|
+| **Direction** | Input | Device Direction | The direction, either `input`, `output`, or `both` indicating `microphone`, `speaker/headphone`, or `both` types.|
 | **Audio Devices** | Output | List of Audio Devices | A list of [audio devices](xref:DolbyIO.Comms.AudioDevice) filtered by the `Direction` input.|
 
 
@@ -160,7 +160,7 @@ Allows setting the position of the local player.
 ---
 ### Set Remote Player Position
 
-Set the remote participant's spatial audio position for the local participant. This is only applicable when the spatial audio style was set as `individual` in the Spatial Conference node where each client needs to inform the server how they would like the platform to render the remote participant's audio for them.  
+Sets the remote participant's spatial audio position for the local participant. This is only applicable when the spatial audio style is set as `individual` in the Spatial Conference node. The individual style requires each client to inform the server how they would like the platform to render the remote participant's audio for them.  
 <div style="text-align:left">
     <img style="padding:25px 0" src="~/images/nodes/remote-position.png" width="250px">
 </div>
