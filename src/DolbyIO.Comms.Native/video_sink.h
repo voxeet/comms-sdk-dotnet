@@ -8,6 +8,8 @@
 #include <dolbyio/comms/media_engine/video_frame_macos.h>
 #include <dolbyio/comms/media_engine/video_utils.h>
 
+#include "yuv_to_rgba.h"
+
 #if defined(__APPLE__)
   #import <CoreVideo/CoreVideo.h>
 #endif
@@ -96,27 +98,20 @@ namespace dolbyio::comms::native {
       int u_stride = frame_i420->stride_u();
       int v_stride = frame_i420->stride_v();
 
-      int16_t yy, cb, cr = 0;
-      uint16_t r, g, b = 0;
-
-      for (int j = 0; j < height; j++) {
-        for (int i = 0; i < width; i++) {
-          yy = y_addr[j * y_stride + i];
-          cb = u_addr[(j / 2) * u_stride + (i / 2)] - 128;
-          cr = v_addr[(j / 2) * v_stride + (i / 2)] - 128;
-
-          r = (yy) * 1.164 + cr *  1.596 ;
-          g = (yy) * 1.164 + cb * -0.391 + cr * -0.813 ;
-          b = (yy) * 1.164 + cb *  2.018;
-
-          int index = (j * width * bytes_per_pixel) + (i * bytes_per_pixel);
-          resbuffer[index + 0] = 0xff;
-          resbuffer[index + 1] = clamp(r);
-          resbuffer[index + 2] = clamp(g);
-          resbuffer[index + 3] = clamp(b);
-        }
-      }
+      yuv420_rgb24_std(
+        width,
+        height,
+        y_addr,
+        u_addr,
+        v_addr,
+        y_stride,
+        u_stride,
+        resbuffer,
+        width * bytes_per_pixel,
+        ycbcr_type::ycbcr_2020_full
+      );
 #endif
+
       delegate_(strdup(stream_id), strdup(track_id), width, height, resbuffer);
     }
 

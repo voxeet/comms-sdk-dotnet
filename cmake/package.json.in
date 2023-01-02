@@ -1,5 +1,5 @@
 {
-  "name": "dolbyio.comms",
+  "name": "dolbyio.comms.unity",
   "version": "${PROJECT_VERSION}",
   "unity": "2021.1",
   "displayName": "DolbyIO Communications",
