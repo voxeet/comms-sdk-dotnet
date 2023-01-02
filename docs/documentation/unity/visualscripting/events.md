@@ -47,7 +47,7 @@ Emitted when a conference participant has [changed](xref:DolbyIO.Comms.Services.
 ---
 ### On Active Speaker Change
 
-Emitted when active speakers has [changed](xref:DolbyIO.Comms.Services.ConferenceService.ActiveSpeakerChange). 
+Emitted when active speakers have [changed](xref:DolbyIO.Comms.Services.ConferenceService.ActiveSpeakerChange). 
 
 <div style="text-align:left">
     <img style="padding:25px 0" src="~/images/nodes/event-active-speaker.png" width="250px">
@@ -55,12 +55,12 @@ Emitted when active speakers has [changed](xref:DolbyIO.Comms.Services.Conferenc
 
 | Name  | Direction | Type | Description  |
 |---|:---|:---|:---|
-| **Participant Ids** | Output | List of Strings| The list of participant IDs that are currently speaking.|
+| **Participant Ids** | Output | List of Strings| The list of IDs of participants who are currently speaking.|
 
 ---
 ### On Audio Device Added
 
-Emitted when an audio device is [added](xref:DolbyIO.Comms.Services.MediaDeviceService.Added).
+Emitted when an audio device has been [added](xref:DolbyIO.Comms.Services.MediaDeviceService.Added).
 
 <div style="text-align:left">
     <img style="padding:25px 0" src="~/images/nodes/event-audio-added.png" width="250px">
@@ -86,7 +86,7 @@ Emitted when the active audio device has [changed](xref:DolbyIO.Comms.Services.M
 ---
 ### On Signaling Channel Error
 
-Emitted when an error occured when the SDK tries to connect to a conference.
+Emitted when an error occurs when the SDK tries to connect to a conference.
 
 <div style="text-align:left">
     <img style="padding:25px 0" src="~/images/nodes/event-signaling-error.png" width="250px">
@@ -99,7 +99,7 @@ Emitted when an error occured when the SDK tries to connect to a conference.
 ---
 ### On Invalid Token Error
 
-Emitted when the access token is invalid or has expired. You need to acquire a new token from the service to continue the operation.
+Emitted when the access token is invalid or has expired. After receiving the error, you need to acquire a new token from the service to continue the operation.
 
 <div style="text-align:left">
     <img style="padding:25px 0" src="~/images/nodes/event-token-error.png" width="250px">
