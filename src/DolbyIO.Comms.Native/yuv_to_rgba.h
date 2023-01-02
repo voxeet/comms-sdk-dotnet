@@ -41,12 +41,12 @@ enum class ycbcr_type : int {
 };
 
 struct yuv_params {
-	uint8_t cb_factor;   // [(255*CbNorm)/CbRange]
-	uint8_t cr_factor;   // [(255*CrNorm)/CrRange]
-	uint8_t g_cb_factor; // [Bf/Gf*(255*CbNorm)/CbRange]
-	uint8_t g_cr_factor; // [Rf/Gf*(255*CrNorm)/CrRange]
-	uint8_t y_factor;    // [(YMax-YMin)/255]
-	uint8_t y_offset;    // YMin
+  uint8_t cb_factor;   // [(255*CbNorm)/CbRange]
+  uint8_t cr_factor;   // [(255*CrNorm)/CrRange]
+  uint8_t g_cb_factor; // [Bf/Gf*(255*CbNorm)/CbRange]
+  uint8_t g_cr_factor; // [Rf/Gf*(255*CrNorm)/CrRange]
+  uint8_t y_factor;    // [(YMax-YMin)/255]
+  uint8_t y_offset;    // YMin
 };
 
 constexpr uint8_t clamp(uint16_t value) {
@@ -84,12 +84,12 @@ void yuv420_rgb24_std(
 	uint32_t width, uint32_t height, 
 	const uint8_t* y_addr, const uint8_t *u_addr, const uint8_t *v_addr, uint32_t y_stride, uint32_t uv_stride, 
 	uint8_t *rgba_addr, uint32_t rgb_stride, 
-	ycbcr_type yuv_type)
-{
+	ycbcr_type yuv_type
+) {
 	const yuv_params* const param = &(yuv2rb[(int)yuv_type]);
 	uint32_t x, y;
-	for(y=0; y<(height-1); y+=2)
-	{
+
+	for(y=0; y<(height-1); y+=2) {
 		const uint8_t* y_ptr1 = y_addr + y * y_stride;
 		const uint8_t* y_ptr2 = y_addr + (y + 1) * y_stride;
 		const uint8_t* u_ptr = u_addr + (y / 2) * uv_stride;
@@ -98,8 +98,7 @@ void yuv420_rgb24_std(
 		uint8_t* rgb_ptr1 = rgba_addr + y * rgb_stride;
 		uint8_t* rgb_ptr2 = rgba_addr + (y + 1) * rgb_stride;
 		
-		for(x=0; x<(width - 1); x+=2)
-		{
+		for(x=0; x<(width - 1); x+=2) {
 			int8_t u_tmp, v_tmp;
 			u_tmp = u_ptr[0] - 128;
 			v_tmp = v_ptr[0] - 128;
