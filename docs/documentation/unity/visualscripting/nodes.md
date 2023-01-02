@@ -40,7 +40,7 @@ A helper node that retrieves a client access token directly from within the Unit
 |---|:---|:---|:---|
 | **App Key** | Input | String| The app key from the Dolby.io dashboard. |
 | **App Secret** | Input | String | The app secret from the Dolby.io dashboard. |
-| **Token Action** | Output | System.Func<string> | A function that returns the access token. It can be linked to the [Initialize](#Initialize) node. |
+| **Token Action** | Output | System.Func<string> | A function that returns the access token. It can be linked to the [Initialize](#initialize) node. |
 
 ---
 ### Spatial Conference
