@@ -7,13 +7,12 @@
 With the .NET SDK and Virtual World plugin for Unity, you can easily integrate Dolby quality spatial communications capabilities into your virtual world applications.
 
 ## Get Started
-### Unity Plugin
-The Unity plugin is built on top of the .NET SDK with visual scripting support. You can find the latest releases package [here](https://github.com/DolbyIO/comms-sdk-dotnet/releases). Refer to this [article](https://api-references.dolby.io/comms-sdk-dotnet/documentation/unity/unity.html) for installing and using the Unity plugin.
+### Unity plugin
+The Virtual World plugin for Unity is built on top of the .NET SDK and includes support for Unity’s visual scripting. You can find the latest releases package [here](https://github.com/DolbyIO/comms-sdk-dotnet/releases). Refer to this [article](https://api-references.dolby.io/comms-sdk-dotnet/documentation/unity/unity.html) for installing and using the Unity plugin.
 
 ### .NET 
 The following guide presents an example of using the SDK to create a basic .NET audio-only conference application.
-In this repo we will proved a starter project example for using the .NET SDK.
-You can create by following this procedure provides the foundation upon which you can add additional features as you build out your application.
+The resulting project provides the foundation upon which you can add additional features as you build out your application.
 
 You can find the complete code for the application in the [Summary](#summary) section. The created application is available in the [SimpleApp](https://github.com/DolbyIO/comms-sdk-dotnet/tree/master/samples/SimpleApp) folder.
 
