@@ -64,9 +64,6 @@ jobs:
         with:
           name: nugets
           path: ${{github.workspace}}/build/bin/DolbyIO.Comms.Sdk.*.nupkg
-      
-      - run: rm Plugins/**/*.dylib
-        working-directory: ${{github.workspace}}/unity
 
       - run: 7z x "${{github.workspace}}/build/bin/DolbyIO.Comms.Sdk.Runtime.*.nupkg" -o${{github.workspace}}/build "runtimes/*"
         working-directory: ${{github.workspace}}/build
