@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.15)
 
 option(BUILD_TESTS "Build Tests" ON)
-option(BUILD_UNITY "Package Unity Plugin" OFF)
+option(BUILD_UNITY "Package Unity Plugin" ON)
 
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_CURRENT_SOURCE_DIR}/cmake/")
 
@@ -9,8 +9,9 @@ include(version)
 
 project(DolbyIO LANGUAGES CXX)
 set(PROJECT_VERSION ${CSSDK_MAJOR}.${CSSDK_MINOR}.${CSSDK_PATH})
-
 set(CMAKE_VS_NUGET_PACKAGE_RESTORE OFF)
+
+include(externals/cpp-sdk)
 
 find_package(DolbyIO REQUIRED)
 find_package(Dotnet REQUIRED)
