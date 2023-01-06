@@ -74,7 +74,7 @@ jobs:
       - uses: actions/upload-artifact@v3
         with:
           name: dolbyio-comms-unity-plugin
-          path: ${{github.workspace}}/build/unity/
+          path: ${{github.workspace}}/unity/
 
       - run: dotnet publish dotnet/DolbyCMD/DolbyCMD.csproj -o CmdLine
         working-directory: ${{github.workspace}}/build
