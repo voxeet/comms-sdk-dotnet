@@ -230,7 +230,7 @@ mark_as_advanced(
 )
 
 if (DOLBYIO_INCLUDE_DIR AND DOLBYIO_LIBRARY_SDK AND DOLBYIO_LIBRARY_MEDIA)
-  message("Found DolbyIO library successfully.")
+  message("Found DolbyIO library successfully: " ${DOLBYIO_LIBRARY_PATH})
   set(DOLBYIO_FOUND 1)
 else()
   set(DOLBYIO_FOUND 0)

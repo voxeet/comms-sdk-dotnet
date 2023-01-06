@@ -10,17 +10,14 @@ jobs:
         os: [macos-latest, windows-latest]
         include:
           - os: macos-latest
-            sdk: cppsdk-2.3.0-alpha.3-macos64.zip
             shell: bash
           - os: windows-latest
-            sdk: cppsdk-2.3.0-alpha.3-windows64.zip
             shell: powershell
     
     steps:
       - uses: actions/checkout@v2
       - uses: ./.github/actions/configure
         with:
-          cpp-sdk: ${{ matrix.sdk }}
           shell: ${{ matrix.shell }}
 
       - name: Build

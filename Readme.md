@@ -263,17 +263,17 @@ cmake .. -DDOLBYIO_LIBRARY_PATH=/path/to/c++sdk -DCMAKE_BUILD_TYPE=Debug
 cmake --build .
 ```
 
-The .NET SDK depends on the [C++ SDK](https://github.com/DolbyIO/comms-sdk-cpp) for core functions and supports the same functionalities for client applications as the C++ SDK. Set the environment variable `DOLBYIO_LIBRARY_PATH` as the path to the root folder containing the Dolby.io Communications C++ SDK. 
+The .NET SDK depends on the [C++ SDK](https://github.com/DolbyIO/comms-sdk-cpp) for core functions and supports the same functionalities for client applications as the C++ SDK.
 
 `cmake` allows you to generate various project files, for example, if you want to generate a Visual Studio solution on Windows, you can add the following option when generating (`-G "Visual Studio 17 2022"`):
 
 ```shell
-cmake .. -DDOLBYIO_LIBRARY_PATH=/path/to/c++sdk -DCMAKE_BUILD_TYPE=Debug -G "Visual Studio 17 2022"
+cmake .. -DCMAKE_BUILD_TYPE=Debug -G "Visual Studio 17 2022"
 ```
 
 > **Note**: Currently, the SDK is only compatible with the x86_64 architecture. If you want to compile your application on a Mac with an **Apple Silicon** chip, you need to use the x64 .NET SDK, not the ARM one, and specify the architecture on which CMake should build upon:
 >```bash
->cmake .. -DDOLBYIO_LIBRARY_PATH=/path/to/c++sdk -DCMAKE_BUILD_TYPE=Debug -DCMAKE_OSX_ARCHITECTURES=x86_64
+>cmake .. -DCMAKE_BUILD_TYPE=Debug -DCMAKE_OSX_ARCHITECTURES=x86_64
 >```
 
 Run the unit tests after compiling the SDK using the following command:
