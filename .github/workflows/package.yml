@@ -65,14 +65,14 @@ jobs:
           name: nugets
           path: ${{github.workspace}}/build/bin/DolbyIO.Comms.Sdk.*.nupkg
       
-      - run: rm ${{github.workspace}}/unity/Plugins/**/*.dylib 2> /dev/null
-        working-directory: ${{github.workspace}}/build
+      - run: rm Plugins/**/*.dylib
+        working-directory: ${{github.workspace}}/unity
 
       - run: 7z x "${{github.workspace}}/build/bin/DolbyIO.Comms.Sdk.Runtime.*.nupkg" -o${{github.workspace}}/build "runtimes/*"
         working-directory: ${{github.workspace}}/build
 
       - run: mv ${{github.workspace}}/build/runtimes ${{github.workspace}}/unity/Plugins
-        working-directory: ${{github.workspace}}/build
+        working-directory: ${{github.workspace}}/unity
 
       - uses: actions/upload-artifact@v3
         with:
