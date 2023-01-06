@@ -68,7 +68,10 @@ jobs:
       - run: 7z x "${{github.workspace}}/build/bin/DolbyIO.Comms.Sdk.Runtime.*.nupkg" -o${{github.workspace}}/build "runtimes/*"
         working-directory: ${{github.workspace}}/build
 
-      - run: mv ${{github.workspace}}/build/runtimes ${{github.workspace}}/unity/Plugins
+      - run: rm -f Plugins/osx-x64/native/*.dylib
+        working-directory: ${{github.workspace}}/unity
+
+      - run: mv ${{github.workspace}}/build/runtimes/* ${{github.workspace}}/unity/Plugins
         working-directory: ${{github.workspace}}/unity
 
       - uses: actions/upload-artifact@v3
