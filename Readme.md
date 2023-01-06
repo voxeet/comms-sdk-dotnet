@@ -259,7 +259,7 @@ In order to compile the Dolby.io Communications .NET SDK, you will need to use C
 
 ```console
 mkdir build && cd build
-cmake .. -DDOLBYIO_LIBRARY_PATH=/path/to/c++sdk -DCMAKE_BUILD_TYPE=Debug
+cmake .. -DCMAKE_BUILD_TYPE=Debug
 cmake --build .
 ```
 
