@@ -3,6 +3,6 @@
   homepage: documentation/sdk/started.md
 - name: Unity
   href: documentation/unity/
-  homepage: documentation/unity/unity.md
+  homepage: documentation/unity/getting-started/installation.md
 - name: Api Reference
   href: api/

@@ -59,7 +59,7 @@ Connects to a conference with preferred spatial audio style and the settings of 
 ---
 ### Demo Conference
 
-Allows connecting to a conference that has several bots injecting audio. This makes it easier for testing the connection during the prototyping phase.
+Allows connecting to a conference that has several bots injecting audio. This makes it easier for testing the connection during the prototyping phase without having to instantiate multiple remote participants.
 <div style="text-align:left">
     <img style="padding:25px 0" src="~/images/nodes/demo.png" width="200px">
 </div>
@@ -67,7 +67,7 @@ Allows connecting to a conference that has several bots injecting audio. This ma
 | Name  | Direction | Type | Description  |
 |---|:---|:---|:---|
 | **Scale, Forward, Up, Right** | Input | Vector3| [Vectors](xref:DolbyIO.Comms.Services.ConferenceService.SetSpatialEnvironmentAsync(System.Numerics.Vector3,System.Numerics.Vector3,System.Numerics.Vector3,System.Numerics.Vector3)) that define the 3D environment that you are working with. The default values are based on the Unity Coordinates System. In most cases, you should only modify the scale.|
-| **Spatial Audio** | Input | Boolean | Information whether you want to enable spatial audio for the demo. | 
+| **Spatial Audio** | Input | Spatial Audio Style | The [spatial audio style](xref:DolbyIO.Comms.SpatialAudioStyle) that defines how the spatial location should be communicated between the SDK and the Dolby.io platform. By default, the parameter is set to `shared` indicating the client application just reports its own position within the virtual world. | 
 
 ---
 ### Mute Participant
@@ -148,7 +148,7 @@ Allows setting the direction of the local player.
 ---
 ### Set Local Player Position
 
-Allows setting the position of the local player.
+Allows setting the position of the local player. 
 <div style="text-align:left">
     <img style="padding:25px 0" src="~/images/nodes/local-position.png" width="220px">
 </div>
@@ -160,7 +160,7 @@ Allows setting the position of the local player.
 ---
 ### Set Remote Player Position
 
-Sets the remote participant's spatial audio position for the local participant. This is only applicable when the spatial audio style is set as `individual` in the Spatial Conference node. The individual style requires each client to inform the server how they would like the platform to render the remote participant's audio for them.  
+Sets the remote participant's spatial audio position for the local participant. This is only applicable when the spatial audio style is set as `individual` in the Spatial Conference node. The individual style requires each client to inform the server how they would like the platform to render each individual remote participant's audio for them.  
 <div style="text-align:left">
     <img style="padding:25px 0" src="~/images/nodes/remote-position.png" width="250px">
 </div>

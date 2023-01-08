@@ -1,20 +1,31 @@
-## Initialize and connect to a demo conference
-The Demo conference node allows connecting to a conference that has several bots injecting audio, making it easier to test the connection and project setup during the prototyping phase. This example demonstrates how to initialize, authenticate, and connect to a demo conference.
+## Initialization
 
-To start fresh, you can create a new project from Unity Hub using one of the provided templates, such as `Core 3D`. The following video shows the workflow.
+This guide demonstrates how to initialize, authenticate, and connect to a demo conference. The demo conference has several bots injecting audio, making it easier to test the connection and project setup during the prototyping phase. 
+
+To start fresh, you can create a new project from Unity Hub using the `Third Person` template. The following video shows the workflow.
 
 <div style="position: relative; padding-bottom: 56.25%; height: 0;"><iframe src="https://www.loom.com/embed/43ef2d4c32824acd952741b281e8c5c4" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe></div>
 
-### Step 0. Install the Unity plugin
-This guide assumes you have already installed the plugin. If you have not done so, please refer to [this article](../unity.md#installation) for more information then come back to this guide. 
+## Step 1. Setting up the GameObject
+The Unity plugin provides access to an instance of the SDK through a custom `DolbyIO Manager` manager. To add the SDK to Unity, follow these steps:
 
-### Step 1. Add the DolbyIO Manager and Script Machine components
+1. Create an empty game object in your scene and provide a name for the object. In this example, we call the object `ApplicationManager`:
+    <div style="text-align:left">
+        <img style="padding:25px 0" src="~/images/unity_1.png" width="350px">
+    </div>
+
+2. Select the created game object and select `Component` > `DolbyIO` > `DolbyIO Manager` from the Unity menu. This step adds the `DolbyIO Manager` to the game object.
+    <div style="text-align:left">
+        <img style="padding:25px 0" src="~/images/unity_2.png" width="700px">
+    </div>
+
+## Step 2. Add the DolbyIO Manager and Script Machine components
 Once you have added the `AppManager` GameObject to the scene, you can add the following two components to the `AppManager`:
 
 - `DolbyIO Manager`: Provides access to the SDK functionalities.
 - `Script Machine`: Contains the visual representation of a script that is a script graph.
 
-### Step 2. Edit the script graph
+## Step 3. Setup the initial visual scripting
 The newly created script graph contains `On Start`, which is the initial triggering event. This event must be explicitly set as `coroutine` in order for it to work with the `Initialize` node. 
 
 Add the following nodes to the script graph:
@@ -24,9 +35,9 @@ Add the following nodes to the script graph:
 
 Connect the `On Start` event to the input trigger of the `Initialize` node, of which the output trigger connects to the `Demo Conference` input trigger. 
 
-To keep things simple for now, uncheck the `Spatial Audio` option in the `Demo Conference` node. This is because unless you have provided your spatial position, the default platform behavior for the spatial audio conference is `no rendering`, which means you will not hear any audio. Unchecking the `Spatial Audio` flag informs the platform to always render the audio for the local participant. 
+> To keep things simple for now, set the `Spatial Audio` option to `none` in the `Demo Conference` node. This is because unless you have provided your spatial position, the default platform behavior for the spatial audio conference is **no rendering**, which means you will not hear any audio. Setting the `Spatial Audio` flag to `none` informs the platform to always render the audio for the local participant. In the next sections we will explain how to setup the spatial audio conference.
 
-### Step 3. Set up the Client Access Token
+## Step 4. Set up the Client Access Token
 You should have signed up in Dolby.io by now. In the app that is automatically created for you in the dashboard, acquire a temporary Client Access Token and paste in the **String** literal. Then, connect to the `Access Token` input of the `Initialize` node. For security reasons, the token you acquired will expire in 12 hours. You will have to provide a new token after the expiration. 
 
 The following visual scripting example illustrates how to connect the nodes together once you acquired a Client Access Token from the dashboard.
@@ -43,7 +54,4 @@ The following visual scripting example illustrates how to connect the nodes toge
     <img style="padding:25px 0" src="~/images/samples/demo/get-token-initialize.png" width="450px">
 </div>
 
-Once this is all done, close the visual script editing window and run the app. If everything works, you should be able to hear the audio coming from the Dolby.io service that confirms you have properly configured the development environment with the Unity plugin installed and ready to go.
-
-### Apple Silicon
-If you are using Unity from an Apple Silicon Mac (e.g., M1), please be aware that currently the SDK is only distributed as x64 binary for Mac. You need to configure the Unity project under `File` > `Build Settings` and select `Intel 64bits` to make it work.  
+Once this is all done, run the app. If everything works, you should be able to hear the audio coming from the Dolby.io service that confirms you have properly configured the development environment with the Unity plugin installed and ready to go. 
