@@ -23,6 +23,9 @@ namespace DolbyIO.Comms.Unity
 
         private static HttpClient _client = new HttpClient();
 
+        private float _timePosition = 0.0f;
+        private float _timeDirection = 0.0f;
+
         [Inspectable]
         public static DolbyIOSDK Sdk { get => _sdk; }
         
@@ -31,6 +34,19 @@ namespace DolbyIO.Comms.Unity
         
         [Tooltip("Indicates if the DolbyIOManager should automatically close the session on application quit.")]
         public bool AutoCloseSession = true;
+
+        [Tooltip("The elapsed time between two call to set position in s.")]
+        public float PositionDuration = 0.3f;
+
+        [Tooltip("A GameObject to get the local player position from.")]
+        public GameObject PositionSource;
+
+        [Tooltip("The elapsed time between two call to set direction in s.")]
+        public float DirectionDuration = 0.05f;
+
+        [Tooltip("A GameObject to get the local player direction from.")]
+        public GameObject DirectionSource;
+        
 
         /// <summary>
         /// For convenience during early development and prototyping, a method is provided for you to 
@@ -83,7 +99,7 @@ namespace DolbyIO.Comms.Unity
             }
         }
 
-        private void FixedUpdate()
+        void Update()
         {
             lock(_backlog)
             {
@@ -92,6 +108,59 @@ namespace DolbyIO.Comms.Unity
                     action();
                 }
                 _backlog.Clear();
+            }
+
+            if (_sdk.IsInitialized && _sdk.Session.IsOpen && _sdk.Conference.IsInConference)
+            {
+                UpdatePosition();
+                UpdateDirection();
+            }
+        }
+
+        private void UpdatePosition()
+        {
+            if (PositionSource)
+            {
+                _timePosition += Time.deltaTime;
+
+                if (_timePosition >= PositionDuration)
+                {
+                    _timePosition = 0.0f;
+
+                    var position = PositionSource.transform.position;
+                    _sdk.Conference.SetSpatialPositionAsync
+                    (
+                        _sdk.Session.User.Id,
+                        new System.Numerics.Vector3(position.x, position.y, position.z)
+                    )
+                    .ContinueWith(t =>
+                    {
+                        Debug.LogError(t.Exception);
+                    }, TaskContinuationOptions.OnlyOnFaulted);
+                }
+            }
+        }
+
+        private void UpdateDirection()
+        {
+            if (DirectionSource)
+            {
+                _timeDirection += Time.deltaTime;
+
+                if (_timeDirection >= DirectionDuration)
+                {
+                    _timeDirection = 0.0f;
+
+                    var direction = DirectionSource.transform.rotation.eulerAngles;
+                    _sdk.Conference.SetSpatialDirectionAsync
+                    (
+                        new System.Numerics.Vector3(direction.x, direction.y, direction.z)
+                    )
+                    .ContinueWith(t =>
+                    {
+                        Debug.LogError(t.Exception);
+                    }, TaskContinuationOptions.OnlyOnFaulted);
+                }
             }
         }
 
