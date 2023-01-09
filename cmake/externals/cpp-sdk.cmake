@@ -1,6 +1,6 @@
 include(FetchContent)
 
-set(CPP_SDK_VERSION 2.3.0-alpha.3)
+set(CPP_SDK_VERSION 2.3.0-alpha.5)
 
 if (WIN32)
     set(CPP_SDK_FILENAME cppsdk-${CPP_SDK_VERSION}-windows64.zip)
