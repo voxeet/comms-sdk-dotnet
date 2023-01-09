@@ -36,7 +36,7 @@ The following visual scripting example illustrates how to connect the nodes toge
 
 Alternatively, you can add the [Get Token](../visualscripting/nodes.md#get-token) node to the graph, and pass the `App Key` and `App Secret` to the node. Connecting the output of the node to the `Access Token` input of the `Initialize` node will generate a client access token from the Unity app and initialize the plugin.
 
-> Please note that using `Get Token` effectively includes the permanent app credential in your Unity app, which is not safe for production deployment. Please follow our [security best practices](https://docs.dolby.io/communications-apis/docs/guides-client-authentication) and set up a backend server to retrieve a temporary access token on behalf of the Unity app. 
+> ⚠️ Please note that using `Get Token` effectively includes the permanent app credential in your Unity app, which is not safe for production deployment. Please follow our [security best practices](https://docs.dolby.io/communications-apis/docs/guides-client-authentication) and set up a backend server to retrieve a temporary access token on behalf of the Unity app. 
 
 The following visual scripting example illustrates how to connect the nodes together if you decided to use the [Get Token](../visualscripting/nodes.md#get-token) node:
 <div style="text-align:left">
