@@ -43,7 +43,7 @@ A helper node that retrieves a client access token directly from within the Unit
 | **Token Action** | Output | System.Func<string> | A function that returns the access token. It can be linked to the [Initialize](#initialize) node. |
 
 ---
-### Spatial Conference
+### Conference
 
 Connects to a conference with preferred spatial audio style and the settings of the 3D environment. If the conference does not exist, this operation automatically creates the conference. 
 <div style="text-align:left">
