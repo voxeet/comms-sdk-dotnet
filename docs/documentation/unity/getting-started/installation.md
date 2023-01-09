@@ -6,7 +6,7 @@ Make sure that you have:
 - A Dolby.io account. If you do not have an account, you can [sign up](https://dolby.io/signup) for a free account.
 - The [client access token](https://docs.dolby.io/communications-apis/docs/overview-developer-tools#client-access-token) copied from the Dolby.io dashboard. To create the token, log in to the [Dolby.io dashboard](https://dashboard.dolby.io/), create an application, and navigate to the API keys section.
 
-You can install the Unity plugin from the Unity Package Manager. First, download `dolbyio-comms-unity-plugin` archive in the [Release](https://github.com/DolbyIO/comms-sdk-dotnet/releases) page and extract it to a suitable folder.
+You can install the Unity plugin from the Unity Package Manager. First, download the `dolbyio-comms-unity-plugin` archive from the [Release](https://github.com/DolbyIO/comms-sdk-dotnet/releases) page and extract it to a suitable folder.
 
 Open the Package Manager from the Unity Editor and click the <img src="~/images/plus_sign.png" height="20px"/> sign in the upper left corner. Select "Add package from disk", and look for the `package.json` file located where you extracted the aforementioned plugin archive.
 

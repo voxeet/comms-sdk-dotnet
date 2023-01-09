@@ -2,7 +2,7 @@
 
 Visual Scripting in Unity allows creating logic for virtual world applications using visual, node-based graphs without writing code. The Dolby.io Virtual World plugin is compatible with Unity Visual Scripting 2021. The plugin can be used with Visual Scripting and C# scripting at the same time. 
 
-### Nodes
+## Nodes
 
 Nodes are the most basic part of scripts in Visual Scripting. A node can listen for events, get the value of a variable, modify a component on a GameObject, and more.
 Once the plugin is successfully installed, the Dolby.io nodes are accessible in the `Add Node` contextual menu, under the DolbyIO category:
