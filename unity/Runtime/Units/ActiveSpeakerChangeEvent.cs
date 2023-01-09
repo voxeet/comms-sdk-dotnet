@@ -8,7 +8,7 @@ using DolbyIO.Comms;
 namespace DolbyIO.Comms.Unity
 {
     [UnitTitle("On Active Speaker Change Event")]
-    [UnitCategory("Events\\DolbyIO")]
+    [UnitCategory("Events\\Dolby.io Comms")]
     public class ActiveSpeakerChangeEvent : EventUnit<List<string>>
     {
         [DoNotSerialize]

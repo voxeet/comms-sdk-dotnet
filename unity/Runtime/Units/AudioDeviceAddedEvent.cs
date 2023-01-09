@@ -8,7 +8,7 @@ using DolbyIO.Comms;
 namespace DolbyIO.Comms.Unity
 {
     [UnitTitle("On Audio Device Added Event")]
-    [UnitCategory("Events\\DolbyIO")]
+    [UnitCategory("Events\\Dolby.io Comms")]
     public class AudioDeviceAddedEvent : EventUnit<DolbyIO.Comms.AudioDevice>
     {
         [DoNotSerialize]
