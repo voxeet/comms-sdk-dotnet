@@ -14,7 +14,7 @@ using Newtonsoft.Json.Serialization;
 
 namespace DolbyIO.Comms.Unity
 {
-    [AddComponentMenu("DolbyIO/DolbyIO Manager")]
+    [AddComponentMenu("Dolby.io Comms/Dolby.io Manager")]
     [Inspectable]
     public class DolbyIOManager : MonoBehaviour
     {

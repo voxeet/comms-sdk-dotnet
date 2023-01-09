@@ -8,7 +8,7 @@ using DolbyIO.Comms;
 namespace DolbyIO.Comms.Unity
 {
     [UnitTitle("Spatial Conference")]
-    [UnitCategory("DolbyIO")]
+    [UnitCategory("Dolby.io Comms")]
     public class SpatialConferenceUnit : ConferenceUnit
     {
         [DoNotSerialize]

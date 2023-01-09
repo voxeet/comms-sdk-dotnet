@@ -8,7 +8,7 @@ using DolbyIO.Comms;
 namespace DolbyIO.Comms.Unity
 {
     [UnitTitle("On Invalid Token Error Event")]
-    [UnitCategory("Events\\DolbyIO")]
+    [UnitCategory("Events\\Dolby.io Comms")]
     public class InvalidTokenErrorEvent : EventUnit<string>
     {
         [DoNotSerialize]

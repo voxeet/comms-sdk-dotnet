@@ -9,7 +9,7 @@ using DolbyIO.Comms.Unity;
 namespace DolbyIO.Comms.Unity
 {
     [UnitTitle("Initialize")]
-    [UnitCategory("DolbyIO")]
+    [UnitCategory("Dolby.io Comms")]
     public class DolbyIOUnit : Unit, IDolbyUnit
     {
         private DolbyIOSDK _sdk = DolbyIOManager.Sdk;

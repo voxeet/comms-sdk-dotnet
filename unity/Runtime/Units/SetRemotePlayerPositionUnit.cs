@@ -8,7 +8,7 @@ using DolbyIO.Comms;
 namespace DolbyIO.Comms.Unity
 {
     [UnitTitle("Set Remote Player Position")]
-    [UnitCategory("DolbyIO")]
+    [UnitCategory("Dolby.io Comms")]
     public class SetRemotePlayerPositionUnit : Unit, IDolbyUnit
     {
         protected DolbyIOSDK _sdk = DolbyIOManager.Sdk;

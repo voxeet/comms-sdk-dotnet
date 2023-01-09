@@ -8,7 +8,7 @@ using DolbyIO.Comms;
 namespace DolbyIO.Comms.Unity
 {
     [UnitTitle("Set Player Direction")]
-    [UnitCategory("DolbyIO")]
+    [UnitCategory("Dolby.io Comms")]
     public class SetPlayerDirectionUnit : Unit, IDolbyUnit
     {
         protected DolbyIOSDK _sdk = DolbyIOManager.Sdk;

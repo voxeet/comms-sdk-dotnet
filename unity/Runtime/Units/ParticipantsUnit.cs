@@ -10,7 +10,7 @@ using DolbyIO.Comms.Unity;
 namespace DolbyIO.Comms.Unity
 {
     [UnitTitle("Get Participants")]
-    [UnitCategory("DolbyIO")]
+    [UnitCategory("Dolby.io Comms")]
     public class ParticipantsUnit : Unit, IDolbyUnit
     {
         private DolbyIOSDK _sdk = DolbyIOManager.Sdk;

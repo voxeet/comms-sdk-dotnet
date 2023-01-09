@@ -8,7 +8,7 @@ using DolbyIO.Comms;
 namespace DolbyIO.Comms.Unity
 {
     [UnitTitle("On Participant Added Event")]
-    [UnitCategory("Events\\DolbyIO")]
+    [UnitCategory("Events\\Dolby.io Comms")]
     public class ParticipantAddedEvent : EventUnit<Participant>
     {
         [DoNotSerialize]
