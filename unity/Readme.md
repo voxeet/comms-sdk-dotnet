@@ -1,4 +1,9 @@
-## Installation
+## Dolby.io Virtual World plugin for Unity
+
+With the Dolby.io Virtual World plugin for Unity, you can easily integrate Dolby.io Spatial Audio, powered by Dolby Atmos technology into your virtual world applications.
+
+- [Getting started](https://api-references.dolby.io/comms-sdk-dotnet/documentation/unity/getting-started/installation.html)
+- [References](https://api-references.dolby.io/comms-sdk-dotnet/documentation/unity/components/index.html)  
 
 ### Prerequisites
 - Apple MacOS x64 or Microsoft Windows 10+ x64.
@@ -20,4 +25,3 @@ You can install the plugin from the Unity Package Manager.
 
 ### Apple Silicon
 If you are using Unity from an Apple Silicon Mac (e.g., M1), please be aware that currently the SDK is only distributed as x64 binary for Mac. You need to configure the Unity project under `File` > `Build Settings` and select `Intel 64bits` to make it work. 
-
