@@ -96,9 +96,9 @@ extern "C" {
     }}.result();
   }
 
-  EXPORT_API int Demo(bool spatial_audio, dolbyio::comms::native::conference* conf) {
+  EXPORT_API int Demo(int audio_style, dolbyio::comms::native::conference* conf) {
     return call { [&]() {
-      auto result = wait(sdk->conference().demo(spatial_audio));
+      auto result = wait(sdk->conference().demo((dolbyio::comms::spatial_audio_style)audio_style));
       no_alloc_to_c(conf, result);
     }}.result();
   }

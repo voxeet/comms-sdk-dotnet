@@ -310,16 +310,15 @@ namespace DolbyIO.Comms.Services
         /// <summary>
         /// Creates a demo conference and joins it upon completion.
         /// </summary>
-        /// <param name="spatialAudio">A boolean that indicates whether spatial audio should be enabled for the joining
-        /// participant. By default, the parameter is set to true.</param>
+        /// <param name="spatialAudio">The <see cref="DolbyIO.Comms.SpatialAudioStyle">spatial audio style</xref> to be used in the demo conference.</param>
         /// <returns>The <xref href="System.Threading.Tasks.Task`1"/> that represents the asynchronous operation.
         /// The <xref href="System.Threading.Tasks.Task`1.Result"/> property returns the joined <see cref="Conference" /> object.</returns>
-        public async Task<Conference> DemoAsync(bool spatialAudio = true)
+        public async Task<Conference> DemoAsync(SpatialAudioStyle audioStyle = SpatialAudioStyle.Individual)
         {
             return await Task.Run(() => 
             {
                 Conference conference = new Conference();
-                Native.CheckException(Native.Demo(spatialAudio, conference));
+                Native.CheckException(Native.Demo(audioStyle, conference));
                 _isInConference = true;
                 return conference;
             }).ConfigureAwait(false);
