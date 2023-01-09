@@ -1,11 +1,11 @@
 ## Individual scene
-This article demonstrates how to implement individual spatial scene using visual scripting. 
+This article demonstrates how to implement an individual spatial scene using visual scripting. 
 
-If you followed the previous guides and successfully placed the remote participants in the game, you may have noticed there is no spatial audio separation for the bots; and when the player moves around, the audio of the bots does not change. This is because the demo conference has not been enabled with spatial audio yet. 
+If you followed the previous guides and successfully placed the remote participants in the game, you may have noticed that there is no spatial audio separation for the bots; when the player moves around, the audio of the bots does not change. This is because the demo conference has not been enabled with spatial audio yet. 
 
 In the [individual scene](xref:DolbyIO.Comms.SpatialAudioStyle), each client explicitly configures the spatial audio position of every remote participant for themselves.
 
-[Set remote player position](../visualscripting/nodes.md#set-remote-player-position) is the node that controls the individual remote participant's spatial audio position. This node must be invoked when the remote participant joins the conference; and when the remote participant moves around in the scene. 
+[Set remote player position](../visualscripting/nodes.md#set-remote-player-position) is the node that controls the individual remote participant's spatial audio position. This node must be invoked when the remote participant joins the conference, and when the remote participant moves around in the scene. 
 
 When the local player moves around in the scene, use the [Set local player position](../visualscripting/nodes.md#set-local-player-position) and the [Set local player direction](../visualscripting/nodes.md#set-local-player-direction) nodes to keep the spatial audio rendering coherent with the local user's visual position.
 
