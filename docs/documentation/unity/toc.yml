@@ -7,10 +7,11 @@
       href: getting-started/initialization.md
     - name: Remote participants
       href: getting-started/remote-participants.md
-    - name: Individual scene
-      href: getting-started/individual-scene.md
     - name: Shared scene
       href: getting-started/shared-scene.md
+    - name: Individual scene
+      href: getting-started/individual-scene.md
+
 - name: Component reference
   href: components/index.md
 - name: Visual Scripting reference

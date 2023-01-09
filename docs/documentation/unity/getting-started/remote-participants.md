@@ -6,7 +6,7 @@ Rendering remote participants in the scene is an essential task for building mul
 </div>
 
 ### Participant events
-Once the plugin is successfully connected to the conference, it emits various events that the application can listen to. In this example, we will use the [On Participant Updated Event](../visualscripting/events.html#on-participant-updated), which is emitted whenever the remote participant state changes. This event provides a custom type [Participant](xref:DolbyIO.Comms.Participant) for the application to retrieve the participant information.
+Once the plugin is successfully connected to the conference, it emits various events that the application can listen to. In this example, we will use the [On Participant Updated Event](../visualscripting/events.md#on-participant-updated), which is emitted whenever the remote participant state changes. This event provides a custom type [Participant](xref:DolbyIO.Comms.Participant) for the application to retrieve the participant information. In your application, you can choose other triggering event based on your needs.
 
 > In order to access Dolby.io Communications SDK custom types from visual scripting, you need to explicitly add them to the visual scripting library. In the Unity editor, click on **Edit** > **Project Settings** > **Visual Scripting**, expand the **Node Library**, click on **+** then add `DolbyIO.Comms.Sdk`. After that, expand **Type Operations**, click on **+**, and then add the `Participant` and `ParticipantInfo` objects. Finally, click on **Regenerate Nodes** to make sure that the node library is updated with the changes. 
 
@@ -14,7 +14,7 @@ Once the plugin is successfully connected to the conference, it emits various ev
 There are several ways to identify a participant in the Dolby.io conference.
 - [participant ID](xref:DolbyIO.Comms.Participant.Id): Dolby.io generated unique identifier in a UUID format.
 - [external ID](xref:DolbyIO.Comms.ParticipantInfo.ExternalId): A free-form string defined by you as a developer to uniquely identify a participant in your application. 
-- [name](xref:DolbyIO.Comms.ParticipantInfo.Name): A free-form string provided during [initialization](../visualscripting/nodes.html#initialize). Dolby.io does not guarantee the name to be unique, which means more than one participant can use the same name to join the conference. For demonstration purposes, we will use the `name` to identify the remote participants in the demo conference.
+- [name](xref:DolbyIO.Comms.ParticipantInfo.Name): A free-form string provided during [initialization](../visualscripting/nodes.md#initialize). Dolby.io does not guarantee the name to be unique, which means more than one participant can use the same name to join the conference. For demonstration purposes, we will use the `name` to identify the remote participants in the demo conference.
 
 There are three bots in the demo conference, their names are:
 

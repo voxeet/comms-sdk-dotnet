@@ -6,21 +6,12 @@ To start fresh, you can create a new project from Unity Hub using the `Third Per
 
 <div style="position: relative; padding-bottom: 56.25%; height: 0;"><iframe src="https://www.loom.com/embed/43ef2d4c32824acd952741b281e8c5c4" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe></div>
 
-## 1. Set up the GameObject
-The Unity plugin provides access to an instance of the SDK through a custom `DolbyIO Manager` manager. To add the SDK to Unity, create an empty game object in your scene and provide a name for the object. In this example, we call the object `ApplicationManager`:
-    <div style="text-align:left">
-        <img style="padding:25px 0" src="~/images/unity_1.png" width="350px">
-    </div>
+## 1. Set up the AppManager
+To add the SDK to Unity, create an empty GameObject in your scene and provide a name for the object. In this example, we call the object `AppManager`.
 
-Then, select the created game object and select `Component` > `DolbyIO` > `DolbyIO Manager` from the Unity menu. This step adds the `DolbyIO Manager` to the game object.
-    <div style="text-align:left">
-        <img style="padding:25px 0" src="~/images/unity_2.png" width="700px">
-    </div>
+Then, you can add the following two components to the `AppManager`:
 
-## 2. Add the DolbyIO Manager and Script Machine components
-Once you have added the `AppManager` GameObject to the scene, you can add the following two components to the `AppManager`:
-
-- `DolbyIO Manager`: Provides access to the SDK functionalities.
+- `Dolby.io Manager`: Provides access to the SDK functionalities.
 - `Script Machine`: Contains the visual representation of a script that is a script graph.
 
 ## 3. Set up the initial visual scripting

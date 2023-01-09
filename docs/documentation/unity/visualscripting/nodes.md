@@ -7,7 +7,7 @@ Visual Scripting in Unity allows creating logic for virtual world applications u
 Nodes are the most basic part of scripts in Visual Scripting. A node can listen for events, get the value of a variable, modify a component on a GameObject, and more.
 Once the plugin is successfully installed, the Dolby.io nodes are accessible in the `Add Node` contextual menu, under the DolbyIO category:
 <div style="text-align:left">
-    <img style="padding:25px 0" src="~/images/nodes/menu.png" width="500px">
+    <img style="padding:25px 0" src="~/images/nodes/menu.png" width="360px">
 </div>
 
 ---
@@ -31,7 +31,7 @@ Initializes the SDK and connects to the Dolby.io platform. During the onboarding
 
 A helper node that retrieves a client access token directly from within the Unity application. 
 
->Using this node effectively distributes the permanent app credential with your Unity application, which is not safe for production deployment. Follow our security best practices [here](https://docs.dolby.io/communications-apis/docs/guides-client-authentication) to set up a server through which you can acquire a temporary client access token. 
+> ⚠️ Using this node effectively distributes the permanent app credential with your Unity application, which is not safe for production deployment. Follow our security best practices [here](https://docs.dolby.io/communications-apis/docs/guides-client-authentication) to set up a server through which you can acquire a temporary client access token. 
 <div style="text-align:left">
     <img style="padding:25px 0" src="~/images/nodes/get-token.png" width="300px">
 </div>
