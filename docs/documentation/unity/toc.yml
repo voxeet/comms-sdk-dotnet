@@ -11,6 +11,8 @@
       href: getting-started/individual-scene.md
     - name: Shared scene
       href: getting-started/shared-scene.md
+- name: Component reference
+  href: components/index.md
 - name: Visual Scripting reference
   href: visualscripting/nodes.md
   items:
