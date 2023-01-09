@@ -15,7 +15,7 @@ Once the plugin is successfully installed, the Dolby.io nodes are accessible in 
 
 Initializes the SDK and connects to the Dolby.io platform. During the onboarding and prototyping phase, you can obtain a client access token from the Dolby.io dashboard, or use the [GetToken](#get-token) node to retrieve a token directly.
 
->In your production application deployment, please follow our security best practice [here](https://docs.dolby.io/communications-apis/docs/guides-client-authentication) to set up a server through which you can acquire a temporary client access token that you can pass to this node.
+>In your production application deployment, please follow our security best practices [here](https://docs.dolby.io/communications-apis/docs/guides-client-authentication) to set up a server through which you can acquire a temporary client access token that you can pass to this node.
 
 <div style="text-align:left">
     <img style="padding:25px 0" src="~/images/nodes/init.png" width="300px">
@@ -31,7 +31,7 @@ Initializes the SDK and connects to the Dolby.io platform. During the onboarding
 
 A helper node that retrieves a client access token directly from within the Unity application. 
 
->Using this node effectively distributes the permanent app credential with your Unity application which is not safe for production deployment. Follow our security best practice [here](https://docs.dolby.io/communications-apis/docs/guides-client-authentication) to set up a server through which you can acquire a temporary client access token. 
+>Using this node effectively distributes the permanent app credential with your Unity application, which is not safe for production deployment. Follow our security best practices [here](https://docs.dolby.io/communications-apis/docs/guides-client-authentication) to set up a server through which you can acquire a temporary client access token. 
 <div style="text-align:left">
     <img style="padding:25px 0" src="~/images/nodes/get-token.png" width="300px">
 </div>

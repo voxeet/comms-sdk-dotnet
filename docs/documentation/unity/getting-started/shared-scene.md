@@ -1,5 +1,5 @@
 ## Shared scene
-Shared scene is built purposely for the virtual world use cases to simplify the programming model. With shared scene, there is no need to explicitly set each remote participant's spatial audio position. Instead, each participant needs to report their own position and direction. 
+Shared scene is built purposely for virtual world use cases to simplify the programming model. With shared scene, there is no need to explicitly set each remote participant's spatial audio position. Instead, each participant needs to report their own position and direction. 
 
 For more information regarding the individual scene, please refer to this [article](https://docs.dolby.io/communications-apis/docs/guides-integrating-shared-spatial-audio).
 
