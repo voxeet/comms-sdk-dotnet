@@ -64,20 +64,20 @@ jobs:
         with:
           name: nugets
           path: ${{github.workspace}}/build/bin/DolbyIO.Comms.Sdk.*.nupkg
-      
-      - run: rm ${{github.workspace}}/build/unity/Runtime/*.dylib
+
+      - run: 7z x "${{github.workspace}}/build/bin/DolbyIO.Comms.Sdk.Runtime.*.nupkg" -o${{github.workspace}}/build "runtimes/*"
         working-directory: ${{github.workspace}}/build
 
-      - run: 7z x "${{github.workspace}}/build/bin/DolbyIO.Comms.Sdk.Runtime.*.nupkg" -o${{github.workspace}}/build/unity/Runtime "runtimes/*"
-        working-directory: ${{github.workspace}}/build
+      - run: rm -f Plugins/osx-x64/native/*.dylib
+        working-directory: ${{github.workspace}}/unity
 
-      - run: mv ${{github.workspace}}/build/unity/Runtime/runtimes ${{github.workspace}}/build/unity/Runtime/lib
-        working-directory: ${{github.workspace}}/build
+      - run: cp -r ${{github.workspace}}/build/runtimes/* ${{github.workspace}}/unity/Plugins
+        working-directory: ${{github.workspace}}/unity
 
       - uses: actions/upload-artifact@v3
         with:
           name: dolbyio-comms-unity-plugin
-          path: ${{github.workspace}}/build/unity/
+          path: ${{github.workspace}}/unity/
 
       - run: dotnet publish dotnet/DolbyCMD/DolbyCMD.csproj -o CmdLine
         working-directory: ${{github.workspace}}/build
