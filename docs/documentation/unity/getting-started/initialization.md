@@ -2,7 +2,7 @@
 
 This guide demonstrates how to initialize, authenticate, and connect to a demo conference. The demo conference has several bots injecting audio, making it easier to test the connection and project setup during the prototyping phase. 
 
-To start fresh, you can create a new project from Unity Hub using the `Third Person` template. The following video shows the workflow:
+To start fresh, you can create a new project from the Unity Hub. This guide use the `Third Person` template in Unity version 2021.3.6f1 LTS. The following video shows the workflow:
 
 <div style="position: relative; padding-bottom: 56.25%; height: 0;"><iframe src="https://www.loom.com/embed/43ef2d4c32824acd952741b281e8c5c4" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe></div>
 
