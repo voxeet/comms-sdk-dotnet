@@ -19,8 +19,6 @@ jobs:
     
     steps:
       - uses: actions/checkout@v2
-        with: 
-          submodules: true
       - uses: ./.github/actions/configure
         with:
           shell: ${{ matrix.shell }}
@@ -43,6 +41,8 @@ jobs:
     needs: [build-runtimes]
     steps:
       - uses: actions/checkout@v2
+        with: 
+          submodules: true
       - uses: ./.github/actions/configure
       - uses: actions/download-artifact@v3
         with:
