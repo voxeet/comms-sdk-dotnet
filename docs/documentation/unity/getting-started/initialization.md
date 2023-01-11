@@ -2,23 +2,15 @@
 
 This guide demonstrates how to initialize, authenticate, and connect to a demo conference. The demo conference has several bots injecting audio, making it easier to test the connection and project setup during the prototyping phase. 
 
-To start fresh, you can create a new project from the Unity Hub. This guide use the `Third Person` template in Unity version 2021.3.6f1 LTS. The following video shows the workflow:
-
-<div style="position: relative; padding-bottom: 56.25%; height: 0;"><iframe src="https://www.loom.com/embed/43ef2d4c32824acd952741b281e8c5c4" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe></div>
+To start fresh, you can create a new project from the Unity Hub. This guide use the `Third Person` template in Unity version 2021.3.6f1 LTS. 
 
 ## Set up up the DolbyIO Manager
 The Unity plugin provides access to an instance of the SDK through a custom `DolbyIO Manager` manager.
 To add the SDK to Unity, follow these steps:
 
 1. Create an empty game object in your scene and provide a name for the object. In this example, we call the object `AppManager`:
-    <div style="text-align:left">
-        <img style="padding:25px 0" src="~/images/unity_1.png" width="350px">
-    </div>
 
 2. Select the created game object and select `Component` > `DolbyIO` > `DolbyIO Manager` from the Unity menu. This step adds the `DolbyIO Manager` to the game object.
-    <div style="text-align:left">
-        <img style="padding:25px 0" src="~/images/unity_2.png" width="700px">
-    </div>
 
 ## Set up the initial visual scripting
 1. Select the `AppManager` object and add a `Script Machine` by choosing `Component` > `Visual Scripting` > `Script Machine` from the Unity menu.
