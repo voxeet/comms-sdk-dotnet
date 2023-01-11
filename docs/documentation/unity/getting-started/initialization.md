@@ -2,7 +2,7 @@
 
 This guide demonstrates how to initialize, authenticate, and connect to a demo conference. The demo conference has several bots injecting audio, making it easier to test the connection and project setup during the prototyping phase. 
 
-To start fresh, you can create a new project from the Unity Hub. This guide use the `Third Person` template in Unity version 2021.3.6f1 LTS. 
+To start fresh, you can create a new project from the Unity Hub. This guide uses the `Third Person` template in Unity version 2021.3.6f1 LTS. 
 
 ## Set up up the DolbyIO Manager
 The Unity plugin provides access to an instance of the SDK through a custom `DolbyIO Manager` manager.
@@ -15,7 +15,7 @@ To add the SDK to Unity, follow these steps:
 ## Set up the initial visual scripting
 1. Select the `AppManager` object and add a `Script Machine` by choosing `Component` > `Visual Scripting` > `Script Machine` from the Unity menu.
 
-2. Add a new script to the `Script Machine` component. In the component click the `New` button and name and save your new script. Start editing the script with the `Edit Graph` button.
+2. Add a new script to the `Script Machine` component. In the component, click the `New` button and name and save your new script. Start editing the script with the `Edit Graph` button.
 
     The newly created script graph contains `On Start`, which is the initial triggering event. This event must be explicitly set as `Coroutine` in order for it to work with the `Initialize` node. Select the node and turn on the `Coroutine` check box.
 
@@ -34,8 +34,8 @@ To add the SDK to Unity, follow these steps:
 
 > To keep things simple for now, set the `Spatial Audio` option to `none` in the `Demo Conference` node. This is because unless you have provided your spatial position, the default platform behavior for the spatial audio conference is **no rendering**, which means you will not hear any audio. Setting the `Spatial Audio` flag to `none` informs the platform to always render the audio for the local participant. In the next sections we will explain how to setup the spatial audio conference.
 
-## Step 4. Set up the Client Access Token
-You should have signed up in Dolby.io by now. In the app that is automatically created for you in the Dolby.io dashboard, acquire a temporary Client Access Token and paste in the `String` literal node. For security reasons, the token you acquired will expire in 12 hours. You will have to provide a new token after the expiration.
+## Set up the Client Access Token
+You should have signed up in Dolby.io by now. In the app that is automatically created for you in the Dolby.io dashboard, acquire a temporary Client Access Token and paste it into the `String` literal node. For security reasons, the token you acquired expires after 12 hours. You will have to provide a new token after the expiration.
 
 The following visual scripting example illustrates how to connect the nodes together once you acquired a Client Access Token from the dashboard.
 <div style="text-align:left">
