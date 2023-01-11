@@ -41,6 +41,9 @@ jobs:
     needs: [build-runtimes]
     steps:
       - uses: actions/checkout@v2
+        with: 
+          submodules: true
+          lfs: true
       - uses: ./.github/actions/configure
       - uses: actions/download-artifact@v3
         with:
