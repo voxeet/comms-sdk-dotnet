@@ -60,7 +60,7 @@ Emitted when active speakers have [changed](xref:DolbyIO.Comms.Services.Conferen
 ---
 ### On Audio Device Added
 
-Emitted when an audio device has been [added](xref:DolbyIO.Comms.Services.MediaDeviceService.Added).
+Emitted when an audio device has been [added](xref:DolbyIO.Comms.Services.MediaDeviceService.AudioDeviceAdded).
 
 <div style="text-align:left">
     <img style="padding:25px 0" src="~/images/nodes/event-audio-added.png" width="250px">
@@ -73,7 +73,7 @@ Emitted when an audio device has been [added](xref:DolbyIO.Comms.Services.MediaD
 ---
 ### On Audio Device Changed
 
-Emitted when the active audio device has [changed](xref:DolbyIO.Comms.Services.MediaDeviceService.Changed).
+Emitted when the active audio device has [changed](xref:DolbyIO.Comms.Services.MediaDeviceService.AudioDeviceChanged).
 
 <div style="text-align:left">
     <img style="padding:25px 0" src="~/images/nodes/event-audio-changed.png" width="250px">

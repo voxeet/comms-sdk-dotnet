@@ -2,12 +2,12 @@
 
 Visual Scripting in Unity allows creating logic for virtual world applications using visual, node-based graphs without writing code. The Dolby.io Virtual World plugin is compatible with Unity Visual Scripting 2021. The plugin can be used with Visual Scripting and C# scripting at the same time. 
 
-### Nodes
+## Nodes
 
 Nodes are the most basic part of scripts in Visual Scripting. A node can listen for events, get the value of a variable, modify a component on a GameObject, and more.
 Once the plugin is successfully installed, the Dolby.io nodes are accessible in the `Add Node` contextual menu, under the DolbyIO category:
 <div style="text-align:left">
-    <img style="padding:25px 0" src="~/images/nodes/menu.png" width="500px">
+    <img style="padding:25px 0" src="~/images/nodes/menu.png" width="360px">
 </div>
 
 ---
@@ -15,7 +15,7 @@ Once the plugin is successfully installed, the Dolby.io nodes are accessible in 
 
 Initializes the SDK and connects to the Dolby.io platform. During the onboarding and prototyping phase, you can obtain a client access token from the Dolby.io dashboard, or use the [GetToken](#get-token) node to retrieve a token directly.
 
->In your production application deployment, please follow our security best practice [here](https://docs.dolby.io/communications-apis/docs/guides-client-authentication) to set up a server through which you can acquire a temporary client access token that you can pass to this node.
+>In your production application deployment, please follow our security best practices [here](https://docs.dolby.io/communications-apis/docs/guides-client-authentication) to set up a server through which you can acquire a temporary client access token that you can pass to this node.
 
 <div style="text-align:left">
     <img style="padding:25px 0" src="~/images/nodes/init.png" width="300px">
@@ -31,7 +31,7 @@ Initializes the SDK and connects to the Dolby.io platform. During the onboarding
 
 A helper node that retrieves a client access token directly from within the Unity application. 
 
->Using this node effectively distributes the permanent app credential with your Unity application which is not safe for production deployment. Follow our security best practice [here](https://docs.dolby.io/communications-apis/docs/guides-client-authentication) to set up a server through which you can acquire a temporary client access token. 
+> ⚠️ Using this node effectively distributes the permanent app credential with your Unity application, which is not safe for production deployment. Follow our security best practices [here](https://docs.dolby.io/communications-apis/docs/guides-client-authentication) to set up a server through which you can acquire a temporary client access token. 
 <div style="text-align:left">
     <img style="padding:25px 0" src="~/images/nodes/get-token.png" width="300px">
 </div>
@@ -43,7 +43,7 @@ A helper node that retrieves a client access token directly from within the Unit
 | **Token Action** | Output | System.Func<string> | A function that returns the access token. It can be linked to the [Initialize](#initialize) node. |
 
 ---
-### Spatial Conference
+### Conference
 
 Connects to a conference with preferred spatial audio style and the settings of the 3D environment. If the conference does not exist, this operation automatically creates the conference. 
 <div style="text-align:left">
@@ -59,7 +59,7 @@ Connects to a conference with preferred spatial audio style and the settings of 
 ---
 ### Demo Conference
 
-Allows connecting to a conference that has several bots injecting audio. This makes it easier for testing the connection during the prototyping phase.
+Allows connecting to a conference that has several bots injecting audio. This makes it easier for testing the connection during the prototyping phase without having to instantiate multiple remote participants.
 <div style="text-align:left">
     <img style="padding:25px 0" src="~/images/nodes/demo.png" width="200px">
 </div>
@@ -67,7 +67,7 @@ Allows connecting to a conference that has several bots injecting audio. This ma
 | Name  | Direction | Type | Description  |
 |---|:---|:---|:---|
 | **Scale, Forward, Up, Right** | Input | Vector3| [Vectors](xref:DolbyIO.Comms.Services.ConferenceService.SetSpatialEnvironmentAsync(System.Numerics.Vector3,System.Numerics.Vector3,System.Numerics.Vector3,System.Numerics.Vector3)) that define the 3D environment that you are working with. The default values are based on the Unity Coordinates System. In most cases, you should only modify the scale.|
-| **Spatial Audio** | Input | Boolean | Information whether you want to enable spatial audio for the demo. | 
+| **Spatial Audio** | Input | Spatial Audio Style | The [spatial audio style](xref:DolbyIO.Comms.SpatialAudioStyle) that defines how the spatial location should be communicated between the SDK and the Dolby.io platform. By default, the parameter is set to `shared` indicating the client application just reports its own position within the virtual world. | 
 
 ---
 ### Mute Participant
@@ -148,7 +148,7 @@ Allows setting the direction of the local player.
 ---
 ### Set Local Player Position
 
-Allows setting the position of the local player.
+Allows setting the position of the local player. 
 <div style="text-align:left">
     <img style="padding:25px 0" src="~/images/nodes/local-position.png" width="220px">
 </div>
@@ -160,7 +160,7 @@ Allows setting the position of the local player.
 ---
 ### Set Remote Player Position
 
-Sets the remote participant's spatial audio position for the local participant. This is only applicable when the spatial audio style is set as `individual` in the Spatial Conference node. The individual style requires each client to inform the server how they would like the platform to render the remote participant's audio for them.  
+Sets the remote participant's spatial audio position for the local participant. This is only applicable when the spatial audio style is set as `individual` in the Spatial Conference node. The individual style requires each client to inform the server how they would like the platform to render each individual remote participant's audio for them.  
 <div style="text-align:left">
     <img style="padding:25px 0" src="~/images/nodes/remote-position.png" width="250px">
 </div>
