@@ -6,8 +6,6 @@
 - The [client access token](https://docs.dolby.io/communications-apis/docs/overview-developer-tools#client-access-token) copied from the Dolby.io dashboard. To create the token, log into the [Dolby.io dashboard](https://dashboard.dolby.io/), create an application, and navigate to the API keys section.
 - Install `git-lfs` command line tool on your computer.
 
-> For Apple Silicon, you need to have the Intel Unity editor.
-
 ### How to install
 You can install the plugin from the Unity Package Manager.
 
@@ -33,4 +31,4 @@ Option 2. Install from the downloaded package
 >xattr -d -r com.apple.quarantine .
 >```
 ### Apple Silicon
-If you are using Unity from an Apple Silicon Mac (e.g., M1), please be aware that currently the SDK is only distributed as x64 binary for Mac. You need to configure the Unity project under `File` > `Build Settings` and select `Intel 64bits` to make it work. 
+If you are using Unity from an Apple Silicon Mac (e.g., M1), please be aware that currently the SDK is only distributed as x64 binary for Mac. You need to use the Intel flavor of the Unity Editor
