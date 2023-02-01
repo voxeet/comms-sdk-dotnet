@@ -30,8 +30,8 @@ find_path(DOLBYIO_INCLUDE_DIR
 )
 
 if(WIN32)
-  set(DOLBYIO_BIN_DIR ${DOLBYIO_LIBRARY_PATH}/sdk-release/bin)
-  set(DOLBYIO_LIB_DIR ${DOLBYIO_LIBRARY_PATH}/sdk-release/lib)
+  set(DOLBYIO_BIN_DIR ${DOLBYIO_INCLUDE_DIR}/../bin)
+  set(DOLBYIO_LIB_DIR ${DOLBYIO_INCLUDE_DIR}/../lib)
 
   set(DOLBYIO_LIBRARY_SDK "${DOLBYIO_LIB_DIR}/dolbyio_comms_sdk.lib")
   set(DOLBYIO_LIBRARY_MEDIA "${DOLBYIO_LIB_DIR}/dolbyio_comms_media.lib")
