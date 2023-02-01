@@ -103,7 +103,7 @@ set_target_properties(DolbyioComms::sdk PROPERTIES
   LINKER_LANGUAGE CXX
 )
 
-add_dependencies(DolbyioComms::sdk universal_sdk)
+add_dependencies(DolbyioComms::sdk macos_universal_library)
 
 add_library(DolbyioComms::media SHARED IMPORTED)
 set_target_properties(DolbyioComms::media PROPERTIES
