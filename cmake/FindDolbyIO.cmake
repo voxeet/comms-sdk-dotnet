@@ -19,7 +19,7 @@ endif()
 
 find_path(DOLBYIO_INCLUDE_DIR
   HINTS
-    ${DOLBYIO_LIBRARY_PATH}
+    ${DOLBYIO_LIBRARY_PATH}/sdk-release
     ${DOLBYIO_LIBRARY_PATH}/sdk-release-arm
   NAMES
     "dolbyio/comms/sdk.h"
@@ -33,16 +33,15 @@ if(WIN32)
   set(DOLBYIO_BIN_DIR ${DOLBYIO_LIBRARY_PATH}/sdk-release/bin)
   set(DOLBYIO_LIB_DIR ${DOLBYIO_LIBRARY_PATH}/sdk-release/lib)
 
-  set(DOLBYIO_LIBRARY_SDK "${DOLBYIO_BIN_DIR}/dolbyio_comms_sdk.dll")
-  set(DOLBYIO_LIBRARY_MEDIA "${DOLBYIO_BIN_DIR}/dolbyio_comms_media.dll")
-  set(DOLBYIO_LIBRARY_DVC "${DOLBYIO_BIN_DIR}/dvclient.dll")
-  set(DOLBYIO_LIBRARY_DNR "${DOLBYIO_BIN_DIR}/dvdnr.dll")
+  set(DOLBYIO_LIBRARY_SDK "${DOLBYIO_LIB_DIR}/dolbyio_comms_sdk.lib")
+  set(DOLBYIO_LIBRARY_MEDIA "${DOLBYIO_LIB_DIR}/dolbyio_comms_media.lib")
+  set(DOLBYIO_LIBRARY_DVC "${DOLBYIO_LIB_DIR}/dvclient.lib")
+  set(DOLBYIO_LIBRARY_DNR "${DOLBYIO_LIB_DIR}/dvdnr.lib")
 
-  set(DOLBYIO_LIBRARY_SDK_IMPORTED "${DOLBYIO_LIB_DIR}/dolbyio_comms_sdk.lib")
-  set(DOLBYIO_LIBRARY_MEDIA_IMPORTED "${DOLBYIO_LIB_DIR}/dolbyio_comms_media.lib")
-  set(DOLBYIO_LIBRARY_DVC_IMPORTED "${DOLBYIO_LIB_DIR}/dvclient.lib")
-  set(DOLBYIO_LIBRARY_DNR_IMPORTED "${DOLBYIO_LIB_DIR}/dvdnr.lib")
-
+  set(DOLBYIO_LIBRARY_SDK_IMPORTED "${DOLBYIO_BIN_DIR}/dolbyio_comms_sdk.dll")
+  set(DOLBYIO_LIBRARY_MEDIA_IMPORTED "${DOLBYIO_BIN_DIR}/dolbyio_comms_media.dll")
+  set(DOLBYIO_LIBRARY_DVC_IMPORTED "${DOLBYIO_BIN_DIR}/dvclient.dll")
+  set(DOLBYIO_LIBRARY_DNR_IMPORTED "${DOLBYIO_BIN_DIR}/dvdnr.dll")
 
   add_library(avcodec SHARED IMPORTED)
   set_target_properties(avcodec PROPERTIES
