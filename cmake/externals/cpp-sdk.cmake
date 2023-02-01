@@ -12,7 +12,6 @@ if (NOT DOLBYIO_LIBRARY_PATH)
   FetchContent_Declare(CPPSDK
       URL https://github.com/DolbyIO/comms-sdk-cpp/releases/download/${CPP_SDK_VERSION}/${CPP_SDK_FILENAME}
       DOWNLOAD_EXTRACT_TIMESTAMP true
-      BUILD_COMMAND "cp  ${cppsdk_SOURCE_DIR}/sdk-realease-arm/bin ${cppsdk_SOURCE_DIR}/bin"
   )
 
   FetchContent_MakeAvailable(CPPSDK)

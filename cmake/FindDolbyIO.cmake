@@ -19,7 +19,7 @@ endif()
 
 find_path(DOLBYIO_INCLUDE_DIR
   HINTS
-    ${DOLBYIO_LIBRARY_PATH}/sdk-release
+    ${DOLBYIO_LIBRARY_PATH}
     ${DOLBYIO_LIBRARY_PATH}/sdk-release-arm
   NAMES
     "dolbyio/comms/sdk.h"
