@@ -77,7 +77,6 @@ elseif(APPLE)
   add_custom_command(
     OUTPUT 
       ${DOLBYIO_LIBRARY_PATH}/universal/libdolbyio_comms_sdk.dylib
-    COMMAND ${CMAKE_COMMAND} -E touch  ${DOLBYIO_LIBRARY_PATH}/universal/libdolbyio_comms_sdk.dylib
     COMMAND 
       "lipo" "-create" ${DOLBYIO_LIBRARY_PATH}/sdk-release-arm/lib/libdolbyio_comms_sdk.dylib ${DOLBYIO_LIBRARY_PATH}/sdk-release-x86/lib/libdolbyio_comms_sdk.dylib "-output" ${DOLBYIO_LIBRARY_PATH}/universal/libdolbyio_comms_sdk.dylib
   )
@@ -85,7 +84,6 @@ elseif(APPLE)
   add_custom_command(
     OUTPUT 
       ${DOLBYIO_LIBRARY_PATH}/universal/libdolbyio_comms_media.dylib
-    COMMAND ${CMAKE_COMMAND} -E touch  ${DOLBYIO_LIBRARY_PATH}/universal/libdolbyio_comms_media.dylib
     COMMAND 
       "lipo" "-create" ${DOLBYIO_LIBRARY_PATH}/sdk-release-arm/lib/libdolbyio_comms_media.dylib ${DOLBYIO_LIBRARY_PATH}/sdk-release-x86/lib/libdolbyio_comms_sdk.dylib "-output" ${DOLBYIO_LIBRARY_PATH}/universal/libdolbyio_comms_media.dylib
   )
