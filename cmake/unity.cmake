@@ -4,7 +4,7 @@ if (BUILD_UNITY)
     if (WIN32)
         set(UNITY_RUNTIME_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/unity/Plugins/win-x64/native")
     elseif(APPLE)
-        set(UNITY_RUNTIME_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/unity/Plugins/osx-x64/native")
+        set(UNITY_RUNTIME_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/unity/Plugins/osx-universal/native")
     endif()
 
     set(UNITY_ASSEMBLY_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/unity/Runtime/Assembly")

@@ -55,7 +55,8 @@ extern "C" {
   }
 
   EXPORT_API void AudioDeviceTest(audio_device* result) {
-    dvc_device dev("UID", "dummy device", dvc_device::direction::output, dvc_device::platform::macos, "ID");
+
+    dvc_device dev({'U', 'I', 'D'}, "dummy device", dvc_device::direction::output, dvc_device::platform::macos, "ID");
     no_alloc_to_c(result, dev);
   }
 

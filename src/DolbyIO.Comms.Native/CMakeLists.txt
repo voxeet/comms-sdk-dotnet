@@ -19,7 +19,7 @@ set(SOURCES
     video_frame_handler.cc
 )
 
-add_library(DolbyIO.Comms.Native  SHARED
+add_library(DolbyIO.Comms.Native SHARED
     ${SOURCES}
 )
 
@@ -73,7 +73,7 @@ if (APPLE)
             $<TARGET_FILE:dvc>
             $<TARGET_FILE:dnr>
         OUTPUT
-            runtimes/osx-x64/native
+            runtimes/osx-universal/native
     )
 elseif (WIN32)
     # Set target link options (allows to step into and set breakpoints for mixed-mode C++ assemblies).
