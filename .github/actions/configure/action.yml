@@ -22,7 +22,7 @@ runs:
     - name: Configure
       shell: ${{ inputs.shell }}
       working-directory: ${{github.workspace}}/build
-      run: cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo ${{github.workspace}}
+      run: cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_OSX_ARCHITECTURES=x86_64;arm64 ${{github.workspace}}
 
     - run: cmake -E make_directory ${{github.workspace}}/build/_deps/cppsdk-src/universal
       shell: ${{ inputs.shell }}
