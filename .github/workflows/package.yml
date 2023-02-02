@@ -13,14 +13,6 @@ jobs:
           - os: macos-latest
             shell: bash
             runtime: DolbyIO.Comms.Sdk.Runtime.Osx
-            sign: |
-              echo "${{ secrets.WINDOWS_CERTIFICATE }}" > data.b64
-              certutil -decode data.b64 certificate.pfx 
-              signtool sign /f ./certificate.pfx /t http://timestamp.digicert.com/ DolbyIO.Comms.Sdk.dll
-              signtool sign /f ./certificate.pfx /t http://timestamp.digicert.com/ DolbyIO.Comms.Native.dll
-              signtool sign /f ./certificate.pfx /t http://timestamp.digicert.com/ dolbyio_comms_sdk.dll
-              signtool sign /f ./certificate.pfx /t http://timestamp.digicert.com/ dolbyio_comms_media.dll
-              rm certificate.pfx
           - os: windows-latest
             shell: powershell
             runtime: DolbyIO.Comms.Sdk.Runtime.Win
@@ -39,9 +31,16 @@ jobs:
         working-directory: ${{github.workspace}}/build
         run: dotnet pack dotnet/${{ matrix.runtime }}/${{ matrix.runtime }}.csproj
 
-      - if: ${{matrix.sign}}
+      - if: ${{matrix.os == 'windows-latest'}}
         working-directory: ${{github.workspace}}/build/bin
-        run: ${{matrix.sign}}
+        run: |
+          echo "${{ secrets.WINDOWS_CERTIFICATE }}" > data.b64
+          certutil -decode data.b64 certificate.pfx 
+          signtool sign /f ./certificate.pfx /t http://timestamp.digicert.com/ DolbyIO.Comms.Sdk.dll
+          signtool sign /f ./certificate.pfx /t http://timestamp.digicert.com/ DolbyIO.Comms.Native.dll
+          signtool sign /f ./certificate.pfx /t http://timestamp.digicert.com/ dolbyio_comms_sdk.dll
+          signtool sign /f ./certificate.pfx /t http://timestamp.digicert.com/ dolbyio_comms_media.dll
+          rm certificate.pfx
 
       - uses: actions/upload-artifact@v3
         with:
