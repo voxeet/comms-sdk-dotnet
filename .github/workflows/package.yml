@@ -36,10 +36,10 @@ jobs:
         run: |
           echo "${{ secrets.WINDOWS_CERTIFICATE }}" > data.b64
           certutil -decode data.b64 certificate.pfx 
-          signtool sign /f ./certificate.pfx /t http://timestamp.digicert.com/ DolbyIO.Comms.Sdk.dll
-          signtool sign /f ./certificate.pfx /t http://timestamp.digicert.com/ DolbyIO.Comms.Native.dll
-          signtool sign /f ./certificate.pfx /t http://timestamp.digicert.com/ dolbyio_comms_sdk.dll
-          signtool sign /f ./certificate.pfx /t http://timestamp.digicert.com/ dolbyio_comms_media.dll
+          SignTool sign /f ./certificate.pfx /t http://timestamp.digicert.com/ DolbyIO.Comms.Sdk.dll
+          SignTool sign /f ./certificate.pfx /t http://timestamp.digicert.com/ DolbyIO.Comms.Native.dll
+          SignTool sign /f ./certificate.pfx /t http://timestamp.digicert.com/ dolbyio_comms_sdk.dll
+          SignTool sign /f ./certificate.pfx /t http://timestamp.digicert.com/ dolbyio_comms_media.dll
           rm certificate.pfx
 
       - uses: actions/upload-artifact@v3
