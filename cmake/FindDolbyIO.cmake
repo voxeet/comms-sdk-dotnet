@@ -46,19 +46,19 @@ if(WIN32)
   add_library(avcodec SHARED IMPORTED)
   set_target_properties(avcodec PROPERTIES
     IMPORTED_IMPLIB ""
-    IMPORTED_LOCATION ${DOLBYIO_BIN_DIR}/avcodec-58.dll
+    IMPORTED_LOCATION ${DOLBYIO_BIN_DIR}/avcodec-59.dll
   )
 
   add_library(avformat SHARED IMPORTED)
   set_target_properties(avformat PROPERTIES
     IMPORTED_IMPLIB ""
-    IMPORTED_LOCATION ${DOLBYIO_BIN_DIR}/avformat-58.dll
+    IMPORTED_LOCATION ${DOLBYIO_BIN_DIR}/avformat-59.dll
   )
 
   add_library(avutil SHARED IMPORTED)
   set_target_properties(avutil PROPERTIES
     IMPORTED_IMPLIB ""
-    IMPORTED_LOCATION ${DOLBYIO_BIN_DIR}/avutil-56.dll
+    IMPORTED_LOCATION ${DOLBYIO_BIN_DIR}/avutil-57.dll
   )
 elseif(APPLE)
   set(DOLBYIO_BIN_DIR ${DOLBYIO_LIBRARY_PATH}/sdk-release-x86/bin)
