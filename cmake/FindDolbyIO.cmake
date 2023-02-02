@@ -77,6 +77,7 @@ elseif(APPLE)
   add_custom_command(
     OUTPUT 
       ${DOLBYIO_LIBRARY_PATH}/universal/libdolbyio_comms_sdk.dylib
+    COMMAND ${CMAKE_COMMAND} -E make_directory ${DOLBYIO_LIBRARY_PATH}/universal
     COMMAND 
       "lipo" "-create" ${DOLBYIO_LIBRARY_PATH}/sdk-release-arm/lib/libdolbyio_comms_sdk.dylib ${DOLBYIO_LIBRARY_PATH}/sdk-release-x86/lib/libdolbyio_comms_sdk.dylib "-output" ${DOLBYIO_LIBRARY_PATH}/universal/libdolbyio_comms_sdk.dylib
   )
@@ -85,8 +86,15 @@ elseif(APPLE)
     OUTPUT 
       ${DOLBYIO_LIBRARY_PATH}/universal/libdolbyio_comms_media.dylib
     COMMAND 
-      "lipo" "-create" ${DOLBYIO_LIBRARY_PATH}/sdk-release-arm/lib/libdolbyio_comms_media.dylib ${DOLBYIO_LIBRARY_PATH}/sdk-release-x86/lib/libdolbyio_comms_sdk.dylib "-output" ${DOLBYIO_LIBRARY_PATH}/universal/libdolbyio_comms_media.dylib
+      "lipo" "-create" ${DOLBYIO_LIBRARY_PATH}/sdk-release-arm/lib/libdolbyio_comms_media.dylib ${DOLBYIO_LIBRARY_PATH}/sdk-release-x86/lib/libdolbyio_comms_media.dylib "-output" ${DOLBYIO_LIBRARY_PATH}/universal/libdolbyio_comms_media.dylib
   )
+
+  # add_custom_command(
+  #   OUTPUT 
+  #     ${DOLBYIO_LIBRARY_PATH}/universal/libdvclient.dylib
+  #   COMMAND 
+  #     "lipo" "-create" ${DOLBYIO_LIBRARY_PATH}/sdk-release-arm/lib/libdvclient.dylib ${DOLBYIO_LIBRARY_PATH}/sdk-release-x86/lib/libdvclient.dylib "-output" ${DOLBYIO_LIBRARY_PATH}/universal/libdolbyio_comms_media.dylib
+  # )
 
   add_custom_target(macos_universal_library 
     DEPENDS 
