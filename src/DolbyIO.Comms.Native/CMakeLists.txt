@@ -31,10 +31,12 @@ set_target_properties(DolbyIO.Comms.Native  PROPERTIES C_STANDARD 11)
 target_link_libraries(DolbyIO.Comms.Native  PRIVATE
     DolbyioComms::sdk
     DolbyioComms::media
-    dvc
-    dnr
     ${CoreVideo}
 )
+
+if (NOT WIN32)
+    target_link_libraries(DolbyIO.Comms.Native PRIVATE dvc dnr)
+endif()
 
 if (BUILD_TESTS)
     add_library(DolbyIO.Comms.Native.Tests  SHARED
@@ -45,10 +47,12 @@ if (BUILD_TESTS)
     target_link_libraries(DolbyIO.Comms.Native.Tests  PRIVATE
         DolbyioComms::sdk
         DolbyioComms::media
-        dvc
-        dnr
         ${CoreVideo}
     )
+
+    if (NOT WIN32)
+        target_link_libraries(DolbyIO.Comms.Native.Tests PRIVATE dvc dnr)
+    endif()
 
     target_compile_definitions(DolbyIO.Comms.Native.Tests PRIVATE MOCK)
 
