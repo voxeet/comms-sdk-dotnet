@@ -26,8 +26,7 @@ jobs:
 
       - name: Tests
         working-directory: ${{github.workspace}}/build
-        run: |
-          export DYLD_PRINT_LIBRARIES=1
-          ctest -VV -C RelWithDebInfo
+        run: ctest -VV -C RelWithDebInfo
+
 
 

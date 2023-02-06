@@ -9,6 +9,10 @@
   </PropertyGroup>
 
   <PropertyGroup>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+
+  <PropertyGroup>
     <OutputPath>${CMAKE_RUNTIME_OUTPUT_DIRECTORY}</OutputPath>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
   </PropertyGroup>

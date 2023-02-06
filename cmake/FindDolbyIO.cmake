@@ -66,8 +66,8 @@ elseif(APPLE)
 
   set(DOLBYIO_LIBRARY_SDK "${DOLBYIO_LIBRARY_PATH}/universal/libdolbyio_comms_sdk.dylib")
   set(DOLBYIO_LIBRARY_MEDIA "${DOLBYIO_LIBRARY_PATH}/universal/libdolbyio_comms_media.dylib")
-  set(DOLBYIO_LIBRARY_DVC "${DOLBYIO_LIBRARY_PATH}/sdk-release-arm/lib/libdvclient.dylib")
-  set(DOLBYIO_LIBRARY_DNR "${DOLBYIO_LIBRARY_PATH}/sdk-release-arm/lib/libdvdnr.dylib")
+  set(DOLBYIO_LIBRARY_DVC "${DOLBYIO_LIBRARY_PATH}/sdk-release-x86/lib/libdvclient.dylib")
+  set(DOLBYIO_LIBRARY_DNR "${DOLBYIO_LIBRARY_PATH}/sdk-release-x86/lib/libdvdnr.dylib")
 
   set(DOLBYIO_LIBRARY_SDK_IMPORTED ${DOLBYIO_LIBRARY_SDK})
   set(DOLBYIO_LIBRARY_MEDIA_IMPORTED ${DOLBYIO_LIBRARY_MEDIA})
