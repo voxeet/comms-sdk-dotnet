@@ -20,6 +20,7 @@ endif()
 find_path(DOLBYIO_INCLUDE_DIR
   HINTS
     ${DOLBYIO_LIBRARY_PATH}
+    ${DOLBYIO_LIBRARY_PATH}/sdk-release-arm
   NAMES
     "dolbyio/comms/sdk.h"
   PATH_SUFFIXES
@@ -28,155 +29,72 @@ find_path(DOLBYIO_INCLUDE_DIR
     ${DOLBYIO_SEARCH_PATHS}
 )
 
-set(DOLBYIO_BINARY_DIR ${DOLBYIO_INCLUDE_DIR}/../bin)
+if(WIN32)
+  set(DOLBYIO_BIN_DIR ${DOLBYIO_INCLUDE_DIR}/../bin)
+  set(DOLBYIO_LIB_DIR ${DOLBYIO_INCLUDE_DIR}/../lib)
 
-find_path(DOLBYIO_IAPI_TEST_INCLUDE_DIR
-  HINTS
-    ${DOLBYIO_LIBRARY_PATH}
-  NAMES
-    "test_api/test_api.h"
-  PATH_SUFFIXES
-    "include/iapi" include
-  PATHS
-    ${DOLBYIO_SEARCH_PATHS}
-)
+  set(DOLBYIO_LIBRARY_SDK "${DOLBYIO_LIB_DIR}/dolbyio_comms_sdk.lib")
+  set(DOLBYIO_LIBRARY_MEDIA "${DOLBYIO_LIB_DIR}/dolbyio_comms_media.lib")
+  set(DOLBYIO_LIBRARY_DVC "${DOLBYIO_LIB_DIR}/dvclient.lib")
+  set(DOLBYIO_LIBRARY_DNR "${DOLBYIO_LIB_DIR}/dvdnr.lib")
 
-find_library(DOLBYIO_LIBRARY_SDK
-  HINTS
-    ${DOLBYIO_LIBRARY_PATH}
-  NAMES
-    dolbyio_comms_sdk
-  PATH_SUFFIXES
-    ${DOLBYIO_LIBRARY_SUFFIXES}
-  PATHS
-    ${DOLBYIO_SEARCH_PATHS}
-)
-
-find_library(DOLBYIO_LIBRARY_MEDIA
-  HINTS
-    ${DOLBYIO_LIBRARY_PATH}
-  NAMES
-    dolbyio_comms_media
-  PATH_SUFFIXES
-    ${DOLBYIO_LIBRARY_SUFFIXES}
-  PATHS
-    ${DOLBYIO_SEARCH_PATHS}
-)
-
-find_library(DOLBYIO_LIBRARY_IAPI_TEST
-  HINTS
-    ${DOLBYIO_LIBRARY_PATH}
-  NAMES
-    iapi_test
-  PATH_SUFFIXES
-    ${DOLBYIO_LIBRARY_SUFFIXES}
-  PATHS
-    ${DOLBYIO_SEARCH_PATHS}
-)
-
-find_library(DOLBYIO_LIBRARY_DVC
-  HINTS
-    ${DOLBYIO_LIBRARY_PATH}
-  NAMES
-    dvclient
-  PATH_SUFFIXES
-    ${DOLBYIO_LIBRARY_SUFFIXES}
-  PATHS
-    ${DOLBYIO_SEARCH_PATHS}
-)
-
-find_library(DOLBYIO_LIBRARY_DNR
-  HINTS
-    ${DOLBYIO_LIBRARY_PATH}
-  NAMES
-    dvdnr
-  PATH_SUFFIXES
-    ${DOLBYIO_LIBRARY_SUFFIXES}
-  PATHS
-    ${DOLBYIO_SEARCH_PATHS}
-)
-
-if (WIN32)
-  find_file(DOLBYIO_LIBRARY_SDK_IMPORTED
-    HINTS
-      ${DOLBYIO_LIBRARY_PATH}
-    NAMES
-      dolbyio_comms_sdk.dll
-    PATH_SUFFIXES
-      bin
-    PATHS
-      ${DOLBYIO_SEARCH_PATHS}
-  )
-
-  find_file(DOLBYIO_LIBRARY_MEDIA_IMPORTED
-    HINTS
-      ${DOLBYIO_LIBRARY_PATH}
-    NAMES
-      dolbyio_comms_media.dll
-    PATH_SUFFIXES
-      bin
-    PATHS
-      ${DOLBYIO_SEARCH_PATHS}
-  )
-
-  find_file(DOLBYIO_LIBRARY_DVC_IMPORTED
-    HINTS
-      ${DOLBYIO_LIBRARY_PATH}
-    NAMES
-      dvclient.dll
-    PATH_SUFFIXES
-      bin
-    PATHS
-      ${DOLBYIO_SEARCH_PATHS}
-  )
-
-  find_file(DOLBYIO_LIBRARY_DNR_IMPORTED
-  HINTS
-    ${DOLBYIO_LIBRARY_PATH}
-  NAMES
-    dvdnr.dll
-  PATH_SUFFIXES
-    bin
-  PATHS
-    ${DOLBYIO_SEARCH_PATHS}
-  )
-
-  find_file(DOLBYIO_LIBRARY_IAPI_TEST_IMPORTED
-    HINTS
-      ${DOLBYIO_LIBRARY_PATH}
-    NAMES
-      iapi_test.dll
-    PATH_SUFFIXES
-      bin
-    PATHS
-      ${DOLBYIO_SEARCH_PATHS}
-  )
+  set(DOLBYIO_LIBRARY_SDK_IMPORTED "${DOLBYIO_BIN_DIR}/dolbyio_comms_sdk.dll")
+  set(DOLBYIO_LIBRARY_MEDIA_IMPORTED "${DOLBYIO_BIN_DIR}/dolbyio_comms_media.dll")
+  set(DOLBYIO_LIBRARY_DVC_IMPORTED "${DOLBYIO_BIN_DIR}/dvclient.dll")
+  set(DOLBYIO_LIBRARY_DNR_IMPORTED "${DOLBYIO_BIN_DIR}/dvdnr.dll")
 
   add_library(avcodec SHARED IMPORTED)
   set_target_properties(avcodec PROPERTIES
     IMPORTED_IMPLIB ""
-    IMPORTED_LOCATION ${DOLBYIO_BINARY_DIR}/avcodec-58.dll
+    IMPORTED_LOCATION ${DOLBYIO_BIN_DIR}/avcodec-59.dll
   )
 
   add_library(avformat SHARED IMPORTED)
   set_target_properties(avformat PROPERTIES
     IMPORTED_IMPLIB ""
-    IMPORTED_LOCATION ${DOLBYIO_BINARY_DIR}/avformat-58.dll
+    IMPORTED_LOCATION ${DOLBYIO_BIN_DIR}/avformat-59.dll
   )
 
   add_library(avutil SHARED IMPORTED)
   set_target_properties(avutil PROPERTIES
     IMPORTED_IMPLIB ""
-    IMPORTED_LOCATION ${DOLBYIO_BINARY_DIR}/avutil-56.dll
+    IMPORTED_LOCATION ${DOLBYIO_BIN_DIR}/avutil-57.dll
   )
-else()
+elseif(APPLE)
+  set(DOLBYIO_BIN_DIR ${DOLBYIO_LIBRARY_PATH}/sdk-release-x86/bin)
+  set(DOLBYIO_LIB_DIR ${DOLBYIO_LIBRARY_PATH}/sdk-release-x86/lib)
+
+  set(DOLBYIO_LIBRARY_SDK "${DOLBYIO_LIBRARY_PATH}/universal/libdolbyio_comms_sdk.dylib")
+  set(DOLBYIO_LIBRARY_MEDIA "${DOLBYIO_LIBRARY_PATH}/universal/libdolbyio_comms_media.dylib")
+  set(DOLBYIO_LIBRARY_DVC "${DOLBYIO_LIBRARY_PATH}/sdk-release-x86/lib/libdvclient.dylib")
+  set(DOLBYIO_LIBRARY_DNR "${DOLBYIO_LIBRARY_PATH}/sdk-release-x86/lib/libdvdnr.dylib")
+
   set(DOLBYIO_LIBRARY_SDK_IMPORTED ${DOLBYIO_LIBRARY_SDK})
   set(DOLBYIO_LIBRARY_MEDIA_IMPORTED ${DOLBYIO_LIBRARY_MEDIA})
-  set(DOLBYIO_LIBRARY_IAPI_TEST_IMPORTED ${DOLBYIO_LIBRARY_IAPI_TEST})
   set(DOLBYIO_LIBRARY_DVC_IMPORTED ${DOLBYIO_LIBRARY_DVC})
   set(DOLBYIO_LIBRARY_DNR_IMPORTED ${DOLBYIO_LIBRARY_DNR})
-endif()
 
+  add_custom_command(
+    OUTPUT 
+      ${DOLBYIO_LIBRARY_PATH}/universal/libdolbyio_comms_sdk.dylib
+    COMMAND ${CMAKE_COMMAND} -E make_directory ${DOLBYIO_LIBRARY_PATH}/universal
+    COMMAND 
+      "lipo" "-create" ${DOLBYIO_LIBRARY_PATH}/sdk-release-arm/lib/libdolbyio_comms_sdk.dylib ${DOLBYIO_LIBRARY_PATH}/sdk-release-x86/lib/libdolbyio_comms_sdk.dylib "-output" ${DOLBYIO_LIBRARY_PATH}/universal/libdolbyio_comms_sdk.dylib
+  )
+
+  add_custom_command(
+    OUTPUT 
+      ${DOLBYIO_LIBRARY_PATH}/universal/libdolbyio_comms_media.dylib
+    COMMAND 
+      "lipo" "-create" ${DOLBYIO_LIBRARY_PATH}/sdk-release-arm/lib/libdolbyio_comms_media.dylib ${DOLBYIO_LIBRARY_PATH}/sdk-release-x86/lib/libdolbyio_comms_media.dylib "-output" ${DOLBYIO_LIBRARY_PATH}/universal/libdolbyio_comms_media.dylib
+  )
+
+  add_custom_target(macos_universal_library 
+    DEPENDS 
+      ${DOLBYIO_LIBRARY_PATH}/universal/libdolbyio_comms_sdk.dylib
+      ${DOLBYIO_LIBRARY_PATH}/universal/libdolbyio_comms_media.dylib
+  )
+endif()
 
 add_library(DolbyioComms::sdk SHARED IMPORTED)
 set_target_properties(DolbyioComms::sdk PROPERTIES
@@ -185,6 +103,8 @@ set_target_properties(DolbyioComms::sdk PROPERTIES
   INTERFACE_INCLUDE_DIRECTORIES ${DOLBYIO_INCLUDE_DIR}
   LINKER_LANGUAGE CXX
 )
+
+add_dependencies(DolbyioComms::sdk macos_universal_library)
 
 add_library(DolbyioComms::media SHARED IMPORTED)
 set_target_properties(DolbyioComms::media PROPERTIES
@@ -208,18 +128,6 @@ set_target_properties(dnr PROPERTIES
   IMPORTED_LOCATION ${DOLBYIO_LIBRARY_DNR_IMPORTED}
   INTERFACE_INCLUDE_DIRECTORIES ${DOLBYIO_INCLUDE_DIR}
   LINKER_LANGUAGE CXX
-)
-
-if (NOT WIN32)
-  target_link_libraries(DolbyioComms::sdk INTERFACE dvc)
-  target_link_libraries(DolbyioComms::sdk INTERFACE dnr)
-endif()
-
-add_library(iapi_test SHARED IMPORTED)
-set_target_properties(iapi_test PROPERTIES
-  IMPORTED_IMPLIB ${DOLBYIO_LIBRARY_IAPI_TEST}
-  IMPORTED_LOCATION ${DOLBYIO_LIBRARY_IAPI_TEST_IMPORTED}
-  INTERFACE_INCLUDE_DIRECTORIES ${DOLBYIO_IAPI_TEST_INCLUDE_DIR}
 )
 
 mark_as_advanced(

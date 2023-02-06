@@ -2,9 +2,9 @@ find_program(DOTNET_EXE
   NAME
     dotnet
   HINTS
-    /usr/local/share/dotnet/x64/
+    /usr/local/share/dotnet/
   PATHS
-    /usr/local/share/dotnet/x64/
+    /usr/local/share/dotnet/
 )
 
 include(FindPackageHandleStandardArgs)

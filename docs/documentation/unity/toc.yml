@@ -11,6 +11,8 @@
       href: getting-started/shared-scene.md
     - name: Individual scene
       href: getting-started/individual-scene.md
+    - name: Work with real remote users
+      href: getting-started/wotk-with-real-users.md
 
 - name: Component reference
   href: components/index.md
