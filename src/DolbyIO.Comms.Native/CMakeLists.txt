@@ -75,6 +75,14 @@ if (APPLE)
         OUTPUT
             runtimes/osx-universal/native
     )
+    
+    add_custom_command(TARGET DolbyIO.Comms.Native POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy_if_different $<TARGET_FILE:DolbyioComms::sdk> "${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/$<TARGET_FILE_NAME:DolbyioComms::sdk>"
+        COMMAND ${CMAKE_COMMAND} -E copy_if_different $<TARGET_FILE:DolbyioComms::media> "${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/$<TARGET_FILE_NAME:DolbyioComms::media>"
+        COMMAND ${CMAKE_COMMAND} -E copy_if_different $<TARGET_FILE:dvc> "${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/$<TARGET_FILE_NAME:dvc>"
+        COMMAND ${CMAKE_COMMAND} -E copy_if_different $<TARGET_FILE:dnr> "${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/$<TARGET_FILE_NAME:dnr>"
+    )
+
 elseif (WIN32)
     # Set target link options (allows to step into and set breakpoints for mixed-mode C++ assemblies).
     # This will not be enabled for Release or MinSizeRel builds.
