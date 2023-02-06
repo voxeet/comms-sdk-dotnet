@@ -13,4 +13,4 @@ The `Dolby.io Manager` is a component required to let you access the functionnal
 | **Auto Close Session** | Boolean | Allows the plugin to automatically close the session when the application is quitting. |
 | **Position Duration** | Float (seconds) | The throttling time for setting the local player position. |
 | **Direction Duration** | Float (seconds) | The throttling time for setting the local player direction. |
-| **Audio Listener** | GameObject | A GameObject containing the AudioListener component to get the local player position from. If empty, the default AudioListener will be choosen. | 
+| **Audio Listener** | GameObject | A GameObject containing the AudioListener component to get the local player position from. If empty, the default AudioListener will be chosen. | 
