@@ -35,8 +35,8 @@ if(WIN32)
 
   set(DOLBYIO_LIBRARY_SDK "${DOLBYIO_LIB_DIR}/dolbyio_comms_sdk.lib")
   set(DOLBYIO_LIBRARY_MEDIA "${DOLBYIO_LIB_DIR}/dolbyio_comms_media.lib")
-  set(DOLBYIO_LIBRARY_DVC "${DOLBYIO_LIB_DIR}/dvclient.lib")
-  set(DOLBYIO_LIBRARY_DNR "${DOLBYIO_LIB_DIR}/dvdnr.lib")
+  set(DOLBYIO_LIBRARY_DVC "")
+  set(DOLBYIO_LIBRARY_DNR "")
 
   set(DOLBYIO_LIBRARY_SDK_IMPORTED "${DOLBYIO_BIN_DIR}/dolbyio_comms_sdk.dll")
   set(DOLBYIO_LIBRARY_MEDIA_IMPORTED "${DOLBYIO_BIN_DIR}/dolbyio_comms_media.dll")
@@ -89,13 +89,6 @@ elseif(APPLE)
       "lipo" "-create" ${DOLBYIO_LIBRARY_PATH}/sdk-release-arm/lib/libdolbyio_comms_media.dylib ${DOLBYIO_LIBRARY_PATH}/sdk-release-x86/lib/libdolbyio_comms_media.dylib "-output" ${DOLBYIO_LIBRARY_PATH}/universal/libdolbyio_comms_media.dylib
   )
 
-  # add_custom_command(
-  #   OUTPUT 
-  #     ${DOLBYIO_LIBRARY_PATH}/universal/libdvclient.dylib
-  #   COMMAND 
-  #     "lipo" "-create" ${DOLBYIO_LIBRARY_PATH}/sdk-release-arm/lib/libdvclient.dylib ${DOLBYIO_LIBRARY_PATH}/sdk-release-x86/lib/libdvclient.dylib "-output" ${DOLBYIO_LIBRARY_PATH}/universal/libdolbyio_comms_media.dylib
-  # )
-
   add_custom_target(macos_universal_library 
     DEPENDS 
       ${DOLBYIO_LIBRARY_PATH}/universal/libdolbyio_comms_sdk.dylib
@@ -136,13 +129,6 @@ set_target_properties(dnr PROPERTIES
   INTERFACE_INCLUDE_DIRECTORIES ${DOLBYIO_INCLUDE_DIR}
   LINKER_LANGUAGE CXX
 )
-
-if (NOT WIN32)
-  target_link_libraries(DolbyioComms::sdk INTERFACE dvc)
-  target_link_libraries(DolbyioComms::sdk INTERFACE dnr)
-endif()
-
-
 
 mark_as_advanced(
   DOLBYIO_INCLUDE_DIR
