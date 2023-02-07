@@ -3,23 +3,27 @@
   items:
     - name: Installation
       href: getting-started/installation.md
-    - name: Initialization
-      href: getting-started/initialization.md
-    - name: Remote participants
-      href: getting-started/remote-participants.md
-    - name: Shared scene
-      href: getting-started/shared-scene.md
-    - name: Individual scene
-      href: getting-started/individual-scene.md
-    - name: Work with real remote users
-      href: getting-started/work-with-real-users.md
+    - name: Built-in Sample
+      href: getting-started/example.md
 
-- name: Component reference
+- name: Components
   href: components/index.md
-- name: Visual Scripting reference
+- name: Visual Scripting
   href: visualscripting/nodes.md
   items:
     - name: Nodes
       href: visualscripting/nodes.md
     - name: Events
       href: visualscripting/events.md
+    - name: Tutorials
+      items:
+      - name: Initialization
+        href: visualscripting/tutorials/initialization.md
+      - name: Remote participants
+        href: visualscripting/tutorials/remote-participants.md
+      - name: Shared scene
+        href: visualscripting/tutorials/shared-scene.md
+      - name: Individual scene
+        href: visualscripting/tutorials/individual-scene.md
+      - name: Work with real remote users
+        href: visualscripting/tutorials/work-with-real-users.md
