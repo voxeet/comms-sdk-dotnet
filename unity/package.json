@@ -1,0 +1,32 @@
+{
+  "name": "dolbyio.comms.unity",
+  "version": "1.1.0",
+  "unity": "2021.1",
+  "displayName": "DolbyIO Communications",
+  "description": "The DolbyIO Virtual World Plugin for Unity",
+  "documentationUrl": "https://api-references.dolby.io/comms-sdk-dotnet/documentation/unity/unity.html",
+  "licensesUrl": "https://github.com/DolbyIO/comms-sdk-dotnet/blob/main/LICENSE",
+  "keywords": [
+      "audio",
+      "voice",
+      "spatial"
+  ],
+  "samples": [{
+    "displayName": "Reference Sample Scenes",
+    "description": "Dolby.io Communications samples",
+    "path": "Samples~"
+  }],
+  "author": {
+      "name": "DolbyIO",
+      "email": "customer@dolby.io",
+      "url": "https://github.com/DolbyIO/comms-sdk-dotnet"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/DolbyIO/comms-sdk-dotnet",
+    "directory": "dolbyio.comms.unity"
+  },
+  "dependencies": {
+    "com.unity.nuget.newtonsoft-json": "3.0.2"
+  }
+}
