@@ -1,3 +1,0 @@
-[submodule "unity"]
-	path = unity
-	url = git@github.com:DolbyIO/comms-sdk-unity.git
