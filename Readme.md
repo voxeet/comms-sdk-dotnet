@@ -33,10 +33,6 @@ Use the following command to install the .NET SDK from NuGet into your .NET proj
 dotnet add package DolbyIO.Comms.Sdk
 ```
 
->On MacOS, it is necessary to unquarantine SDK libraries. Otherwise, quarantine attributes prevent their usage. The simplest way to unquarantine is to strip the quarantine attributes recursively for all the files in the package. Follow these steps:
->1. Open **Terminal**.
->2. Assuming you have unzipped the SDK under `~/Downloads/dolbyio-comms-dotnet-sdk`, run this command `xattr -d -r com.apple.quarantine ~/Downloads/dolbyio-comms-dotnet-sdk`.
-
 #### 1. Initialize the SDK
 
 Initialize the SDK using the secure authentication method that uses a token in the application. For the purpose of this application, use a [client access token](https://docs.dolby.io/communications-apis/docs/overview-developer-tools#client-access-token) generated from the Dolby.io dashboard. Use the following code to initialize the SDK using the [DolbyIOSDK.InitAsync](https://api-references.dolby.io/comms-sdk-dotnet/api/DolbyIO.Comms.DolbyIOSDK.html#DolbyIO_Comms_DolbyIOSDK_InitAsync_System_String_DolbyIO_Comms_RefreshTokenCallBack_) method:
