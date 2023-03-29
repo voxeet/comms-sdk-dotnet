@@ -1,5 +1,3 @@
-option(BUILD_UNITY "Build unity native dependencies (Development Only)" OFF)
-
 if (BUILD_UNITY)
     if (NOT DEFINED ENV{UNITY_PLUGIN_PATH})
         message(FATAL_ERROR "Please set UNITY_PLUGIN_PATH")

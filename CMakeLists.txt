@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.15)
 
 option(BUILD_TESTS "Build Tests" ON)
-option(BUILD_UNITY "Package Unity Plugin" ON)
+option(BUILD_UNITY "Copy Binaries to Unity Plugin" OFF)
 
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_CURRENT_SOURCE_DIR}/cmake/")
 
