@@ -16,10 +16,10 @@ namespace DolbyIO.Comms.Services
         /// </summary>
         /// <param name="sink">The VideoSink used to receive video frames.</param>
         /// <returns>A <xref href="System.Threading.Tasks.Task"/> that represents the asynchronous operation.</returns>
-        public async Task SetVideoSinkAsync(VideoSink? sink)
+        public async Task SetVideoSinkAsync(VideoTrack track, VideoSink? sink)
         {
             VideoSinkHandle handle = sink != null ? sink.Handle : new VideoSinkHandle();
-            await Task.Run(() => Native.CheckException(Native.SetVideoSink(handle))).ConfigureAwait(false);
+            await Task.Run(() => Native.CheckException(Native.SetVideoSink(track, handle))).ConfigureAwait(false);
         }
     }
 }

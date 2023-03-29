@@ -94,6 +94,19 @@ namespace dolbyio::comms::native {
     bool    audible_locally;
   };
 
+  /**
+   * @brief C# Video Track C Struct
+   */
+  struct video_track {
+    char* peer_id;
+    char* stream_id;
+    char* track_id;
+    char* sdp_track_id;
+
+    bool is_screenshare;
+    bool remote;
+  };
+
   struct on_conference_status_updated {
     using event = dolbyio::comms::conference_status_updated;
     using type = void (*)(int status, const char* conferenceId);
@@ -125,7 +138,7 @@ namespace dolbyio::comms::native {
   };
 
   struct on_active_speaker_change {
-    using event = dolbyio::comms::active_speaker_change;
+    using event = dolbyio::comms::active_speaker_changed;
     using type = void (*)(char* conference_id, int count, char* active_speakers[]);
     static constexpr const char* name = "on_active_speaker_change";
   };
@@ -140,6 +153,18 @@ namespace dolbyio::comms::native {
     using event = dolbyio::comms::conference_invitation_received;
     using type = void (*)(char* conference_id, char* conference_alias, participant_info* info);
     static constexpr const char* name = "on_conference_invitation_received";
+  };
+
+  struct on_conference_video_track_added {
+    using event = dolbyio::comms::video_track_added;
+    using type = void (*)(video_track track);
+    static constexpr const char* name = "on_conference_video_track_added";
+  };
+
+  struct on_conference_video_track_removed {
+    using event = dolbyio::comms::video_track_removed;
+    using type = void (*)(video_track track);
+    static constexpr const char* name = "on_conference_video_track_removed";
   };
 
   template<typename Traits> 
@@ -265,6 +290,29 @@ namespace dolbyio::comms::native {
       dest.audible_locally = src->audible_locally;
       
       no_alloc_to_cpp(dest.info, &src->info);
+    }
+  };
+
+  template<typename Traits> 
+  struct translator<dolbyio::comms::native::video_track, dolbyio::comms::video_track, Traits> {
+    static void to_c(typename Traits::c_type* dest, const typename Traits::cpp_type& src) {
+      dest->peer_id = strdup(src.peer_id);
+      dest->stream_id = strdup(src.stream_id);
+      dest->track_id = strdup(src.track_id);
+      dest->sdp_track_id = strdup(src.sdp_track_id);
+
+      dest->is_screenshare = src.is_screenshare;
+      dest->remote = src.remote;
+    }
+
+    static void to_cpp(typename Traits::cpp_type& dest, typename Traits::c_type* src) {
+      dest.peer_id = std::string(src->peer_id);
+      dest.stream_id = std::string(src->stream_id);
+      dest.track_id = std::string(src->track_id);
+      dest.sdp_track_id = std::string(src->sdp_track_id);
+
+      dest.is_screenshare = src->is_screenshare;
+      dest.remote = src->remote;
     }
   };
 

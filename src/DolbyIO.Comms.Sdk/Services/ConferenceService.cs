@@ -204,6 +204,34 @@ namespace DolbyIO.Comms.Services
             }
         }
 
+        private VideoTrackAddedEventHandler _videoTrackAdded;
+
+        /// <summary>
+        /// Sets the <see cref="VideoTrackAddedEventHandler"/> that is raised when a <see cref="VideoTrack"/> is added.
+        /// </summary>
+        public VideoTrackAddedEventHandler VideoTrackAdded
+        {
+            set
+            {
+                Native.SetOnConferenceVideoTrackAddedHandler(value);
+                _videoTrackAdded = value;
+            }
+        }
+
+        /// <summary>
+        /// Sets the <see cref="VideoTrackRemovedEventHandler"/> that is raised when a <see cref="VideoTrack"/> is removed.
+        /// </summary>
+        private VideoTrackRemovedEventHandler _videoTrackRemoved;
+
+        public VideoTrackRemovedEventHandler VideoTrackRemoved
+        {
+            set
+            {
+                Native.SetOnConferenceVideoTrackRemovedHandler(value);
+                _videoTrackRemoved = value;
+            }
+        }
+
         private volatile bool _isInConference = false;
 
         /// <summary>

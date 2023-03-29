@@ -80,7 +80,7 @@ static constexpr yuv_params yuv2rb[6] = {
   make_yuv_params(0.2627, 0.0593, 0.0, 255.0, 255.0),
 };
 
-void yuv420_rgb24_std(
+static void yuv420_rgb24_std(
 	uint32_t width, uint32_t height, 
 	const uint8_t* y_addr, const uint8_t *u_addr, const uint8_t *v_addr, uint32_t y_stride, uint32_t uv_stride, 
 	uint8_t *rgba_addr, uint32_t rgb_stride, 

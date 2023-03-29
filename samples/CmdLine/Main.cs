@@ -155,14 +155,14 @@ public class CommandLine
                 Log.Debug($"OnDeviceAdded: {device.Name}");
             });
 
-            _sdk.MediaDevice.AudioDeviceRemoved = new AudioDeviceRemovedEventHandler((byte[] uid) =>
+            _sdk.MediaDevice.AudioDeviceRemoved = new AudioDeviceRemovedEventHandler((DeviceIdentity id)=>
             {
-                Log.Debug($"OnDeviceRemoved: {uid}");
+                Log.Debug($"OnDeviceRemoved");
             });
 
-            _sdk.MediaDevice.AudioDeviceChanged = new AudioDeviceChangedEventHandler((AudioDevice device, bool noDevice) =>
+            _sdk.MediaDevice.AudioDeviceChanged = new AudioDeviceChangedEventHandler((DeviceIdentity id, bool noDevice) =>
             {
-                Log.Debug($"OnDeviceChanged: {device.Name}");
+                Log.Debug($"OnDeviceChanged");
             });
 
             UserInfo user = new UserInfo();
@@ -207,7 +207,7 @@ public class CommandLine
             await _sdk.Conference.SetSpatialPositionAsync(_sdk.Session.User.Id, new Vector3(0.0f, 0.0f, 0.0f));
 
 
-            await _sdk.Video.Remote.SetVideoSinkAsync(_sink);
+            //await _sdk.Video.Remote.SetVideoSinkAsync(_sink);
 
             await InputLoop();
         }
@@ -261,10 +261,10 @@ public class CommandLine
         try
         {
             List<AudioDevice> audioDevices = await _sdk.MediaDevice.GetAudioDevicesAsync();
-            audioDevices.ForEach(d => Console.WriteLine(d.Uid + " : " + d.Name));
+            audioDevices.ForEach(d => Console.WriteLine(d.Name));
 
             List<VideoDevice> videoDevices = await _sdk.MediaDevice.GetVideoDevicesAsync();
-            videoDevices.ForEach(d => Console.WriteLine(d.Uid + " : " + d.Name));
+            videoDevices.ForEach(d => Console.WriteLine(d.Name));
             
             var device = await _sdk.MediaDevice.GetCurrentAudioInputDeviceAsync();
             await _sdk.MediaDevice.SetPreferredAudioInputDeviceAsync(device);
@@ -351,12 +351,12 @@ public class CommandLine
 
 public class Sink : VideoSink {
     public Sink() : base() {}
-    public override void OnFrame(string streamId, string trackId, VideoFrame frame)
+    public override void OnFrame(VideoFrame frame)
     {
         using(frame)
         {
   
-            Log.Debug($"OnFrame {streamId} {frame.Width}x{frame.Height} : {frame.DangerousGetHandle()}");
+            Log.Debug($"OnFrame {frame.Width}x{frame.Height} : {frame.DangerousGetHandle()}");
             try 
             {
                 var buffer = frame.GetBuffer();

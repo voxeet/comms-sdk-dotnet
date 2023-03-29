@@ -18,9 +18,9 @@ extern "C" {
   EXPORT_API void SetOnAudioDeviceRemovedHandler(on_audio_device_removed::type handler) {
     handle<on_audio_device_removed>(sdk->device_management(), handler, 
       [handler](const on_audio_device_removed::event& e) {
-        char uid[constants::DEVICE_GUID_SIZE];
-        std::memcpy(uid, &e.uid[0], e.uid.size());
-        handler(uid);
+        device_identity id;
+        id.value = (void*)new dolbyio::comms::audio_device::identity(e.device_id);
+        handler(id);
       }
     );
   }
@@ -28,9 +28,13 @@ extern "C" {
   EXPORT_API void SetOnAudioDeviceChangedHandler(on_audio_device_changed::type handler) {
     handle<on_audio_device_changed>(sdk->device_management(), handler, 
       [handler](const on_audio_device_changed::event& e) {
-        audio_device dev;
-        no_alloc_to_c(&dev, e.device);
-        handler(dev, e.no_device);
+        device_identity dev;
+
+        if (e.device.has_value()) {
+          dev.value = new dolbyio::comms::audio_device::identity(e.device.value());
+        }
+
+        handler(dev, !e.device.has_value());
       }
     );
   }
@@ -63,12 +67,16 @@ extern "C" {
     );
   }
 
+  EXPORT_API bool AudioDeviceEquals(dolbyio::comms::audio_device::identity* id1, dolbyio::comms::audio_device::identity* id2) {
+    return (*id1) == (*id2);
+  }
+
   EXPORT_API int GetAudioDevices(int* size, dolbyio::comms::native::audio_device** dest) {
     return call { [&]() {
       auto devices = wait(sdk->device_management().get_audio_devices());
       (*dest) = (dolbyio::comms::native::audio_device*) malloc(sizeof(dolbyio::comms::native::audio_device) * devices.size());
       
-      std::for_each(devices.begin(), devices.end(), [&devices, dest](const dvc_device& device) {
+      std::for_each(devices.begin(), devices.end(), [&devices, dest](const dolbyio::comms::audio_device& device) {
         int index = &device - &devices[0];
         no_alloc_to_c(&(*dest)[index], device);
       });
@@ -80,8 +88,9 @@ extern "C" {
   EXPORT_API int SetPreferredAudioInputDevice(dolbyio::comms::native::audio_device dev) {
     return call { [&]() {
       auto devices = wait(sdk->device_management().get_audio_devices());
-      auto result = std::find_if(devices.begin(), devices.end(), [&dev](const dvc_device& device) {
-        return std::memcmp(&device.uid()[0], dev.uid, device.uid().size()) == 0; 
+      auto result = std::find_if(devices.begin(), devices.end(), [&dev](const dolbyio::comms::audio_device& device) {
+        dolbyio::comms::audio_device::identity* identity = (dolbyio::comms::audio_device::identity*)dev.identity.value;
+        return device.get_identity() == *identity;
       });
 
       if (result != std::end(devices)) {
@@ -93,8 +102,9 @@ extern "C" {
   EXPORT_API int SetPreferredAudioOutputDevice(dolbyio::comms::native::audio_device dev) {
     return call { [&]() {
       auto devices = wait(sdk->device_management().get_audio_devices());
-      auto result = std::find_if(devices.begin(), devices.end(), [&dev](const dvc_device& device) {
-        return std::memcmp(&device.uid()[0], dev.uid, device.uid().size()) == 0; 
+      auto result = std::find_if(devices.begin(), devices.end(), [&dev](const dolbyio::comms::audio_device& device) {
+        dolbyio::comms::audio_device::identity* identity = (dolbyio::comms::audio_device::identity*)dev.identity.value;
+        return device.get_identity() == *identity;
       });
 
       if (result != std::end(devices)) {
@@ -145,6 +155,15 @@ extern "C" {
         no_alloc_to_c(dev, device.value());
       }
     }}.result();
+  }
+
+  EXPORT_API bool DeleteDeviceIdentity(dolbyio::comms::audio_device::identity* identity) {
+    if (identity) {
+      delete identity;
+      return true;
+    }
+
+    return false;
   }
 
 } // extern "C"

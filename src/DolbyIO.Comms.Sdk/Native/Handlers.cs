@@ -77,6 +77,18 @@ namespace DolbyIO.Comms
     /// <param name="reason">The reason for the error.</param>
     public delegate void PeerConnectionErrorEventHandler(string reason);
 
+    /// <summary>
+    /// The <see cref="DolbyIO.Comms.Services.ConferenceService.VideoTrackAdded">Conference.VideoTrackAdded</see> event handler.
+    /// </summary>
+    /// <param name="track">The added video track</param>
+    public delegate void VideoTrackAddedEventHandler(VideoTrack track);
+
+    /// <summary>
+    /// The <see cref="DolbyIO.Comms.Services.ConferenceService.VideoTrackRemoved">Conference.VideoTrackRemoved</see> event handler.
+    /// </summary>
+    /// <param name="track">The removed video track</param>
+    public delegate void VideoTrackRemovedEventHandler(VideoTrack track);
+
     // -- Devices --
 
     /// <summary>
@@ -89,14 +101,14 @@ namespace DolbyIO.Comms
     /// The <see cref="DolbyIO.Comms.Services.MediaDeviceService.AudioDeviceRemoved">MediaDevice.AudioRemoved</see> event handler.
     /// </summary>
     /// <param name="uid">A unique device identifier of the removed audio device.</param>
-    public delegate void AudioDeviceRemovedEventHandler([MarshalAs(UnmanagedType.LPArray, SizeConst = Constants.DeviceUidSize, ArraySubType = UnmanagedType.U1)] byte[] uid);
+    public delegate void AudioDeviceRemovedEventHandler(DeviceIdentity id);
 
     /// <summary>
     /// The <see cref="DolbyIO.Comms.Services.MediaDeviceService.AudioDeviceChanged">MediaDevice.AudioChanged</see> event handler.
     /// </summary>
-    /// <param name="device">The new audio device.</param>
+    /// <param name="id">The changed audio device identity.</param>
     /// <param name="noDevice">A boolean indicating whether there is a device in use for the current direction. True if there is no device; otherwise, false.</param>
-    public delegate void AudioDeviceChangedEventHandler(AudioDevice device, bool noDevice);
+    public delegate void AudioDeviceChangedEventHandler(DeviceIdentity id, bool noDevice);
 
     /// <summary>
     /// The <see cref="DolbyIO.Comms.Services.MediaDeviceService.VideoDeviceAdded">MediaDevice.VideoAdded</see> event handler.

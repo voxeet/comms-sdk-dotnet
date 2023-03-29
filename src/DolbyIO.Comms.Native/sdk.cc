@@ -51,6 +51,12 @@ extern "C" {
     }}.result();
   }
 
+  EXPORT_API int RegisterComponentVersion(const char* name, const char* version) {
+    return call { [&]() {
+      wait(sdk->register_component_version(std::string(name), std::string(version)));
+    }}.result();
+  }
+
   EXPORT_API int Release() {
     return call { [&]() {
       for (const auto& [key, value] : handlers_map)
