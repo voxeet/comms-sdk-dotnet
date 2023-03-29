@@ -52,9 +52,10 @@ namespace dolbyio::comms::native {
    * @brief C# ConnectionOptions C struct.
    */
   struct connection_options {
-    // max forwarding
+    int   max_video_forwarding;
     char* conference_access_token;
     bool  spatial_audio;
+    bool  simulcast;
   };
 
   /**
@@ -215,13 +216,17 @@ namespace dolbyio::comms::native {
   template<typename Traits>
   struct translator<dolbyio::comms::native::connection_options, dolbyio::comms::services::conference::connection_options, Traits> {
     static void to_c(typename Traits::c_type* dest, const typename Traits::cpp_type& src) {
+      dest->max_video_forwarding = src.max_video_forwarding.value_or(25);
       dest->conference_access_token = strdup(src.conference_access_token.value_or(""));
       dest->spatial_audio = src.spatial_audio;
+      dest->simulcast = src.simulcast;
     }
 
     static void to_cpp(typename Traits::cpp_type& dest, typename Traits::c_type* src) {
+      dest.max_video_forwarding = src->max_video_forwarding;
       dest.conference_access_token = src->conference_access_token;
       dest.spatial_audio = src->spatial_audio;
+      dest.simulcast = src->simulcast;
     }
   };
 
