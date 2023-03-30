@@ -157,12 +157,12 @@ public class CommandLine
 
             _sdk.MediaDevice.AudioDeviceRemoved = new AudioDeviceRemovedEventHandler((DeviceIdentity id)=>
             {
-                Log.Debug($"OnDeviceRemoved");
+                Log.Debug("OnDeviceRemoved");
             });
 
             _sdk.MediaDevice.AudioDeviceChanged = new AudioDeviceChangedEventHandler((DeviceIdentity id, bool noDevice) =>
             {
-                Log.Debug($"OnDeviceChanged");
+                Log.Debug("OnDeviceChanged");
             });
 
             UserInfo user = new UserInfo();
@@ -205,9 +205,6 @@ public class CommandLine
             );  
             
             await _sdk.Conference.SetSpatialPositionAsync(_sdk.Session.User.Id, new Vector3(0.0f, 0.0f, 0.0f));
-
-
-            //await _sdk.Video.Remote.SetVideoSinkAsync(_sink);
 
             await InputLoop();
         }

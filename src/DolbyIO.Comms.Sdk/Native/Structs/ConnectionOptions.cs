@@ -10,7 +10,7 @@ namespace DolbyIO.Comms
     public class ConnectionOptions
     {
         /// <summary>
-        /// The maximum number of video streams that  may be transmitted to the SDK. Valid parameter values 
+        /// The maximum number of video streams that may be transmitted to the SDK. Valid parameter values 
         /// are between 0 and 25.
         /// </summary>
         public int MaxVideoForwarding = 25;
