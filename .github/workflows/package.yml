@@ -87,3 +87,10 @@ jobs:
           name: CmdLine
           path: ${{github.workspace}}/build/CmdLine/
 
+      - run: 7z x "${{github.workspace}}/build/bin/DolbyIO.Comms.Sdk.Runtime.*.nupkg" -o${{github.workspace}}/build "runtimes/*"
+        working-directory: ${{github.workspace}}/build
+      
+      - uses: actions/upload-artifact@v3
+        with:
+          name: dolbyio-dotnet-binaries
+          path: ${{github.workspace}}/build/runtimes/
