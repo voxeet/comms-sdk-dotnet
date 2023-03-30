@@ -1,0 +1,16 @@
+name: Publish Nuget
+on: workflow_dispatch
+
+jobs:
+  package:
+    uses: ./.github/worflows/package.yml
+    secrets: inherits
+
+  publish:
+    runs-on: macos-latest
+    steps:
+      - name: Download nuget packages
+        uses: actions/download-artifact@v3
+        with:
+          name: nugets
+
