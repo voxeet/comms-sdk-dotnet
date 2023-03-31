@@ -2,19 +2,21 @@ name: Publish NuGet
 on: workflow_dispatch
 
 jobs:
+  package:
+    uses: ./.github/workflows/package.yml
+    secrets: inherit
+
   publish:
     runs-on: macos-latest
+    needs: package
     steps:
-      - uses: ./.github/workflows/package.yml
-        secrets: inherit
-         
       - name: Download nuget artifact
         uses: actions/download-artifact@v3
         with:
           name: nugets
 
       - run: 7z e nugets.zip
-        working-directory: ${{github.workspace}}/artifacts
+         working-directory: ${{github.workspace}}/artifacts
 
       - name: Deploy to NuGet 🚀
         working-directory: ${{github.workspace}}/artifacts
