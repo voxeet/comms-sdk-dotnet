@@ -10,7 +10,7 @@ jobs:
     secrets: inherit
 
   publish:
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
     needs: package
     steps:
       - uses: actions/setup-dotnet@v3
