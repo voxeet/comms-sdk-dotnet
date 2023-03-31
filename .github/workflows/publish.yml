@@ -10,6 +10,10 @@ jobs:
     runs-on: macos-latest
     needs: package
     steps:
+      - uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '6.x'
+
       - name: Download nuget artifact
         uses: actions/download-artifact@v3
         with:
