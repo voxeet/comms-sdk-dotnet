@@ -1,5 +1,8 @@
-name: Publish Nuget
-on: workflow_dispatch
+name: Publish NuGet
+on: 
+  workflow_dispatch:
+  release:
+    type: [published]
 
 jobs:
   package:
@@ -7,10 +10,19 @@ jobs:
     secrets: inherit
 
   publish:
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
+    needs: package
     steps:
-      - name: Download nuget packages
+      - uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '6.x'
+
+      - name: Download nuget artifact
         uses: actions/download-artifact@v3
         with:
           name: nugets
+          path: artifacts
 
+      - name: Deploy to NuGet 🚀
+        working-directory: artifacts
+        run: dotnet nuget push "*.nupkg" --source https://api.nuget.org/v3/index.json --skip-duplicate --api-key ${{ secrets.NUGET_API_KEY }}
