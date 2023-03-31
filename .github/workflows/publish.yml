@@ -14,10 +14,11 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: nugets
+          working-directory: artifacts
 
       - run: 7z e nugets.zip
-         working-directory: ${{github.workspace}}/artifacts
+        working-directory: artifacts
 
       - name: Deploy to NuGet 🚀
-        working-directory: ${{github.workspace}}/artifacts
+        working-directory: artifacts
         run: dotnet nuget push "*.nupkg" --source https://api.nuget.org/v3/index.json --skip-duplicate --api-key ${{ secrets.NUGET_API_KEY }}
