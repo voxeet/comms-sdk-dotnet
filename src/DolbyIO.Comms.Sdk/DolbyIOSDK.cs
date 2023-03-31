@@ -9,6 +9,8 @@ namespace DolbyIO.Comms
     /// </summary>
     public sealed class DolbyIOSDK : IDisposable
     {
+        private string _componentName;
+
         private RefreshTokenCallBack _refreshCallback;
         private SignalingChannelErrorEventHandler _signalingChannelError;
 
@@ -156,6 +158,11 @@ namespace DolbyIO.Comms
         /// <value><c>true</c> if the SDK is initialized; otherwise, <c>false</c>.</value>
         public bool IsInitialized { get => _initialized; }
 
+        public DolbyIOSDK(string componentName = ComponentName.Dotnet)
+        {
+            _componentName = componentName;
+        }
+
         /// <summary>
         /// Initializes the SDK with an access token that is provided by the customer's backend.
         /// </summary>
@@ -173,6 +180,7 @@ namespace DolbyIO.Comms
             await Task.Run(() =>
             {
                 Native.CheckException(Native.Init(accessToken, _refreshCallback));
+                Native.CheckException(Native.RegisterComponentVersion(_componentName, typeof(DolbyIOSDK).Assembly.GetName().Version.ToString()));
                 _initialized = true;
             }).ConfigureAwait(false);
         }

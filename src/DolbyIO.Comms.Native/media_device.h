@@ -6,10 +6,17 @@
 namespace dolbyio::comms::native {
 
   /**
+   * @brief C# DeviceIdentity C struct.
+   */
+  struct device_identity {
+    void* value;
+  };
+
+  /**
    * @brief C# AudioDevice C struct.
    */
   struct audio_device {
-    char  uid[constants::DEVICE_GUID_SIZE];
+    device_identity identity;
     char* name;
     int32_t direction;
   };
@@ -30,13 +37,13 @@ namespace dolbyio::comms::native {
 
   struct on_audio_device_removed {
     using event = dolbyio::comms::audio_device_removed;
-    using type = void (*)(char uid[constants::DEVICE_GUID_SIZE]);
+    using type = void (*)(device_identity);
     static constexpr const char* name = "on_audio_device_removed";
   };
 
   struct on_audio_device_changed {
     using event = dolbyio::comms::audio_device_changed;
-    using type = void (*)(audio_device dev, bool no_device);
+    using type = void (*)(device_identity id, bool no_device);
     static constexpr const char* name = "on_audio_device_changed";
   };
 
@@ -64,9 +71,9 @@ namespace dolbyio::comms::native {
    * @tparam Traits 
    */
   template<typename Traits> 
-  struct translator<dolbyio::comms::native::audio_device, dolbyio::comms::dvc_device, Traits> {
+  struct translator<dolbyio::comms::native::audio_device, dolbyio::comms::audio_device, Traits> {
     static void to_c(typename Traits::c_type* dest, const typename Traits::cpp_type& src) {
-      std::memcpy(dest->uid, &src.uid()[0], src.uid().size());
+      dest->identity.value = (void *)new dolbyio::comms::audio_device::identity(src.get_identity());
       dest->name = strdup(src.name());
       dest->direction = to_underlying(src.direction());
     }

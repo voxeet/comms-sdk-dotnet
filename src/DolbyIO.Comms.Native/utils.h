@@ -13,6 +13,11 @@ namespace dolbyio::comms::native {
     return std::strcpy((char*)malloc(s.size() + 1), s.c_str());
   }
 
+  // No op deleter
+  struct null_deleter {
+    template<typename T> void operator()(T *t) {};
+  };
+
   template<typename Exception = std::exception>
   struct call {
   public:

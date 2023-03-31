@@ -18,6 +18,9 @@ namespace DolbyIO.Comms
         internal static extern int Init(string accessToken, RefreshTokenCallBack cb);
 
         [DllImport (LibName, CharSet = CharSet.Ansi)]
+        internal static extern int RegisterComponentVersion(string name, string version);
+
+        [DllImport (LibName, CharSet = CharSet.Ansi)]
         internal static extern int SetLogLevel([MarshalAs(UnmanagedType.I4)] LogLevel level);
     
         [DllImport (LibName, CharSet = CharSet.Ansi)]
@@ -80,6 +83,9 @@ namespace DolbyIO.Comms
         [DllImport (LibName, CharSet = CharSet.Ansi)]
         internal static extern int DeclineInvitation(string conferenceId);
 
+        [DllImport(LibName, CharSet = CharSet.Ansi)]
+        internal static extern bool AudioDeviceEquals(IntPtr id1, IntPtr id2);
+
         [DllImport (LibName, CharSet = CharSet.Ansi)]
         internal static extern int GetAudioDevices(ref int size, [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 0)] out AudioDevice[] devices);
 
@@ -94,6 +100,9 @@ namespace DolbyIO.Comms
 
         [DllImport(LibName, CharSet = CharSet.Ansi)]
         internal static extern int GetCurrentAudioOutputDevice(out AudioDevice device);
+
+        [DllImport(LibName, CharSet = CharSet.Ansi)]
+        internal static extern bool DeleteDeviceIdentity(IntPtr handle);
 
         [DllImport (LibName, CharSet = CharSet.Ansi)]
         internal static extern int Leave();
@@ -121,7 +130,7 @@ namespace DolbyIO.Comms
         internal static extern bool DeleteVideoFrameBuffer(IntPtr handle);
 
         [DllImport (Native.LibName, CharSet = CharSet.Ansi)]
-        internal static extern int SetVideoSink(VideoSinkHandle handle);
+        internal static extern int SetVideoSink(VideoTrack track, VideoSinkHandle handle);
 
         [DllImport (Native.LibName, CharSet = CharSet.Ansi)]
         internal static extern int StartVideo(VideoDevice device, VideoFrameHandlerHandle handler);
@@ -186,6 +195,12 @@ namespace DolbyIO.Comms
 
         [DllImport (LibName, CharSet = CharSet.Ansi)]
         internal static extern void SetOnPeerConnectionFailedExceptionHandler(PeerConnectionErrorEventHandler handler);
+
+        [DllImport(LibName, CharSet = CharSet.Ansi)]
+        internal static extern void SetOnConferenceVideoTrackAddedHandler(VideoTrackAddedEventHandler handler);
+
+        [DllImport(LibName, CharSet = CharSet.Ansi)]
+        internal static extern void SetOnConferenceVideoTrackRemovedHandler(VideoTrackRemovedEventHandler handler);
 
         internal static void CheckException(int err)
         {

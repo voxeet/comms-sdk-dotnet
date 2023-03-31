@@ -1,20 +1,23 @@
+using System;
 using System.Runtime.InteropServices;
 
 namespace DolbyIO.Comms
 {
+    
+    
     /// <summary>
     /// The AudioDevice class contains a platform-agnostic description of an audio device.
     /// </summary>
     /// @ingroup device_management
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
-    public struct AudioDevice
+    public struct AudioDevice : IEquatable<DeviceIdentity>, 
+                                IEquatable<AudioDevice>
     {
         /// <summary>
         /// The unique identifier of the audio device.
         /// </summary>
         /// <returns>The identifier.</returns>
-        [MarshalAs(UnmanagedType.ByValArray, SizeConst = Constants.DeviceUidSize, ArraySubType = UnmanagedType.U1)]
-        public readonly byte[] Uid;
+        internal readonly DeviceIdentity Identity;
 
         /// <summary>
         /// The name of the audio device.
@@ -29,5 +32,15 @@ namespace DolbyIO.Comms
         /// <returns>Information whether the device is the input or output device.</returns>
         [MarshalAs(UnmanagedType.I4)]
         public readonly DeviceDirection Direction;
+
+        public bool Equals(AudioDevice obj)
+        {
+            return Native.AudioDeviceEquals(Identity.Value, obj.Identity.Value);
+        }
+
+        public bool Equals(DeviceIdentity id)
+        {
+            return Native.AudioDeviceEquals(Identity.Value, id.Value);
+        }
     }
 }

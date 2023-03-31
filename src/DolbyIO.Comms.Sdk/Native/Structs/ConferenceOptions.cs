@@ -12,13 +12,11 @@ namespace DolbyIO.Comms
         /// <summary>
         /// The conference parameters.
         /// </summary>
-        /// <returns>The conference parameters.</returns>
         public ConferenceParams Params = new ConferenceParams();
 
         /// <summary>
         /// The conference alias.
         /// </summary>
-        /// <returns>The alias.</returns>
         [MarshalAs(UnmanagedType.LPStr)]
         public string Alias;
     }

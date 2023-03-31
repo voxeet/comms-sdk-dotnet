@@ -10,12 +10,17 @@ namespace DolbyIO.Comms
     public class ConnectionOptions
     {
         /// <summary>
+        /// The maximum number of video streams that may be transmitted to the SDK. Valid parameter values 
+        /// are between 0 and 25.
+        /// </summary>
+        public int MaxVideoForwarding = 25;
+
+        /// <summary>
         /// The conference access token that is required to join a protected conference if
         /// the conference is created using the [create](ref:conference#operation-create-conference)
         /// REST API. While calling the join or listen method, the application has to externally
         /// fetch the token and provide it to the SDK.
         /// </summary>
-        /// <returns>The conference access token.</returns>
         [MarshalAs(UnmanagedType.LPStr)]
         public string ConferenceAccessToken = "";
 
@@ -24,8 +29,13 @@ namespace DolbyIO.Comms
         /// true if spatial audio style is enabled. For more information, refer to our sample
         /// application code.
         /// </summary>
-        /// <returns>If true, spatial audio is enabled.</returns>
         [MarshalAs(UnmanagedType.U1)]
         public bool SpatialAudio = false;
+
+        /// <summary>
+        /// Enables simulcast support in the conference.
+        /// </summary>
+        [MarshalAs(UnmanagedType.U1)]
+        public bool Simulcast = false;
     }
 }

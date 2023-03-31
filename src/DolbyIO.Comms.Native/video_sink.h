@@ -25,13 +25,13 @@ namespace dolbyio::comms::native {
   class video_sink : public dolbyio::comms::video_sink {
   
   public:
-    using delegate_type = void (*)(char*, char*, int, int, uint8_t*);
+    using delegate_type = void (*)(int, int, uint8_t*);
 
     video_sink(delegate_type delegate) {
       delegate_ = delegate;
     }
 
-    void handle_frame(const std::string &stream_id, const std::string &track_id, std::unique_ptr<video_frame> frame) {
+    void handle_frame(std::unique_ptr<video_frame> frame) {
       int bytes_per_pixel = 4;
 
 #if defined(__APPLE__)
@@ -112,7 +112,7 @@ namespace dolbyio::comms::native {
       );
 #endif
 
-      delegate_(strdup(stream_id), strdup(track_id), width, height, resbuffer);
+      delegate_(width, height, resbuffer);
     }
 
   private:

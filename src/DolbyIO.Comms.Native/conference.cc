@@ -78,7 +78,27 @@ extern "C" {
       }
     );
   }
-  
+
+  EXPORT_API void SetOnConferenceVideoTrackAddedHandler(on_conference_video_track_added::type handler) {
+    handle<on_conference_video_track_added>(sdk->conference(), handler,
+      [handler](const on_conference_video_track_added::event& e) {
+        video_track t;
+        no_alloc_to_c(&t, e.track);
+        handler(t);
+      }
+    );
+  }
+
+  EXPORT_API void SetOnConferenceVideoTrackRemovedHandler(on_conference_video_track_removed::type handler) {
+    handle<on_conference_video_track_removed>(sdk->conference(), handler,
+      [handler](const on_conference_video_track_removed::event& e) {
+        video_track t;
+        no_alloc_to_c(&t, e.track);
+        handler(t);
+      }
+    );
+  }
+
   EXPORT_API int Create(dolbyio::comms::native::conference_options* opts, dolbyio::comms::native::conference* conf) {
     return call { [&]() {
       auto options = to_cpp<dolbyio::comms::services::conference::conference_options>(opts);

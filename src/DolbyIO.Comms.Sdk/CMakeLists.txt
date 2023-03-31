@@ -14,6 +14,7 @@ add_dotnet_library(
         Native/Structs/Handles/VideoFrame.cs
         Native/Structs/Handles/VideoSinkHandle.cs
         Native/Structs/Handles/VideoFrameHandlerHandle.cs
+        Native/Structs/DeviceIdentity.cs
         Native/Structs/AudioDevice.cs
         Native/Structs/Conference.cs
         Native/Structs/ConferenceOptions.cs
@@ -29,6 +30,7 @@ add_dotnet_library(
         Native/Structs/VideoDevice.cs
         Native/Structs/VideoSink.cs
         Native/Structs/VideoFrameHandler.cs
+        Native/Structs/VideoTrack.cs
         Native/Callback.cs
         Native/Handlers.cs
         Native/Native.cs
@@ -41,6 +43,7 @@ add_dotnet_library(
         Services/Video/VideoService.cs
         Services/Video/LocalVideoService.cs
         Services/Video/RemoteVideoService.cs
+        ComponentName.cs
         DolbyIOException.cs
         DolbyIOSDK.cs
     VERSION
