@@ -16,9 +16,6 @@ jobs:
           name: nugets
           path: artifacts
 
-      - run: 7z e nugets.zip
-        working-directory: artifacts
-
       - name: Deploy to NuGet 🚀
         working-directory: artifacts
         run: dotnet nuget push "*.nupkg" --source https://api.nuget.org/v3/index.json --skip-duplicate --api-key ${{ secrets.NUGET_API_KEY }}
