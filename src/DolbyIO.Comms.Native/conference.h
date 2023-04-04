@@ -71,6 +71,7 @@ namespace dolbyio::comms::native {
    */
   struct listen_options {
     connection_options connection;
+    int                listen_mode;
   };
 
   /**
@@ -253,10 +254,12 @@ namespace dolbyio::comms::native {
   struct translator<dolbyio::comms::native::listen_options, dolbyio::comms::services::conference::listen_options, Traits> {
     static void to_c(typename Traits::c_type* dest, const typename Traits::cpp_type& src) {
       no_alloc_to_c(&dest->connection, src.connection);
+      dest->listen_mode = to_underlying(src.type);
     }
 
     static void to_cpp(typename Traits::cpp_type& dest, typename Traits::c_type* src) {
       no_alloc_to_cpp(dest.connection, &src->connection);
+      dest.type = (dolbyio::comms::listen_mode)(src->listen_mode);
     }
   };
   

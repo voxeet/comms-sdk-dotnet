@@ -11,6 +11,7 @@ add_dotnet_library(
         Native/Enums/ParticipantType.cs
         Native/Enums/Result.cs
         Native/Enums/SpatialAudioStyle.cs
+        Native/Enums/ListenMode.cs
         Native/Structs/Handles/VideoFrame.cs
         Native/Structs/Handles/VideoSinkHandle.cs
         Native/Structs/Handles/VideoFrameHandlerHandle.cs

@@ -14,5 +14,11 @@ namespace DolbyIO.Comms
         /// </summary>
         /// <returns>The connection options.</returns>
         public ConnectionOptions Connection = new ConnectionOptions();
+
+        /// <summary>
+        /// The listening mode.
+        /// </summary>
+        [MarshalAs(UnmanagedType.I4)]
+        public ListenMode Mode = ListenMode.Regular;
     }
 }

@@ -77,6 +77,7 @@ namespace DolbyIO.Comms.Tests
             ListenOptions src = new ListenOptions();
             src.Connection.ConferenceAccessToken = "AccessToken";
             src.Connection.SpatialAudio = true;
+            src.Mode = ListenMode.RtsMixed;
 
             ListenOptions dest = new ListenOptions();
             NativeTests.ListenOptionsTest(src, dest);
@@ -84,6 +85,7 @@ namespace DolbyIO.Comms.Tests
             Assert.NotEqual(src, dest);
             Assert.Equal(src.Connection.ConferenceAccessToken, dest.Connection.ConferenceAccessToken);
             Assert.Equal(src.Connection.SpatialAudio, dest.Connection.SpatialAudio);
+            Assert.Equal(src.Mode, dest.Mode);
         }
 
         [Fact]
