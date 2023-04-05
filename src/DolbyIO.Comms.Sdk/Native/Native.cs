@@ -131,6 +131,9 @@ namespace DolbyIO.Comms
 
         [DllImport (Native.LibName, CharSet = CharSet.Ansi)]
         internal static extern int SetVideoSink(VideoTrack track, VideoSinkHandle handle);
+        
+        [DllImport (Native.LibName, CharSet = CharSet.Ansi)]
+        internal static extern int SetNullVideoSink(VideoTrack track);
 
         [DllImport (Native.LibName, CharSet = CharSet.Ansi)]
         internal static extern int StartVideo(VideoDevice device, VideoFrameHandlerHandle handler);

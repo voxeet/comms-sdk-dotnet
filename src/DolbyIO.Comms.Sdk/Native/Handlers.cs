@@ -100,7 +100,7 @@ namespace DolbyIO.Comms
     /// <summary>
     /// The <see cref="DolbyIO.Comms.Services.MediaDeviceService.AudioDeviceRemoved">MediaDevice.AudioRemoved</see> event handler.
     /// </summary>
-    /// <param name="uid">A unique device identifier of the removed audio device.</param>
+    /// <param name="id">A unique device identifier of the removed audio device.</param>
     public delegate void AudioDeviceRemovedEventHandler(DeviceIdentity id);
 
     /// <summary>

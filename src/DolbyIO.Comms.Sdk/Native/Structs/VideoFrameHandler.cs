@@ -16,6 +16,9 @@ namespace DolbyIO.Comms
         internal VideoFrameHandlerHandle Handle;
         private VideoSink? _sink;
 
+        /// <summary>
+        /// The VideoSink used to handle video frames.
+        /// </summary>
         public VideoSink? Sink 
         {
             get => _sink;
@@ -26,22 +29,27 @@ namespace DolbyIO.Comms
             }
         }
 
+        /// <summary>
+        /// Create a new VideoFrameHandler.
+        /// </summary>
         public VideoFrameHandler()
         {
             Handle = Native.CreateVideoFrameHandler();
         }
-
+    
         internal VideoFrameHandler(VideoFrameHandlerHandle handle)
         {
             Handle = handle;
         }
 
+        /// <inheritdoc/>
         public void Dispose()
         {
             Dispose(disposing: true);
             GC.SuppressFinalize(this);
         }
 
+        /// <inheritdoc/>
         protected virtual void Dispose(bool disposing)
         {
             if (Handle != null && !Handle.IsInvalid)

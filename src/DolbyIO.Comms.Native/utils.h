@@ -15,7 +15,7 @@ namespace dolbyio::comms::native {
 
   // No op deleter
   struct null_deleter {
-    template<typename T> void operator()(T *t) {};
+    template<typename T> void operator()(T *t) { };
   };
 
   template<typename Exception = std::exception>

@@ -218,11 +218,11 @@ namespace DolbyIO.Comms.Services
             }
         }
 
+        private VideoTrackRemovedEventHandler _videoTrackRemoved;
+
         /// <summary>
         /// Sets the <see cref="VideoTrackRemovedEventHandler"/> that is raised when a <see cref="VideoTrack"/> is removed.
         /// </summary>
-        private VideoTrackRemovedEventHandler _videoTrackRemoved;
-
         public VideoTrackRemovedEventHandler VideoTrackRemoved
         {
             set
@@ -338,7 +338,7 @@ namespace DolbyIO.Comms.Services
         /// <summary>
         /// Creates a demo conference and joins it upon completion.
         /// </summary>
-        /// <param name="spatialAudio">The <see cref="DolbyIO.Comms.SpatialAudioStyle">spatial audio style</xref> to be used in the demo conference.</param>
+        /// <param name="audioStyle">The <see cref="DolbyIO.Comms.SpatialAudioStyle">spatial audio style</see> to be used in the demo conference.</param>
         /// <returns>The <xref href="System.Threading.Tasks.Task`1"/> that represents the asynchronous operation.
         /// The <xref href="System.Threading.Tasks.Task`1.Result"/> property returns the joined <see cref="Conference" /> object.</returns>
         public async Task<Conference> DemoAsync(SpatialAudioStyle audioStyle = SpatialAudioStyle.Individual)

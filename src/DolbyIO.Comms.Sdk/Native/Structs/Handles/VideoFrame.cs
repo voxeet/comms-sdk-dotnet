@@ -25,9 +25,11 @@ namespace DolbyIO.Comms
             Height = height;
             SetHandle(buffer);
         }
-
+        
+        /// <inheritdoc/>
         public override bool IsInvalid => handle == IntPtr.Zero || handle == new IntPtr(-1);
 
+        /// <inheritdoc/>
         protected override bool ReleaseHandle()
         {
             return Native.DeleteVideoFrameBuffer(handle);
