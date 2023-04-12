@@ -28,6 +28,30 @@ jobs:
       - name: Build
         working-directory: ${{github.workspace}}/build
         run: cmake --build . -t DolbyIO.Comms.Native
+      - if: ${{matrix.os == 'macos-latest'}}
+        env:
+          BUILD_CERTIFICATE_BASE64: ${{ secrets.BUILD_CERTIFICATE_BASE64 }}
+          P12_PASSWORD: ${{ secrets.P12_PASSWORD }}
+          BUILD_PROVISION_PROFILE_BASE64: ${{ secrets.BUILD_PROVISION_PROFILE_BASE64 }}
+          KEYCHAIN_PASSWORD: ${{ secrets.KEYCHAIN_PASSWORD }}
+          IAPI_DOTNET_APP_SPECYFIC_PASSWORD: ${{ secrets.IAPI_DOTNET_APP_SPECYFIC_PASSWORD }}
+        working-directory: ${{github.workspace}}/build/bin
+        run: |
+          # create variables
+          CERTIFICATE_PATH=$RUNNER_TEMP/build_certificate.p12
+          KEYCHAIN_PATH=$RUNNER_TEMP/app-signing.keychain-db
+          # import certificate and provisioning profile from secrets
+          echo -n "$BUILD_CERTIFICATE_BASE64" | base64 --decode -o $CERTIFICATE_PATH
+          # create temporary keychain
+          security create-keychain -p "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
+          security set-keychain-settings -lut 21600 $KEYCHAIN_PATH
+          security unlock-keychain -p "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
+          # import certificate to keychain
+          security import $CERTIFICATE_PATH -P "$P12_PASSWORD" -A -t cert -f pkcs12 -k $KEYCHAIN_PATH
+          security list-keychain -d user -s $KEYCHAIN_PATH
+          xcrun notarytool store-credentials "dotnet-sdk-notarization-profile" --apple-id "iapi@dolby.com" --team-id B55NRA8BRW --password "${IAPI_DOTNET_APP_SPECYFIC_PASSWORD}"
+          codesign --force --strict --timestamp --sign 'Developer ID Application: VOXEET INC. (B55NRA8BRW)' *.dylib      
+
 
       - name: Pack
         working-directory: ${{github.workspace}}/build
@@ -43,7 +67,6 @@ jobs:
           & 'C:/Program Files (x86)/Windows Kits/10/bin/10.0.17763.0/x86/signtool.exe' sign /f ./certificate.pfx /p ${{ secrets.WINDOWS_CERTIFICATE_PASSWORD}} /t http://timestamp.digicert.com/ dolbyio_comms_sdk.dll
           & 'C:/Program Files (x86)/Windows Kits/10/bin/10.0.17763.0/x86/signtool.exe' sign /f ./certificate.pfx /p ${{ secrets.WINDOWS_CERTIFICATE_PASSWORD}} /t http://timestamp.digicert.com/ dolbyio_comms_media.dll
           Remove-Item -Recurse -Force certificate.pfx
-
       - uses: actions/upload-artifact@v3
         with:
           name: nugets
@@ -57,6 +80,27 @@ jobs:
         with: 
           submodules: true
           lfs: true
+      - name: Install the Apple certificate and notarization profile
+        env:
+          BUILD_CERTIFICATE_BASE64: ${{ secrets.BUILD_CERTIFICATE_BASE64 }}
+          P12_PASSWORD: ${{ secrets.P12_PASSWORD }}
+          BUILD_PROVISION_PROFILE_BASE64: ${{ secrets.BUILD_PROVISION_PROFILE_BASE64 }}
+          KEYCHAIN_PASSWORD: ${{ secrets.KEYCHAIN_PASSWORD }}
+          IAPI_DOTNET_APP_SPECYFIC_PASSWORD: ${{ secrets.IAPI_DOTNET_APP_SPECYFIC_PASSWORD }}
+        run: |
+          # create variables
+          CERTIFICATE_PATH=$RUNNER_TEMP/build_certificate.p12
+          KEYCHAIN_PATH=$RUNNER_TEMP/app-signing.keychain-db
+          # import certificate and provisioning profile from secrets
+          echo -n "$BUILD_CERTIFICATE_BASE64" | base64 --decode -o $CERTIFICATE_PATH
+          # create temporary keychain
+          security create-keychain -p "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
+          security set-keychain-settings -lut 21600 $KEYCHAIN_PATH
+          security unlock-keychain -p "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
+          # import certificate to keychain
+          security import $CERTIFICATE_PATH -P "$P12_PASSWORD" -A -t cert -f pkcs12 -k $KEYCHAIN_PATH
+          security list-keychain -d user -s $KEYCHAIN_PATH
+          xcrun notarytool store-credentials "dotnet-sdk-notarization-profile" --apple-id "iapi@dolby.com" --team-id B55NRA8BRW --password "${IAPI_DOTNET_APP_SPECYFIC_PASSWORD}"
       - uses: ./.github/actions/configure
       - uses: actions/download-artifact@v3
         with:
@@ -75,7 +119,6 @@ jobs:
           echo "${{ secrets.WINDOWS_CERTIFICATE }}" | base64 --decode > certificate.pfx
           dotnet nuget sign DolbyIO.Comms.Sdk.*.nupkg --certificate-path ./certificate.pfx --certificate-password ${{ secrets.WINDOWS_CERTIFICATE_PASSWORD}} --timestamper http://timestamp.digicert.com/
           rm certificate.pfx
-
       - uses: actions/upload-artifact@v3
         with:
           name: nugets
@@ -91,7 +134,10 @@ jobs:
 
       - run: 7z x "${{github.workspace}}/build/bin/DolbyIO.Comms.Sdk.Runtime.*.nupkg" -o${{github.workspace}}/build "runtimes/*"
         working-directory: ${{github.workspace}}/build
-      
+
+      - name: Sign osx libs
+        run: |
+         codesign --force --strict --timestamp --sign 'Developer ID Application: VOXEET INC. (B55NRA8BRW)'   ${{github.workspace}}/build/runtimes/osx-universal/native/*.dylib      
       - uses: actions/upload-artifact@v3
         with:
           name: dolbyio-dotnet-binaries
