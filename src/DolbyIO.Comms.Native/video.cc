@@ -36,8 +36,8 @@ extern "C" {
     return call { [&]() {
       dolbyio::comms::screen_share_source source;
       no_alloc_to_cpp(source, &src);
-      auto shared = std::shared_ptr<dolbyio::comms::native::video_frame_handler>(handler, null_deleter{});
 
+      auto shared = std::shared_ptr<dolbyio::comms::native::video_frame_handler>(handler, null_deleter{});
       wait(sdk->conference().start_screen_share(source, shared));
     }}.result();
   }
