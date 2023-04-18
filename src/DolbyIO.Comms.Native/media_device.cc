@@ -157,6 +157,20 @@ extern "C" {
     }}.result();
   }
 
+  EXPORT_API int GetScreenShareSources(int* size, dolbyio::comms::native::screen_share_source** dest) {
+    return call { [&]() {
+      auto sources = wait(sdk->device_management().get_screen_share_sources());
+      (*dest) = (dolbyio::comms::native::screen_share_source*) malloc(sizeof(dolbyio::comms::native::screen_share_source) * sources.size());
+      
+      std::for_each(sources.begin(), sources.end(), [&sources, dest](const dolbyio::comms::screen_share_source& source) {
+        int index = &source - &sources[0];
+        no_alloc_to_c(&(*dest)[index], source);
+      });
+
+      (*size) = sources.size();
+    }}.result();
+  }
+
   EXPORT_API bool DeleteDeviceIdentity(dolbyio::comms::audio_device::identity* identity) {
     if (identity) {
       delete identity;

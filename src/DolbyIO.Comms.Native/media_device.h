@@ -29,6 +29,15 @@ namespace dolbyio::comms::native {
     char* name;
   };
 
+  /**
+   * @brief C# Screen Share Source C Struct
+   */
+  struct screen_share_source {
+    char*   title;
+    int64_t id;
+    int     type;
+  };
+
   struct on_audio_device_added {
     using event = dolbyio::comms::audio_device_added;
     using type = void (*)(audio_device dev);
@@ -94,6 +103,21 @@ namespace dolbyio::comms::native {
     static void to_cpp(typename Traits::cpp_type& dest, typename Traits::c_type* src) {
       dest.display_name = std::string(src->name);
       dest.unique_id = std::string(src->uid);
+    }
+  };
+
+  template<typename Traits> 
+  struct translator<dolbyio::comms::native::screen_share_source, dolbyio::comms::screen_share_source, Traits> {
+    static void to_c(typename Traits::c_type* dest, const typename Traits::cpp_type& src) {
+      dest->title = strdup(src.title);
+      dest->id = src.id;
+      dest->type = to_underlying(src.type);
+    }
+
+    static void to_cpp(typename Traits::cpp_type& dest, typename Traits::c_type* src) {
+      dest.title = std::string(src->title);
+      dest.id = src->id;
+      dest.type = (enum dolbyio::comms::screen_share_source::type)src->type;
     }
   };
 

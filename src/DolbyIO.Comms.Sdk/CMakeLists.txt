@@ -12,6 +12,7 @@ add_dotnet_library(
         Native/Enums/Result.cs
         Native/Enums/SpatialAudioStyle.cs
         Native/Enums/ListenMode.cs
+        Native/Enums/ScreenShareType.cs
         Native/Structs/Handles/VideoFrame.cs
         Native/Structs/Handles/VideoSinkHandle.cs
         Native/Structs/Handles/VideoFrameHandlerHandle.cs
@@ -32,6 +33,7 @@ add_dotnet_library(
         Native/Structs/VideoSink.cs
         Native/Structs/VideoFrameHandler.cs
         Native/Structs/VideoTrack.cs
+        Native/Structs/ScreenShareSource.cs
         Native/Callback.cs
         Native/Handlers.cs
         Native/Native.cs

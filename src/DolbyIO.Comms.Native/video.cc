@@ -32,5 +32,21 @@ extern "C" {
     }}.result();
   }
 
+  EXPORT_API int StartScreenShare(dolbyio::comms::native::screen_share_source src, dolbyio::comms::native::video_frame_handler* handler) {
+    return call { [&]() {
+      dolbyio::comms::screen_share_source source;
+      no_alloc_to_cpp(source, &src);
+      auto shared = std::shared_ptr<dolbyio::comms::native::video_frame_handler>(handler, null_deleter{});
+
+      wait(sdk->conference().start_screen_share(source, shared));
+    }}.result();
+  }
+
+  EXPORT_API int StopScreenShare() {
+   return call { []() {
+    wait(sdk->conference().stop_screen_share());
+   }}.result(); 
+  }
+
 } // extern "C"
 } // namespace dolbyio::comms::native

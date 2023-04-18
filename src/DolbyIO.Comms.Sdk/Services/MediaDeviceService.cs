@@ -219,5 +219,29 @@ namespace DolbyIO.Comms.Services
                 return device;
             }).ConfigureAwait(false);
         }
+        
+        /// <summary>
+        /// Get a list of all possible Screen Sharing sources. This can be both entire
+        /// monitor screens or specific active application windows.
+        /// </summary>
+        /// <returns>The <xref href="System.Threading.Tasks.Task`1.Result"/> property returns the <see cref="ScreenShareSource">screen share source</see> list.</returns>
+        public async Task<List<ScreenShareSource>> GetScreenShareSourcesAsync()
+        {
+            return await Task.Run(() => 
+            {
+                List<ScreenShareSource> sources = new List<ScreenShareSource>();
+                ScreenShareSource[] src = new ScreenShareSource[0];
+                int size = 0;
+
+                Native.CheckException(Native.GetScreenShareSources(ref size, out src));
+                
+                for (int i = 0; i < size; i++)
+                {
+                    sources.Add(src[i]);
+                }
+
+                return sources;
+            }).ConfigureAwait(false);
+        }
     }
 }

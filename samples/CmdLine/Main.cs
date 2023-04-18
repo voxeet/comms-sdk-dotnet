@@ -199,7 +199,7 @@ public class CommandLine
             await _sdk.Conference.SetSpatialEnvironmentAsync
             (
                 new Vector3(1.0f, 1.0f, 1.0f),  // Scale
-                new Vector3(0.0f, 0.0f, 1.0f), // Forward
+                new Vector3(0.0f, 0.0f, 1.0f),  // Forward
                 new Vector3(0.0f, 1.0f, 0.0f),  // Up
                 new Vector3(1.0f, 0.0f, 0.0f)   // Right
             );  
@@ -353,7 +353,7 @@ public class Sink : VideoSink {
         using(frame)
         {
   
-            Log.Debug($"OnFrame {frame.Width}x{frame.Height} : {frame.DangerousGetHandle()}");
+            Log.Debug($"OnFrame {frame.Width}x{frame.Height}");
             try 
             {
                 var buffer = frame.GetBuffer();
