@@ -13,8 +13,19 @@ extern "C" {
 
       auto shared = std::shared_ptr<dolbyio::comms::native::video_sink>(sink, null_deleter{});
       wait(sdk->video().remote().set_video_sink(cpp_track, shared));
+
     }}.result();
   }
+
+    EXPORT_API int SetNullVideoSink(video_track track) {
+      return call { [&]() {
+        dolbyio::comms::video_track cpp_track;
+        no_alloc_to_cpp(cpp_track, &track);
+        //auto shared = std::shared_ptr<dolbyio::comms::native::video_sink>(nullptr);
+        //wait(sdk->video().remote().set_video_sink(cpp_track, shared));
+        
+      }}.result();
+    }
 
   EXPORT_API int StartVideo(video_device device, dolbyio::comms::native::video_frame_handler* handler) {
     return call { [&]() {

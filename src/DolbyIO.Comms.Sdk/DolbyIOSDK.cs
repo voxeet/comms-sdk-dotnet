@@ -137,6 +137,10 @@ namespace DolbyIO.Comms
 
         private VideoService _video = new VideoService();
 
+        /// <summary>
+        /// Gets the video service.
+        /// </summary>
+        /// <exception cref="DolbyIOException">Is thrown when <see cref="InitAsync(string, RefreshTokenCallBack)"/> has not yet been called.</exception>
         public VideoService Video
         {
             get 
@@ -157,7 +161,11 @@ namespace DolbyIO.Comms
         /// </summary>
         /// <value><c>true</c> if the SDK is initialized; otherwise, <c>false</c>.</value>
         public bool IsInitialized { get => _initialized; }
-
+        
+        /// <summary>
+        /// Create a new DolbyIOSDK
+        /// </summary>
+        /// <param name="componentName">The component used.</param>
         public DolbyIOSDK(string componentName = ComponentName.Dotnet)
         {
             _componentName = componentName;
@@ -194,7 +202,10 @@ namespace DolbyIO.Comms
         {
             await Task.Run(() => Native.CheckException(Native.SetLogLevel(logLevel))).ConfigureAwait(false);
         }
-
+        
+        /// <summary>
+        /// Class finalizer.
+        /// </summary>
         ~DolbyIOSDK()
         {
             Dispose(false);

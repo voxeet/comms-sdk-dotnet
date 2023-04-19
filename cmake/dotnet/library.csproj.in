@@ -24,6 +24,7 @@
   <PropertyGroup>
     <OutputPath>${CMAKE_LIBRARY_OUTPUT_DIRECTORY}</OutputPath>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
   
   ${_DOTNET_SOURCES}

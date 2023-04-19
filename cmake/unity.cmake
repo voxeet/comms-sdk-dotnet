@@ -19,6 +19,7 @@ if (BUILD_UNITY)
         COMMAND ${CMAKE_COMMAND} -E copy_if_different $<TARGET_FILE:dnr> "${UNITY_RUNTIME_DIRECTORY}/$<TARGET_FILE_NAME:dnr>"
         COMMAND ${CMAKE_COMMAND} -E copy_if_different $<TARGET_FILE:DolbyIO.Comms.Native> "${UNITY_RUNTIME_DIRECTORY}/$<TARGET_FILE_NAME:DolbyIO.Comms.Native>"
         COMMAND ${CMAKE_COMMAND} -E copy_if_different ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/DolbyIO.Comms.Sdk.dll "${UNITY_ASSEMBLY_DIRECTORY}/DolbyIO.Comms.Sdk.dll"
+        COMMAND ${CMAKE_COMMAND} -E copy_if_different ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/DolbyIO.Comms.Sdk.xml "${UNITY_ASSEMBLY_DIRECTORY}/DolbyIO.Comms.Sdk.xml"
 
         DEPENDS DolbyIO.Comms.Native DolbyIO.Comms.Sdk
     )

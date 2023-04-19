@@ -33,11 +33,13 @@ namespace DolbyIO.Comms
         [MarshalAs(UnmanagedType.I4)]
         public readonly DeviceDirection Direction;
 
+        /// <inheritdoc/>
         public bool Equals(AudioDevice obj)
         {
             return Native.AudioDeviceEquals(Identity.Value, obj.Identity.Value);
         }
 
+        /// <inheritdoc/>
         public bool Equals(DeviceIdentity id)
         {
             return Native.AudioDeviceEquals(Identity.Value, id.Value);

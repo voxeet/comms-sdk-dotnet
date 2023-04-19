@@ -16,6 +16,9 @@ namespace DolbyIO.Comms
 
         internal VideoSinkOnFrame _delegate;
 
+        /// <summary>
+        /// Create a new VideoSink.
+        /// </summary>
         public VideoSink()
         {
             _delegate = OnNativeFrame;
@@ -35,12 +38,14 @@ namespace DolbyIO.Comms
         /// <param name="frame">The video frame.</param>
         public abstract void OnFrame(VideoFrame frame);
 
+        /// <inheritdoc/>
         public void Dispose()
         {
             Dispose(disposing: true);
             GC.SuppressFinalize(this);
         }
 
+        /// <inheritdoc/>
         protected virtual void Dispose(bool disposing)
         {
             if (_handle != null && !_handle.IsInvalid)
