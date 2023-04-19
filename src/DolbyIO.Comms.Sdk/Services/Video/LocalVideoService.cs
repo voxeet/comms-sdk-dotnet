@@ -61,7 +61,7 @@ namespace DolbyIO.Comms.Services
         /// This method may be called only if a conference is active.
    
         /// This method can also be used to switch screen share sources at any point. If you have passed in a
-        /// <xref="VideoFrameHandler/> to the previous start call and would like to continue using this handler, you must pass the
+        /// <xref="VideoFrameHandler"/> to the previous start call and would like to continue using this handler, you must pass the
         /// same handler into the subsequent call used to switch sources. This will have the effect of just switching sources,
         /// keeping the rest of the pipeline in tact.
    
