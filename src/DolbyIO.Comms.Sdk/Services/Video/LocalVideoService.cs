@@ -54,5 +54,38 @@ namespace DolbyIO.Comms.Services
         {
             await Task.Run(() => Native.CheckException(Native.StopVideo())).ConfigureAwait(false);
         }
+
+        /// <summary>
+        /// Starts local capture of screen share.
+        ///
+        /// This method may be called only if a conference is active.
+   
+        /// This method can also be used to switch screen share sources at any point. If you have passed in a
+        /// <xref="VideoFrameHandler"/> to the previous start call and would like to continue using this handler, you must pass the
+        /// same handler into the subsequent call used to switch sources. This will have the effect of just switching sources,
+        /// keeping the rest of the pipeline in tact.
+   
+        /// The SDK supports switching seamlesly between various screen capture sources, without readding a video track
+        /// to the peer connection. However, if switching from low resolution Window capture to high resolution Fullscreen
+        /// capture the Window capture screen share must be stopped before the Fullscreen capture can be started.
+
+        /// </summary>
+        /// <param name="source">The screen source to capture from.</param>
+        /// <param name="handler">The video frames handler.</param>
+        /// <returns>A <xref href="System.Threading.Tasks.Task"/> that represents the asynchronous operation.</returns>
+        public async Task StartScreenShareAsync(ScreenShareSource source, VideoFrameHandler? handler = null)
+        {
+            VideoFrameHandler inputHandler = handler ?? new VideoFrameHandler(new VideoFrameHandlerHandle());
+            await Task.Run(() => Native.CheckException(Native.StartScreenShare(source, inputHandler.Handle))).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Stops the screen share capture.
+        /// </summary>
+        /// <returns>A <xref href="System.Threading.Tasks.Task"/> that represents the asynchronous operation.</returns>
+        public async Task StopScreenShareAsync()
+        {
+            await Task.Run(() => Native.CheckException(Native.StopScreenShare())).ConfigureAwait(false);
+        }
     }
 }

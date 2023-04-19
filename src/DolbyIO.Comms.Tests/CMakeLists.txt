@@ -11,6 +11,7 @@ add_dotnet_test(
         ConferenceTests.cs
         MediaDeviceTests.cs
         AudioTests.cs
+        VideoTests.cs
         DolbyIOSDKTests.cs
     REFERENCES
         DolbyIO.Comms.Sdk

@@ -143,3 +143,130 @@ static void yuv420_rgb24_std(
 		}
 	}
 }
+
+static void nv12_rgb24_std(
+	uint32_t width, uint32_t height, 
+	const uint8_t* y_addr, const uint8_t* uv_addr, uint32_t y_stride, uint32_t uv_stride, 
+	uint8_t *rgb, uint32_t rgb_stride, 
+	ycbcr_type yuv_type)
+{
+	const yuv_params* const param = &(yuv2rb[(int)yuv_type]);
+	uint32_t x, y;
+	for(y=0; y<(height-1); y+=2)
+	{
+		const uint8_t *y_ptr1=y_addr+y*y_stride,
+			*y_ptr2=y_addr+(y+1)*y_stride,
+			*uv_ptr=uv_addr+(y/2)*uv_stride;
+		
+		uint8_t *rgb_ptr1=rgb+y*rgb_stride,
+			*rgb_ptr2=rgb+(y+1)*rgb_stride;
+		
+		for(x=0; x<(width-1); x+=2)
+		{
+			int8_t u_tmp, v_tmp;
+			u_tmp = uv_ptr[0]-128;
+			v_tmp = uv_ptr[1]-128;
+			
+			//compute Cb Cr color offsets, common to four pixels
+			int16_t b_cb_offset, r_cr_offset, g_cbcr_offset;
+			b_cb_offset = (param->cb_factor*u_tmp)>>6;
+			r_cr_offset = (param->cr_factor*v_tmp)>>6;
+			g_cbcr_offset = (param->g_cb_factor*u_tmp + param->g_cr_factor*v_tmp)>>7;
+			
+			int16_t y_tmp;
+			y_tmp = (param->y_factor*(y_ptr1[0]-param->y_offset))>>7;
+      rgb_ptr1[0] = 0xFF;
+			rgb_ptr1[1] = clamp(y_tmp + r_cr_offset);
+			rgb_ptr1[2] = clamp(y_tmp - g_cbcr_offset);
+			rgb_ptr1[3] = clamp(y_tmp + b_cb_offset);
+			
+			y_tmp = (param->y_factor*(y_ptr1[1]-param->y_offset))>>7;
+      rgb_ptr1[4] = 0xFF;
+			rgb_ptr1[5] = clamp(y_tmp + r_cr_offset);
+			rgb_ptr1[6] = clamp(y_tmp - g_cbcr_offset);
+			rgb_ptr1[7] = clamp(y_tmp + b_cb_offset);
+			
+			y_tmp = (param->y_factor*(y_ptr2[0]-param->y_offset))>>7;
+      rgb_ptr2[0] = 0xFF;
+			rgb_ptr2[1] = clamp(y_tmp + r_cr_offset);
+			rgb_ptr2[2] = clamp(y_tmp - g_cbcr_offset);
+			rgb_ptr2[3] = clamp(y_tmp + b_cb_offset);
+			
+			y_tmp = (param->y_factor*(y_ptr2[1]-param->y_offset))>>7;
+      rgb_ptr2[4] = 0xFF;
+			rgb_ptr2[5] = clamp(y_tmp + r_cr_offset);
+			rgb_ptr2[6] = clamp(y_tmp - g_cbcr_offset);
+			rgb_ptr2[7] = clamp(y_tmp + b_cb_offset);
+			
+			rgb_ptr1 += 8;
+			rgb_ptr2 += 8;
+			y_ptr1 += 2;
+			y_ptr2 += 2;
+			uv_ptr += 2;
+		}
+	}
+}
+
+static void nv21_rgb24_std(
+	uint32_t width, uint32_t height, 
+	const uint8_t* y_addr, const uint8_t* uv_addr, uint32_t y_stride, uint32_t uv_stride, 
+	uint8_t *rgb, uint32_t rgb_stride, 
+	ycbcr_type yuv_type)
+{
+	const yuv_params* const param = &(yuv2rb[(int)yuv_type]);
+
+	uint32_t x, y;
+	for(y=0; y<(height-1); y+=2)
+	{
+		const uint8_t *y_ptr1=y_addr+y*y_stride,
+			*y_ptr2=y_addr+(y+1)*y_stride,
+			*uv_ptr=uv_addr+(y/2)*uv_stride;
+		
+		uint8_t *rgb_ptr1=rgb+y*rgb_stride,
+			*rgb_ptr2=rgb+(y+1)*rgb_stride;
+		
+		for(x=0; x<(width-1); x+=2)
+		{
+			int8_t u_tmp, v_tmp;
+			u_tmp = uv_ptr[1]-128;
+			v_tmp = uv_ptr[0]-128;
+			
+			//compute Cb Cr color offsets, common to four pixels
+			int16_t b_cb_offset, r_cr_offset, g_cbcr_offset;
+			b_cb_offset = (param->cb_factor*u_tmp)>>6;
+			r_cr_offset = (param->cr_factor*v_tmp)>>6;
+			g_cbcr_offset = (param->g_cb_factor*u_tmp + param->g_cr_factor*v_tmp)>>7;
+			
+			int16_t y_tmp;
+			y_tmp = (param->y_factor*(y_ptr1[0]-param->y_offset))>>7;
+      rgb_ptr1[0] = 0xFF;
+			rgb_ptr1[1] = clamp(y_tmp + r_cr_offset);
+			rgb_ptr1[2] = clamp(y_tmp - g_cbcr_offset);
+			rgb_ptr1[3] = clamp(y_tmp + b_cb_offset);
+			
+			y_tmp = (param->y_factor*(y_ptr1[1]-param->y_offset))>>7;
+      rgb_ptr1[4] = 0xFF;
+			rgb_ptr1[5] = clamp(y_tmp + r_cr_offset);
+			rgb_ptr1[6] = clamp(y_tmp - g_cbcr_offset);
+			rgb_ptr1[7] = clamp(y_tmp + b_cb_offset);
+			
+			y_tmp = (param->y_factor*(y_ptr2[0]-param->y_offset))>>7;
+      rgb_ptr2[0] = 0xFF;
+			rgb_ptr2[1] = clamp(y_tmp + r_cr_offset);
+			rgb_ptr2[2] = clamp(y_tmp - g_cbcr_offset);
+			rgb_ptr2[3] = clamp(y_tmp + b_cb_offset);
+			
+			y_tmp = (param->y_factor*(y_ptr2[1]-param->y_offset))>>7;
+      rgb_ptr2[4] = 0xFF;
+			rgb_ptr2[5] = clamp(y_tmp + r_cr_offset);
+			rgb_ptr2[6] = clamp(y_tmp - g_cbcr_offset);
+			rgb_ptr2[7] = clamp(y_tmp + b_cb_offset);
+			
+			rgb_ptr1 += 8;
+			rgb_ptr2 += 8;
+			y_ptr1 += 2;
+			y_ptr2 += 2;
+			uv_ptr += 2;
+		}
+	}
+}

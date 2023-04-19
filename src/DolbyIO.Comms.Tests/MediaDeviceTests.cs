@@ -50,5 +50,11 @@ namespace DolbyIO.Comms.Tests
             await _fixture.Sdk.MediaDevice.GetVideoDevicesAsync();
             await _fixture.Sdk.MediaDevice.GetCurrentVideoDeviceAsync();
         }
+
+        [Fact]
+        public async void Test_MediaDevice_CanCallScreenShareMethods()
+        {
+            await _fixture.Sdk.MediaDevice.GetScreenShareSourcesAsync();
+        }
     }
 }

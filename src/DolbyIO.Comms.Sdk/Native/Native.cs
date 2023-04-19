@@ -141,6 +141,15 @@ namespace DolbyIO.Comms
         [DllImport (Native.LibName, CharSet = CharSet.Ansi)]
         internal static extern int StopVideo();
 
+        [DllImport(LibName, CharSet = CharSet.Ansi)]
+        internal static extern int GetScreenShareSources(ref int size, [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 0)] out ScreenShareSource[] sources);
+
+        [DllImport(LibName, CharSet = CharSet.Ansi)]
+        internal static extern int StartScreenShare(ScreenShareSource source, VideoFrameHandlerHandle handler);
+
+        [DllImport(LibName, CharSet = CharSet.Ansi)]
+        internal static extern int StopScreenShare();
+
         [DllImport (Native.LibName, CharSet = CharSet.Ansi)]
         internal static extern VideoFrameHandlerHandle CreateVideoFrameHandler();
 
@@ -149,6 +158,7 @@ namespace DolbyIO.Comms
 
         [DllImport (Native.LibName, CharSet = CharSet.Ansi)]
         internal static extern int SetVideoFrameHandlerSink(VideoFrameHandlerHandle handle, VideoSinkHandle sink);
+
 
         // Events Handling
         [DllImport (LibName, CharSet = CharSet.Ansi)]
