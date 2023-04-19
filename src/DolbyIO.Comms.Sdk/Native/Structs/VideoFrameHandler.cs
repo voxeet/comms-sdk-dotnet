@@ -36,7 +36,7 @@ namespace DolbyIO.Comms
         {
             Handle = Native.CreateVideoFrameHandler();
         }
-    
+
         internal VideoFrameHandler(VideoFrameHandlerHandle handle)
         {
             Handle = handle;

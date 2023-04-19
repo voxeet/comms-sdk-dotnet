@@ -6,7 +6,7 @@ namespace DolbyIO.Comms
     public static class ComponentName
     {
         /// <summary>
-        /// The unity component name.
+        /// The Unity component name.
         /// </summary>
         public const string Unity = "unity-sdk";
 
