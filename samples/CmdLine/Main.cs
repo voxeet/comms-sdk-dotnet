@@ -144,12 +144,12 @@ public class CommandLine
 
             _sdk.Conference.ParticipantAdded = OnParticipantAdded;
             _sdk.Conference.ParticipantUpdated = OnParticipantUpdated;
-            _sdk.Conference.StatusUpdated = OnConferenceStatusUpdated;
+            _sdk.Conference.StatusUpdated += OnConferenceStatusUpdated;
             _sdk.Conference.ActiveSpeakerChange = OnActiveSpeakerChange;
 
             _sdk.Conference.DvcError = OnDvcError;
             _sdk.Conference.PeerConnectionError = OnPeerConnectionError;
-
+            
             _sdk.MediaDevice.AudioDeviceAdded = new AudioDeviceAddedEventHandler((AudioDevice device) => 
             {
                 Log.Debug($"OnDeviceAdded: {device.Name}");

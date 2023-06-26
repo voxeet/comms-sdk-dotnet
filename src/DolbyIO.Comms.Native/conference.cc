@@ -3,13 +3,19 @@
 namespace dolbyio::comms::native {
 extern "C" {
 
- EXPORT_API void SetOnConferenceStatusUpdatedHandler(on_conference_status_updated::type handler) {
-    handle<on_conference_status_updated>(sdk->conference(), handler,
+ EXPORT_API void AddOnConferenceStatusUpdatedHandler(std::int32_t hash, on_conference_status_updated::type handler) {
+    handle<on_conference_status_updated>(sdk->conference(), hash, handler,
       [handler](const on_conference_status_updated::event& e) {
         handler(to_underlying(e.status), strdup(e.id.c_str()));
       }
     );
   }
+
+ EXPORT_API int RemoveOnConferenceStatusUpdatedHandler(std::int32_t hash, on_conference_status_updated::type handler) {
+  return call { [&]() {
+    disconnect_handler<on_conference_status_updated>(hash, handler);
+  }}.result();
+ }
 
   EXPORT_API void SetOnParticipantAddedHandler(on_participant_added::type handler) {
     handle<on_participant_added>(sdk->conference(), handler,

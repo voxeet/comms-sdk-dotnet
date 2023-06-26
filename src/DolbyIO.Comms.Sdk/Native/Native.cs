@@ -162,7 +162,10 @@ namespace DolbyIO.Comms
 
         // Events Handling
         [DllImport (LibName, CharSet = CharSet.Ansi)]
-        internal static extern void SetOnConferenceStatusUpdatedHandler(ConferenceStatusUpdatedEventHandler handler);                                      
+        internal static extern void AddOnConferenceStatusUpdatedHandler(int hash, ConferenceStatusUpdatedEventHandler handler);                                      
+
+        [DllImport (LibName, CharSet = CharSet.Ansi)]
+        internal static extern int RemoveOnConferenceStatusUpdatedHandler(int hash, ConferenceStatusUpdatedEventHandler handler);                                      
 
         [DllImport (LibName, CharSet = CharSet.Ansi)]
         internal static extern void SetOnParticipantAddedHandler(ParticipantAddedEventHandler handler);   

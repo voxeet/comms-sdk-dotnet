@@ -19,14 +19,14 @@ namespace DolbyIO.Comms.Services
     /// </summary>
     public sealed class ConferenceService
     {
-        private ConferenceStatusUpdatedEventHandler _statusUpdated;
+        private event ConferenceStatusUpdatedEventHandler _statusUpdated;
 
         /// <summary>
         /// Sets the <see cref="ConferenceStatusUpdatedEventHandler"/> that is raised when a conference status has changed.
         /// See <see cref="DolbyIO.Comms.ConferenceStatus">ConferenceStatus</see>
         /// <example>
         /// <code>
-        /// _sdk.Conference.StatusUpdated = delegate (ConferenceStatus status, string conferenceId) 
+        /// _sdk.Conference.StatusUpdated += delegate (ConferenceStatus status, string conferenceId) 
         /// {
         /// 
         /// }
@@ -34,12 +34,18 @@ namespace DolbyIO.Comms.Services
         /// </example>
         /// </summary>
         /// <value>The <see cref="ConferenceStatusUpdatedEventHandler"/> event handler.</value>
-        public ConferenceStatusUpdatedEventHandler StatusUpdated
+        public event ConferenceStatusUpdatedEventHandler StatusUpdated
         {
-            set 
+            add 
             { 
-                Native.SetOnConferenceStatusUpdatedHandler(value); 
-                _statusUpdated = value;
+                Native.AddOnConferenceStatusUpdatedHandler(value.GetHashCode(), value); 
+                _statusUpdated += value;
+            }
+
+            remove
+            {
+                Native.RemoveOnConferenceStatusUpdatedHandler(value.GetHashCode(), value);
+                _statusUpdated -= value;
             }
         }
 
