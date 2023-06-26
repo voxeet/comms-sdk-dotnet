@@ -5,8 +5,8 @@
 namespace dolbyio::comms::native {
 extern "C" {
 
-  EXPORT_API void SetOnAudioDeviceAddedHandler(on_audio_device_added::type handler) {
-    handle<on_audio_device_added>(sdk->device_management(), handler, 
+  EXPORT_API void AddOnAudioDeviceAddedHandler(std::int32_t hash, on_audio_device_added::type handler) {
+    handle<on_audio_device_added>(sdk->device_management(), hash, handler, 
       [handler](const on_audio_device_added::event& e) {
         audio_device dev;
         no_alloc_to_c(&dev, e.device);
@@ -15,8 +15,14 @@ extern "C" {
     );
   }
 
-  EXPORT_API void SetOnAudioDeviceRemovedHandler(on_audio_device_removed::type handler) {
-    handle<on_audio_device_removed>(sdk->device_management(), handler, 
+  EXPORT_API int RemoveOnAudioDeviceAddedHandler(std::int32_t hash, on_audio_device_added::type handler) {
+    return call { [&]() {
+      disconnect_handler<on_audio_device_added>(hash, handler);
+    }}.result();
+  }
+
+  EXPORT_API void AddOnAudioDeviceRemovedHandler(std::int32_t hash, on_audio_device_removed::type handler) {
+    handle<on_audio_device_removed>(sdk->device_management(), hash, handler, 
       [handler](const on_audio_device_removed::event& e) {
         device_identity id;
         id.value = (void*)new dolbyio::comms::audio_device::identity(e.device_id);
@@ -25,8 +31,14 @@ extern "C" {
     );
   }
 
-  EXPORT_API void SetOnAudioDeviceChangedHandler(on_audio_device_changed::type handler) {
-    handle<on_audio_device_changed>(sdk->device_management(), handler, 
+  EXPORT_API int RemoveOnAudioDeviceRemovedHandler(std::int32_t hash, on_audio_device_removed::type handler) {
+    return call { [&]() {
+      disconnect_handler<on_audio_device_removed>(hash, handler);
+    }}.result();
+  }
+
+  EXPORT_API void AddOnAudioDeviceChangedHandler(std::int32_t hash, on_audio_device_changed::type handler) {
+    handle<on_audio_device_changed>(sdk->device_management(), hash, handler, 
       [handler](const on_audio_device_changed::event& e) {
         device_identity dev;
 
@@ -38,9 +50,15 @@ extern "C" {
       }
     );
   }
+  
+  EXPORT_API int RemoveOnAudioDeviceChangedHandler(std::int32_t hash, on_audio_device_changed::type handler) {
+    return call { [&]() {
+      disconnect_handler<on_audio_device_changed>(hash, handler);
+    }}.result();
+  }
 
-  EXPORT_API void SetOnVideoDeviceAddedHandler(on_video_device_added::type handler) {
-    handle<on_video_device_added>(sdk->device_management(), handler,
+  EXPORT_API void AddOnVideoDeviceAddedHandler(std::int32_t hash, on_video_device_added::type handler) {
+    handle<on_video_device_added>(sdk->device_management(), hash, handler,
       [handler](const on_video_device_added::event& e) {
         video_device dev;
         no_alloc_to_c(&dev, e.device);
@@ -48,9 +66,15 @@ extern "C" {
       }
     );
   }
+  
+  EXPORT_API int RemoveOnVideoDeviceAddedHandler(std::int32_t hash, on_video_device_added::type handler) {
+    return call { [&]() {
+      disconnect_handler<on_video_device_added>(hash, handler);
+    }}.result();
+  }
 
-  EXPORT_API void SetOnVideoDeviceChangedHandler(on_video_device_changed::type handler) {
-    handle<on_video_device_changed>(sdk->device_management(), handler,
+  EXPORT_API void AddOnVideoDeviceChangedHandler(std::int32_t hash, on_video_device_changed::type handler) {
+    handle<on_video_device_changed>(sdk->device_management(), hash, handler,
       [handler](const on_video_device_changed::event& e) {
         video_device dev;
         no_alloc_to_c(&dev, e.device);
@@ -59,12 +83,24 @@ extern "C" {
     );
   }
 
-  EXPORT_API void SetOnVideoDeviceRemovedHandler(on_video_device_removed::type handler) {
-    handle<on_video_device_removed>(sdk->device_management(), handler,
+  EXPORT_API int RemoveOnVideoDeviceChangedHandler(std::int32_t hash, on_video_device_changed::type handler) {
+    return call { [&]() {
+      disconnect_handler<on_video_device_changed>(hash, handler);
+    }}.result();
+  }
+
+  EXPORT_API void AddOnVideoDeviceRemovedHandler(std::int32_t hash, on_video_device_removed::type handler) {
+    handle<on_video_device_removed>(sdk->device_management(), hash, handler,
       [handler](const on_video_device_removed::event& e) {
         handler(strdup(e.uid));
       }
     );
+  }
+
+  EXPORT_API int RemoveOnVideoDeviceRemovedHandler(std::int32_t hash, on_video_device_removed::type handler) {
+    return call { [&]() {
+      disconnect_handler<on_video_device_removed>(hash, handler);
+    }}.result();
   }
 
   EXPORT_API bool AudioDeviceEquals(dolbyio::comms::audio_device::identity* id1, dolbyio::comms::audio_device::identity* id2) {

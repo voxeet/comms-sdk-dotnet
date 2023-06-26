@@ -159,7 +159,6 @@ namespace DolbyIO.Comms
         [DllImport (Native.LibName, CharSet = CharSet.Ansi)]
         internal static extern int SetVideoFrameHandlerSink(VideoFrameHandlerHandle handle, VideoSinkHandle sink);
 
-
         // Events Handling
         [DllImport (LibName, CharSet = CharSet.Ansi)]
         internal static extern void AddOnConferenceStatusUpdatedHandler(int hash, ConferenceStatusUpdatedEventHandler handler);                                      
@@ -168,55 +167,106 @@ namespace DolbyIO.Comms
         internal static extern int RemoveOnConferenceStatusUpdatedHandler(int hash, ConferenceStatusUpdatedEventHandler handler);                                      
 
         [DllImport (LibName, CharSet = CharSet.Ansi)]
-        internal static extern void SetOnParticipantAddedHandler(ParticipantAddedEventHandler handler);   
-
-        [DllImport (LibName, CharSet = CharSet.Ansi)]
-        internal static extern void SetOnParticipantUpdatedHandler(ParticipantUpdatedEventHandler handler);   
-
-        [DllImport (LibName, CharSet = CharSet.Ansi)]
-        internal static extern void SetOnConferenceMessageReceivedHandler(ConferenceMessageReceivedEventHandler handler);
-
-        [DllImport (LibName, CharSet = CharSet.Ansi)]
-        internal static extern void SetOnConferenceInvitationReceivedHandler(ConferenceInvitationReceivedEventHandler handler);
-
-        [DllImport (LibName, CharSet = CharSet.Ansi)]
-        internal static extern void SetOnAudioDeviceAddedHandler(AudioDeviceAddedEventHandler handler);   
-
-        [DllImport (LibName, CharSet = CharSet.Ansi)]
-        internal static extern void SetOnAudioDeviceRemovedHandler(AudioDeviceRemovedEventHandler handler);   
-
-        [DllImport (LibName, CharSet = CharSet.Ansi)]
-        internal static extern void SetOnAudioDeviceChangedHandler(AudioDeviceChangedEventHandler handler);
-
-        [DllImport (LibName, CharSet = CharSet.Ansi)]
-        internal static extern void SetOnVideoDeviceAddedHandler(VideoDeviceAddedEventHandler handler);   
-
-        [DllImport (LibName, CharSet = CharSet.Ansi)]
-        internal static extern void SetOnVideoDeviceRemovedHandler(VideoDeviceRemovedEventHandler handler);   
-
-        [DllImport (LibName, CharSet = CharSet.Ansi)]
-        internal static extern void SetOnVideoDeviceChangedHandler(VideoDeviceChangedEventHandler handler);
+        internal static extern void AddOnParticipantAddedHandler(int hash, ParticipantAddedEventHandler handler);   
         
         [DllImport (LibName, CharSet = CharSet.Ansi)]
-        internal static extern void SetOnActiveSpeakerChangeHandler(ActiveSpeakerChangeEventHandler handler);
+        internal static extern void RemoveOnParticipantAddedHandler(int hash, ParticipantAddedEventHandler handler); 
 
         [DllImport (LibName, CharSet = CharSet.Ansi)]
-        internal static extern void SetOnSignalingChannelExceptionHandler(SignalingChannelErrorEventHandler handler);
+        internal static extern void AddOnParticipantUpdatedHandler(int hash, ParticipantUpdatedEventHandler handler);   
+        
+        [DllImport (LibName, CharSet = CharSet.Ansi)]
+        internal static extern void RemoveOnParticipantUpdatedHandler(int hash, ParticipantUpdatedEventHandler handler);  
 
         [DllImport (LibName, CharSet = CharSet.Ansi)]
-        internal static extern void SetOnInvalidTokenExceptionHandler(InvalidTokenErrorEventHandler handler);
+        internal static extern void AddOnConferenceMessageReceivedHandler(int hash, ConferenceMessageReceivedEventHandler handler);
+    
+        [DllImport (LibName, CharSet = CharSet.Ansi)]
+        internal static extern void RemoveOnConferenceMessageReceivedHandler(int hash, ConferenceMessageReceivedEventHandler handler);
 
         [DllImport (LibName, CharSet = CharSet.Ansi)]
-        internal static extern void SetOnDvcErrorExceptionHandler(DvcErrorEventHandler handler);
+        internal static extern void AddOnConferenceInvitationReceivedHandler(int hash, ConferenceInvitationReceivedEventHandler handler);
 
         [DllImport (LibName, CharSet = CharSet.Ansi)]
-        internal static extern void SetOnPeerConnectionFailedExceptionHandler(PeerConnectionErrorEventHandler handler);
+        internal static extern void RemoveOnConferenceInvitationReceivedHandler(int hash, ConferenceInvitationReceivedEventHandler handler);
+
+        [DllImport (LibName, CharSet = CharSet.Ansi)]
+        internal static extern void AddOnAudioDeviceAddedHandler(int hash, AudioDeviceAddedEventHandler handler);   
+
+        [DllImport (LibName, CharSet = CharSet.Ansi)]
+        internal static extern void RemoveOnAudioDeviceAddedHandler(int hash, AudioDeviceAddedEventHandler handler);   
+
+        [DllImport (LibName, CharSet = CharSet.Ansi)]
+        internal static extern void AddOnAudioDeviceRemovedHandler(int hash, AudioDeviceRemovedEventHandler handler);   
+
+        [DllImport (LibName, CharSet = CharSet.Ansi)]
+        internal static extern void RemoveOnAudioDeviceRemovedHandler(int hash, AudioDeviceRemovedEventHandler handler);   
+
+        [DllImport (LibName, CharSet = CharSet.Ansi)]
+        internal static extern void AddOnAudioDeviceChangedHandler(int hash, AudioDeviceChangedEventHandler handler);
+
+        [DllImport (LibName, CharSet = CharSet.Ansi)]
+        internal static extern void RemoveOnAudioDeviceChangedHandler(int hash, AudioDeviceChangedEventHandler handler);
+
+        [DllImport (LibName, CharSet = CharSet.Ansi)]
+        internal static extern void AddOnVideoDeviceAddedHandler(int hash, VideoDeviceAddedEventHandler handler);   
+
+        [DllImport (LibName, CharSet = CharSet.Ansi)]
+        internal static extern void RemoveOnVideoDeviceAddedHandler(int hash, VideoDeviceAddedEventHandler handler);   
+
+        [DllImport (LibName, CharSet = CharSet.Ansi)]
+        internal static extern void AddOnVideoDeviceRemovedHandler(int hash, VideoDeviceRemovedEventHandler handler);   
+
+        [DllImport (LibName, CharSet = CharSet.Ansi)]
+        internal static extern void RemoveOnVideoDeviceRemovedHandler(int hash, VideoDeviceRemovedEventHandler handler);   
+
+        [DllImport (LibName, CharSet = CharSet.Ansi)]
+        internal static extern void AddOnVideoDeviceChangedHandler(int hash, VideoDeviceChangedEventHandler handler);
+        
+        [DllImport (LibName, CharSet = CharSet.Ansi)]
+        internal static extern void RemoveOnVideoDeviceChangedHandler(int hash, VideoDeviceChangedEventHandler handler);
+        
+        [DllImport (LibName, CharSet = CharSet.Ansi)]
+        internal static extern void AddOnActiveSpeakerChangeHandler(int hash, ActiveSpeakerChangeEventHandler handler);
+
+        [DllImport (LibName, CharSet = CharSet.Ansi)]
+        internal static extern void RemoveOnActiveSpeakerChangeHandler(int hash, ActiveSpeakerChangeEventHandler handler);
+
+        [DllImport (LibName, CharSet = CharSet.Ansi)]
+        internal static extern void AddOnSignalingChannelExceptionHandler(int hash, SignalingChannelErrorEventHandler handler);
+
+        [DllImport (LibName, CharSet = CharSet.Ansi)]
+        internal static extern void RemoveOnSignalingChannelExceptionHandler(int hash, SignalingChannelErrorEventHandler handler);
+
+        [DllImport (LibName, CharSet = CharSet.Ansi)]
+        internal static extern void AddOnInvalidTokenExceptionHandler(int hash, InvalidTokenErrorEventHandler handler);
+
+        [DllImport (LibName, CharSet = CharSet.Ansi)]
+        internal static extern void RemoveOnInvalidTokenExceptionHandler(int hash, InvalidTokenErrorEventHandler handler);
+
+        [DllImport (LibName, CharSet = CharSet.Ansi)]
+        internal static extern void AddOnDvcErrorExceptionHandler(int hash, DvcErrorEventHandler handler);
+
+        [DllImport (LibName, CharSet = CharSet.Ansi)]
+        internal static extern void RemoveOnDvcErrorExceptionHandler(int hash, DvcErrorEventHandler handler);
+
+        [DllImport (LibName, CharSet = CharSet.Ansi)]
+        internal static extern void AddOnPeerConnectionFailedExceptionHandler(int hash, PeerConnectionErrorEventHandler handler);
+
+        [DllImport (LibName, CharSet = CharSet.Ansi)]
+        internal static extern void RemoveOnPeerConnectionFailedExceptionHandler(int hash, PeerConnectionErrorEventHandler handler);
 
         [DllImport(LibName, CharSet = CharSet.Ansi)]
-        internal static extern void SetOnConferenceVideoTrackAddedHandler(VideoTrackAddedEventHandler handler);
+        internal static extern void AddOnConferenceVideoTrackAddedHandler(int hash, VideoTrackAddedEventHandler handler);
 
         [DllImport(LibName, CharSet = CharSet.Ansi)]
-        internal static extern void SetOnConferenceVideoTrackRemovedHandler(VideoTrackRemovedEventHandler handler);
+        internal static extern void RemoveOnConferenceVideoTrackAddedHandler(int hash, VideoTrackAddedEventHandler handler);
+
+        [DllImport(LibName, CharSet = CharSet.Ansi)]
+        internal static extern void AddOnConferenceVideoTrackRemovedHandler(int hash, VideoTrackRemovedEventHandler handler);
+
+        [DllImport(LibName, CharSet = CharSet.Ansi)]
+        internal static extern void RemoveOnConferenceVideoTrackRemovedHandler(int hash, VideoTrackRemovedEventHandler handler);
 
         internal static void CheckException(int err)
         {

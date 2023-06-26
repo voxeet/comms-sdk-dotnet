@@ -19,14 +19,14 @@ namespace DolbyIO.Comms.Services
     /// </summary>
     public sealed class ConferenceService
     {
-        private event ConferenceStatusUpdatedEventHandler _statusUpdated;
+        private ConferenceStatusUpdatedEventHandler _statusUpdated;
 
         /// <summary>
         /// Sets the <see cref="ConferenceStatusUpdatedEventHandler"/> that is raised when a conference status has changed.
         /// See <see cref="DolbyIO.Comms.ConferenceStatus">ConferenceStatus</see>
         /// <example>
         /// <code>
-        /// _sdk.Conference.StatusUpdated += delegate (ConferenceStatus status, string conferenceId) 
+        /// _sdk.Conference.StatusUpdated += (ConferenceStatus status, string conferenceId) =>
         /// {
         /// 
         /// }
@@ -55,7 +55,7 @@ namespace DolbyIO.Comms.Services
         /// Sets the <see cref="ParticipantAddedEventHandler"/> that is raised when a new participant has been added to a conference.
         /// <example>
         /// <code>
-        /// _sdk.Conference.ParticipantAdded = (Participant participant) => 
+        /// _sdk.Conference.ParticipantAdded += (Participant participant) => 
         /// {
         /// 
         /// }
@@ -63,12 +63,18 @@ namespace DolbyIO.Comms.Services
         /// </example>
         /// </summary>
         /// <value>The <see cref="ParticipantAddedEventHandler"/> event handler.</value>
-        public ParticipantAddedEventHandler ParticipantAdded
+        public event ParticipantAddedEventHandler ParticipantAdded
         {
-            set 
+            add 
             {
-                Native.SetOnParticipantAddedHandler(value); 
-                _participantAdded = value;
+                Native.AddOnParticipantAddedHandler(value.GetHashCode(), value); 
+                _participantAdded += value;
+            }
+
+            remove
+            {
+                Native.RemoveOnParticipantAddedHandler(value.GetHashCode(), value);
+                _participantAdded -= value;
             }
         }
 
@@ -78,7 +84,7 @@ namespace DolbyIO.Comms.Services
         /// Sets the <see cref="ParticipantUpdatedEventHandler"/> that is raised when a conference participant has changed a status.
         /// <example>
         /// <code>
-        /// _sdk.Conference.ParticipantUpdated = (Participant participant) =>
+        /// _sdk.Conference.ParticipantUpdated += (Participant participant) =>
         /// {
         /// 
         /// }
@@ -86,12 +92,18 @@ namespace DolbyIO.Comms.Services
         /// </example>
         /// </summary>
         /// <value>The <see cref="ParticipantUpdatedEventHandler"/> event handler.</value>
-        public ParticipantUpdatedEventHandler ParticipantUpdated
+        public event ParticipantUpdatedEventHandler ParticipantUpdated
         {
-            set 
+            add 
             {
-                Native.SetOnParticipantUpdatedHandler(value); 
-                _participantUpdated = value;
+                Native.AddOnParticipantUpdatedHandler(value.GetHashCode(), value); 
+                _participantUpdated += value;
+            }
+
+            remove
+            {
+                Native.RemoveOnParticipantUpdatedHandler(value.GetHashCode(), value);
+                _participantUpdated -= value;
             }
         }
 
@@ -101,7 +113,7 @@ namespace DolbyIO.Comms.Services
         /// Sets the <see cref="ActiveSpeakerChangeEventHandler"/> that is raised when an active speaker has changed.
         /// <example>
         /// <code>
-        /// _sdk.Conference.ActiveSpeakerChange = (string conferenceId, int count, string[] activeSpeakers) => 
+        /// _sdk.Conference.ActiveSpeakerChange += (string conferenceId, int count, string[] activeSpeakers) => 
         /// {
         /// 
         /// }
@@ -109,12 +121,18 @@ namespace DolbyIO.Comms.Services
         /// </example>
         /// </summary>
         /// <value>The <see cref="ActiveSpeakerChangeEventHandler"/> event handler.</value>
-        public ActiveSpeakerChangeEventHandler ActiveSpeakerChange
+        public event ActiveSpeakerChangeEventHandler ActiveSpeakerChange
         {
-            set 
+            add 
             {
-                Native.SetOnActiveSpeakerChangeHandler(value); 
-                _activeSpeakerChange = value;
+                Native.AddOnActiveSpeakerChangeHandler(value.GetHashCode(), value); 
+                _activeSpeakerChange += value;
+            }
+
+            remove
+            {
+                Native.RemoveOnActiveSpeakerChangeHandler(value.GetHashCode(), value);
+                _activeSpeakerChange -= value;
             }
         }
 
@@ -125,19 +143,25 @@ namespace DolbyIO.Comms.Services
         /// </summary>
         /// <example>
         /// <code>
-        /// _sdk.Conference.MessageReceived = (string conferenceId, string userId, ParticipantInfo info, string message) =>
+        /// _sdk.Conference.MessageReceived += (string conferenceId, string userId, ParticipantInfo info, string message) =>
         /// {
         /// 
         /// }
         /// </code>
         /// </example>
         /// <value>The <see cref="ConferenceMessageReceivedEventHandler"/> event handler.</value>
-        public ConferenceMessageReceivedEventHandler MessageReceived
+        public event ConferenceMessageReceivedEventHandler MessageReceived
         {
-            set 
+            add 
             { 
-                Native.SetOnConferenceMessageReceivedHandler(value);
-                _messageReceived = value;
+                Native.AddOnConferenceMessageReceivedHandler(value.GetHashCode(), value);
+                _messageReceived += value;
+            }
+
+            remove
+            {
+                Native.RemoveOnConferenceMessageReceivedHandler(value.GetHashCode(), value);
+                _messageReceived -= value;
             }
         }
 
@@ -148,19 +172,25 @@ namespace DolbyIO.Comms.Services
         /// </summary>
         /// <example>
         /// <code>
-        /// _sdk.Conference.InvitationReceived = (string conferenceId, string conferenceAlias, ParticipantInfo info) =>
+        /// _sdk.Conference.InvitationReceived += (string conferenceId, string conferenceAlias, ParticipantInfo info) =>
         /// {
         /// 
         /// }
         /// </code>
         /// </example>
         /// <value>The <see cref="ConferenceInvitationReceivedEventHandler"/> event handler.</value>
-        public ConferenceInvitationReceivedEventHandler InvitationReceived
+        public event ConferenceInvitationReceivedEventHandler InvitationReceived
         {
-            set 
+            add
             { 
-                Native.SetOnConferenceInvitationReceivedHandler(value);
-                _invitationReceived = value;
+                Native.AddOnConferenceInvitationReceivedHandler(value.GetHashCode(), value);
+                _invitationReceived += value;
+            }
+
+            remove
+            {
+                Native.RemoveOnConferenceInvitationReceivedHandler(value.GetHashCode(), value);
+                _invitationReceived -= value;
             }
         }
 
@@ -171,19 +201,25 @@ namespace DolbyIO.Comms.Services
         /// </summary>
         /// <example>
         /// <code>
-        /// _sdk.Conference.DvcError = (string reason) =>
+        /// _sdk.Conference.DvcError += (string reason) =>
         /// {
         /// 
         /// }
         /// </code>
         /// </example>
         /// <value>The <see cref="DvcErrorEventHandler"/> event handler.</value>
-        public DvcErrorEventHandler DvcError
+        public event DvcErrorEventHandler DvcError
         {
-            set 
+            add 
             { 
-                Native.SetOnDvcErrorExceptionHandler(value);
-                _dvcError = value;
+                Native.AddOnDvcErrorExceptionHandler(value.GetHashCode(), value);
+                _dvcError += value;
+            }
+
+            remove
+            {
+                Native.RemoveOnDvcErrorExceptionHandler(value.GetHashCode(), value);
+                _dvcError -= value;
             }
         }
 
@@ -194,19 +230,25 @@ namespace DolbyIO.Comms.Services
         /// </summary>
         /// <example>
         /// <code>
-        /// _sdk.Conference.PeerConnectionError = (string reason, string description) =>
+        /// _sdk.Conference.PeerConnectionError += (string reason, string description) =>
         /// {
         /// 
         /// }
         /// </code>
         /// </example>
         /// <value>The <see cref="PeerConnectionErrorEventHandler"/> event handler.</value>
-        public PeerConnectionErrorEventHandler PeerConnectionError
+        public event PeerConnectionErrorEventHandler PeerConnectionError
         {
-            set 
+            add 
             { 
-                Native.SetOnPeerConnectionFailedExceptionHandler(value);
-                _peerConnectionError = value;
+                Native.AddOnPeerConnectionFailedExceptionHandler(value.GetHashCode(), value);
+                _peerConnectionError += value;
+            }
+
+            remove
+            {
+                Native.RemoveOnPeerConnectionFailedExceptionHandler(value.GetHashCode(), value);
+                _peerConnectionError -= value;
             }
         }
 
@@ -215,12 +257,18 @@ namespace DolbyIO.Comms.Services
         /// <summary>
         /// Sets the <see cref="VideoTrackAddedEventHandler"/> that is raised when a <see cref="VideoTrack"/> is added.
         /// </summary>
-        public VideoTrackAddedEventHandler VideoTrackAdded
+        public event VideoTrackAddedEventHandler VideoTrackAdded
         {
-            set
+            add
             {
-                Native.SetOnConferenceVideoTrackAddedHandler(value);
-                _videoTrackAdded = value;
+                Native.AddOnConferenceVideoTrackAddedHandler(value.GetHashCode(), value);
+                _videoTrackAdded += value;
+            }
+
+            remove
+            {
+                Native.RemoveOnConferenceVideoTrackAddedHandler(value.GetHashCode(), value);
+                _videoTrackAdded -= value;
             }
         }
 
@@ -229,12 +277,18 @@ namespace DolbyIO.Comms.Services
         /// <summary>
         /// Sets the <see cref="VideoTrackRemovedEventHandler"/> that is raised when a <see cref="VideoTrack"/> is removed.
         /// </summary>
-        public VideoTrackRemovedEventHandler VideoTrackRemoved
+        public event VideoTrackRemovedEventHandler VideoTrackRemoved
         {
-            set
+            add
             {
-                Native.SetOnConferenceVideoTrackRemovedHandler(value);
-                _videoTrackRemoved = value;
+                Native.AddOnConferenceVideoTrackRemovedHandler(value.GetHashCode(), value);
+                _videoTrackRemoved += value;
+            }
+
+            remove
+            {
+                Native.RemoveOnConferenceVideoTrackRemovedHandler(value.GetHashCode(), value);
+                _videoTrackRemoved -= value;
             }
         }
 

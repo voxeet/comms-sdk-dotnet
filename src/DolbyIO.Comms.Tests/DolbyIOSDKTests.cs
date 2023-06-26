@@ -35,8 +35,8 @@ namespace DolbyIO.Comms.Tests
         [Fact]
         public void Test_Delegates_ThrowsIfNotInitialized()
         {
-            Assert.Throws<DolbyIOException>(() => _sdk.InvalidTokenError = delegate { });
-            Assert.Throws<DolbyIOException>(() => _sdk.SignalingChannelError = delegate { });
+            Assert.Throws<DolbyIOException>(() => _sdk.InvalidTokenError += delegate { });
+            Assert.Throws<DolbyIOException>(() => _sdk.SignalingChannelError += delegate { });
         }
     }
 }

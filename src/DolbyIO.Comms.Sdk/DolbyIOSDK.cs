@@ -20,17 +20,28 @@ namespace DolbyIO.Comms
         /// </summary>
         /// <value>The <see cref="SignalingChannelErrorEventHandler"/> event handler raised when an error occurs.</value>
         /// <exception cref="DolbyIOException">Is thrown when <see cref="InitAsync(string, RefreshTokenCallBack)"/> has not yet been called.</exception>
-        public SignalingChannelErrorEventHandler SignalingChannelError
+        public event SignalingChannelErrorEventHandler SignalingChannelError
         {
-            set 
+            add
             { 
                 if (!_initialized)
                 {
                     throw new DolbyIOException($"{nameof(DolbyIOSDK)} is not initialized!");
                 }
 
-                Native.SetOnSignalingChannelExceptionHandler(value);
-                _signalingChannelError = value;
+                Native.AddOnSignalingChannelExceptionHandler(value.GetHashCode(), value);
+                _signalingChannelError += value;
+            }
+
+            remove
+            {
+                if (!_initialized)
+                {
+                    throw new DolbyIOException($"{nameof(DolbyIOSDK)} is not initialized!");
+                }
+
+                Native.RemoveOnSignalingChannelExceptionHandler(value.GetHashCode(), value);
+                _signalingChannelError -= value;
             }
         }
 
@@ -41,17 +52,28 @@ namespace DolbyIO.Comms
         /// </summary>
         /// <value>The <see cref="InvalidTokenErrorEventHandler"/> event handler raised when the access token is invalid or has expired.</value>
         /// <exception cref="DolbyIOException">Is thrown when <see cref="InitAsync(string, RefreshTokenCallBack)"/> has not yet been called.</exception>
-        public InvalidTokenErrorEventHandler InvalidTokenError
+        public event InvalidTokenErrorEventHandler InvalidTokenError
         {
-            set
+            add
             { 
                 if (!_initialized)
                 {
                     throw new DolbyIOException($"{nameof(DolbyIOSDK)} is not initialized!");
                 }
                 
-                Native.SetOnInvalidTokenExceptionHandler(value);
-                _invalidTokenError = value;
+                Native.AddOnInvalidTokenExceptionHandler(value.GetHashCode(), value);
+                _invalidTokenError += value;
+            }
+
+            remove
+            { 
+                if (!_initialized)
+                {
+                    throw new DolbyIOException($"{nameof(DolbyIOSDK)} is not initialized!");
+                }
+                
+                Native.RemoveOnInvalidTokenExceptionHandler(value.GetHashCode(), value);
+                _invalidTokenError -= value;
             }
         }
 
