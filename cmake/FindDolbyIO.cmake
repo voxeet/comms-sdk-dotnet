@@ -11,6 +11,9 @@ if(WIN32)
   set(DOLBYIO_LIBRARY_SUFFIXES lib)
 elseif(APPLE)
   set(DOLBYIO_LIBRARY_SUFFIXES "lib")
+elseif(ANDROID)
+  set(DOLBYIO_LIBRARY_SUFFIXES "a")
+  set(DOLBYIO_SEARCH_PATHS ${DOLBYIO_LIBRARY_PATH})
 endif()
 
 if (NOT DOLBYIO_LIBRARY_SUFFIXES)
@@ -29,7 +32,15 @@ find_path(DOLBYIO_INCLUDE_DIR
     ${DOLBYIO_SEARCH_PATHS}
 )
 
-if(WIN32)
+if(ANDROID)
+  set(DOLBYIO_INCLUDE_DIR ${DOLBYIO_LIBRARY_PATH}/include)
+  set(DOLBYIO_BIN_DIR ${DOLBYIO_INCLUDE_DIR}/../libs)
+
+  set(DOLBYIO_LIBRARY_SDK_IMPORTED "${DOLBYIO_BIN_DIR}/dolbyio_comms_sdk.so")
+  set(DOLBYIO_LIBRARY_MEDIA_IMPORTED "${DOLBYIO_BIN_DIR}/dolbyio_comms_media.so")
+  set(DOLBYIO_LIBRARY_DVC_IMPORTED "${DOLBYIO_BIN_DIR}/dvclient.so")
+  set(DOLBYIO_LIBRARY_DNR_IMPORTED "${DOLBYIO_BIN_DIR}/dvdnr.so")
+elseif(WIN32)
   set(DOLBYIO_BIN_DIR ${DOLBYIO_INCLUDE_DIR}/../bin)
   set(DOLBYIO_LIB_DIR ${DOLBYIO_INCLUDE_DIR}/../lib)
 
@@ -96,38 +107,49 @@ elseif(APPLE)
   )
 endif()
 
-add_library(DolbyioComms::sdk SHARED IMPORTED)
-set_target_properties(DolbyioComms::sdk PROPERTIES
-  IMPORTED_IMPLIB ${DOLBYIO_LIBRARY_SDK}
-  IMPORTED_LOCATION ${DOLBYIO_LIBRARY_SDK_IMPORTED}
-  INTERFACE_INCLUDE_DIRECTORIES ${DOLBYIO_INCLUDE_DIR}
-  LINKER_LANGUAGE CXX
+function(add_library_cross __library include_dir imported_location import_implib)
+  add_library(${__library} SHARED IMPORTED)
+  if(ANDROID)
+    set_target_properties(${__library} PROPERTIES
+      IMPORTED_LOCATION ${imported_location}
+      INTERFACE_INCLUDE_DIRECTORIES ${include_dir}
+      LINKER_LANGUAGE CXX
+    )
+  else()
+    set_target_properties(${__library} PROPERTIES
+      IMPORTED_IMPLIB ${import_implib}
+      IMPORTED_LOCATION ${imported_location}
+      INTERFACE_INCLUDE_DIRECTORIES ${include_dir}
+      LINKER_LANGUAGE CXX
+    )
+  endif(ANDROID)
+endfunction()
+
+add_library_cross(DolbyioComms::sdk
+                ${DOLBYIO_INCLUDE_DIR}
+                ${DOLBYIO_LIBRARY_SDK_IMPORTED}
+                "${DOLBYIO_LIBRARY_SDK}"
 )
 
 add_dependencies(DolbyioComms::sdk macos_universal_library)
 
-add_library(DolbyioComms::media SHARED IMPORTED)
-set_target_properties(DolbyioComms::media PROPERTIES
-  IMPORTED_IMPLIB ${DOLBYIO_LIBRARY_MEDIA}
-  IMPORTED_LOCATION ${DOLBYIO_LIBRARY_MEDIA_IMPORTED}
-  INTERFACE_INCLUDE_DIRECTORIES ${DOLBYIO_INCLUDE_DIR}
-  LINKER_LANGUAGE CXX
+
+add_library_cross(DolbyioComms::media
+                ${DOLBYIO_INCLUDE_DIR}
+                ${DOLBYIO_LIBRARY_MEDIA_IMPORTED}
+                "${DOLBYIO_LIBRARY_MEDIA}"
 )
 
-add_library(dvc SHARED IMPORTED)
-set_target_properties(dvc PROPERTIES
-  IMPORTED_IMPLIB ${DOLBYIO_LIBRARY_DVC}
-  IMPORTED_LOCATION ${DOLBYIO_LIBRARY_DVC_IMPORTED}
-  INTERFACE_INCLUDE_DIRECTORIES ${DOLBYIO_INCLUDE_DIR}
-  LINKER_LANGUAGE CXX
+add_library_cross(dvc
+                ${DOLBYIO_INCLUDE_DIR}
+                ${DOLBYIO_LIBRARY_DVC_IMPORTED}
+                "${DOLBYIO_LIBRARY_DVC}"
 )
 
-add_library(dnr SHARED IMPORTED)
-set_target_properties(dnr PROPERTIES
-  IMPORTED_IMPLIB ${DOLBYIO_LIBRARY_DNR}
-  IMPORTED_LOCATION ${DOLBYIO_LIBRARY_DNR_IMPORTED}
-  INTERFACE_INCLUDE_DIRECTORIES ${DOLBYIO_INCLUDE_DIR}
-  LINKER_LANGUAGE CXX
+add_library_cross(dnr
+                ${DOLBYIO_INCLUDE_DIR}
+                ${DOLBYIO_LIBRARY_DNR_IMPORTED}
+                "${DOLBYIO_LIBRARY_DNR}"
 )
 
 mark_as_advanced(
@@ -137,7 +159,7 @@ mark_as_advanced(
   DOLBYIO_LIBRARY_IAPI_TEST
 )
 
-if (DOLBYIO_INCLUDE_DIR AND DOLBYIO_LIBRARY_SDK AND DOLBYIO_LIBRARY_MEDIA)
+if (DOLBYIO_INCLUDE_DIR AND DOLBYIO_LIBRARY_SDK_IMPORTED AND DOLBYIO_LIBRARY_MEDIA_IMPORTED)
   message("Found DolbyIO library successfully: " ${DOLBYIO_LIBRARY_PATH})
   set(DOLBYIO_FOUND 1)
 else()
