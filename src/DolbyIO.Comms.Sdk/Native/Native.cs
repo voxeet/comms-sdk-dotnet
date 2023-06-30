@@ -170,10 +170,10 @@ namespace DolbyIO.Comms
         internal static extern void AddOnParticipantAddedHandler(int hash, ParticipantAddedEventHandler handler);   
         
         [DllImport (LibName, CharSet = CharSet.Ansi)]
-        internal static extern void RemoveOnParticipantAddedHandler(int hash, ParticipantAddedEventHandler handler); 
+        internal static extern void RemoveOnParticipantAddedHandler(int hash, ParticipantAddedEventHandler handler);
 
         [DllImport (LibName, CharSet = CharSet.Ansi)]
-        internal static extern void AddOnParticipantUpdatedHandler(int hash, ParticipantUpdatedEventHandler handler);   
+        internal static extern void AddOnParticipantUpdatedHandler(int hash, ParticipantUpdatedEventHandler handler);
         
         [DllImport (LibName, CharSet = CharSet.Ansi)]
         internal static extern void RemoveOnParticipantUpdatedHandler(int hash, ParticipantUpdatedEventHandler handler);  
