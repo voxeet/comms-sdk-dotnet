@@ -139,28 +139,28 @@ public class CommandLine
                 return "dummy";
             });
 
-            _sdk.SignalingChannelError = OnSignalingChannelError;
-            _sdk.InvalidTokenError = OnInvalidTokenError;
+            _sdk.SignalingChannelError += OnSignalingChannelError;
+            _sdk.InvalidTokenError += OnInvalidTokenError;
 
-            _sdk.Conference.ParticipantAdded = OnParticipantAdded;
-            _sdk.Conference.ParticipantUpdated = OnParticipantUpdated;
-            _sdk.Conference.StatusUpdated = OnConferenceStatusUpdated;
-            _sdk.Conference.ActiveSpeakerChange = OnActiveSpeakerChange;
+            _sdk.Conference.ParticipantAdded += OnParticipantAdded;
+            _sdk.Conference.ParticipantUpdated += OnParticipantUpdated;
+            _sdk.Conference.StatusUpdated += OnConferenceStatusUpdated;
+            _sdk.Conference.ActiveSpeakerChange += OnActiveSpeakerChange;
 
-            _sdk.Conference.DvcError = OnDvcError;
-            _sdk.Conference.PeerConnectionError = OnPeerConnectionError;
-
-            _sdk.MediaDevice.AudioDeviceAdded = new AudioDeviceAddedEventHandler((AudioDevice device) => 
+            _sdk.Conference.DvcError += OnDvcError;
+            _sdk.Conference.PeerConnectionError += OnPeerConnectionError;
+            
+            _sdk.MediaDevice.AudioDeviceAdded += new AudioDeviceAddedEventHandler((AudioDevice device) => 
             {
                 Log.Debug($"OnDeviceAdded: {device.Name}");
             });
 
-            _sdk.MediaDevice.AudioDeviceRemoved = new AudioDeviceRemovedEventHandler((DeviceIdentity id)=>
+            _sdk.MediaDevice.AudioDeviceRemoved += new AudioDeviceRemovedEventHandler((DeviceIdentity id)=>
             {
                 Log.Debug("OnDeviceRemoved");
             });
 
-            _sdk.MediaDevice.AudioDeviceChanged = new AudioDeviceChangedEventHandler((DeviceIdentity id, bool noDevice) =>
+            _sdk.MediaDevice.AudioDeviceChanged += new AudioDeviceChangedEventHandler((DeviceIdentity id, bool noDevice) =>
             {
                 Log.Debug("OnDeviceChanged");
             });

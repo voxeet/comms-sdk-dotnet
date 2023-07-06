@@ -5,27 +5,39 @@
 
 namespace dolbyio::comms::native {
 
-std::map<std::string, dolbyio::comms::event_handler_id> handlers_map;
+std::map<std::string, std::map<std::int32_t, dolbyio::comms::event_handler_id>> handlers_map;
 
 dolbyio::comms::sdk* sdk = nullptr;
 std::string error = "";
 
 extern "C" {
 
- EXPORT_API void SetOnSignalingChannelExceptionHandler(on_signaling_channel_exception::type handler) {
-    handle<on_signaling_channel_exception>(*sdk, handler,
+  EXPORT_API void AddOnSignalingChannelExceptionHandler(std::int32_t hash, on_signaling_channel_exception::type handler) {
+    handle<on_signaling_channel_exception>(*sdk, hash, handler,
       [handler](const on_signaling_channel_exception::event& e) {
         handler(strdup(e.what()));
       }
     );
   }
 
-  EXPORT_API void SetOnInvalidTokenExceptionHandler(on_invalid_token_exception::type handler) {
-    handle<on_invalid_token_exception>(*sdk, handler,
+  EXPORT_API int RemoveOnSignalingChannelExceptionHandler(std::int32_t hash, on_signaling_channel_exception::type handler) {
+    return call { [&]() {
+      disconnect_handler<on_signaling_channel_exception>(hash, handler);
+    }}.result();
+  }
+
+  EXPORT_API void AddOnInvalidTokenExceptionHandler(std::int32_t hash, on_invalid_token_exception::type handler) {
+    handle<on_invalid_token_exception>(*sdk, hash, handler,
       [handler](const on_invalid_token_exception::event& e) {
         handler(strdup(e.reason()), strdup(e.description()));
       }
     );
+  }
+  
+  EXPORT_API int RemoveOnInvalidTokenExceptionHandler(std::int32_t hash, on_invalid_token_exception::type handler) {
+    return call { [&]() {
+      disconnect_handler<on_invalid_token_exception>(hash, handler);
+    }}.result();
   }
 
   EXPORT_API int SetLogLevel(uint32_t log_level) {
@@ -59,8 +71,13 @@ extern "C" {
 
   EXPORT_API int Release() {
     return call { [&]() {
-      for (const auto& [key, value] : handlers_map)
-        wait(value->disconnect());
+      for (const auto& [key, value] : handlers_map) {
+        for (const auto& [key2, value2] : value) {
+          wait(value2->disconnect());
+        }
+      }
+
+      handlers_map.clear();
 
       // Releasing sdk
       if (sdk) {

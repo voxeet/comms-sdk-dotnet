@@ -14,10 +14,10 @@ public class Call
             });
 
             // Registering event handlers
-            _sdk.Conference.StatusUpdated = OnConferenceStatus;
+            _sdk.Conference.StatusUpdated += OnConferenceStatus;
 
             // Or inline
-            _sdk.Conference.ParticipantAdded = new ParticipantAddedEventHandler
+            _sdk.Conference.ParticipantAdded += new ParticipantAddedEventHandler
             (
                 (Participant participant) =>
                 {

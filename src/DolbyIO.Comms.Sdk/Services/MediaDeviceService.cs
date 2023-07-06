@@ -21,12 +21,18 @@ namespace DolbyIO.Comms.Services
         /// Sets the <see cref="AudioDeviceAddedEventHandler"/> that is raised when a new audio device is added to the system.
         /// </summary>
         /// <value>The <see cref="AudioDeviceAddedEventHandler"/> event handler.</value>
-        public AudioDeviceAddedEventHandler AudioDeviceAdded
+        public event AudioDeviceAddedEventHandler AudioDeviceAdded
         {
-            set 
+            add 
             { 
-                Native.SetOnAudioDeviceAddedHandler(value);
-                _audioDeviceAdded = value;
+                Native.AddOnAudioDeviceAddedHandler(value.GetHashCode(), value);
+                _audioDeviceAdded += value;
+            }
+
+            remove 
+            { 
+                Native.RemoveOnAudioDeviceAddedHandler(value.GetHashCode(), value);
+                _audioDeviceAdded -= value;
             }
         }
 
@@ -36,12 +42,18 @@ namespace DolbyIO.Comms.Services
         /// Sets the <see cref="AudioDeviceRemovedEventHandler"/> that is raised when an audio device is removed from the system.
         /// </summary>
         /// <value>The <see cref="AudioDeviceRemovedEventHandler"/> event handler.</value>
-        public AudioDeviceRemovedEventHandler AudioDeviceRemoved
+        public event AudioDeviceRemovedEventHandler AudioDeviceRemoved
         {
-            set 
+            add 
             { 
-                Native.SetOnAudioDeviceRemovedHandler(value);
-                _audioDeviceRemoved = value;
+                Native.AddOnAudioDeviceRemovedHandler(value.GetHashCode(), value);
+                _audioDeviceRemoved += value;
+            }
+
+            remove
+            { 
+                Native.RemoveOnAudioDeviceRemovedHandler(value.GetHashCode(), value);
+                _audioDeviceRemoved -= value;
             }
         }
 
@@ -51,12 +63,18 @@ namespace DolbyIO.Comms.Services
         /// Sets the <see cref="AudioDeviceChangedEventHandler"/> that is raised when the currently used input or output audio device has changed.
         /// </summary>
         /// <value>The <see cref="AudioDeviceChangedEventHandler"/> event handler.</value>
-        public AudioDeviceChangedEventHandler AudioDeviceChanged
+        public event AudioDeviceChangedEventHandler AudioDeviceChanged
         {
-            set 
+            add 
             { 
-                Native.SetOnAudioDeviceChangedHandler(value);
-                _audioDeviceChanged = value;
+                Native.AddOnAudioDeviceChangedHandler(value.GetHashCode(), value);
+                _audioDeviceChanged += value;
+            }
+
+            remove 
+            { 
+                Native.RemoveOnAudioDeviceChangedHandler(value.GetHashCode(), value);
+                _audioDeviceChanged -= value;
             }
         }
 
@@ -66,12 +84,18 @@ namespace DolbyIO.Comms.Services
         /// Sets the <see cref="VideoDeviceAddedEventHandler"/> that is raised when a new video device is added to the system.
         /// </summary>
         /// <value>The <see cref="AudioDeviceAddedEventHandler"/> event handler.</value>
-        public VideoDeviceAddedEventHandler VideoDeviceAdded
+        public event VideoDeviceAddedEventHandler VideoDeviceAdded
         {
-            set
+            add
             {
-                Native.SetOnVideoDeviceAddedHandler(value);
-                _videoDeviceAdded = value;
+                Native.AddOnVideoDeviceAddedHandler(value.GetHashCode(), value);
+                _videoDeviceAdded += value;
+            }
+
+            remove
+            {
+                Native.RemoveOnVideoDeviceAddedHandler(value.GetHashCode(), value);
+                _videoDeviceAdded -= value;
             }
         }
 
@@ -81,12 +105,18 @@ namespace DolbyIO.Comms.Services
         /// Sets the <see cref="VideoDeviceChangedEventHandler"/> that is raised when the currently used input or output video device has changed.
         /// </summary>
         /// <value>The <see cref="VideoDeviceChangedEventHandler"/> event handler.</value>
-        public VideoDeviceChangedEventHandler VideoDeviceChanged
+        public event VideoDeviceChangedEventHandler VideoDeviceChanged
         {
-            set
+            add
             {
-                Native.SetOnVideoDeviceChangedHandler(value);
-                _videoDeviceChanged = value;
+                Native.AddOnVideoDeviceChangedHandler(value.GetHashCode(), value);
+                _videoDeviceChanged += value;
+            }
+
+            remove
+            {
+                Native.RemoveOnVideoDeviceChangedHandler(value.GetHashCode(), value);
+                _videoDeviceChanged -= value;
             }
         }
 
@@ -96,12 +126,18 @@ namespace DolbyIO.Comms.Services
         /// Sets the <see cref="VideoDeviceRemovedEventHandler"/> that is raised when a video device is removed from the system.
         /// </summary>
         /// <value>The <see cref="VideoDeviceRemovedEventHandler"/> event handler.</value>
-        public VideoDeviceRemovedEventHandler VideoDeviceRemoved
+        public event VideoDeviceRemovedEventHandler VideoDeviceRemoved
         {
-            set
+            add
             {
-                Native.SetOnVideoDeviceRemovedHandler(value);
-                _videoDeviceRemoved = value;
+                Native.AddOnVideoDeviceRemovedHandler(value.GetHashCode(), value);
+                _videoDeviceRemoved += value;
+            }
+
+            remove
+            {
+                Native.RemoveOnVideoDeviceRemovedHandler(value.GetHashCode(), value);
+                _videoDeviceRemoved -= value;
             }
         }
 

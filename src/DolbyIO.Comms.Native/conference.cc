@@ -3,32 +3,50 @@
 namespace dolbyio::comms::native {
 extern "C" {
 
- EXPORT_API void SetOnConferenceStatusUpdatedHandler(on_conference_status_updated::type handler) {
-    handle<on_conference_status_updated>(sdk->conference(), handler,
+ EXPORT_API void AddOnConferenceStatusUpdatedHandler(std::int32_t hash, on_conference_status_updated::type handler) {
+    handle<on_conference_status_updated>(sdk->conference(), hash, handler,
       [handler](const on_conference_status_updated::event& e) {
         handler(to_underlying(e.status), strdup(e.id.c_str()));
       }
     );
   }
 
-  EXPORT_API void SetOnParticipantAddedHandler(on_participant_added::type handler) {
-    handle<on_participant_added>(sdk->conference(), handler,
+ EXPORT_API int RemoveOnConferenceStatusUpdatedHandler(std::int32_t hash, on_conference_status_updated::type handler) {
+  return call { [&]() {
+    disconnect_handler<on_conference_status_updated>(hash, handler);
+  }}.result();
+ }
+
+  EXPORT_API void AddOnParticipantAddedHandler(std::int32_t hash, on_participant_added::type handler) {
+    handle<on_participant_added>(sdk->conference(), hash, handler,
       [handler](const on_participant_added::event& e) {
         handler(to_c<dolbyio::comms::native::participant>(e.participant));      
       }
     );
   }
 
-  EXPORT_API void SetOnParticipantUpdatedHandler(on_participant_updated::type handler) {
-    handle<on_participant_updated>(sdk->conference(), handler,
+  EXPORT_API int RemoveOnParticipantAddedHandler(std::int32_t hash, on_participant_added::type handler) {
+    return call { [&]() {
+      disconnect_handler<on_participant_added>(hash, handler);
+    }}.result();
+  }
+
+  EXPORT_API void AddOnParticipantUpdatedHandler(std::int32_t hash, on_participant_updated::type handler) {
+    handle<on_participant_updated>(sdk->conference(), hash, handler,
       [handler](const on_participant_updated::event& e) {
         handler(to_c<dolbyio::comms::native::participant>(e.participant));      
       }
     );
   }
 
-  EXPORT_API void SetOnActiveSpeakerChangeHandler(on_active_speaker_change::type handler) {
-    handle<on_active_speaker_change>(sdk->conference(), handler,
+  EXPORT_API int RemoveOnParticipantUpdatedHandler(std::int32_t hash, on_participant_updated::type handler) {
+    return call { [&]() {
+      disconnect_handler<on_participant_updated>(hash, handler);
+    }}.result();
+  }
+
+  EXPORT_API void AddOnActiveSpeakerChangeHandler(std::int32_t hash, on_active_speaker_change::type handler) {
+    handle<on_active_speaker_change>(sdk->conference(), hash, handler,
       [handler](const on_active_speaker_change::event& e) {
         char* conf_id = strdup(e.conference_id);
         std::vector<char*> speakers(e.active_speakers.size());
@@ -42,8 +60,14 @@ extern "C" {
     );
   }
 
-  EXPORT_API void SetOnConferenceMessageReceivedHandler(on_conference_message_received::type handler) {
-    handle<on_conference_message_received>(sdk->conference(), handler,
+  EXPORT_API int RemoveOnActiveSpeakerChangeHandler(std::int32_t hash, on_active_speaker_change::type handler) {
+    return call { [&]() {
+      disconnect_handler<on_active_speaker_change>(hash, handler);
+    }}.result();
+  }
+
+  EXPORT_API void AddOnConferenceMessageReceivedHandler(std::int32_t hash, on_conference_message_received::type handler) {
+    handle<on_conference_message_received>(sdk->conference(), hash, handler,
       [handler](const on_conference_message_received::event& e) {
           auto info = to_c<dolbyio::comms::native::participant_info>(e.sender_info);
           handler(strdup(e.conference_id), strdup(e.user_id), info, strdup(e.message));
@@ -51,8 +75,14 @@ extern "C" {
     );
   }
 
-  EXPORT_API void SetOnConferenceInvitationReceivedHandler(on_conference_invitation_received::type handler) {
-    handle<on_conference_invitation_received>(sdk->conference(), handler,
+  EXPORT_API int RemoveOnConferenceMessageReceivedHandler(std::int32_t hash, on_conference_message_received::type handler) {
+    return call { [&]() {
+      disconnect_handler<on_conference_message_received>(hash, handler);
+    }}.result();
+  }
+
+  EXPORT_API void AddOnConferenceInvitationReceivedHandler(std::int32_t hash, on_conference_invitation_received::type handler) {
+    handle<on_conference_invitation_received>(sdk->conference(), hash, handler,
       [handler](const on_conference_invitation_received::event& e) {
         handler(
           strdup(e.conference_id), 
@@ -63,7 +93,13 @@ extern "C" {
     );
   }
 
-  EXPORT_API void SetOnDvcErrorExceptionHandler(on_dvc_error_exception::type handler) {
+  EXPORT_API int RemoveOnConferenceInvitationReceivedHandler(std::int32_t hash, on_conference_invitation_received::type handler) {
+    return call { [&]() {
+      disconnect_handler<on_conference_invitation_received>(hash, handler);
+    }}.result();
+  }
+
+  EXPORT_API void AddOnDvcErrorExceptionHandler(std::int32_t hash, on_dvc_error_exception::type handler) {
     handle<on_dvc_error_exception>(sdk->conference(), handler,
       [handler](const on_dvc_error_exception::event& e) {
         handler(strdup(e.what()));
@@ -71,16 +107,28 @@ extern "C" {
     );
   }
 
-  EXPORT_API void SetOnPeerConnectionFailedExceptionHandler(on_peer_connection_failed_exception::type handler) {
-    handle<on_peer_connection_failed_exception>(sdk->conference(), handler,
+  EXPORT_API int RemoveOnDvcErrorExceptionHandler(std::int32_t hash, on_dvc_error_exception::type handler) {
+    return call { [&]() {
+      disconnect_handler<on_dvc_error_exception>(hash, handler);
+    }}.result();
+  }
+
+  EXPORT_API void AddOnPeerConnectionFailedExceptionHandler(std::int32_t hash, on_peer_connection_failed_exception::type handler) {
+    handle<on_peer_connection_failed_exception>(sdk->conference(), hash, handler,
       [handler](const on_peer_connection_failed_exception::event& e) {
         handler(strdup(e.what()));
       }
     );
   }
 
-  EXPORT_API void SetOnConferenceVideoTrackAddedHandler(on_conference_video_track_added::type handler) {
-    handle<on_conference_video_track_added>(sdk->conference(), handler,
+  EXPORT_API int RemoveOnPeerConnectionFailedExceptionHandler(std::int32_t hash, on_peer_connection_failed_exception::type handler) {
+    return call { [&]() {
+      disconnect_handler<on_peer_connection_failed_exception>(hash, handler);
+    }}.result();
+  }
+
+  EXPORT_API void AddOnConferenceVideoTrackAddedHandler(std::int32_t hash, on_conference_video_track_added::type handler) {
+    handle<on_conference_video_track_added>(sdk->conference(), hash, handler,
       [handler](const on_conference_video_track_added::event& e) {
         video_track t;
         no_alloc_to_c(&t, e.track);
@@ -89,14 +137,26 @@ extern "C" {
     );
   }
 
-  EXPORT_API void SetOnConferenceVideoTrackRemovedHandler(on_conference_video_track_removed::type handler) {
-    handle<on_conference_video_track_removed>(sdk->conference(), handler,
+  EXPORT_API int RemoveOnConferenceVideoTrackAddedHandler(std::int32_t hash, on_conference_video_track_added::type handler) {
+    return call { [&]() {
+      disconnect_handler<on_conference_video_track_added>(hash, handler);
+    }}.result();
+  }
+
+  EXPORT_API void AddOnConferenceVideoTrackRemovedHandler(std::int32_t hash, on_conference_video_track_removed::type handler) {
+    handle<on_conference_video_track_removed>(sdk->conference(), hash, handler,
       [handler](const on_conference_video_track_removed::event& e) {
         video_track t;
         no_alloc_to_c(&t, e.track);
         handler(t);
       }
     );
+  }
+
+  EXPORT_API int RemoveOnConferenceVideoTrackRemovedHandler(std::int32_t hash, on_conference_video_track_removed::type handler) {
+    return call { [&]() {
+      disconnect_handler<on_conference_video_track_removed>(hash, handler);
+    }}.result();
   }
 
   EXPORT_API int Create(dolbyio::comms::native::conference_options* opts, dolbyio::comms::native::conference* conf) {
