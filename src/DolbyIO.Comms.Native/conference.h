@@ -302,7 +302,7 @@ namespace dolbyio::comms::native {
   };
 
   template<typename Traits> 
-  struct translator<dolbyio::comms::native::video_track, dolbyio::comms::video_track, Traits> {
+  struct translator<dolbyio::comms::native::video_track, dolbyio::comms::generic_video_track, Traits> {
     static void to_c(typename Traits::c_type* dest, const typename Traits::cpp_type& src) {
       dest->peer_id = strdup(src.peer_id);
       dest->stream_id = strdup(src.stream_id);
