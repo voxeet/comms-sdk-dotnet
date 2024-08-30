@@ -1,3 +1,5 @@
+# :warning: This repository is no longer maintained :warning:
+
 [![Build and Test](https://github.com/DolbyIO/comms-sdk-dotnet/actions/workflows/build-and-test.yml/badge.svg)](https://github.com/DolbyIO/comms-sdk-dotnet/actions/workflows/build-and-test.yml)
 [![Deploy Docfx Documentation](https://github.com/DolbyIO/comms-sdk-dotnet/actions/workflows/pages.yml/badge.svg)](https://github.com/DolbyIO/comms-sdk-dotnet/actions/workflows/pages.yml)
 [![Package Artifacts](https://github.com/DolbyIO/comms-sdk-dotnet/actions/workflows/package.yml/badge.svg)](https://github.com/DolbyIO/comms-sdk-dotnet/actions/workflows/package.yml)
